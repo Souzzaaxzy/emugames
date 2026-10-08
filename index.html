@@ -17,9 +17,23 @@
 
   <nav id="filtros" aria-label="Categorias"></nav>
 
-  <div id="grid"></div>
+  <div class="busca-wrap">
+    <span class="busca-icone" aria-hidden="true">&#128269;</span>
+    <input id="busca" type="search" inputmode="search" autocomplete="off"
+      placeholder="Pesquisar jogos..." aria-label="Pesquisar jogos">
+  </div>
 
-  <p id="vazio" hidden>Nenhum jogo nesta categoria.</p>
+  <section id="recentes" hidden aria-labelledby="recentes-titulo">
+    <h2 class="secao-titulo" id="recentes-titulo">&#128293; Jogados recentemente</h2>
+    <div id="recentes-lista"></div>
+  </section>
+
+  <section class="todos" aria-labelledby="todos-titulo">
+    <h2 class="secao-titulo" id="todos-titulo">&#127918; Todos os jogos</h2>
+    <div id="grid"></div>
+  </section>
+
+  <p id="vazio" hidden>&#128533; Nenhum jogo encontrado</p>
 </section>
 
 <!-- ============================= JOGADOR ============================= -->
@@ -117,6 +131,9 @@
   const grid = document.getElementById('grid');
   const filtros = document.getElementById('filtros');
   const vazio = document.getElementById('vazio');
+  const pesquisaEl = document.getElementById('busca');
+  const recentesEl = document.getElementById('recentes');
+  const recentesLista = document.getElementById('recentes-lista');
   const alvo = document.getElementById('game');
   const subtitulo = document.getElementById('subtitulo');
   const erro = document.getElementById('erro');
@@ -146,6 +163,8 @@
 
   let catalogoJogos = [];
   let jogoAtual = null;
+  let filtroAtual = 'todos';
+  let buscaTermo = '';
   let rodando = false;
   let ocioso = Date.now();
 
@@ -169,6 +188,81 @@
   // ==========================================================================
   // CATALOGO
   // ==========================================================================
+  const RECENTES_CHAVE = 'emugames.recentes';
+  const RECENTES_MAX = 8;
+
+  function lerRecentes() {
+    try {
+      const v = JSON.parse(localStorage.getItem(RECENTES_CHAVE) || '[]');
+      if (!Array.isArray(v)) return [];
+      return v.filter((id) => typeof id === 'string' && catalogoJogos.some((j) => j.id === id));
+    } catch (e) { return []; }
+  }
+
+  function registrarRecente(jogo) {
+    const lista = [jogo.id].concat(lerRecentes().filter((x) => x !== jogo.id)).slice(0, RECENTES_MAX);
+    try { localStorage.setItem(RECENTES_CHAVE, JSON.stringify(lista)); } catch (e) { /* ok */ }
+  }
+
+  function normaliza(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function capaDoJogo(j) {
+    return `./capas/${encodeURIComponent(j.capa || (j.id + '.gif'))}`;
+  }
+
+  function montarCard(j, compacto) {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'card' + (compacto ? ' card-mini' : '');
+    card.dataset.id = j.id;
+
+    const capa = document.createElement('div');
+    capa.className = 'capa';
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.alt = j.nome;
+    img.src = capaDoJogo(j);
+    img.addEventListener('error', () => { img.style.display = 'none'; });
+    capa.appendChild(img);
+
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.textContent = (CONSOLES[j.console] && CONSOLES[j.console].emoji) || '🎮';
+    tag.title = (CONSOLES[j.console] && CONSOLES[j.console].nome) || j.console;
+    capa.appendChild(tag);
+    card.appendChild(capa);
+
+    const info = document.createElement('div');
+    info.className = 'info';
+    const nome = document.createElement('span');
+    nome.className = 'nome';
+    nome.textContent = j.nome;
+    info.appendChild(nome);
+    if (!compacto) {
+      const plat = document.createElement('span');
+      plat.className = 'plat';
+      plat.textContent = (CONSOLES[j.console] && CONSOLES[j.console].nome) || j.console.toUpperCase();
+      info.appendChild(plat);
+    }
+    card.appendChild(info);
+
+    card.addEventListener('click', () => abrirJogo(j));
+    return card;
+  }
+
+  function montarRecentes() {
+    const ids = lerRecentes();
+    recentesLista.innerHTML = '';
+    recentesEl.hidden = ids.length === 0 || Boolean(buscaTermo.trim());
+    if (recentesEl.hidden) return;
+    for (const id of ids) {
+      const j = catalogoJogos.find((x) => x.id === id);
+      if (j) recentesLista.appendChild(montarCard(j, true));
+    }
+  }
+
   function montarFiltros() {
     const vistos = [];
     for (const j of catalogoJogos) if (!vistos.includes(j.console)) vistos.push(j.console);
@@ -183,64 +277,47 @@
     for (const it of itens) {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'aba' + (it.id === 'todos' ? ' ativa' : '');
+      b.className = 'aba' + (it.id === filtroAtual ? ' ativa' : '');
       b.dataset.cat = it.id;
       b.textContent = `${it.emoji} ${it.rotulo}`;
       b.addEventListener('click', () => {
+        filtroAtual = it.id;
         for (const x of filtros.children) x.classList.toggle('ativa', x === b);
-        montarGrid(it.id);
+        renderCatalogo();
       });
       filtros.appendChild(b);
     }
   }
 
-  function montarGrid(filtro) {
-    const lista = (!filtro || filtro === 'todos')
-      ? catalogoJogos
-      : catalogoJogos.filter((j) => j.console === filtro);
-
-    grid.innerHTML = '';
-    vazio.hidden = lista.length > 0;
-
-    for (const j of lista) {
-      const card = document.createElement('button');
-      card.type = 'button';
-      card.className = 'card';
-      card.dataset.id = j.id;
-
-      const capa = document.createElement('div');
-      capa.className = 'capa';
-      const img = document.createElement('img');
-      img.loading = 'lazy';
-      img.alt = '';
-      img.src = `./capas/${encodeURIComponent(j.capa || (j.id + '.gif'))}`;
-      img.addEventListener('error', () => { img.style.display = 'none'; });
-      capa.appendChild(img);
-
-      const tag = document.createElement('span');
-      tag.className = 'tag';
-      tag.textContent = (CONSOLES[j.console] && CONSOLES[j.console].emoji) || '🎮';
-      tag.title = (CONSOLES[j.console] && CONSOLES[j.console].nome) || j.console;
-      capa.appendChild(tag);
-
-      const nome = document.createElement('span');
-      nome.className = 'nome';
-      nome.textContent = j.nome;
-
-      card.appendChild(capa);
-      card.appendChild(nome);
-      card.addEventListener('click', () => abrirJogo(j.id));
-
-      grid.appendChild(card);
-    }
+  function jogosFiltrados() {
+    const termo = normaliza(buscaTermo.trim());
+    return catalogoJogos.filter((j) => {
+      if (filtroAtual !== 'todos' && j.console !== filtroAtual) return false;
+      if (!termo) return true;
+      const cons = (CONSOLES[j.console] && CONSOLES[j.console].nome) || j.console;
+      return normaliza(j.nome).includes(termo) || normaliza(cons).includes(termo)
+        || normaliza(j.id).includes(termo);
+    });
   }
+
+  function renderCatalogo() {
+    const lista = jogosFiltrados();
+    grid.innerHTML = '';
+    for (const j of lista) grid.appendChild(montarCard(j, false));
+    vazio.hidden = lista.length > 0;
+    montarRecentes();
+  }
+
+  pesquisaEl.addEventListener('input', () => { buscaTermo = pesquisaEl.value; renderCatalogo(); });
 
   // Abrir um jogo RECARREGA a pagina. E' de proposito: o EmulatorJS carrega o
   // loader UMA vez por documento (o loader declara `EJS_STORAGE`, entre outras
   // coisas) e reinjetar o script na mesma pagina quebra com
   // "Identifier 'EJS_STORAGE' has already been declared". Uma navegacao nova
   // garante um emulador limpo -- e a troca continua rapida.
-  function abrirJogo(id) {
+  function abrirJogo(jogo) {
+    const id = (jogo && jogo.id) ? jogo.id : jogo;
+    if (jogo && jogo.id) registrarRecente(jogo);
     location.href = `./?jogo=${encodeURIComponent(id)}#/jogo/${encodeURIComponent(id)}`;
   }
 
@@ -898,7 +975,7 @@
     }
 
     montarFiltros();
-    montarGrid('todos');
+    renderCatalogo();
 
     // Link antigo (`?jogo=id`) continua funcionando: vira a rota nova. O
     // `hashchange` cuida de entrar no jogo.
