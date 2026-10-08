@@ -329,25 +329,31 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
   Aqui o player fica com altura = tela + faixa, e cada andar recebe sua area
   (sem aspect-ratio, que espremia a tela quando somado ao padding).
 
-  Tamanho dos controles: o EmulatorJS fixa a POSICAO de cada controle inline
-  (px), entao mexer so na largura/altura nao basta (os botoes se sobrepoem).
-  A solucao e escalar cada CLUSTER com transform: escala tamanho E espacamento
-  juntos. O dpad/analogico fica no cluster esquerdo e os botoes no direito, o
-  que permite escalas diferentes para cada um.
+  Tamanho dos controles: TUDO sai do menor eixo do viewport (vmin) com teto
+  (clamp), entao adapta a qualquer aparelho sem valor fixo como regra. O D-pad
+  e o analogico vivem na mesma coluna a esquerda em CAIXAS SEPARADAS (topo e
+  base) -- as areas de toque nao se sobrepoem.
 
-    --joy-scale  dpad/analogico  (base 125px -> 1.16 = +20px)
-    --btn-scale  botoes redondos (base 50px  -> 1.4  = +20px)
+    --lado       analogico (24vh, teto 225px)
+    --dpad       D-pad (92% do lado)
+    --gap        vao obrigatorio entre os dois
+    --btn-scale  botoes redondos
     --mid-scale  start/select/rapido/lento (base 50x31)
 */
 #game {
-  /* O cluster esquerdo agora tem DOIS controles empilhados (D-pad em cima,
-     analogico embaixo), entao a faixa de baixo cresceu para os dois caberem. */
-  --ctl: 300px;
-  --joy-scale: 1;
+  /* Tamanhos 100% responsivos: derivados do menor eixo do viewport, com teto
+     para nao ficarem gigantes em telas largas. Nada de px fixo como regra. */
+  --gap: clamp(13px, 3.5vmin, 26px);
+  --lado: min(clamp(150px, 24vh, 225px), 44vmin);
+  --dpad: calc(var(--lado) * 0.92);
+  --stick: var(--lado);
+  --knob: min(clamp(58px, 10vh, 95px), 22vmin);
+  --bar: calc(var(--dpad) * 0.28);
+  --stack: calc(var(--dpad) + var(--stick) + var(--gap));
+  /* a faixa de controles e' exatamente o que os dois ocupam + o vao */
+  --ctl: calc(var(--dpad) + var(--stick) + var(--gap) + 22px);
   --btn-scale: 1.4;
   --mid-scale: 1;
-  /* Analogo ~30px maior que o padrao do nipple (base 100px). */
-  --stick-scale: 1.3;
 
   width: 100%;
   background: #000;
@@ -380,75 +386,63 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
   height: var(--ctl);
   z-index: 2;
 }
-#game .ejs_virtualGamepad_left {
-  bottom: 18px;
-  transform: scale(var(--joy-scale));
-  transform-origin: 0% 100%;
-}
 
 /*
-  ANALOGICO + D-PAD no MESMO cluster (esquerdo). Os dois sao posicionados por
-  `left: 50%` / `top: 0%|100%` INLINE dentro do cluster:
-    - D-PAD  -> `top: 0%`    (em cima)
-    - STICK  -> `top: 100%`  (embaixo)
-  Aqui o conjunto todo vai um pouco para a ESQUERDA e o analogico ganha ~30px
-  (`--stick-scale`), como o dono pediu. Como cada peca tem o proprio centro, o
-  deslocamento e' aplicado em CADA uma (o `left: 50%` inline nao muda).
-*/
-/*
-  O cluster esquerdo e' o referencial das duas pecas:
-    - o D-PAD fica em `top: 0%` (inline) -> encosta no topo do cluster;
-    - o ANALOGICO fica em `top: 100%` (inline) -> encosta no fundo do cluster.
-  Entao a ALTURA do cluster posiciona o analogico: com 220px, o analogico fica
-  centrado em y=220 (embaixo do dpad, que ocupa 0..145). O `bottom: 72px` sobe
-  o conjunto o bastante para o analogico (130px) caber inteiro na faixa.
-  `left: 0` + um pequeno recuo em cada peca = o conjunto um pouco mais a
-  esquerda, sem sair da tela.
+  A coluna esquerda empilha os DOIS controles com as caixas SEPARADAS:
+    - D-PAD     -> topo da coluna (top: 0)
+    - ANALOGICO -> base da coluna (bottom: 0)
+  Os dois tem largura/altura proprias (var(--dpad) e var(--stick)), entao as
+  areas de toque nunca se tocam: sobra o `--gap` entre a base do D-pad e o topo
+  do analogico. A altura da coluna e a soma dos dois + o vao.
 */
 #game .ejs_virtualGamepad_left {
-  left: 4px !important;
-  /* Ancorado no TOPO da faixa de controles: o D-pad encosta no alto e o
-     analogico cai logo abaixo, os dois dentro da faixa (a faixa tem 300px e os
-     dois somam ~275). */
-  bottom: auto;
-  top: 0;
+  left: clamp(6px, 3vw, 26px) !important;
+  top: 11px;
+  bottom: 11px;
+  height: auto;
+  width: var(--stick);
+  transform: none;
 }
-#game .b_dpad { margin-left: -10px; }
-#game .b_stick { margin-left: -16px; }
-/*
-  SEPARACAO do D-pad e do analogico (pedido do dono: "move o analogico 25px
-  para a direita e o d-pad 25px para cima").
-  Medido antes: o D-pad ocupava y 266..391 e o analogico comecava em 353 -- os
-  dois se sobrepunham em **38px**, entao tocar a seta de baixo acertava o
-  analogico. Agora o D-pad sobe 25px e o analogico vai 25px para a direita, o
-  que deixa os dois deslocados na diagonal (cada um no seu canto).
-  `translate` e' usado de proposito: move SO o desenho, sem mexer no layout nem
-  depender de qual elemento e' o `offsetParent` de cada peca.
-*/
-#game .ejs_virtualGamepad_left .ejs_dpad_main { transform: translateY(-25px); }
-/*
-  O `top: 100%` inline do analogico o cola no FUNDO do cluster -- e como o
-  cluster tem altura automatica, ele ficava fora da tela. Aqui ele desce um
-  valor FIXO a partir do topo: a altura do D-pad (145px) + uma folga, ou seja,
-  logo abaixo das setinhas. O D-pad fica intacto no topo.
-*/
-/*
-  O circulo do analogico e' o filho `.back` do nipple (100x100 inline, escalado
-  por `--stick-scale`). E' ELE que precisa ser deslocado: mover o wrapper nao
-  mexe no desenho e o `left` do `.back` ja vem inline (`0px`), entao o nosso
-  valor tem de vencer com `!important`.
-  - `top: 152px`  -> logo abaixo do D-pad (o `top: 100%` inline o colaria no
-                     fundo do cluster, que tem altura automatica);
-  - `left: 25px`  -> 25px para a direita (pedido do dono), separando do D-pad.
-*/
-#game .b_stick > div {
-  top: 152px !important;
-  transform: scale(var(--stick-scale));
-  transform-origin: 50% 50%;
+
+#game .ejs_virtualGamepad_left .b_dpad {
+  position: absolute !important;
+  left: calc((var(--stick) - var(--dpad)) / 2) !important;
+  top: 0 !important;
+  width: var(--dpad) !important;
+  height: var(--dpad) !important;
+  margin: 0 !important;
 }
+#game .ejs_virtualGamepad_left .ejs_dpad_main { width: 100%; height: 100%; opacity: .85; }
+#game .ejs_dpad_vertical { width: var(--bar); }
+#game .ejs_dpad_horizontal { height: var(--bar); }
+
+#game .ejs_virtualGamepad_left .b_stick {
+  position: absolute !important;
+  left: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
+  width: var(--stick) !important;
+  height: var(--stick) !important;
+  margin: 0 !important;
+}
+/* O nipple (elemento do nipplejs) traz `top:100%` inline; aqui ele fica no
+   CENTRO da caixa `.b_stick`, para o `.back` (o circulo) centralizar nela. */
+#game .b_stick > div { left: 50% !important; top: 50% !important; }
 #game .b_stick .back {
-  left: 25px !important;
+  width: var(--stick) !important;
+  height: var(--stick) !important;
+  left: 50% !important;
+  top: 50% !important;
+  margin-left: calc(var(--stick) * -0.5) !important;
+  margin-top: calc(var(--stick) * -0.5) !important;
 }
+#game .b_stick .front {
+  width: var(--knob) !important;
+  height: var(--knob) !important;
+  margin-left: calc(var(--knob) * -0.5) !important;
+  margin-top: calc(var(--knob) * -0.5) !important;
+}
+
 #game .ejs_virtualGamepad_right {
   bottom: 18px;
   transform: scale(var(--btn-scale));
@@ -532,14 +526,12 @@ body.cheia #game {
   border: 0;
   border-radius: 0;
   z-index: 40;
-  --joy-scale: 1.32;
   --btn-scale: 1.8;
   --mid-scale: 1.7;
-  --stick-scale: 1.42;
 }
 body.cheia #game .ejs_canvas_parent { height: 100%; }
 body.cheia #game .ejs_virtualGamepad_parent { height: 100%; }
-body.cheia #game .ejs_virtualGamepad_left { bottom: 130px; top: auto; }
+body.cheia #game .ejs_virtualGamepad_left { top: auto; bottom: 12px; height: var(--stack); }
 body.cheia #game .ejs_virtualGamepad_right { bottom: 12px; }
 body.cheia #game .ejs_virtualGamepad_top { bottom: 168px; }
 body.cheia #game .ejs_virtualGamepad_bottom { bottom: 4px; }
@@ -584,15 +576,13 @@ body.girado #game {
   min-height: 0;
   border: 0;
   border-radius: 0;
-  --joy-scale: 1.24;
   --btn-scale: 1.62;
   --mid-scale: 1.45;
-  --stick-scale: 1.34;
 }
 body.girado #barra { display: none; }
 body.girado #game .ejs_canvas_parent { height: 100%; }
 body.girado #game .ejs_virtualGamepad_parent { height: 100%; }
-body.girado #game .ejs_virtualGamepad_left { bottom: 120px; top: auto; }
+body.girado #game .ejs_virtualGamepad_left { top: auto; bottom: 10px; height: var(--stack); }
 body.girado #game .ejs_virtualGamepad_right { bottom: 10px; }
 body.girado #game .ejs_virtualGamepad_top { bottom: 150px; }
 body.girado #game .ejs_virtualGamepad_bottom { bottom: auto; top: 72px; transform-origin: 50% 0%; }
@@ -636,14 +626,12 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
     border: 0;
     border-radius: 0;
     z-index: 40;
-    --joy-scale: 1.24;
     --btn-scale: 1.62;
     --mid-scale: 1.45;
-    --stick-scale: 1.34;
   }
   body.jogando #game .ejs_canvas_parent { height: 100%; }
   body.jogando #game .ejs_virtualGamepad_parent { height: 100%; }
-  body.jogando #game .ejs_virtualGamepad_left { bottom: 120px; top: auto; }
+  body.jogando #game .ejs_virtualGamepad_left { top: auto; bottom: 10px; height: var(--stack); }
   body.jogando #game .ejs_virtualGamepad_right { bottom: 10px; }
   body.jogando #game .ejs_virtualGamepad_top { bottom: 150px; }
 
