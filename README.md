@@ -54,10 +54,15 @@ os jogos.
 /?jogo=topgear2          → link antigo (redireciona para a rota `#/jogo/`)
 ```
 
-O botão **‹ INÍCIO** (na biblioteca) e o **‹ JOGOS** (no jogo) voltam para a
-home e devolvem a URL limpa (`/`, sem hash nem `?jogo=`). Usam
-`location.replace`, então a rota antiga não fica no histórico — o botão
-"voltar" do aparelho sai do site em vez de reabrir o jogo.
+Navegação de volta:
+
+- **‹ JOGOS** (dentro do jogo) → **biblioteca** (`#/biblioteca`), para escolher
+  outro jogo direto. Vale para jogos do catálogo e para os do aparelho.
+- **‹ INÍCIO** (na biblioteca) → **home**, com a URL limpa (`/`).
+- **Inatividade** (10 min sem toque) → home.
+
+Os dois usam `location.replace`, então a rota antiga não fica no histórico — o
+botão "voltar" do aparelho sai do site em vez de reabrir o jogo.
 
 O histórico de recentes é o mesmo `localStorage` (`emugames.recentes`), gravado
 ao abrir o jogo; a home só o exibe.

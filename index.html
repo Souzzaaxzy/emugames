@@ -115,7 +115,7 @@
 <section id="jogador" hidden>
   <div id="barra">
     <span id="subtitulo"></span>
-    <button id="voltar" type="button" title="Voltar ao catálogo" aria-label="Voltar ao catálogo">
+    <button id="voltar" type="button" title="Voltar à biblioteca" aria-label="Voltar à biblioteca">
       <span class="seta">&#8249;</span> JOGOS
     </button>
   </div>
@@ -866,11 +866,27 @@
     parando = false;
   }
 
+  /**
+   * Volta de um jogo para a BIBLIOTECA (nao para a home). Recarrega a pagina:
+   * o EmulatorJS so pode ser montado uma vez por documento, entao sair do jogo
+   * exige uma navegacao nova (ver `abrirJogo`). A URL final e' `#/biblioteca`,
+   * com o `?jogo=`/`?arquivo=` removido.
+   */
+  function voltarParaBiblioteca() {
+    if (estaEmTelaCheia()) alternarTelaCheia(false);
+    if (location.hash === '#/biblioteca' && !location.search) {
+      mostrarTela('biblioteca');
+      return;
+    }
+    location.replace(location.pathname + '#/biblioteca');
+  }
+
+  /**
+   * Volta para a HOME (tela inicial, URL limpa). Usado pelo botao INICIO da
+   * biblioteca e pela inatividade.
+   */
   function voltarParaHome() {
     if (estaEmTelaCheia()) alternarTelaCheia(false);
-    // Sai do jogo e devolve a URL LIMPA (home, sem hash nem `?jogo=`).
-    // Recarregar e' de proposito: o EmulatorJS so pode ser montado uma vez por
-    // documento, entao voltar exige uma navegacao nova (ver `abrirJogo`).
     if (limparUrlDaHome()) return;
     mostrarTela('home');
   }
@@ -1202,17 +1218,17 @@
   // EVENTOS
   // ==========================================================================
   pararBtn.addEventListener('click', parar);
-  voltarBtn.addEventListener('click', voltarParaHome);
+  voltarBtn.addEventListener('click', voltarParaBiblioteca);
   cheiaBtn.addEventListener('click', () => alternarTelaCheia());
   bibliotecaBtn.addEventListener('click', abrirBiblioteca);
   arquivoBtn.addEventListener('click', escolherArquivo);
   voltarHomeBtn.addEventListener('click', voltarParaHome);
 
-  // O botao "sair" do proprio EmulatorJS volta para a home.
+  // O botao "sair" do proprio EmulatorJS volta para a biblioteca, igual ao JOGOS.
   window.EJS_onExit = () => {
     window.EJS_emulator = null;
     aoSair();
-    if (!jogador.hidden) voltarParaHome();
+    if (!jogador.hidden) voltarParaBiblioteca();
   };
 
   window.addEventListener('hashchange', aplicarRota);
