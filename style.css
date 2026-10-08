@@ -250,7 +250,6 @@ h1 #marca { letter-spacing: 2px; }
 #voltar:focus-visible,
 #controle:focus-visible,
 #parar:focus-visible,
-#turbo:focus-visible,
 #cheia:focus-visible,
 #controle-painel button:focus-visible,
 #controle-lista .item:focus-visible {
@@ -265,7 +264,7 @@ h1 #marca { letter-spacing: 2px; }
   .card .nome { font-size: 15px; }
   .card .plat { font-size: 12px; }
   .capa .tag { font-size: 15px; padding: 4px 9px; }
-  #voltar, #controle, #parar, #cheia, #turbo { padding: 12px 18px; font-size: 13px; }
+  #voltar, #controle, #parar, #cheia { padding: 12px 18px; font-size: 13px; }
   h1 { font-size: 34px; }
   .cabeca .sub { font-size: 15px; }
   .secao-titulo { font-size: 15px; }
@@ -642,8 +641,6 @@ body.cheia #controles {
 body.cheia #controles > * { pointer-events: auto; }
 body.cheia #parar,
 body.cheia #status { display: none; }
-body.cheia #turbo { opacity: .55; padding: 7px 12px; font-size: 11px; background: rgba(20, 25, 34, .85); }
-body.cheia #turbo.ligado { opacity: 1; background: #f59e0b; }
 body.cheia #cheia {
   opacity: .55;
   padding: 7px 12px;
@@ -739,7 +736,6 @@ body.girado #controles {
 body.girado #controles > * { pointer-events: auto; }
 body.girado #parar,
 body.girado #status { display: none; }
-body.girado #turbo { opacity: .6; padding: 7px 12px; font-size: 11px; }
 body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
 
 /*
@@ -825,15 +821,6 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
   letter-spacing: 1px; font-family: inherit; cursor: pointer;
 }
 #cheia:active { background: var(--acento); border-color: var(--acento); }
-/* TURBO: alterna o modo desempenho do N64 (ligado = ambar). */
-#turbo {
-  background: var(--painel2); color: var(--texto); border: 1px solid var(--borda);
-  border-radius: 8px; padding: 10px 16px; font-size: 12px; font-weight: 700;
-  letter-spacing: 1px; font-family: inherit; cursor: pointer;
-}
-#turbo.ligado {
-  background: #f59e0b; border-color: #f59e0b; color: #1a1205;
-}
 #status { font-size: 11px; color: var(--fraco); }
 
 /* ==========================================================================

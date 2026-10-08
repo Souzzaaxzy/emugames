@@ -17,7 +17,6 @@ emugames/                    <- ESTE repositório (o site)
 ├── neogeo.zip      ← BIOS do Neo Geo (FBNeo)
 └── jogos/
     ├── snes/
-    ├── n64/
     └── arcade/
 ```
 
@@ -40,78 +39,6 @@ emugames/                    <- ESTE repositório (o site)
 
 1. Coloque a ROM em `jogos/<console>/`
 2. Adicione uma linha no `jogos.json`
-
-### Nintendo 64 (`n64`)
-
-O core é o **`mupen64plus_next`** (o EmulatorJS já traz o core e o **layout de
-controle padrão** do N64: `A`, `B`, `Z`, `L`, `R`, `Start`, analógico, D-pad e o
-C-pad). Por isso um jogo de N64 **não precisa de `gamepadDoJogo` no
-`index.html`** — o site cai no layout padrão e funciona.
-
-Formato: **`.z64`** (big-endian, magic `80 37 12 40`). O EmulatorJS não valida a
-extensão, quem manda é o `console`, mas `.z64` é o formato canônico.
-
-> **ROMs comerciais em `.zip` também funcionam**: o EmulatorJS detecta o zip pelo
-> *magic* `PK\x03\x04` e descompacta antes de entregar ao core, então um `.zip`
-> com um único `.z64` dentro roda normalmente — é só apontar o `rom` para o zip.
-> Preferimos guardar a ROM **compactada** (o repo fica bem menor).
-
-> **Zip acima de 25 MiB** não cabe num asset do Cloudflare: nesses casos a ROM
-> sobe em **partes** (`<nome>.zip.p1`, `.p2`), o zip inteiro entra no
-> `.assetsignore` e o jogo leva o campo `partes` no `jogos.json` (igual ao
-> `kof97`, do arcade).
-
-```json
-{
-  "id": "supermario64",
-  "nome": "Super Mario 64",
-  "emoji": "🍄",
-  "console": "n64",
-  "capa": "supermario64.gif",
-  "descricao": "A transição do Mario para o 3D...",
-  "rom": "jogos/n64/supermario64.zip"
-}
-```
-
-### Desempenho / FPS do N64
-
-O N64 é o console mais pesado aqui (core `mupen64plus_next` em WASM). O que já
-está ligado:
-
-- **Threads** (`EJS_threads`) — quando o host manda COOP/COEP (o `_headers`
-  manda), a página fica isolada e o EmulatorJS usa o core `-thread` (vários
-  núcleos). O player DETECTA `crossOriginIsolated` e só pede threads se houver
-  isolamento.
-- **Core options** (em `index.html`, via `EJS_defaultOptions`, só para `n64`):
-  `cpucore=dynamic_recompiler` (dynarec), `rdp-plugin=gliden64` (render OpenGL,
-  o rápido), `rsp-plugin=hle` e `EnableNativeResFactor=0` (sem render acima da
-  resolução nativa). São os defaults mais rápidos do core, fixados de propósito.
-
-### Botão ⚡ TURBO (N64)
-
-Se um jogo específico continuar travando, tem um botão **⚡ TURBO** na barra do
-player (só aparece no N64). Ele liga as opções que o core marca como "break some
-games" — por isso **não** são default:
-
-- `mupen64plus-Framerate = Fullspeed` (força Count per Op 1)
-- `mupen64plus-EnableFBEmulation = False` (menos trabalho de framebuffer)
-- `mupen64plus-EnableLODEmulation = False`
-- `mupen64plus-EnableCopyColorToRDRAM = Off` / `EnableCopyDepthToRDRAM = Off`
-
-É um toggle **opt-in**, guardado em `localStorage` (`emugames.turbo`): vale para
-todos os jogos de N64 e sobrevive a recarregar a página. Alternar **recarrega o
-jogo** (as core options são lidas na montagem do emulador). Custo: alguns
-efeitos/timing podem quebrar em certos jogos — se quebrar, é só desligar.
-
-> **Sobre "120 fps"**: não faz sentido aqui. O N64 é um console de ~30 fps e o
-> emulador roda emulado — o número que importa é **quantos fps o aparelho
-> consegue manter** (o medidor fica à mostra). Mirar 120 fps só pioraria: render
-> mais rápido que o console faz o jogo acelerar (tudo roda 2–4× mais rápido).
-> O caminho é reduzir o custo por quadro, que é o que o TURBO faz.
-
-> **Inatividade**: o player desliga sozinho após **10 min** sem interação — e o
-> tempo só conta com a página **visível** (`document.hidden`), então não desliga
-> em segundo plano.
 
 ## Abrir
 

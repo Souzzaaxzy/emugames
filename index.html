@@ -58,7 +58,6 @@
 
   <div id="controles">
     <button id="parar" type="button" disabled>■ PARAR</button>
-    <button id="turbo" type="button" hidden title="Modo desempenho: mais FPS, menos precisao">⚡ TURBO</button>
     <button id="cheia" type="button">⛶ TELA CHEIA</button>
     <span id="status"></span>
   </div>
@@ -145,7 +144,6 @@
   const erroDica = document.getElementById('erro-dica');
   const pararBtn = document.getElementById('parar');
   const voltarBtn = document.getElementById('voltar');
-  const turboBtn = document.getElementById('turbo');
   const cheiaBtn = document.getElementById('cheia');
   const controleBtn = document.getElementById('controle');
   const controleTexto = document.getElementById('controle-texto');
@@ -159,12 +157,11 @@
     gba: { nome: 'Game Boy Advance', emoji: '🎮' },
     gb: { nome: 'Game Boy', emoji: '🎮' },
     genesis: { nome: 'Mega Drive', emoji: '🎮' },
-    n64: { nome: 'Nintendo 64', emoji: '🎮' },
     psx: { nome: 'PlayStation', emoji: '🎮' },
     arcade: { nome: 'Arcade', emoji: '🕹️' },
   };
   const CORES = { snes: '#1d4ed8', nes: '#b91c1c', gba: '#7c3aed', gb: '#166534',
-    genesis: '#0369a1', n64: '#b45309', psx: '#475569', arcade: '#b45309' };
+    genesis: '#0369a1', psx: '#475569', arcade: '#b45309' };
 
   let catalogoJogos = [];
   let jogoAtual = null;
@@ -325,33 +322,6 @@
   }
 
   pesquisaEl.addEventListener('input', () => { buscaTermo = pesquisaEl.value; renderCatalogo(); });
-
-  // ==========================================================================
-  // MODO TURBO (N64)
-  // O N64 e' o unico console com opcao de core que muda o FPS. As opcoes extras
-  // (`Framerate=Fullspeed`, `EnableFBEmulation=False`, copias de framebuffer
-  // desligadas) dao desempenho, mas o proprio core avisa que "break some games"
-  // -- por isso NAO sao default: ficam atras deste botao, que o usuario liga
-  // quando um jogo especifico esta travando.
-  //
-  // As opcoes sao lidas na MONTAGEM do emulador (dentro de `iniciar`), entao
-  // alternar o turbo RECARREGA a pagina do jogo para elas valerem.
-  // ==========================================================================
-  const TURBO_CHAVE = 'emugames.turbo';
-
-  function modoTurbo() {
-    try { return localStorage.getItem(TURBO_CHAVE) === '1'; } catch (e) { return false; }
-  }
-
-  function alternarTurbo() {
-    const ligar = !modoTurbo();
-    try { localStorage.setItem(TURBO_CHAVE, ligar ? '1' : '0'); } catch (e) { /* ok */ }
-    turboBtn.classList.toggle('ligado', ligar);
-    // Reinicia o jogo atual para o emulador reler as core options.
-    if (jogoAtual) {
-      location.href = `./?jogo=${encodeURIComponent(jogoAtual.id)}#/jogo/${encodeURIComponent(jogoAtual.id)}`;
-    }
-  }
 
   // Abrir um jogo RECARREGA a pagina. E' de proposito: o EmulatorJS carrega o
   // loader UMA vez por documento (o loader declara `EJS_STORAGE`, entre outras
@@ -632,42 +602,6 @@
     // Ficar com o medidor de FPS a mostra ajuda a CONFERRAR que o emulador nao
     // esta caindo de quadro (que e' o que o dono percebe como "travar").
     window.EJS_defaultOptions = { fps: 'show' };
-    // O Nintendo 64 e' o console mais pesado aqui: o `mupen64plus_next` roda no
-    // WASM e o desempenho depende das escolhas do core. O EmulatorJS ja vem com
-    // os defaults MAIS RAPIDOS, mas eles podem mudar entre versoes -- por isso
-    // fixamos EXPLICITAMENTE os tres que definem a velocidade (nomes do
-    // `libretro_core_options.h` do repo `EmulatorJS/mupen64plus-libretro-nx`):
-    //   * `mupen64plus-cpucore`   = `dynamic_recompiler` (dynarec: recompila o
-    //     codigo do N64 em vez de interpretar; ordens de grandeza mais rapido)
-    //   * `mupen64plus-rdp-plugin` = `gliden64` (renderizador OpenGL de alto
-    //     nivel; `angrylion`/`parallel` sao mais precisos e MUITO mais lentos)
-    //   * `mupen64plus-rsp-plugin` = `hle` (audio/video por emulacao de alto
-    //     nivel, o mais rapido)
-    //   * `mupen64plus-EnableNativeResFactor` = `0` (nao renderiza acima da
-    //     resolucao nativa; e' o que o celular aguenta)
-    // Alem disso o `EJS_threads` acima liga a variante `-thread` (varios nucleos).
-    //
-    // NAO ligamos `mupen64plus-Framerate = Fullspeed` nem `EnableFBEmulation =
-    // False` por padrao: os dois dao FPS, mas o proprio core avisa que "break
-    // some games" (timing/framebuffer). Eles entram no modo TURBO (botao ⚡),
-    // que o usuario liga so quando um jogo especifico esta travando.
-    if (j.console === 'n64') {
-      Object.assign(window.EJS_defaultOptions, {
-        'mupen64plus-cpucore': 'dynamic_recompiler',
-        'mupen64plus-rdp-plugin': 'gliden64',
-        'mupen64plus-rsp-plugin': 'hle',
-        'mupen64plus-EnableNativeResFactor': '0',
-      });
-      if (modoTurbo()) {
-        Object.assign(window.EJS_defaultOptions, {
-          'mupen64plus-Framerate': 'Fullspeed',
-          'mupen64plus-EnableFBEmulation': 'False',
-          'mupen64plus-EnableLODEmulation': 'False',
-          'mupen64plus-EnableCopyColorToRDRAM': 'Off',
-          'mupen64plus-EnableCopyDepthToRDRAM': 'Off',
-        });
-      }
-    }
     if (j.bios) {
       // A BIOS tem de chegar ao emulador como ZIP. O EmulatorJS, por padrao,
       // EXTRAI a BIOS em arquivos soltos -- e o FBNeo procura "neogeo.zip", que
@@ -688,9 +622,6 @@
 
     rodando = true;
     pararBtn.disabled = false;
-    // O TURBO so existe no N64 (unico console com opcao de core que muda o FPS).
-    turboBtn.hidden = j.console !== 'n64';
-    turboBtn.classList.toggle('ligado', turboBtn.hidden ? false : modoTurbo());
     marcarAtividade();
 
     // O loader so pode ser injetado UMA vez por documento -- por isso abrir um
@@ -927,7 +858,6 @@
   // ==========================================================================
   pararBtn.addEventListener('click', parar);
   voltarBtn.addEventListener('click', voltarAoCatalogo);
-  turboBtn.addEventListener('click', alternarTurbo);
   cheiaBtn.addEventListener('click', () => alternarTelaCheia());
 
   // O botao "sair" do proprio EmulatorJS volta para o catalogo.

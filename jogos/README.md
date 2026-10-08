@@ -10,8 +10,6 @@ jogos/
 │   └── topgear2.smc
 ├── genesis/
 │   └── sonic.rom
-├── n64/
-│   └── dexanoid.z64
 └── arcade/
     ├── kof97.zip
     └── neogeo.zip
@@ -53,15 +51,8 @@ Entao `.rom` funciona quando o conteudo e daquele console:
 | `genesis` | `.md` `.bin` `.gen` | **sim** |
 | `nes` | `.nes` `.fds` | as vezes |
 | `gba` | `.gba` | nao (use `.gba`) |
-| `n64` | `.z64` `.n64` `.v64` | nao (use `.z64`) |
 | `psx` | `.bin` + `.cue` `.pbp` | nao |
 | **`arcade`** | **`.zip` (romset)** | **NAO** — ver abaixo |
-
-> **N64**: core `mupen64plus_next`. O EmulatorJS ja traz o **layout de controle
-> padrao** do N64 (`A` `B` `Z` `L` `R` `Start`, analogico, D-pad, C-pad), entao o
-> jogo **nao precisa** de `gamepadDoJogo` no `index.html`. Use ROM **homebrew /
-> dominio publico** (ex.: [N64-PD-ROMS](https://github.com/DerekTurtleRoe/N64-PD-ROMS));
-> ROM comercial e' copyright.
 
 ## ARCADE (Neo Geo, CPS, MAME) — caso especial
 
@@ -155,5 +146,5 @@ Underscore = formato antigo, precisa converter.
 
 ## Consoles suportados (EmulatorJS)
 
-`snes` `nes` `gba` `gb` `gbc` `genesis` `segaMD` `n64` `psx` `arcade`
+`snes` `nes` `gba` `gb` `gbc` `genesis` `segaMD` `psx` `arcade`
 `atari2600` `segaMS` `segaGG` `segaSaturn` `3do` `lynx` `jaguar` `vb` `nds` `pce`
