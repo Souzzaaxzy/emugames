@@ -63,13 +63,6 @@ extensão, quem manda é o `console`, mas `.z64` é o formato canônico.
 }
 ```
 
-> **ROM legal**: as ROMs de N64 deste catálogo são **homebrew de domínio
-> público** (ex.: [DerekTurtleRoe/N64-PD-ROMS](https://github.com/DerekTurtleRoe/N64-PD-ROMS)).
-> Não suba ROM comercial (Super Mario 64, Zelda, etc.) — é conteúdo protegido
-> por copyright.
-
-Pronto — aparece na lista automaticamente. Detalhes em `jogos/README.md`.
-
 ## Abrir
 
 ```
