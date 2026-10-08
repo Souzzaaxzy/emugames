@@ -87,13 +87,31 @@ está ligado:
   o rápido), `rsp-plugin=hle` e `EnableNativeResFactor=0` (sem render acima da
   resolução nativa). São os defaults mais rápidos do core, fixados de propósito.
 
-Ficaram **de fora** de propósito (dão FPS, mas o próprio core avisa "break some
-games"): `mupen64plus-Framerate=Fullspeed` e `EnableFBEmulation=False`. Se
-quiser testar num jogo específico, é só acrescentar ao objeto.
+### Botão ⚡ TURBO (N64)
+
+Se um jogo específico continuar travando, tem um botão **⚡ TURBO** na barra do
+player (só aparece no N64). Ele liga as opções que o core marca como "break some
+games" — por isso **não** são default:
+
+- `mupen64plus-Framerate = Fullspeed` (força Count per Op 1)
+- `mupen64plus-EnableFBEmulation = False` (menos trabalho de framebuffer)
+- `mupen64plus-EnableLODEmulation = False`
+- `mupen64plus-EnableCopyColorToRDRAM = Off` / `EnableCopyDepthToRDRAM = Off`
+
+É um toggle **opt-in**, guardado em `localStorage` (`emugames.turbo`): vale para
+todos os jogos de N64 e sobrevive a recarregar a página. Alternar **recarrega o
+jogo** (as core options são lidas na montagem do emulador). Custo: alguns
+efeitos/timing podem quebrar em certos jogos — se quebrar, é só desligar.
+
+> **Sobre "120 fps"**: não faz sentido aqui. O N64 é um console de ~30 fps e o
+> emulador roda emulado — o número que importa é **quantos fps o aparelho
+> consegue manter** (o medidor fica à mostra). Mirar 120 fps só pioraria: render
+> mais rápido que o console faz o jogo acelerar (tudo roda 2–4× mais rápido).
+> O caminho é reduzir o custo por quadro, que é o que o TURBO faz.
 
 > **Inatividade**: o player desliga sozinho após **10 min** sem interação — e o
 > tempo só conta com a página **visível** (`document.hidden`), então não desliga
-> em segundo plano. O medidor de FPS fica à mostra para conferir a performance.
+> em segundo plano.
 
 ## Abrir
 
