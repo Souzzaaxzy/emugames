@@ -1,5 +1,11 @@
 # Arquivos que NAO devem subir para o Cloudflare Workers.
 #
+# IMPORTANTE: o wrangler le a RAIZ do repositorio como assets directory, entao
+# o .git tambem entra na varredura. O pack do .git tem >100 MiB e guarda o blob
+# do kof97.zip (27,6 MiB) — sem exclui-lo o deploy falha com "Asset too large".
+.git
+.wrangler
+node_modules
 # O Cloudflare limita cada asset a 25 MiB. O kof97.zip tem ~27,6 MiB, o que
 # faria o deploy inteiro falhar. Ele NAO sobe; no lugar dele sobem as PARTES
 # (kof97.zip.p1/.p2, ~13,8 MiB cada), que o player baixa e remonta num Blob
