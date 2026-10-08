@@ -194,6 +194,51 @@
       "capa": "umk3.gif",
       "descricao": "A versao definitiva do MK3: elenco completo, Kombat Kodes, Brutalities e os fatalities classicos.",
       "rom": "jogos/snes/umk3.sfc"
+    },
+    {
+      "id": "dexanoid",
+      "nome": "Dexanoid R1",
+      "emoji": "🧱",
+      "console": "n64",
+      "capa": "dexanoid.gif",
+      "descricao": "Breakout/Arkanoid no Nintendo 64: rebata a bola, quebre os blocos e colete power-ups em fases com visual 3D.",
+      "rom": "jogos/n64/dexanoid.z64"
+    },
+    {
+      "id": "puzzlemaster64",
+      "nome": "Puzzle Master 64",
+      "emoji": "🧩",
+      "console": "n64",
+      "capa": "puzzlemaster64.gif",
+      "descricao": "Coletânea de quebra-cabeças e jogos de lógica criados para o Nintendo 64.",
+      "rom": "jogos/n64/puzzlemaster64.z64"
+    },
+    {
+      "id": "manicminer",
+      "nome": "Manic Miner",
+      "emoji": "⛏️",
+      "console": "n64",
+      "capa": "manicminer.gif",
+      "descricao": "Porte do clássico: guie o Miner Willy por 20 cavernas cheias de armadilhas e colete tudo antes do ar acabar.",
+      "rom": "jogos/n64/manicminer.z64"
+    },
+    {
+      "id": "twintris",
+      "nome": "Twintris",
+      "emoji": "🎲",
+      "console": "n64",
+      "capa": "twintris.gif",
+      "descricao": "Tetris competitivo: empilhe as peças, limpe linhas e aguente mais tempo que o adversário.",
+      "rom": "jogos/n64/twintris.z64"
+    },
+    {
+      "id": "shufflepuck64",
+      "nome": "Shuffle Puck 64",
+      "emoji": "🏒",
+      "console": "n64",
+      "capa": "shufflepuck64.gif",
+      "descricao": "Disputa de air hockey contra o computador: defenda o seu gol e marque pontos rebatendo o disco.",
+      "rom": "jogos/n64/shufflepuck64.z64"
     }
   ]
 }

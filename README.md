@@ -17,6 +17,7 @@ emugames/                    <- ESTE repositório (o site)
 ├── neogeo.zip      ← BIOS do Neo Geo (FBNeo)
 └── jogos/
     ├── snes/
+    ├── n64/
     └── arcade/
 ```
 
@@ -39,6 +40,33 @@ emugames/                    <- ESTE repositório (o site)
 
 1. Coloque a ROM em `jogos/<console>/`
 2. Adicione uma linha no `jogos.json`
+
+### Nintendo 64 (`n64`)
+
+O core é o **`mupen64plus_next`** (o EmulatorJS já traz o core e o **layout de
+controle padrão** do N64: `A`, `B`, `Z`, `L`, `R`, `Start`, analógico, D-pad e o
+C-pad). Por isso um jogo de N64 **não precisa de `gamepadDoJogo` no
+`index.html`** — o site cai no layout padrão e funciona.
+
+Formato: **`.z64`** (big-endian, magic `80 37 12 40`). O EmulatorJS não valida a
+extensão, quem manda é o `console`, mas `.z64` é o formato canônico.
+
+```json
+{
+  "id": "dexanoid",
+  "nome": "Dexanoid R1",
+  "emoji": "🧱",
+  "console": "n64",
+  "capa": "dexanoid.gif",
+  "descricao": "Breakout no Nintendo 64...",
+  "rom": "jogos/n64/dexanoid.z64"
+}
+```
+
+> **ROM legal**: as ROMs de N64 deste catálogo são **homebrew de domínio
+> público** (ex.: [DerekTurtleRoe/N64-PD-ROMS](https://github.com/DerekTurtleRoe/N64-PD-ROMS)).
+> Não suba ROM comercial (Super Mario 64, Zelda, etc.) — é conteúdo protegido
+> por copyright.
 
 Pronto — aparece na lista automaticamente. Detalhes em `jogos/README.md`.
 
