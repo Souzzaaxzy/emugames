@@ -42,13 +42,16 @@ body:not(.jogando) { padding: 0; }
    creditos ficarem sempre no rodape, com os recentes absorvendo a sobra.
    ========================================================================== */
 #home {
+  /* O padding do topo e' uma variavel para o video poder cancela-lo exatamente
+     (ver `#intro`). Assim o full-bleed funciona em qualquer tela. */
+  --pad-top: calc(8px + env(safe-area-inset-top, 0px));
   display: flex;
   flex-direction: column;
   /* Empilha do topo: recentes e biblioteca ficam juntos e os creditos vao para
      o rodape via `margin-top: auto` (ver `#creditos`). */
   gap: clamp(8px, 2vh, 16px);
   height: 100dvh;
-  padding: calc(8px + env(safe-area-inset-top, 0px))
+  padding: var(--pad-top)
            calc(8px + env(safe-area-inset-right, 0px))
            calc(8px + env(safe-area-inset-bottom, 0px))
            calc(8px + env(safe-area-inset-left, 0px));
@@ -60,7 +63,11 @@ body:not(.jogando) { padding: 0; }
 @supports not (height: 100dvh) {
   #home { height: 100vh; }
 }
-#home .cabeca { padding: 4px 4px 0; }
+#home .cabeca {
+  /* o padding do topo e' o do `#home`; aqui so os 4px laterais + base */
+  --pad-cabeca-topo: 4px;
+  padding: var(--pad-cabeca-topo) 4px 0;
+}
 
 /* ==========================================================================
    CABECALHO — intro em video com o titulo ATRAVESSADO na base.
@@ -68,21 +75,28 @@ body:not(.jogando) { padding: 0; }
    sobre o video, metade para fora. Como a sobra de espaco e' dividida por
    `space-between`, a home continua cabendo na tela (sem rolagem).
    ========================================================================== */
+/* O video SANGRА para as bordas: ocupa o topo INTEIRO, de ponta a ponta.
+   `width: 100vw` + o truque do `translateX(-50%)` deixa o elemento mais largo
+   que o container. O `margin-top` negativo cancela o padding do `.cabeca` (4)
+   e o do `#home` (8), encostando o video no topo -- mas PRESERVANDO a safe
+   area do notch (ela nao entra na conta). */
 #intro {
-  --intro-h: clamp(72px, 20vh, 150px);
-  width: min(100%, calc(var(--intro-h) * 16 / 9));
-  margin: 0 auto;
-  border-radius: 16px;
+  /* cancela exatamente o padding de topo (o do `#home` + o do `.cabeca`) */
+  margin-top: calc(-1 * (var(--pad-top) + var(--pad-cabeca-topo)));
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: clamp(108px, 24vh, 210px);
+  border-radius: 0 0 18px 18px;
   overflow: hidden;
   background: #05070a;
-  border: 1px solid var(--borda);
   box-shadow: 0 8px 22px rgba(0, 0, 0, .45);
   line-height: 0;
 }
 #intro-video {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   object-fit: cover;
 }
 #home .cabeca h1 {
@@ -533,7 +547,7 @@ h1 #marca { letter-spacing: 2px; }
    ========================================================================== */
 @media (max-height: 700px) {
   #home { gap: 8px; }
-  #home .cabeca { padding: 0; }
+  #home .cabeca { --pad-cabeca-topo: 0px; }
   h1 { font-size: clamp(20px, 5.6vw, 26px); }
   .cabeca .sub { margin-top: 4px; font-size: 12px; }
   #recentes-lista { padding-bottom: 4px; }
@@ -1033,6 +1047,9 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
   body { padding: 0; }
   #barra, #controles { display: none; }
   #home, #biblioteca { padding: 6px; }
+  /* em paisagem o padding encolhe: o video tem de cancelar o valor NOVO,
+     senao ele passaria do topo da tela */
+  #home { --pad-top: 6px; }
 
   /* Deitado, a secao do jogo passa a ocupar tudo SOZINHA — nao precisa mais
      tocar no botao de tela cheia. */
