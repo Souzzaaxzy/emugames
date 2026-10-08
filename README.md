@@ -105,7 +105,8 @@ Para conferir o que está no ar sem abrir o navegador:
 
 ```bash
 curl -s https://emugames.kannonmtx.workers.dev/jogos.json | grep -c '"id"'
-# 16 = atualizado | 3 = deploy pendente
+# confira com a contagem local:
+python3 -c "import json;print(len(json.load(open('jogos.json'))['jogos']))"
 ```
 
 > O `!arcade` e os comandos `!<jogo>` leem o **catálogo local** (do repositório)
