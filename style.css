@@ -347,7 +347,8 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
   --lado: min(clamp(150px, 24vh, 225px), 46vmin, 34vh);
   --dpad: calc(var(--lado) * 0.92);
   --stick: calc(var(--lado) * 1.15);
-  --knob: min(clamp(58px, 10vh, 95px), 22vmin);
+  /* botao do meio proporcional ao anel: nunca passa do cinza (0.55 < 1). */
+  --knob: calc(var(--stick) * 0.55);
   --dpad-up: 20px;
   --stick-right: 25px;
   --bar: calc(var(--dpad) * 0.28);
