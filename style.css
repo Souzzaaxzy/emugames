@@ -442,12 +442,21 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
   top: 50% !important;
   margin-left: calc(var(--stick) * -0.5) !important;
   margin-top: calc(var(--stick) * -0.5) !important;
+  /* anel AO REDOR: cinza opaco */
+  background-color: #8b8b8b !important;
+  background-image: none !important;
+  opacity: 1 !important;
 }
 #game .b_stick .front {
   width: var(--knob) !important;
   height: var(--knob) !important;
   margin-left: calc(var(--knob) * -0.5) !important;
   margin-top: calc(var(--knob) * -0.5) !important;
+  /* joystick NO MEIO: preto com bolinhas cinzas bem pequenas */
+  background-color: #000 !important;
+  background-image: radial-gradient(rgba(160,160,160,.85) 1px, transparent 1.5px) !important;
+  background-size: 7px 7px !important;
+  opacity: 1 !important;
 }
 
 #game .ejs_virtualGamepad_right {
@@ -548,6 +557,11 @@ body.cheia #game .ejs_virtualGamepad_bottom { bottom: 4px; }
   cluster esquerdo subiu (D-pad + analogico), o L sairia pelo TOPO da caixa; o
   R ja era aproximado por causa do scale. Os dois encostam no cluster.
 */
+/* Os dois rotulos dos cantos ("ESQ"/"DIR" = ombros L/R; o pt-BR traduz
+   L->ESQ e R->DIR) foram removidos a pedido do dono. */
+#game .b_l,
+#game .b_r { display: none !important; }
+
 #game .b_r { top: -70px !important; }
 #game .b_l { top: -22px !important; }
 

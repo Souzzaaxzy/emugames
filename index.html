@@ -431,6 +431,13 @@
 
   function voltarAoCatalogo() {
     if (estaEmTelaCheia()) alternarTelaCheia(false);
+    // Limpa o `?jogo=` da URL (ele e' so do BOOT: reinjetar o loader na mesma
+    // pagina quebra). Sem isto, ao voltar o site continuava com a rota do
+    // jogo mesmo na tela de catalogo.
+    if (new URLSearchParams(location.search).has('jogo')) {
+      location.href = location.pathname + '#/';
+      return;
+    }
     irPara('#/');
   }
 
@@ -895,9 +902,17 @@
 
     // Link antigo (`?jogo=id`) continua funcionando: vira a rota nova. O
     // `hashchange` cuida de entrar no jogo.
-    const antigo = new URLSearchParams(location.search).get('jogo');
+    const params = new URLSearchParams(location.search);
+    const antigo = params.get('jogo');
     if (antigo && catalogoJogos.some((j) => j.id === antigo)) {
       if (!location.hash) { location.hash = '#/jogo/' + encodeURIComponent(antigo); return; }
+    }
+
+    // Catalogo: normaliza a URL (sem `?jogo`) para nao ficar presa na rota do
+    // jogo (o link antigo `?jogo=id` continua entrando no jogo logo acima).
+    if (params.has('jogo') && !location.hash.startsWith('#/jogo/')) {
+      location.href = location.pathname + '#/';
+      return;
     }
 
     aplicarRota();
