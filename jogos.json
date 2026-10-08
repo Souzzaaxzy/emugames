@@ -449,6 +449,15 @@
       "capa": "sonicwings.gif",
       "descricao": "Shoot 'em up de naves da Video System: escolha o piloto, atire em tudo e enfrente chefes enormes.",
       "rom": "jogos/n64/sonicwings.zip"
+    },
+    {
+      "id": "killerinstinctgold",
+      "nome": "Killer Instinct Gold",
+      "emoji": "🥊",
+      "console": "n64",
+      "capa": "killerinstinctgold.gif",
+      "descricao": "Luta da Rare: combos automaticos, Ultra Combo, Fatalities e o elenco do arcade em 3D. Um dos jogos mais bonitos do N64.",
+      "rom": "jogos/n64/killerinstinctgold.zip"
     }
   ]
 }
