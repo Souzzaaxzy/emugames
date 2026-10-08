@@ -8,17 +8,33 @@
 </head>
 <body>
 
-<!-- ============================ CATALOGO ============================ -->
-<section id="catalogo">
+<!-- ============================== HOME ============================== -->
+<!-- Tela unica (launcher): cabecalho, recentes, acesso a biblioteca e
+     creditos no rodape. Cabe na viewport, sem rolagem vertical. -->
+<section id="home">
   <header class="cabeca">
     <h1>EmuGames <span id="marca"></span></h1>
     <p class="sub">Jogos direto do seu navegador</p>
   </header>
 
-  <!-- Mini aba de CREDITOS: quem fez / com quem falar. -->
-  <section id="creditos" aria-label="Creditos">
+  <section id="recentes" aria-labelledby="recentes-titulo">
+    <h2 class="secao-titulo" id="recentes-titulo">&#128293; Jogados recentemente</h2>
+    <div id="recentes-lista"></div>
+    <p id="recentes-vazio" hidden>Abra um jogo e ele aparece aqui.</p>
+  </section>
+
+  <button id="abrir-biblioteca" type="button">
+    <span class="bib-icone" aria-hidden="true">&#127918;</span>
+    <span class="bib-texto">
+      <span class="bib-titulo">Biblioteca de jogos</span>
+      <span class="bib-desc">Explore todos os seus jogos retrô</span>
+    </span>
+    <span class="bib-seta" aria-hidden="true">&#8250;</span>
+  </button>
+
+  <footer id="creditos" aria-label="Créditos">
     <div class="perfil">
-      <p class="perfil-nome" data-bold="&#5564;06"></p>
+      <p class="perfil-nome">ᖼ06</p>
       <a class="perfil-zap" href="https://wa.me/5511919516409" target="_blank"
         rel="noopener noreferrer">
         <span class="zap-icone" aria-hidden="true">&#128172;</span>
@@ -26,14 +42,25 @@
       </a>
     </div>
     <div class="perfil">
-      <p class="perfil-nome" data-bold="Kannon&#8202;&#7188;&#8202;gi"></p>
+      <p class="perfil-nome">𝐊𝐚𝐧𝐧𝐨𝐧ᰔ𝐠𝐢</p>
       <a class="perfil-zap" href="https://wa.me/5511978819676" target="_blank"
         rel="noopener noreferrer">
         <span class="zap-icone" aria-hidden="true">&#128172;</span>
         <span>Fale comigo pelo WhatsApp</span>
       </a>
     </div>
-  </section>
+  </footer>
+</section>
+
+<!-- =========================== BIBLIOTECA =========================== -->
+<!-- Catalogo completo: pesquisa, filtros e todos os jogos. -->
+<section id="biblioteca" hidden>
+  <div id="barra-biblioteca">
+    <button id="voltar-home" type="button" title="Voltar ao início" aria-label="Voltar ao início">
+      <span class="seta">&#8249;</span> INÍCIO
+    </button>
+    <h2>Biblioteca</h2>
+  </div>
 
   <nav id="filtros" aria-label="Categorias"></nav>
 
@@ -42,11 +69,6 @@
     <input id="busca" type="search" inputmode="search" autocomplete="off"
       placeholder="Pesquisar jogos..." aria-label="Pesquisar jogos">
   </div>
-
-  <section id="recentes" hidden aria-labelledby="recentes-titulo">
-    <h2 class="secao-titulo" id="recentes-titulo">&#128293; Jogados recentemente</h2>
-    <div id="recentes-lista"></div>
-  </section>
 
   <section class="todos" aria-labelledby="todos-titulo">
     <h2 class="secao-titulo" id="todos-titulo">&#127918; Todos os jogos</h2>
@@ -140,25 +162,6 @@
     if (el) el.textContent = BOLD;
   })();
 
-  // Nomes dos creditos no mesmo estilo do "Lizzy": MATHEMATICAL BOLD, montado
-  // por code point (o arquivo fica ASCII-safe) e lido do `data-bold`, onde os
-  // nomes vivem em HTML entities. Os simbolos (U+15BC e U+1C14) nao tem versao
-  // bold -- entram como estao.
-  (function () {
-    var AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    function bold(txt) {
-      return txt.split('').map(function (c) {
-        var i = AZ.indexOf(c.toUpperCase());
-        if (i < 0) return c;                     // simbolo/espaco: fica igual
-        var base = 0x1D400 + i;
-        if (c === c.toLowerCase()) base += 0x1A; // bloco minusculo
-        return String.fromCodePoint(base);
-      }).join('');
-    }
-    for (var el of document.querySelectorAll('[data-bold]')) {
-      el.textContent = bold(el.dataset.bold);
-    }
-  })();
 </script>
 
 <script>
@@ -169,7 +172,8 @@
   const LIMITE = window.INATIVIDADE_MS;
 
   // Elementos
-  const catalogo = document.getElementById('catalogo');
+  const home = document.getElementById('home');
+  const biblioteca = document.getElementById('biblioteca');
   const jogador = document.getElementById('jogador');
   const grid = document.getElementById('grid');
   const filtros = document.getElementById('filtros');
@@ -177,6 +181,9 @@
   const pesquisaEl = document.getElementById('busca');
   const recentesEl = document.getElementById('recentes');
   const recentesLista = document.getElementById('recentes-lista');
+  const recentesVazio = document.getElementById('recentes-vazio');
+  const bibliotecaBtn = document.getElementById('abrir-biblioteca');
+  const voltarHomeBtn = document.getElementById('voltar-home');
   const alvo = document.getElementById('game');
   const subtitulo = document.getElementById('subtitulo');
   const erro = document.getElementById('erro');
@@ -213,24 +220,24 @@
   function marcarAtividade() { ocioso = Date.now(); }
 
   // ==========================================================================
-  // ROTAS  (URL limpa = catalogo   |   #/jogo/<id>  = jogando)
+  // ROTAS  (URL limpa = HOME   |   #/biblioteca   |   #/jogo/<id>)
   // Usamos o HASH porque ele funciona em qualquer host estatico (o site mora
-  // no Cloudflare) e da para trocar de tela sem recarregar a pagina. A tela
-  // PRINCIPAL nao tem hash: o endereco volta a ser so `/` (sem `#/`).
+  // no Cloudflare) e da para trocar de tela sem recarregar a pagina. A HOME
+  // nao tem hash: o endereco volta a ser so `/` (sem `#/`).
   // ==========================================================================
   function lerRota() {
     const h = String(location.hash || '').replace(/^#\/?/, '');
     if (h.startsWith('jogo/')) return { tela: 'jogo', id: decodeURIComponent(h.slice(5)) };
-    return { tela: 'catalogo' };
+    if (h.startsWith('biblioteca')) return { tela: 'biblioteca' };
+    return { tela: 'home' };
   }
   /**
-   * Deixa a URL na TELA PRINCIPAL: sem `#/` e sem `?jogo=`. Sem isso o endereco
-   * ficava com um `/#/` sobrando depois de sair do jogo. Usa `replace` (nao
-   * `href`) para a rota antiga nao ficar no historico -- assim o botao "voltar"
-   * do aparelho nao reabre o jogo. Devolve `true` se navegou (a pagina recarrega
-   * ja limpa e o boot mostra o catalogo).
+   * Deixa a URL na HOME: sem hash e sem `?jogo=`. Usa `replace` (nao `href`)
+   * para a rota antiga nao ficar no historico -- assim o botao "voltar" do
+   * aparelho nao reabre o jogo. Devolve `true` se navegou (a pagina recarrega
+   * ja limpa e o boot mostra a home).
    */
-  function limparUrlDoCatalogo() {
+  function limparUrlDaHome() {
     if (location.hash || new URLSearchParams(location.search).has('jogo')) {
       location.replace(location.pathname);
       return true;
@@ -308,12 +315,13 @@
   function montarRecentes() {
     const ids = lerRecentes();
     recentesLista.innerHTML = '';
-    recentesEl.hidden = ids.length === 0 || Boolean(buscaTermo.trim());
-    if (recentesEl.hidden) return;
     for (const id of ids) {
       const j = catalogoJogos.find((x) => x.id === id);
       if (j) recentesLista.appendChild(montarCard(j, true));
     }
+    const vazio = ids.length === 0;
+    recentesLista.hidden = vazio;
+    recentesVazio.hidden = !vazio;
   }
 
   function montarFiltros() {
@@ -358,7 +366,6 @@
     grid.innerHTML = '';
     for (const j of lista) grid.appendChild(montarCard(j, false));
     vazio.hidden = lista.length > 0;
-    montarRecentes();
   }
 
   pesquisaEl.addEventListener('input', () => { buscaTermo = pesquisaEl.value; renderCatalogo(); });
@@ -374,19 +381,29 @@
     location.href = `./?jogo=${encodeURIComponent(id)}#/jogo/${encodeURIComponent(id)}`;
   }
 
-  function mostrarCatalogo() {
+  // Mostra uma das telas de catalogo (home ou biblioteca) e esconde as outras.
+  function mostrarTela(nome) {
     parar();
     jogoAtual = null;
-    catalogo.hidden = false;
+    home.hidden = nome !== 'home';
+    biblioteca.hidden = nome !== 'biblioteca';
     jogador.hidden = true;
     erro.hidden = true;
     document.body.classList.remove('jogando');
     document.title = 'EmuGames Lizzy';
-    // A tela principal tem a URL limpa (`/`, sem `#/` nem `?jogo=`). Sem
-    // recarregar: aqui o emulador ja esta parado.
-    if (location.hash || location.search) {
-      history.replaceState(null, '', location.pathname);
+    if (nome === 'home') {
+      // A home tem a URL limpa (`/`, sem hash nem `?jogo=`). Sem recarregar:
+      // aqui o emulador ja esta parado.
+      if (location.hash || location.search) {
+        history.replaceState(null, '', location.pathname);
+      }
+      montarRecentes();
     }
+  }
+
+  function abrirBiblioteca() {
+    if (location.hash === '#/biblioteca') { mostrarTela('biblioteca'); return; }
+    location.hash = '#/biblioteca'; // dispara `hashchange` -> aplicarRota()
   }
 
   // ==========================================================================
@@ -564,13 +581,13 @@
     parando = false;
   }
 
-  function voltarAoCatalogo() {
+  function voltarParaHome() {
     if (estaEmTelaCheia()) alternarTelaCheia(false);
-    // Sai do jogo e devolve a URL LIMPA (tela principal, sem `#/` nem `?jogo=`).
+    // Sai do jogo e devolve a URL LIMPA (home, sem hash nem `?jogo=`).
     // Recarregar e' de proposito: o EmulatorJS so pode ser montado uma vez por
     // documento, entao voltar exige uma navegacao nova (ver `abrirJogo`).
-    if (limparUrlDoCatalogo()) return;
-    mostrarCatalogo();
+    if (limparUrlDaHome()) return;
+    mostrarTela('home');
   }
 
   async function iniciar(j) {
@@ -578,7 +595,8 @@
     alvo.innerHTML = '';
     window.EJS_emulator = null;
 
-    catalogo.hidden = true;
+    home.hidden = true;
+    biblioteca.hidden = true;
     erro.hidden = true;
     jogador.hidden = false;
     document.body.classList.add('jogando');
@@ -897,14 +915,16 @@
   // EVENTOS
   // ==========================================================================
   pararBtn.addEventListener('click', parar);
-  voltarBtn.addEventListener('click', voltarAoCatalogo);
+  voltarBtn.addEventListener('click', voltarParaHome);
   cheiaBtn.addEventListener('click', () => alternarTelaCheia());
+  bibliotecaBtn.addEventListener('click', abrirBiblioteca);
+  voltarHomeBtn.addEventListener('click', voltarParaHome);
 
-  // O botao "sair" do proprio EmulatorJS volta para o catalogo.
+  // O botao "sair" do proprio EmulatorJS volta para a home.
   window.EJS_onExit = () => {
     window.EJS_emulator = null;
     aoSair();
-    if (!jogador.hidden) voltarAoCatalogo();
+    if (!jogador.hidden) voltarParaHome();
   };
 
   window.addEventListener('hashchange', aplicarRota);
@@ -991,7 +1011,7 @@
     // Controle em uso conta como atividade -- senao o jogo cairia sozinho.
     if (controleEmUso()) marcarAtividade();
     if (Date.now() - ocioso < LIMITE) return;
-    voltarAoCatalogo();
+    voltarParaHome();
   }, 5000);
 
   // ==========================================================================
@@ -1005,13 +1025,13 @@
         if (!jogoAtual || jogoAtual.id !== j.id) iniciar(j);
         return;
       }
-      mostrarCatalogo();
+      mostrarTela('biblioteca');
       erro.hidden = false;
       erroTitulo.textContent = `Jogo "${r.id}" não está no catálogo.`;
       erroDica.textContent = 'Escolha outro jogo na lista.';
       return;
     }
-    mostrarCatalogo();
+    mostrarTela(r.tela);
   }
 
   (async () => {
@@ -1028,7 +1048,8 @@
     }
 
     if (falhou || !catalogoJogos.length) {
-      catalogo.hidden = true;
+      home.hidden = true;
+      biblioteca.hidden = true;
       jogador.hidden = true;
       erro.hidden = false;
       erroTitulo.textContent = falhou
@@ -1051,15 +1072,16 @@
 
     // Limpa a URL SEM recarregar (o documento aqui ja esta limpo). No JOGO so
     // tira o `?jogo=` -- a rota `#/jogo/<id>` precisa ficar, senao o jogo nao
-    // abre. Na TELA PRINCIPAL tira tambem o `#/`, deixando so `/`.
+    // abre. Na HOME tira tambem o hash, deixando so `/`; na biblioteca o
+    // `#/biblioteca` fica (e' o que mantem a tela ao recarregar).
     // `history` muda apenas a URL visivel; o botao "voltar" do aparelho segue
-    // saindo do site, que e' o esperado na tela principal.
+    // saindo do site, que e' o esperado nas telas de catalogo.
     const rotaJogo = location.hash.startsWith('#/jogo/');
     if (rotaJogo) {
       if (params.has('jogo')) {
         history.replaceState(null, '', location.pathname + location.hash);
       }
-    } else if (location.hash || params.has('jogo')) {
+    } else if (!location.hash.startsWith('#/biblioteca') && (location.hash || params.has('jogo'))) {
       history.replaceState(null, '', location.pathname);
     }
 

@@ -40,18 +40,35 @@ emugames/                    <- ESTE repositório (o site)
 1. Coloque a ROM em `jogos/<console>/`
 2. Adicione uma linha no `jogos.json`
 
-## Abrir
+## Telas e rotas
+
+A **home** é um launcher de uma tela só (cabe na viewport, sem rolagem
+vertical): cabeçalho, jogos recentes, card da biblioteca e os créditos no
+rodapé. A **biblioteca** é a tela separada com a pesquisa, os filtros e todos
+os jogos.
 
 ```
-/                        → catálogo (URL limpa, sem `#/`)
+/                        → home (URL limpa, sem hash)
+/#/biblioteca            → biblioteca completa
 /#/jogo/topgear2         → jogo específico
 /?jogo=topgear2          → link antigo (redireciona para a rota `#/jogo/`)
 ```
 
-O botão **‹ JOGOS** volta para a **tela principal** e devolve a URL limpa
-(`/`, sem `#/` nem `?jogo=`). Ele usa `location.replace`, então a rota do jogo
-não fica no histórico — o botão "voltar" do aparelho sai do site em vez de
-reabrir o jogo.
+O botão **‹ INÍCIO** (na biblioteca) e o **‹ JOGOS** (no jogo) voltam para a
+home e devolvem a URL limpa (`/`, sem hash nem `?jogo=`). Usam
+`location.replace`, então a rota antiga não fica no histórico — o botão
+"voltar" do aparelho sai do site em vez de reabrir o jogo.
+
+O histórico de recentes é o mesmo `localStorage` (`emugames.recentes`), gravado
+ao abrir o jogo; a home só o exibe.
+
+### Home sem rolagem
+
+`#home` tem `height: 100dvh` (com fallback `100vh`) e distribui as quatro áreas
+com Flexbox + `justify-content: space-between`, então os créditos ficam sempre
+no rodapé. Em telas baixas (`max-height: 700px` / `560px`) os espaços e os cards
+encolhem — nada é escondido. A faixa de recentes rola na horizontal, nunca na
+vertical.
 
 ## Recursos
 

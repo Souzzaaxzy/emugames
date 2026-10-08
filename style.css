@@ -27,7 +27,161 @@ body {
            calc(10px + env(safe-area-inset-left, 0px));
 }
 
+/* Nas telas de catalogo quem cuida do espacamento e' a propria tela (`#home`,
+   `#biblioteca`), que dimensiona pela viewport. Sem zerar aqui, o padding do
+   `body` somaria a eles e a home passaria da altura da tela. Com um jogo
+   aberto (`body.jogando`) o padding do body continua valendo, como sempre. */
+body:not(.jogando) { padding: 0; }
+
 .seta { font-size: 18px; line-height: 1; }
+
+/* ==========================================================================
+   HOME (launcher) — uma tela, sem rolagem vertical.
+   A altura e' a viewport (`100dvh` acompanha a barra do navegador mobile);
+   a coluna usa `grid-template-rows: auto minmax(0,1fr) auto auto` para os
+   creditos ficarem sempre no rodape, com os recentes absorvendo a sobra.
+   ========================================================================== */
+#home {
+  display: flex;
+  flex-direction: column;
+  /* Distribui as quatro areas por igual na altura: nada de vazio no meio e os
+     creditos sempre no rodape. */
+  justify-content: space-between;
+  gap: clamp(8px, 2vh, 16px);
+  height: 100dvh;
+  padding: calc(8px + env(safe-area-inset-top, 0px))
+           calc(8px + env(safe-area-inset-right, 0px))
+           calc(8px + env(safe-area-inset-bottom, 0px))
+           calc(8px + env(safe-area-inset-left, 0px));
+}
+/* `display` acima sobrepoe o `[hidden]` do navegador: sem isto, a tela
+   "escondida" continuaria no layout (mesmo padrao do `#controle-painel`). */
+#home[hidden],
+#biblioteca[hidden] { display: none; }
+@supports not (height: 100dvh) {
+  #home { height: 100vh; }
+}
+#home .cabeca { padding: 4px 4px 0; }
+
+/* A secao de recentes nao cresce alem do seu espaco: a faixa rola na
+   horizontal e nunca empurra o resto para fora da tela. */
+#recentes {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.6vh, 12px);
+  overflow: hidden;
+}
+#recentes .secao-titulo { margin: 0 2px; }
+
+
+
+/* ==========================================================================
+   BIBLIOTECA — tela separada, com a lista completa (pode rolar).
+   ========================================================================== */
+#biblioteca {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 100dvh;
+  padding: calc(10px + env(safe-area-inset-top, 0px))
+           calc(10px + env(safe-area-inset-right, 0px))
+           calc(10px + env(safe-area-inset-bottom, 0px))
+           calc(10px + env(safe-area-inset-left, 0px));
+}
+@supports not (height: 100dvh) {
+  #biblioteca { min-height: 100vh; }
+}
+#barra-biblioteca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 2px 0 10px;
+}
+#barra-biblioteca h2 {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: #c3cddc;
+}
+#voltar-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--painel2);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  font-family: inherit;
+  cursor: pointer;
+}
+#voltar-home:active { background: var(--acento); border-color: var(--acento); }
+
+/* Card de acesso a biblioteca (na home) */
+#abrir-biblioteca {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 3vw, 16px);
+  width: 100%;
+  padding: clamp(10px, 2.4vh, 18px) clamp(12px, 4vw, 18px);
+  background: var(--painel2);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+  transition: transform .13s ease, border-color .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+#abrir-biblioteca:active {
+  transform: scale(.98);
+  border-color: var(--acento);
+  filter: brightness(1.08);
+}
+@media (hover: hover) {
+  #abrir-biblioteca:hover { transform: translateY(-2px); border-color: #3a4658; }
+}
+.bib-icone {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: clamp(38px, 11vw, 48px);
+  height: clamp(38px, 11vw, 48px);
+  border-radius: 12px;
+  background: var(--acento);
+  font-size: clamp(18px, 5vw, 22px);
+  box-shadow: 0 4px 14px rgba(29, 78, 216, .35);
+}
+.bib-texto { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.bib-titulo { font-size: clamp(14px, 4vw, 16px); font-weight: 800; }
+.bib-desc { font-size: clamp(11px, 3.2vw, 12.5px); color: var(--fraco); }
+.bib-seta {
+  margin-left: auto;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--fraco);
+  transition: transform .15s ease, color .15s ease;
+}
+#abrir-biblioteca:active .bib-seta { color: var(--acento); transform: translateX(3px); }
+@media (hover: hover) {
+  #abrir-biblioteca:hover .bib-seta { color: var(--acento); transform: translateX(3px); }
+}
+
+/* Aviso discreto quando ainda nao ha jogos recentes */
+#recentes-vazio {
+  color: var(--fraco);
+  font-size: 12.5px;
+  text-align: center;
+  padding: 10px 0;
+  border: 1px dashed var(--borda);
+  border-radius: 12px;
+}
 
 /* ==========================================================================
    CATALOGO
@@ -43,13 +197,13 @@ h1 #marca { letter-spacing: 2px; }
 .cabeca .sub { color: var(--fraco); font-size: 13px; margin-top: 7px; }
 
 /* Mini aba de CREDITOS: dois perfis lado a lado (esquerda/direita).
-   Usa os mesmos tokens do resto do site (painel, borda, acento). */
+   Usa os mesmos tokens do resto do site (painel, borda, acento).
+   Fica no rodape da home via `justify-content: space-between` do `#home`. */
 #creditos {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 10px;
-  margin-top: 14px;
 }
 .perfil {
   flex: 1 1 0;
@@ -103,10 +257,8 @@ h1 #marca { letter-spacing: 2px; }
   outline-offset: 2px;
   border-color: #fbbf24;
 }
-/* Telas muito estreitas: empilha os perfis em vez de espremer. */
-@media (max-width: 380px) {
-  #creditos { flex-direction: column; }
-}
+/* Os dois perfis ficam SEMPRE lado a lado: empilhar roubaria altura e
+   quebraria a regra de "home sem rolagem". Em tela estreita eles so encolhem. */
 
 /* Abas de categoria: rolam na horizontal quando nao cabem */
 #filtros {
@@ -330,12 +482,40 @@ h1 #marca { letter-spacing: 2px; }
   .card .nome { font-size: 15px; }
   .card .plat { font-size: 12px; }
   .capa .tag { font-size: 15px; padding: 4px 9px; }
-  #voltar, #controle, #parar, #cheia { padding: 12px 18px; font-size: 13px; }
+  #voltar, #controle, #parar, #cheia, #voltar-home { padding: 12px 18px; font-size: 13px; }
   h1 { font-size: 34px; }
   .cabeca .sub { font-size: 15px; }
   .secao-titulo { font-size: 15px; }
   #recentes-lista .card-mini { width: 160px; }
   #controle-painel .caixa { max-width: 620px; font-size: 15px; }
+}
+
+/* ==========================================================================
+   HOME EM TELA BAIXA (celulares pequenos, ou paisagem)
+   Compacta espacos e cards para tudo caber sem rolagem, SEM esconder nada.
+   ========================================================================== */
+@media (max-height: 700px) {
+  #home { gap: 8px; }
+  #home .cabeca { padding: 0; }
+  h1 { font-size: clamp(20px, 5.6vw, 26px); }
+  .cabeca .sub { margin-top: 4px; font-size: 12px; }
+  #recentes-lista { padding-bottom: 4px; }
+  #recentes-lista .card-mini { width: 92px; }
+  #recentes-lista .card-mini .nome { font-size: 10.5px; }
+  #recentes-vazio { padding: 7px 0; font-size: 11.5px; }
+  .perfil { padding: 9px 8px; gap: 6px; }
+  .perfil-nome { font-size: 14px; }
+  .perfil-zap { padding: 7px 9px; font-size: 10.5px; }
+  .bib-icone { width: 34px; height: 34px; font-size: 17px; }
+}
+@media (max-height: 560px) {
+  #home { gap: 6px; }
+  #recentes .secao-titulo { font-size: 11.5px; }
+  #recentes-lista .card-mini { width: 80px; }
+  .bib-desc { display: none; }
+  .perfil-zap span:last-child { font-size: 0; }
+  .perfil-zap span:last-child::before { content: "WhatsApp"; font-size: 10.5px; }
+  .perfil-zap .zap-icone { font-size: 15px; }
 }
 
 /* ==========================================================================
@@ -815,7 +995,7 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
 @media (orientation: landscape) {
   body { padding: 0; }
   #barra, #controles { display: none; }
-  #catalogo { padding: 6px; }
+  #home, #biblioteca { padding: 6px; }
 
   /* Deitado, a secao do jogo passa a ocupar tudo SOZINHA — nao precisa mais
      tocar no botao de tela cheia. */
