@@ -279,11 +279,11 @@ h1 #marca { letter-spacing: 2px; }
   justify-content: space-between;
   align-items: stretch;
   gap: 10px;
-  /* sobe os cards: absorve a sobra da home, deixando-os no rodape. Antes o
-     `space-between` do `#home` empurrava TUDO (recentes e biblioteca ficavam
-     longe); agora so os creditos sobem. */
+  /* Sobe os cards para o rodape (a sobra da home vira este `auto`). O rodape
+     ficou mais alto com papel + nome + 2 botoes, entao a folga de baixo e'
+     minima -- em tela baixa quem cede sao os cards de recentes. */
   margin-top: auto;
-  margin-bottom: clamp(10px, 4vh, 40px);
+  margin-bottom: clamp(2px, 1vh, 10px);
 }
 .perfil {
   flex: 1 1 0;
@@ -298,6 +298,14 @@ h1 #marca { letter-spacing: 2px; }
   border-radius: 14px;
   text-align: center;
 }
+/* Papel de cada um (Criador / Parceiro), discreto acima do nome. */
+.perfil-papel {
+  font-size: clamp(9.5px, 2.7vw, 11px);
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--fraco);
+}
 .perfil-nome {
   font-size: clamp(14px, 4.4vw, 17px);
   font-weight: 800;
@@ -305,6 +313,33 @@ h1 #marca { letter-spacing: 2px; }
   line-height: 1.2;
   color: var(--texto);
   overflow-wrap: anywhere;
+}
+
+/* Botao do canal, abaixo da caixinha do WhatsApp. */
+.perfil-canal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 7px 10px;
+  background: transparent;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  color: var(--fraco);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-decoration: none;
+  transition: background .15s, border-color .15s, color .15s, transform .1s;
+}
+.perfil-canal:active { transform: scale(.97); }
+@media (hover: hover) {
+  .perfil-canal:hover { background: var(--acento); border-color: var(--acento); color: #fff; }
+}
+.perfil-canal:focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 2px;
+  border-color: #fbbf24;
 }
 .perfil-zap {
   display: inline-flex;
@@ -575,27 +610,30 @@ h1 #marca { letter-spacing: 2px; }
    Compacta espacos e cards para tudo caber sem rolagem, SEM esconder nada.
    ========================================================================== */
 @media (max-height: 700px) {
-  #home { gap: 8px; }
+  #home { gap: 6px; }
   #home .cabeca { --pad-cabeca-topo: 0px; }
   h1 { font-size: clamp(20px, 5.6vw, 26px); }
   .cabeca .sub { margin-top: 4px; font-size: 12px; }
+  #recentes .secao-titulo { font-size: 11.5px; }
   #recentes-lista { padding-bottom: 4px; }
-  #recentes-lista .card-mini { width: 92px; }
-  #recentes-lista .card-mini .nome { font-size: 10.5px; }
+  /* o card ENCOLHE: sem isso o titulo + o card nao caberiam e a faixa cortava */
+  #recentes-lista .card-mini { width: clamp(62px, 17vh, 92px); }
+  #recentes-lista .card-mini .nome { font-size: 10px; }
   #recentes-vazio { padding: 7px 0; font-size: 11.5px; }
-  .perfil { padding: 9px 8px; gap: 6px; }
-  .perfil-nome { font-size: 14px; }
-  .perfil-zap { padding: 7px 9px; font-size: 10.5px; }
+  .perfil { padding: 7px 8px; gap: 4px; }
+  .perfil-papel { font-size: 9.5px; }
+  .perfil-nome { font-size: 13.5px; }
+  .perfil-zap { padding: 6px 9px; font-size: 10.5px; }
+  .perfil-canal { padding: 5px 8px; font-size: 10px; }
   .bib-icone { width: 34px; height: 34px; font-size: 17px; }
 }
 @media (max-height: 560px) {
-  #home { gap: 6px; }
-  #recentes .secao-titulo { font-size: 11.5px; }
-  #recentes-lista .card-mini { width: 80px; }
+  #home { gap: 5px; }
+  #recentes-lista .card-mini { width: clamp(54px, 15vh, 72px); }
   .bib-desc { display: none; }
-  .perfil-zap span:last-child { font-size: 0; }
-  .perfil-zap span:last-child::before { content: "WhatsApp"; font-size: 10.5px; }
-  .perfil-zap .zap-icone { font-size: 15px; }
+  .perfil { padding: 6px 6px; gap: 3px; }
+  .perfil-zap { padding: 5px 7px; }
+  .perfil-canal { padding: 4px 7px; }
 }
 
 /* ==========================================================================
