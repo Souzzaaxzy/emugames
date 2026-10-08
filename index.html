@@ -38,6 +38,18 @@
     <span class="bib-seta" aria-hidden="true">&#8250;</span>
   </button>
 
+  <!-- Abre um arquivo do proprio aparelho. O console e' detectado pela extensao
+       e o emulador roda igual ao de um jogo do catalogo. -->
+  <button id="abrir-arquivo" type="button">
+    <span class="bib-icone" aria-hidden="true">&#128193;</span>
+    <span class="bib-texto">
+      <span class="bib-titulo">Abrir do meu aparelho</span>
+      <span class="bib-desc">Jogue uma ROM que está no seu celular</span>
+    </span>
+    <span class="bib-seta" aria-hidden="true">&#8250;</span>
+  </button>
+  <input id="arquivo" type="file" accept=".zip,.sfc,.smc,.fig,.swc,.nes,.fds,.gba,.gb,.gbc,.md,.bin,.gen,.smd,.n64,.z64,.v64,.iso,.cue,.pbp,.pce,.ngp,.ngc,.ws,.wsc,.a26,.a78,.col,.lnx,.j64,.jag,.d64,.t64,.prg,.crt,.tap,.m3u,.7z,.chd" hidden>
+
   <footer id="creditos" aria-label="Créditos">
     <div class="perfil">
       <p class="perfil-nome">ᖼ06</p>
@@ -189,6 +201,8 @@
   const recentesLista = document.getElementById('recentes-lista');
   const recentesVazio = document.getElementById('recentes-vazio');
   const bibliotecaBtn = document.getElementById('abrir-biblioteca');
+  const arquivoBtn = document.getElementById('abrir-arquivo');
+  const arquivoEl = document.getElementById('arquivo');
   const voltarHomeBtn = document.getElementById('voltar-home');
   const introVideo = document.getElementById('intro-video');
   const alvo = document.getElementById('game');
@@ -238,6 +252,11 @@
     if (h.startsWith('biblioteca')) return { tela: 'biblioteca' };
     return { tela: 'home' };
   }
+
+  // Um jogo do proprio aparelho usa a mesma rota `#/jogo/<nome do arquivo>`,
+  // marcado pelo prefixo `local:`. Assim a barra/voltar funcionam sem mudanca.
+  function ehJogoLocal(id) { return String(id || '').startsWith('local:'); }
+  function nomeDoJogoLocal(id) { return String(id).slice('local:'.length); }
   /**
    * Deixa a URL na HOME: sem hash e sem `?jogo=`. Usa `replace` (nao `href`)
    * para a rota antiga nao ficar no historico -- assim o botao "voltar" do
@@ -245,12 +264,217 @@
    * ja limpa e o boot mostra a home).
    */
   function limparUrlDaHome() {
-    if (location.hash || new URLSearchParams(location.search).has('jogo')) {
+    const p = new URLSearchParams(location.search);
+    if (location.hash || p.has('jogo') || p.has('arquivo')) {
       location.replace(location.pathname);
       return true;
     }
     return false;
   }
+
+  // ==========================================================================
+  // JOGO DO PROPRIO APARELHO
+  // O usuario escolhe uma ROM do celular; o console sai da EXTENSAO do arquivo.
+  // O arquivo vira um `Blob` (URL de objeto) e o EmulatorJS carrega igual a uma
+  // ROM do catalogo -- e' o mesmo caminho que as "partes" do kof97 ja usam.
+  // A escolha precisa sobreviver ao recarregar (o EmulatorJS so monta uma vez
+  // por documento), por isso o arquivo vai para o IndexedDB antes de navegar.
+  // ==========================================================================
+  const EXTENSOES = {
+    sfc: 'snes', smc: 'snes', fig: 'snes', swc: 'snes', bs: 'snes',
+    nes: 'nes', fds: 'nes', unf: 'nes', unif: 'nes',
+    gb: 'gb', gbc: 'gbc',
+    gba: 'gba',
+    md: 'segaMD', gen: 'segaMD', smd: 'segaMD', bin: 'segaMD',
+    sms: 'segaMS', gg: 'segaGG',
+    n64: 'n64', z64: 'n64', v64: 'n64',
+    pce: 'pce',
+    ngp: 'ngp', ngc: 'ngp',
+    ws: 'ws', wsc: 'ws',
+    a26: 'atari2600', a78: 'atari7800',
+    col: 'coleco', cv: 'coleco',
+    lnx: 'lynx',
+    j64: 'jaguar', jag: 'jaguar',
+    d64: 'c64', t64: 'c64', prg: 'c64', crt: 'c64', tap: 'c64',
+    vb: 'vb', vboy: 'vb',
+    iso: 'psx', cue: 'psx', pbp: 'psx', chd: 'psx', cso: 'psx', m3u: 'psx',
+    nds: 'nds',
+    zip: 'arcade', '7z': 'arcade',
+  };
+  const NOMES_CONSOLE = {
+    snes: 'Super Nintendo', nes: 'Nintendo', gb: 'Game Boy', gbc: 'Game Boy Color',
+    gba: 'Game Boy Advance', segaMD: 'Mega Drive', segaMS: 'Master System',
+    segaGG: 'Game Gear', n64: 'Nintendo 64', pce: 'PC Engine', ngp: 'Neo Geo Pocket',
+    ws: 'WonderSwan', atari2600: 'Atari 2600', atari7800: 'Atari 7800',
+    coleco: 'ColecoVision', lynx: 'Atari Lynx', jaguar: 'Jaguar', c64: 'Commodore 64',
+    vb: 'Virtual Boy', psx: 'PlayStation', nds: 'Nintendo DS', arcade: 'Arcade',
+  };
+
+  const ARQUIVO_RECENTES_CHAVE = 'emugames.arquivo.recentes';
+  const ARQUIVO_RECENTES_MAX = 8;
+
+  function consoleDaExtensao(nome) {
+    const ext = String(nome || '').split('.').pop().toLowerCase();
+    return EXTENSOES[ext] || null;
+  }
+
+  function lerArquivoRecentes() {
+    try {
+      const v = JSON.parse(localStorage.getItem(ARQUIVO_RECENTES_CHAVE) || '[]');
+      return Array.isArray(v) ? v.filter((x) => x && typeof x.id === 'string') : [];
+    } catch (e) { return []; }
+  }
+
+  function registrarArquivoRecente(entrada) {
+    const lista = [entrada].concat(lerArquivoRecentes().filter((x) => x.id !== entrada.id))
+      .slice(0, ARQUIVO_RECENTES_MAX);
+    try { localStorage.setItem(ARQUIVO_RECENTES_CHAVE, JSON.stringify(lista)); } catch (e) { /* ok */ }
+  }
+
+  // Guarda o arquivo escolhido no IndexedDB (aguenta ROMs grandes).
+  function guardarArquivo(txt, blob, meta) {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('emugames', 1);
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains('arquivos')) req.result.createObjectStore('arquivos');
+      };
+      req.onerror = () => reject(req.error);
+      req.onsuccess = () => {
+        const db = req.result;
+        const tx = db.transaction('arquivos', 'readwrite');
+        tx.objectStore('arquivos').put({ blob, meta, criado: Date.now() }, txt);
+        tx.oncomplete = () => { db.close(); resolve(); };
+        tx.onerror = () => { db.close(); reject(tx.error); };
+      };
+    });
+  }
+
+  function lerArquivoGuardado(txt) {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('emugames', 1);
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains('arquivos')) req.result.createObjectStore('arquivos');
+      };
+      req.onerror = () => reject(req.error);
+      req.onsuccess = () => {
+        const db = req.result;
+        const tx = db.transaction('arquivos', 'readonly');
+        const get = tx.objectStore('arquivos').get(txt);
+        get.onsuccess = () => { db.close(); resolve(get.result || null); };
+        get.onerror = () => { db.close(); reject(get.error); };
+      };
+    });
+  }
+
+  // O arquivo fica guardado no IndexedDB sob o proprio nome. O `txt` e' a
+  // chave (string), o `nome` identifica o arquivo nas rotas e nos recentes.
+  function txtDoArquivo(nome) { return 'local:' + nome; }
+
+  function iniciarArquivoLocal(j) {
+    // `j` = { id, nome, arquivo, console, consoleNome, url }
+    jogoAtual = j;
+    alvo.innerHTML = '';
+    window.EJS_emulator = null;
+
+    home.hidden = true;
+    biblioteca.hidden = true;
+    erro.hidden = true;
+    jogador.hidden = false;
+    introVideo.pause();
+    document.body.classList.add('jogando');
+    document.title = j.nome + ' · EmuGames Lizzy';
+    subtitulo.textContent = j.consoleNome || 'Jogo do aparelho';
+
+    window.EJS_player = '#game';
+    window.EJS_core = j.console;
+    window.EJS_gameUrl = j.url;
+    window.EJS_gameName = j.nome;
+    window.EJS_pathtodata = DATA;
+    window.EJS_startOnLoaded = true;
+    window.EJS_language = 'pt-BR';
+    window.EJS_color = '#1d4ed8';
+    window.EJS_backgroundColor = '#0b0d12';
+    window.EJS_volume = 0.6;
+    window.EJS_askBeforeExit = false;
+    window.EJS_controlScheme = j.console;
+    window.EJS_threads = Boolean(window.crossOriginIsolated && typeof SharedArrayBuffer === 'function');
+    window.EJS_defaultOptions = { fps: 'show' };
+    window.EJS_Buttons = {
+      playPause: true, restart: true, mute: true, settings: true, fullscreen: false,
+      saveState: false, loadState: false, screenRecord: false, gamepad: false,
+      cheat: false, volume: true, saveSavFiles: false, loadSavFiles: false,
+      quickSave: false, quickLoad: false, screenshot: false, cacheManager: false,
+      exitEmulation: true,
+    };
+
+    rodando = true;
+    pararBtn.disabled = false;
+    marcarAtividade();
+
+    const s = document.createElement('script');
+    s.src = DATA + 'loader.js';
+    document.body.appendChild(s);
+  }
+
+  function nomeConsoleDoArquivo(consoleId) {
+    if (NOMES_CONSOLE[consoleId]) return NOMES_CONSOLE[consoleId];
+    return consoleId ? consoleId.toUpperCase() : 'Jogo do aparelho';
+  }
+
+  // Abre um arquivo ja guardado (usado pela rota e pelos recentes da home).
+  async function abrirArquivoLocal(nome) {
+    const consoleId = consoleDaExtensao(nome);
+    const guardado = await lerArquivoGuardado(txtDoArquivo(nome));
+    if (!guardado || !guardado.blob) {
+      mostrarTela('home');
+      erro.hidden = false;
+      erroTitulo.textContent = `Não encontrei o arquivo "${nome}" no aparelho.`;
+      erroDica.textContent = 'Escolha o arquivo de novo.';
+      return;
+    }
+    const url = URL.createObjectURL(guardado.blob);
+    const j = {
+      id: 'local:' + nome,
+      nome: (guardado.meta && guardado.meta.titulo) || nome,
+      arquivo: nome,
+      console: consoleId,
+      consoleNome: nomeConsoleDoArquivo(consoleId),
+      url,
+    };
+    registrarArquivoRecente({ id: j.id, nome: j.nome, arquivo: nome, console: consoleId });
+    iniciarArquivoLocal(j);
+  }
+
+  function escolherArquivo() { arquivoEl.click(); }
+
+  arquivoEl.addEventListener('change', async () => {
+    const f = arquivoEl.files && arquivoEl.files[0];
+    if (!f) return;
+    arquivoEl.value = '';
+
+    const consoleId = consoleDaExtensao(f.name);
+    if (!consoleId) {
+      erro.hidden = false;
+      erroTitulo.textContent = `Não reconheci o formato "${f.name}".`;
+      erroDica.textContent = 'Use uma ROM com extensão conhecida (.sfc, .gba, .md, .nes...).';
+      return;
+    }
+
+    try {
+      const nome = f.name;
+      await guardarArquivo(txtDoArquivo(nome), f, { titulo: nome.replace(/\.[^.]+$/, ''), console: consoleId });
+      // Mesmo fluxo do catalogo: recarrega a pagina e o BOOT entra no jogo.
+      // O nome vai no `?arquivo=` porque a barra do jogo precisa dele ANTES de
+      // o IndexedDB responder (a leitura e' assincrona).
+      const enc = encodeURIComponent(nome);
+      location.href = `./?arquivo=${enc}#/jogo/${enc}`;
+    } catch (e) {
+      console.error('[EMUGAMES] falha ao guardar o arquivo', e);
+      erro.hidden = false;
+      erroTitulo.textContent = 'Não consegui guardar o arquivo.';
+      erroDica.textContent = 'Tente de novo (ou use um arquivo menor).';
+    }
+  });
 
   // ==========================================================================
   // CATALOGO
@@ -320,15 +544,59 @@
   }
 
   function montarRecentes() {
-    const ids = lerRecentes();
+    const locais = lerArquivoRecentes();
+    const ids = lerRecentes().filter((id) => !locais.some((l) => l.id === id));
     recentesLista.innerHTML = '';
+    // Jogos do aparelho primeiro (foram a ultima escolha do usuario), sem
+    // repetir o que ja esta na lista do catalogo.
+    for (const l of locais) recentesLista.appendChild(montarCardLocal(l, true));
     for (const id of ids) {
       const j = catalogoJogos.find((x) => x.id === id);
       if (j) recentesLista.appendChild(montarCard(j, true));
     }
-    const vazio = ids.length === 0;
+    const vazio = ids.length === 0 && locais.length === 0;
     recentesLista.hidden = vazio;
     recentesVazio.hidden = !vazio;
+  }
+
+  // Card de um jogo do proprio aparelho: mesma aparencia do card normal, mas
+  // sem capa (nao existe thumbnail) -- mostra o emoji do console.
+  function montarCardLocal(l, compacto) {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'card' + (compacto ? ' card-mini' : '') + ' card-local';
+    card.dataset.id = l.id;
+
+    const capa = document.createElement('div');
+    capa.className = 'capa';
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.textContent = (CONSOLES[l.console] && CONSOLES[l.console].emoji) || '📁';
+    tag.title = NOMES_CONSOLE[l.console] || l.console;
+    capa.appendChild(tag);
+    card.appendChild(capa);
+
+    const info = document.createElement('div');
+    info.className = 'info';
+    const nome = document.createElement('span');
+    nome.className = 'nome';
+    nome.textContent = l.nome;
+    info.appendChild(nome);
+    if (!compacto) {
+      const plat = document.createElement('span');
+      plat.className = 'plat';
+      plat.textContent = NOMES_CONSOLE[l.console] || String(l.console).toUpperCase();
+      info.appendChild(plat);
+    }
+    card.appendChild(info);
+
+    card.addEventListener('click', () => abrirJogoLocal(l));
+    return card;
+  }
+
+  function abrirJogoLocal(l) {
+    const enc = encodeURIComponent(l.id);
+    location.href = `./#/jogo/${enc}`;
   }
 
   function montarFiltros() {
@@ -931,6 +1199,7 @@
   voltarBtn.addEventListener('click', voltarParaHome);
   cheiaBtn.addEventListener('click', () => alternarTelaCheia());
   bibliotecaBtn.addEventListener('click', abrirBiblioteca);
+  arquivoBtn.addEventListener('click', escolherArquivo);
   voltarHomeBtn.addEventListener('click', voltarParaHome);
 
   // O botao "sair" do proprio EmulatorJS volta para a home.
@@ -1033,6 +1302,11 @@
   function aplicarRota() {
     const r = lerRota();
     if (r.tela === 'jogo') {
+      // Jogo do proprio aparelho: o id carrega o prefixo `local:`.
+      if (ehJogoLocal(r.id)) {
+        if (!jogoAtual || jogoAtual.id !== r.id) abrirArquivoLocal(nomeDoJogoLocal(r.id));
+        return;
+      }
       const j = catalogoJogos.find((x) => x.id === r.id);
       if (j) {
         if (!jogoAtual || jogoAtual.id !== j.id) iniciar(j);
@@ -1083,18 +1357,28 @@
       if (!location.hash) { location.hash = '#/jogo/' + encodeURIComponent(antigo); return; }
     }
 
+    // Arquivo do proprio aparelho (`?arquivo=<nome>`): vira a rota `local:`.
+    const arquivoNovo = params.get('arquivo');
+    if (arquivoNovo) {
+      if (!location.hash) {
+        location.hash = '#/jogo/' + encodeURIComponent('local:' + arquivoNovo);
+        return;
+      }
+    }
+
     // Limpa a URL SEM recarregar (o documento aqui ja esta limpo). No JOGO so
-    // tira o `?jogo=` -- a rota `#/jogo/<id>` precisa ficar, senao o jogo nao
-    // abre. Na HOME tira tambem o hash, deixando so `/`; na biblioteca o
-    // `#/biblioteca` fica (e' o que mantem a tela ao recarregar).
+    // tira o `?jogo=`/`?arquivo=` -- a rota `#/jogo/<id>` precisa ficar, senao
+    // o jogo nao abre. Na HOME tira tambem o hash, deixando so `/`; na
+    // biblioteca o `#/biblioteca` fica (mantem a tela ao recarregar).
     // `history` muda apenas a URL visivel; o botao "voltar" do aparelho segue
     // saindo do site, que e' o esperado nas telas de catalogo.
     const rotaJogo = location.hash.startsWith('#/jogo/');
     if (rotaJogo) {
-      if (params.has('jogo')) {
+      if (params.has('jogo') || params.has('arquivo')) {
         history.replaceState(null, '', location.pathname + location.hash);
       }
-    } else if (!location.hash.startsWith('#/biblioteca') && (location.hash || params.has('jogo'))) {
+    } else if (!location.hash.startsWith('#/biblioteca')
+      && (location.hash || params.has('jogo') || params.has('arquivo'))) {
       history.replaceState(null, '', location.pathname);
     }
 

@@ -69,6 +69,23 @@ Flexbox; os créditos sobem para o rodapé via `margin-top: auto`. Em telas baix
 (`max-height: 700px` / `560px`) os espaços e os cards encolhem — nada é
 escondido. A faixa de recentes rola na horizontal, nunca na vertical.
 
+### Abrir um jogo do próprio aparelho
+
+O botão **Abrir do meu aparelho** (abaixo do da biblioteca, na home) deixa o
+usuário escolher uma ROM do celular. O console sai da **extensão** do arquivo
+(`.sfc` → `snes`, `.gba` → `gba`, `.md` → `segaMD`, …). O arquivo é guardado no
+**IndexedDB** (aguenta ROMs grandes) e o emulador o carrega por uma URL de
+objeto (`blob:`), o mesmo caminho que as “partes” do `kof97` já usam.
+
+Fluxo: escolhe → grava no IndexedDB → `?arquivo=<nome>#/jogo/local:<nome>` →
+o boot monta o emulador. O jogo aparece nos **recentes** da home (sem capa, com
+o emoji do console) e reabre por ali; o `?arquivo=` sai da URL logo depois do
+boot, então voltar/recarregar continua funcionando.
+
+> A detecção por extensão pode errar em arquivos fora do padrão (ex.: um `.bin`
+> de Mega Drive vs. de PlayStation). `.zip`/`.7z` caem em `arcade`, que exige o
+> romset completo **e** a BIOS.
+
 ### Intro em vídeo
 
 `intro.mp4` (540×300, H.264, ~260 KB) fica no topo da home com bordas

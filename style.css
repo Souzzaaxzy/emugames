@@ -168,8 +168,9 @@ body:not(.jogando) { padding: 0; }
 }
 #voltar-home:active { background: var(--acento); border-color: var(--acento); }
 
-/* Card de acesso a biblioteca (na home) */
-#abrir-biblioteca {
+/* Cards de acesso (biblioteca e abrir do aparelho), na home */
+#abrir-biblioteca,
+#abrir-arquivo {
   display: flex;
   align-items: center;
   gap: clamp(10px, 3vw, 16px);
@@ -185,13 +186,17 @@ body:not(.jogando) { padding: 0; }
   box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
   transition: transform .13s ease, border-color .15s ease, box-shadow .15s ease, filter .15s ease;
 }
-#abrir-biblioteca:active {
+/* o segundo card fica mais colado no primeiro: os dois sao um bloco */
+#abrir-arquivo { margin-top: calc(clamp(8px, 2vh, 16px) * -1 + 8px); }
+#abrir-biblioteca:active,
+#abrir-arquivo:active {
   transform: scale(.98);
   border-color: var(--acento);
   filter: brightness(1.08);
 }
 @media (hover: hover) {
-  #abrir-biblioteca:hover { transform: translateY(-2px); border-color: #3a4658; }
+  #abrir-biblioteca:hover,
+  #abrir-arquivo:hover { transform: translateY(-2px); border-color: #3a4658; }
 }
 .bib-icone {
   flex: 0 0 auto;
@@ -204,6 +209,12 @@ body:not(.jogando) { padding: 0; }
   font-size: clamp(18px, 5vw, 22px);
   box-shadow: 0 4px 14px rgba(29, 78, 216, .35);
 }
+/* o card do aparelho usa um azul mais discreto para nao competir com o da
+   biblioteca (que e' a acao principal) */
+#abrir-arquivo .bib-icone {
+  background: #334155;
+  box-shadow: none;
+}
 .bib-texto { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .bib-titulo { font-size: clamp(14px, 4vw, 16px); font-weight: 800; }
 .bib-desc { font-size: clamp(11px, 3.2vw, 12.5px); color: var(--fraco); }
@@ -214,9 +225,27 @@ body:not(.jogando) { padding: 0; }
   color: var(--fraco);
   transition: transform .15s ease, color .15s ease;
 }
-#abrir-biblioteca:active .bib-seta { color: var(--acento); transform: translateX(3px); }
+#abrir-biblioteca:active .bib-seta,
+#abrir-arquivo:active .bib-seta { color: var(--acento); transform: translateX(3px); }
 @media (hover: hover) {
-  #abrir-biblioteca:hover .bib-seta { color: var(--acento); transform: translateX(3px); }
+  #abrir-biblioteca:hover .bib-seta,
+  #abrir-arquivo:hover .bib-seta { color: var(--acento); transform: translateX(3px); }
+}
+
+/* Card de um jogo do proprio aparelho (sem capa): o vazio leva o emoji do
+   console, centralizado, no mesmo tom do fundo dos cards. */
+.card-local .capa {
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 40%, #1b2230, #05070a);
+}
+.card-local .capa .tag {
+  position: static;
+  font-size: clamp(26px, 8vw, 40px);
+  padding: 0;
+  background: none;
+  border: 0;
+  backdrop-filter: none;
 }
 
 /* Aviso discreto quando ainda nao ha jogos recentes */
@@ -1047,9 +1076,16 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
   body { padding: 0; }
   #barra, #controles { display: none; }
   #home, #biblioteca { padding: 6px; }
-  /* em paisagem o padding encolhe: o video tem de cancelar o valor NOVO,
-     senao ele passaria do topo da tela */
+  /* Em paisagem o padding encolhe: o video tem de cancelar o valor NOVO,
+     senao ele passaria do topo da tela. */
   #home { --pad-top: 6px; }
+  /* Deitado a altura e' pequena demais para caber tudo (video + recentes +
+     2 cards + creditos) sem esconder alguma coisa. Aqui a home pode rolar --
+     em RETRATO ela nunca rola. Assim nada some. */
+  #home { height: auto; min-height: 100dvh; }
+  @supports not (height: 100dvh) {
+    #home { min-height: 100vh; }
+  }
 
   /* Deitado, a secao do jogo passa a ocupar tudo SOZINHA — nao precisa mais
      tocar no botao de tela cheia. */
