@@ -11,3 +11,8 @@ node_modules
 # (kof97.zip.p1/.p2, ~13,8 MiB cada), que o player baixa e remonta num Blob
 # (campo "partes" no jogos.json). Assim tudo sai do MESMO host do site.
 jogos/arcade/kof97.zip
+# Mesmo caso dos zips de N64 acima de 25 MiB: sobem em PARTES (.p1/.p2),
+# que o player remonta num Blob (campo "partes" no jogos.json).
+jogos/n64/donkeykong64.zip
+jogos/n64/megaman64.zip
+jogos/n64/perfectdark.zip

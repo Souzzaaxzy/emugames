@@ -51,15 +51,25 @@ C-pad). Por isso um jogo de N64 **não precisa de `gamepadDoJogo` no
 Formato: **`.z64`** (big-endian, magic `80 37 12 40`). O EmulatorJS não valida a
 extensão, quem manda é o `console`, mas `.z64` é o formato canônico.
 
+> **ROMs comerciais em `.zip` também funcionam**: o EmulatorJS detecta o zip pelo
+> *magic* `PK\x03\x04` e descompacta antes de entregar ao core, então um `.zip`
+> com um único `.z64` dentro roda normalmente — é só apontar o `rom` para o zip.
+> Preferimos guardar a ROM **compactada** (o repo fica bem menor).
+
+> **Zip acima de 25 MiB** não cabe num asset do Cloudflare: nesses casos a ROM
+> sobe em **partes** (`<nome>.zip.p1`, `.p2`), o zip inteiro entra no
+> `.assetsignore` e o jogo leva o campo `partes` no `jogos.json` (igual ao
+> `kof97`, do arcade).
+
 ```json
 {
-  "id": "dexanoid",
-  "nome": "Dexanoid R1",
-  "emoji": "🧱",
+  "id": "supermario64",
+  "nome": "Super Mario 64",
+  "emoji": "🍄",
   "console": "n64",
-  "capa": "dexanoid.gif",
-  "descricao": "Breakout no Nintendo 64...",
-  "rom": "jogos/n64/dexanoid.z64"
+  "capa": "supermario64.gif",
+  "descricao": "A transição do Mario para o 3D...",
+  "rom": "jogos/n64/supermario64.zip"
 }
 ```
 
