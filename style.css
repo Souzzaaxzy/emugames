@@ -691,10 +691,13 @@ h1 #marca { letter-spacing: 2px; }
    pouco. Ele e' o maior bloco flexivel da home -- sem isso o total passava da
    viewport e a pagina ganhava rolagem (ou o card era cortado). */
 @media (max-height: 980px) {
-  #intro { height: clamp(88px, 13vh, 150px); }
+  /* O video cede altura e os vaos encolhem: o espaco liberado vai para os
+     cards de perfil, que ficam ~5px mais altos (o pedido era +15px, mas o
+     espaco esta apertado -- entao fica o +5px). */
+  #intro { height: clamp(80px, 11.5vh, 140px); }
   #recentes-lista .card-mini { width: clamp(80px, 11vh, 112px); }
-  #home { gap: clamp(6px, 1.2vh, 12px); }
-  #creditos { margin-top: clamp(6px, 1.2vh, 12px); margin-bottom: 2px; }
+  #home { gap: clamp(5px, 1vh, 10px); }
+  #creditos { margin-top: clamp(5px, 1vh, 10px); margin-bottom: 2px; }
 }
 
 /* Laptops e celulares de altura media: os cards de perfil (que agora tem os
@@ -732,7 +735,8 @@ h1 #marca { letter-spacing: 2px; }
    cresce, para caber na viewport sempre que der. */
 @media (max-height: 620px) {
   #home { gap: 4px; }
-  #intro { height: clamp(72px, 15vh, 110px); }
+  /* O video cede mais altura aqui para os cards de perfil crescerem. */
+  #intro { height: clamp(60px, 12.5vh, 100px); }
   #recentes .secao-titulo { font-size: 11px; }
   #recentes-lista .card-mini { width: clamp(46px, 12vh, 64px); }
   #recentes-lista .card-mini .nome { font-size: 9.5px; }
