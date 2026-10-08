@@ -74,6 +74,27 @@ Flexbox; os créditos sobem para o rodapé via `margin-top: auto`. Em telas baix
 (`max-height: 700px` / `560px`) os espaços e os cards encolhem — nada é
 escondido. A faixa de recentes rola na horizontal, nunca na vertical.
 
+### PC (telas largas)
+
+Em PC a janela é muito mais larga que um celular. Duas regras resolvem:
+
+- **Teto de 620px** no conteúdo (`#home > *:not(.cabeca)`, `#biblioteca > *`):
+  sem ele os cards e botões esticavam até ~1900px. O `.cabeca` fica de fora
+  porque o vídeo mora dentro dele e precisa sangrar.
+- **Vídeo com `object-fit: fill`**: a faixa do topo é muito mais larga que o
+  vídeo (16:9). Com `cover` as laterais eram **cortadas**; com `fill` o quadro
+  inteiro aparece, só um pouco achatado.
+
+A sangria do vídeo usa `calc(100% + 2 * --pad-lado)` + `margin-left` negativo —
+não `100vw`, que inclui a barra de rolagem e criava overflow horizontal.
+
+Em laptops (`min-width: 900px` e `max-height: 800px`) o vídeo e os vãos
+encolhem para a home caber inteira.
+
+> ⚠️ Se mudar o `padding` lateral do `#home`, mude também `--pad-lado`: é ela
+> que o vídeo cancela para encostar nas bordas. (Já aconteceu de o padding de
+> paisagem virar 6px e a variável ficar 8px — sobrava overflow de 2px.)
+
 ### Abrir um jogo do próprio aparelho
 
 O botão **Abrir do meu aparelho** (abaixo do da biblioteca, na home) deixa o
