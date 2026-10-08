@@ -176,18 +176,29 @@
   function marcarAtividade() { ocioso = Date.now(); }
 
   // ==========================================================================
-  // ROTAS  (#/  = catalogo   |   #/jogo/<id>  = jogando)
+  // ROTAS  (URL limpa = catalogo   |   #/jogo/<id>  = jogando)
   // Usamos o HASH porque ele funciona em qualquer host estatico (o site mora
-  // no Cloudflare) e da para trocar de tela sem recarregar a pagina.
+  // no Cloudflare) e da para trocar de tela sem recarregar a pagina. A tela
+  // PRINCIPAL nao tem hash: o endereco volta a ser so `/` (sem `#/`).
   // ==========================================================================
   function lerRota() {
     const h = String(location.hash || '').replace(/^#\/?/, '');
     if (h.startsWith('jogo/')) return { tela: 'jogo', id: decodeURIComponent(h.slice(5)) };
     return { tela: 'catalogo' };
   }
-  function irPara(hash) {
-    if (location.hash === hash) return;
-    location.hash = hash; // dispara `hashchange` -> aplicarRota()
+  /**
+   * Deixa a URL na TELA PRINCIPAL: sem `#/` e sem `?jogo=`. Sem isso o endereco
+   * ficava com um `/#/` sobrando depois de sair do jogo. Usa `replace` (nao
+   * `href`) para a rota antiga nao ficar no historico -- assim o botao "voltar"
+   * do aparelho nao reabre o jogo. Devolve `true` se navegou (a pagina recarrega
+   * ja limpa e o boot mostra o catalogo).
+   */
+  function limparUrlDoCatalogo() {
+    if (location.hash || new URLSearchParams(location.search).has('jogo')) {
+      location.replace(location.pathname);
+      return true;
+    }
+    return false;
   }
 
   // ==========================================================================
@@ -361,6 +372,11 @@
     erro.hidden = true;
     document.body.classList.remove('jogando');
     document.title = 'EmuGames Lizzy';
+    // A tela principal tem a URL limpa (`/`, sem `#/` nem `?jogo=`). Sem
+    // recarregar: aqui o emulador ja esta parado.
+    if (location.hash || location.search) {
+      history.replaceState(null, '', location.pathname);
+    }
   }
 
   // ==========================================================================
@@ -540,14 +556,11 @@
 
   function voltarAoCatalogo() {
     if (estaEmTelaCheia()) alternarTelaCheia(false);
-    // Limpa o `?jogo=` da URL (ele e' so do BOOT: reinjetar o loader na mesma
-    // pagina quebra). Sem isto, ao voltar o site continuava com a rota do
-    // jogo mesmo na tela de catalogo.
-    if (new URLSearchParams(location.search).has('jogo')) {
-      location.href = location.pathname + '#/';
-      return;
-    }
-    irPara('#/');
+    // Sai do jogo e devolve a URL LIMPA (tela principal, sem `#/` nem `?jogo=`).
+    // Recarregar e' de proposito: o EmulatorJS so pode ser montado uma vez por
+    // documento, entao voltar exige uma navegacao nova (ver `abrirJogo`).
+    if (limparUrlDoCatalogo()) return;
+    mostrarCatalogo();
   }
 
   async function iniciar(j) {
@@ -1066,11 +1079,18 @@
       if (!location.hash) { location.hash = '#/jogo/' + encodeURIComponent(antigo); return; }
     }
 
-    // Catalogo: normaliza a URL (sem `?jogo`) para nao ficar presa na rota do
-    // jogo (o link antigo `?jogo=id` continua entrando no jogo logo acima).
-    if (params.has('jogo') && !location.hash.startsWith('#/jogo/')) {
-      location.href = location.pathname + '#/';
-      return;
+    // Limpa a URL SEM recarregar (o documento aqui ja esta limpo). No JOGO so
+    // tira o `?jogo=` -- a rota `#/jogo/<id>` precisa ficar, senao o jogo nao
+    // abre. Na TELA PRINCIPAL tira tambem o `#/`, deixando so `/`.
+    // `history` muda apenas a URL visivel; o botao "voltar" do aparelho segue
+    // saindo do site, que e' o esperado na tela principal.
+    const rotaJogo = location.hash.startsWith('#/jogo/');
+    if (rotaJogo) {
+      if (params.has('jogo')) {
+        history.replaceState(null, '', location.pathname + location.hash);
+      }
+    } else if (location.hash || params.has('jogo')) {
+      history.replaceState(null, '', location.pathname);
     }
 
     aplicarRota();

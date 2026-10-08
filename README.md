@@ -116,11 +116,15 @@ efeitos/timing podem quebrar em certos jogos — se quebrar, é só desligar.
 ## Abrir
 
 ```
-index.html              → primeiro jogo do catálogo
-index.html?jogo=topgear2 → jogo específico
+/                        → catálogo (URL limpa, sem `#/`)
+/#/jogo/topgear2         → jogo específico
+/?jogo=topgear2          → link antigo (redireciona para a rota `#/jogo/`)
 ```
 
-Com 2+ jogos, o botão **☰ JOGOS** troca de jogo sem recarregar.
+O botão **‹ JOGOS** volta para a **tela principal** e devolve a URL limpa
+(`/`, sem `#/` nem `?jogo=`). Ele usa `location.replace`, então a rota do jogo
+não fica no histórico — o botão "voltar" do aparelho sai do site em vez de
+reabrir o jogo.
 
 ## Recursos
 
