@@ -1,2 +1,6 @@
 # Nada a ignorar: este repo E o site (site + ROMs).
 # O que o BOT usa continua no repo do bot (dados/emugames/jogos.json).
+
+# Wrangler (build local)
+node_modules/
+.wrangler/

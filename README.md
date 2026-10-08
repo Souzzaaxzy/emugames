@@ -6,15 +6,34 @@ Roda jogos de console dentro do webview do WhatsApp, via
 ## Estrutura
 
 ```
-dados/emugames/
-├── index.html      ← player (lê o catálogo)
+emugames/                    <- ESTE repositório (o site)
+├── index.html      ← player + CATÁLOGO (tela inicial com os jogos)
 ├── style.css
-├── jogos.json      ← CATÁLOGO: onde se adiciona jogo
+├── jogos.json      ← catálogo (o bot guarda uma cópia: o `!arcade` lê dela)
+├── wrangler.jsonc  ← config de publicação (Cloudflare Workers)
+├── _headers        ← COOP/COEP (libera SharedArrayBuffer → núcleo com threads)
+├── .assetsignore   ← exclui o `kof97.zip` grande (a ROM vai em partes)
+├── capas/          ← capas dos jogos (GIF)
+├── neogeo.zip      ← BIOS do Neo Geo (FBNeo)
 └── jogos/
     ├── snes/
-    │   └── topgear2.smc
-    └── README.md   ← como adicionar jogos
+    └── arcade/
 ```
+
+> **Este repo é o SITE.** Ele era uma pasta dentro do repositório do bot
+> (`dados/emugames/`) e foi separado para o bot não carregar 113 MB em cada
+> `!atualizar`. O bot guarda só o `jogos.json` (o catálogo que o menu lê) e a
+> URL pública.
+
+### ⚠️ Os DOIS `jogos.json`
+
+| onde | para que |
+|---|---|
+| **aqui** (`emugames/jogos.json`) | o site mostra a lista de jogos |
+| **no bot** (`dados/emugames/jogos.json`) | o `!arcade`/menus/cards montam a lista |
+
+**Ao adicionar um jogo, atualize os dois** — senão o site mostra e o comando não
+(ou o contrário).
 
 ## Adicionar um jogo
 
@@ -46,8 +65,8 @@ Com 2+ jogos, o botão **☰ JOGOS** troca de jogo sem recarregar.
 ## Hospedagem
 
 Servido por **Cloudflare Workers** (static assets) — é o único host usado.
-Config em `wrangler.jsonc` (`assets.directory` = `./dados/emugames`); deploy com
-`wrangler deploy`.
+Config em `wrangler.jsonc` (`assets.directory` = `.`, ou seja, a RAIZ deste
+repo); deploy com `wrangler deploy`.
 
 ### Limite de 25 MiB por arquivo (importante)
 
@@ -66,13 +85,13 @@ nao somarem o zip inteiro.
 
 ### Cloudflare
 
-`wrangler.jsonc` (`assets.directory` = `./dados/emugames`) + `wrangler deploy`.
+`wrangler.jsonc` (`assets.directory` = `.`) + `wrangler deploy`.
 No painel: *Framework* None, *Build command* **vazio**.
 
 ### ⚠️ Deploy MANUAL — o site NÃO atualiza sozinho do `main`
 
-O Worker é um **deploy manual**. Mexer no `dados/emugames/` (adicionar jogo,
-ROM, capa, editar o `jogos.json`) **não** muda o site no ar até rodar o deploy.
+O Worker é um **deploy manual**. Adicionar jogo, ROM, capa ou editar o
+`jogos.json` **não** muda o site no ar até rodar o deploy.
 Se um comando novo abrir o site e aparecer *"Registre um jogo no jogos.json"* ou
 *"Jogo X não está no catálogo"*, quase sempre é isto: **o site no ar está com o
 catálogo antigo**.
