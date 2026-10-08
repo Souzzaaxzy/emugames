@@ -82,9 +82,13 @@ empilhado e centralizado:
 ```
         CRIADOR
       𝐊𝐚𝐧𝐧𝐨𝐧ᰔ𝐠𝐢
-  [ botão do WhatsApp ]
-  [ botão do canal    ]
+[   botão do WhatsApp   ]   <- de ponta a ponta
+[   botão do canal      ]   <- de ponta a ponta
 ```
+
+Os botões ocupam a largura **inteira** do card: as margens negativas em
+`.perfil-botoes` cancelam o `--pad-x` do card (é a mesma técnica do vídeo
+full-bleed, em escala menor).
 
 Eles **crescem para absorver a sobra** da home (`#creditos { flex: 1 1 auto }` +
 `.perfil { flex: 1 1 0 }`): é isso que preenche o vazio em vez de deixar buraco

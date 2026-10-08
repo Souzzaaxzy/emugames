@@ -338,22 +338,28 @@ h1 #marca { letter-spacing: 2px; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* O padding lateral e' uma variavel: os botoes cancelam ele para irem de
+     PONTA A PONTA do card (ver `.perfil-botoes`). */
+  --pad-x: clamp(10px, 3vw, 18px);
   gap: clamp(2px, 0.5vh, 5px);
   /* Tudo em `vh`: o card encolhe junto com a tela, entao os dois cabem sem
      empurrar a home para fora. */
-  padding: clamp(6px, 1.3vh, 16px) clamp(10px, 3vw, 18px);
+  padding: clamp(6px, 1.3vh, 16px) var(--pad-x) clamp(6px, 1.3vh, 14px);
   background: var(--painel);
   border: 1px solid var(--borda);
   border-radius: 16px;
   text-align: center;
 }
-/* Botoes UM EMBAIXO DO OUTRO, centralizados. */
+/* Botoes UM EMBAIXO DO OUTRO, cada um de PONTA A PONTA do card.
+   As margens negativas cancelam o padding lateral do card, entao os botoes
+   ocupam a largura INTEIRA dele. */
 .perfil-botoes {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  align-self: stretch;
   gap: clamp(4px, 0.8vh, 7px);
-  margin-top: clamp(5px, 1vh, 10px);
+  margin: clamp(5px, 1vh, 10px) calc(-1 * var(--pad-x)) 0;
 }
 /* Papel de cada um (Criador / Parceiro), discreto ao lado do nome. */
 .perfil-papel {
@@ -380,7 +386,7 @@ h1 #marca { letter-spacing: 2px; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 168px;
+  width: 100%;
   padding: clamp(6px, 1vh, 10px) 12px;
   background: transparent;
   border: 1px solid var(--borda);
@@ -406,7 +412,7 @@ h1 #marca { letter-spacing: 2px; }
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-width: 168px;
+  width: 100%;
   padding: clamp(6px, 1vh, 10px) 14px;
   background: var(--painel2);
   border: 1px solid var(--borda);
@@ -719,7 +725,7 @@ h1 #marca { letter-spacing: 2px; }
   .perfil-papel { font-size: 9.5px; }
   .perfil-nome { font-size: 13px; }
   .perfil-botoes { gap: 4px; margin-top: 4px; }
-  .perfil-zap, .perfil-canal { padding: 5px 10px; font-size: 10px; min-width: 150px; }
+  .perfil-zap, .perfil-canal { padding: 5px 10px; font-size: 10px; }
 }
 /* Telas MUITO baixas (320x480, 320x568, paisagem): compacta tudo. Como a home
    usa `min-height`, ela cresce em vez de cortar -- aqui so minimizamos o quanto
@@ -738,7 +744,7 @@ h1 #marca { letter-spacing: 2px; }
   .perfil-papel { font-size: 9px; }
   .perfil-nome { font-size: 12px; }
   .perfil-botoes { gap: 3px; margin-top: 3px; }
-  .perfil-zap, .perfil-canal { padding: 4px 10px; font-size: 9.5px; min-width: 140px; }
+  .perfil-zap, .perfil-canal { padding: 4px 10px; font-size: 9.5px; }
 }
 
 /* ==========================================================================
