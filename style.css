@@ -324,42 +324,37 @@ h1 #marca { letter-spacing: 2px; }
    nesse caso a home cresce (rola) em vez de cortar o card. */
 .perfil { flex: 1 1 0; min-height: min-content; }
 /*
-  Card GRANDE e retangular, que ocupa o espaco que sobrava na home.
-  O conteudo fica CENTRALIZADO e o card CRESCE em altura (`flex: 1 1 0` dentro
-  do `#creditos`, que absorve a sobra do `#home`) -- por isso ele preenche o
-  vazio em vez de deixar buraco.
-
-  Em tela BAIXA nao ha sobra: o card fica no tamanho natural, e para caber ele
-  usa a linha (papel + nome a esquerda, botoes a direita). Em tela ALTA
-  (>= 700px de altura) o conteudo empilha, ficando com a cara pedida:
-  papel / nome / botoes.
+  Card retangular com TUDO empilhado e centralizado:
+      papel
+      nome
+      [ botao do WhatsApp ]
+      [ botao do canal ]
+  O card CRESCE em altura (`flex: 1 1 0` dentro do `#creditos`, que absorve a
+  sobra do `#home`), entao ele preenche o vazio do rodape em vez de deixar
+  buraco.
 */
 .perfil {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px 12px;
-  padding: clamp(8px, 2vh, 18px) clamp(10px, 3vw, 18px);
+  gap: clamp(2px, 0.5vh, 5px);
+  /* Tudo em `vh`: o card encolhe junto com a tela, entao os dois cabem sem
+     empurrar a home para fora. */
+  padding: clamp(6px, 1.3vh, 16px) clamp(10px, 3vw, 18px);
   background: var(--painel);
   border: 1px solid var(--borda);
   border-radius: 16px;
   text-align: center;
 }
-
-/* Botoes: pilulas que dividem a largura do card. */
+/* Botoes UM EMBAIXO DO OUTRO, centralizados. */
 .perfil-botoes {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  flex: 1 1 190px;
-  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 0.8vh, 7px);
+  margin-top: clamp(5px, 1vh, 10px);
 }
-/* O card fica SEMPRE na linha (compacto): assim ele cabe em qualquer altura e
-   ainda CRESCE para preencher a sobra da home. Empilhar deixava o card 2x mais
-   alto e estourava a tela em celular/laptop -- e a sobra continua sendo
-   preenchida de qualquer forma, porque quem cresce e' o card. */
 /* Papel de cada um (Criador / Parceiro), discreto ao lado do nome. */
 .perfil-papel {
   font-size: clamp(9.5px, 2.7vw, 11px);
@@ -385,8 +380,8 @@ h1 #marca { letter-spacing: 2px; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex: 1 1 auto;
-  padding: 9px 12px;
+  min-width: 168px;
+  padding: clamp(6px, 1vh, 10px) 12px;
   background: transparent;
   border: 1px solid var(--borda);
   border-radius: 999px;
@@ -411,8 +406,8 @@ h1 #marca { letter-spacing: 2px; }
   align-items: center;
   justify-content: center;
   gap: 6px;
-  flex: 1 1 auto;
-  padding: 9px 14px;
+  min-width: 168px;
+  padding: clamp(6px, 1vh, 10px) 14px;
   background: var(--painel2);
   border: 1px solid var(--borda);
   border-radius: 10px;
@@ -689,47 +684,61 @@ h1 #marca { letter-spacing: 2px; }
 /* Telas de altura media (celular comum, laptop): o card de recentes encolhe um
    pouco. Ele e' o maior bloco flexivel da home -- sem isso o total passava da
    viewport e a pagina ganhava rolagem (ou o card era cortado). */
-@media (max-height: 900px) {
-  #recentes-lista .card-mini { width: clamp(84px, 12vh, 118px); }
-  #home { gap: clamp(6px, 1.4vh, 12px); }
-  #creditos { margin-top: clamp(6px, 1.4vh, 12px); margin-bottom: 2px; }
+@media (max-height: 980px) {
+  #intro { height: clamp(88px, 13vh, 150px); }
+  #recentes-lista .card-mini { width: clamp(80px, 11vh, 112px); }
+  #home { gap: clamp(6px, 1.2vh, 12px); }
+  #creditos { margin-top: clamp(6px, 1.2vh, 12px); margin-bottom: 2px; }
+}
+
+/* Laptops e celulares de altura media: os cards de perfil (que agora tem os
+   DOIS botoes empilhados) precisam encolher mais para a home caber. */
+@media (max-height: 820px) {
+  .perfil { padding: 6px 12px; gap: 1px; }
+  .perfil-botoes { gap: 4px; margin-top: 4px; }
+  .perfil-zap, .perfil-canal { padding: 5px 12px; font-size: 10.5px; }
+  .perfil-nome { font-size: 14px; }
+  .perfil-papel { font-size: 9.5px; }
 }
 
 @media (max-height: 700px) {
-  #home { gap: 6px; }
+  #home { gap: 5px; }
   #home .cabeca { --pad-cabeca-topo: 0px; }
   h1 { font-size: clamp(20px, 5.6vw, 26px); }
-  .cabeca .sub { margin-top: 4px; font-size: 12px; }
+  .cabeca .sub { margin-top: 3px; font-size: 12px; }
   #recentes .secao-titulo { font-size: 11.5px; }
-  #recentes-lista { padding-bottom: 4px; }
+  #recentes-lista { padding-bottom: 3px; }
   /* o card ENCOLHE: sem isso o titulo + o card nao caberiam e a faixa cortava */
-  #recentes-lista .card-mini { width: clamp(62px, 17vh, 92px); }
+  #recentes-lista .card-mini { width: clamp(58px, 14vh, 84px); }
   #recentes-lista .card-mini .nome { font-size: 10px; }
   #recentes-vazio { padding: 7px 0; font-size: 11.5px; }
-  .perfil { padding: 7px 8px; gap: 4px; }
+  #abrir-biblioteca, #abrir-arquivo { padding: 7px 12px; }
+  .bib-icone { width: 32px; height: 32px; font-size: 16px; }
+  #creditos { gap: 5px; margin-top: 4px; margin-bottom: 2px; }
+  .perfil { padding: 5px 10px; gap: 1px; }
   .perfil-papel { font-size: 9.5px; }
-  .perfil-nome { font-size: 13.5px; }
-  .perfil-zap { padding: 6px 9px; font-size: 10.5px; }
-  .perfil-canal { padding: 5px 8px; font-size: 10px; }
-  .bib-icone { width: 34px; height: 34px; font-size: 17px; }
+  .perfil-nome { font-size: 13px; }
+  .perfil-botoes { gap: 4px; margin-top: 4px; }
+  .perfil-zap, .perfil-canal { padding: 5px 10px; font-size: 10px; min-width: 150px; }
 }
 /* Telas MUITO baixas (320x480, 320x568, paisagem): compacta tudo. Como a home
    usa `min-height`, ela cresce em vez de cortar -- aqui so minimizamos o quanto
    cresce, para caber na viewport sempre que der. */
 @media (max-height: 620px) {
   #home { gap: 4px; }
-  #intro { height: clamp(84px, 17vh, 120px); }
+  #intro { height: clamp(72px, 15vh, 110px); }
   #recentes .secao-titulo { font-size: 11px; }
-  #recentes-lista .card-mini { width: clamp(50px, 13vh, 68px); }
+  #recentes-lista .card-mini { width: clamp(46px, 12vh, 64px); }
   #recentes-lista .card-mini .nome { font-size: 9.5px; }
   #abrir-biblioteca, #abrir-arquivo { padding: 6px 10px; }
   .bib-icone { width: 30px; height: 30px; font-size: 15px; }
-  #creditos { gap: 5px; margin-top: 4px; margin-bottom: 2px; }
-  .perfil { padding: 5px 8px; gap: 2px 8px; }
-  .perfil-papel { font-size: 9px; }
-  .perfil-nome { font-size: 12.5px; }
-  .perfil-zap, .perfil-canal { padding: 5px 8px; font-size: 10px; }
   .bib-desc { display: none; }
+  #creditos { gap: 4px; margin-top: 2px; margin-bottom: 2px; }
+  .perfil { padding: 4px 8px; gap: 1px; }
+  .perfil-papel { font-size: 9px; }
+  .perfil-nome { font-size: 12px; }
+  .perfil-botoes { gap: 3px; margin-top: 3px; }
+  .perfil-zap, .perfil-canal { padding: 4px 10px; font-size: 9.5px; min-width: 140px; }
 }
 
 /* ==========================================================================

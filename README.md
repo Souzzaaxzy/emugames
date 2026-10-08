@@ -76,10 +76,19 @@ escondido. A faixa de recentes rola na horizontal, nunca na vertical.
 
 ### Cards de perfil (créditos)
 
-Ficam **um embaixo do outro** (Kannon/Criador primeiro), retangulares e com o
-conteúdo centralizado. Eles **crescem para absorver a sobra** da home
-(`#creditos { flex: 1 1 auto }` + `.perfil { flex: 1 1 0 }`): é isso que
-preenche o vazio em vez de deixar buraco no rodapé.
+Ficam **um embaixo do outro** (Kannon/Criador primeiro), retangulares, com tudo
+empilhado e centralizado:
+
+```
+        CRIADOR
+      𝐊𝐚𝐧𝐧𝐨𝐧ᰔ𝐠𝐢
+  [ botão do WhatsApp ]
+  [ botão do canal    ]
+```
+
+Eles **crescem para absorver a sobra** da home (`#creditos { flex: 1 1 auto }` +
+`.perfil { flex: 1 1 0 }`): é isso que preenche o vazio em vez de deixar buraco
+no rodapé.
 
 Duas armadilhas resolvidas aqui:
 
