@@ -73,6 +73,28 @@ extensão, quem manda é o `console`, mas `.z64` é o formato canônico.
 }
 ```
 
+### Desempenho / FPS do N64
+
+O N64 é o console mais pesado aqui (core `mupen64plus_next` em WASM). O que já
+está ligado:
+
+- **Threads** (`EJS_threads`) — quando o host manda COOP/COEP (o `_headers`
+  manda), a página fica isolada e o EmulatorJS usa o core `-thread` (vários
+  núcleos). O player DETECTA `crossOriginIsolated` e só pede threads se houver
+  isolamento.
+- **Core options** (em `index.html`, via `EJS_defaultOptions`, só para `n64`):
+  `cpucore=dynamic_recompiler` (dynarec), `rdp-plugin=gliden64` (render OpenGL,
+  o rápido), `rsp-plugin=hle` e `EnableNativeResFactor=0` (sem render acima da
+  resolução nativa). São os defaults mais rápidos do core, fixados de propósito.
+
+Ficaram **de fora** de propósito (dão FPS, mas o próprio core avisa "break some
+games"): `mupen64plus-Framerate=Fullspeed` e `EnableFBEmulation=False`. Se
+quiser testar num jogo específico, é só acrescentar ao objeto.
+
+> **Inatividade**: o player desliga sozinho após **10 min** sem interação — e o
+> tempo só conta com a página **visível** (`document.hidden`), então não desliga
+> em segundo plano. O medidor de FPS fica à mostra para conferir a performance.
+
 ## Abrir
 
 ```

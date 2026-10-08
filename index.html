@@ -100,7 +100,10 @@
 
 <script>
   window.EJS_DATA = 'https://cdn.emulatorjs.org/stable/data/';
-  window.INATIVIDADE_MS = 3 * 60 * 1000;
+  // 10 min (antes 3): com 3 min o emulador desligava no meio do jogo quando a
+  // tela ficava parada (ler uma dica, atender o telefone). O tempo SO corre com
+  // a pagina VISIVEL (ver `estaVisivel`), entao nao desliga em segundo plano.
+  window.INATIVIDADE_MS = 10 * 60 * 1000;
 
   // "Lizzy" em MATHEMATICAL BOLD (U+1D400..), montado por code point para o
   // arquivo continuar ASCII-safe (glifos exoticos corrompem em alguns editores).
@@ -578,7 +581,7 @@
     // mandar, o emulador segue no nucleo normal, exatamente como antes.
     window.EJS_threads = Boolean(window.crossOriginIsolated && typeof SharedArrayBuffer === 'function');
     window.EJS_VirtualGamepadSettings = gamepadDoJogo(j.console);
-    // ---- LATENCIA ----------------------------------------------------------
+    // ---- PERFORMANCE -------------------------------------------------------
     // `EJS_defaultOptions` vai para o ARQUIVO DE CORE OPTIONS (`getCoreSettings`
     // -> `setupCoreSettingFile`), nao para o `retroarch.cfg` -- entao so aceita
     // opcao que o proprio CORE declara (ex.: `fps` no snes9x). A latencia de
@@ -587,6 +590,32 @@
     // Ficar com o medidor de FPS a mostra ajuda a CONFERRAR que o emulador nao
     // esta caindo de quadro (que e' o que o dono percebe como "travar").
     window.EJS_defaultOptions = { fps: 'show' };
+    // O Nintendo 64 e' o console mais pesado aqui: o `mupen64plus_next` roda no
+    // WASM e o desempenho depende das escolhas do core. O EmulatorJS ja vem com
+    // os defaults MAIS RAPIDOS, mas eles podem mudar entre versoes -- por isso
+    // fixamos EXPLICITAMENTE os tres que definem a velocidade (nomes do
+    // `libretro_core_options.h` do repo `EmulatorJS/mupen64plus-libretro-nx`):
+    //   * `mupen64plus-cpucore`   = `dynamic_recompiler` (dynarec: recompila o
+    //     codigo do N64 em vez de interpretar; ordens de grandeza mais rapido)
+    //   * `mupen64plus-rdp-plugin` = `gliden64` (renderizador OpenGL de alto
+    //     nivel; `angrylion`/`parallel` sao mais precisos e MUITO mais lentos)
+    //   * `mupen64plus-rsp-plugin` = `hle` (audio/video por emulacao de alto
+    //     nivel, o mais rapido)
+    //   * `mupen64plus-EnableNativeResFactor` = `0` (nao renderiza acima da
+    //     resolucao nativa; e' o que o celular aguenta)
+    // Alem disso o `EJS_threads` acima liga a variante `-thread` (varios nucleos).
+    //
+    // NAO ligamos `mupen64plus-Framerate = Fullspeed` nem `EnableFBEmulation =
+    // False`: os dois dao FPS, mas o proprio core avisa que "break some games"
+    // (timing/framebuffer). Ficam como knob opcional, nao como default.
+    if (j.console === 'n64') {
+      Object.assign(window.EJS_defaultOptions, {
+        'mupen64plus-cpucore': 'dynamic_recompiler',
+        'mupen64plus-rdp-plugin': 'gliden64',
+        'mupen64plus-rsp-plugin': 'hle',
+        'mupen64plus-EnableNativeResFactor': '0',
+      });
+    }
     if (j.bios) {
       // A BIOS tem de chegar ao emulador como ZIP. O EmulatorJS, por padrao,
       // EXTRAI a BIOS em arquivos soltos -- e o FBNeo procura "neogeo.zip", que
@@ -922,8 +951,17 @@
     return false;
   }
 
+  /**
+   * A pagina esta VISIVEL? A inatividade (que desliga o emulador) so pode
+   * contar com a pagina em primeiro plano. Em segundo plano o navegador trava
+   * os timers do jogo e nao ha como o usuario interagir -- desligar ali seria
+   * "fechar sozinho" sem ele ter chance de reagir.
+   */
+  function estaVisivel() { return !document.hidden; }
+
   setInterval(() => {
     if (!rodando) return;
+    if (!estaVisivel()) { marcarAtividade(); return; }
     // Controle em uso conta como atividade -- senao o jogo cairia sozinho.
     if (controleEmUso()) marcarAtividade();
     if (Date.now() - ocioso < LIMITE) return;
