@@ -71,7 +71,11 @@
     </span>
     <span class="bib-seta" aria-hidden="true">&#8250;</span>
   </button>
-  <input id="arquivo" type="file" accept=".zip,.sfc,.smc,.fig,.swc,.nes,.fds,.gba,.gb,.gbc,.md,.bin,.gen,.smd,.n64,.z64,.v64,.iso,.cue,.pbp,.pce,.ngp,.ngc,.ws,.wsc,.a26,.a78,.col,.lnx,.j64,.jag,.d64,.t64,.prg,.crt,.tap,.m3u,.7z,.chd" hidden>
+  <!-- SEM `accept`: com o filtro, o seletor do celular ESCONDE/desabilita ROMs
+       que ele nao reconhece (no Android quase toda ROM cai em
+       `application/octet-stream`). Sem filtro o usuario escolhe qualquer
+       arquivo e o console e' detectado depois, pela extensao. -->
+  <input id="arquivo" type="file" hidden>
 
   <footer id="creditos" aria-label="Créditos">
     <div class="perfil">
@@ -317,7 +321,7 @@
     md: 'segaMD', gen: 'segaMD', smd: 'segaMD', bin: 'segaMD',
     sms: 'segaMS', gg: 'segaGG',
     n64: 'n64', z64: 'n64', v64: 'n64',
-    pce: 'pce',
+    pce: 'pce', sgx: 'pce', pc2: 'pce',
     ngp: 'ngp', ngc: 'ngp',
     ws: 'ws', wsc: 'ws',
     a26: 'atari2600', a78: 'atari7800',
@@ -325,10 +329,17 @@
     lnx: 'lynx',
     j64: 'jaguar', jag: 'jaguar',
     d64: 'c64', t64: 'c64', prg: 'c64', crt: 'c64', tap: 'c64',
+    x64: 'c64', nib: 'c64', dsk: 'c64',
+    d71: 'c128', d81: 'c128',
+    adf: 'amiga', adz: 'amiga', hdf: 'amiga', lha: 'amiga',
     vb: 'vb', vboy: 'vb',
-    iso: 'psx', cue: 'psx', pbp: 'psx', chd: 'psx', cso: 'psx', m3u: 'psx',
+    iso: 'psx', cue: 'psx', pbp: 'psx', chd: 'psx', cso: 'psx', m3u: 'psx', img: 'psx',
     nds: 'nds',
     zip: 'arcade', '7z': 'arcade',
+    // Alem dos oficiais, reconhece o que aparece em backup caseiro -- o
+    // usuario escolhe QUALQUER arquivo, entao vale cobrir o maximo.
+    sgd: 'segaMD', rom: 'snes', srm: 'snes', sav: 'snes',
+    ue: 'atari2600', atr: 'atari2600', xex: 'atari2600', st: 'atari2600', int: 'atari2600',
   };
   const NOMES_CONSOLE = {
     snes: 'Super Nintendo', nes: 'Nintendo', gb: 'Game Boy', gbc: 'Game Boy Color',
@@ -336,7 +347,8 @@
     segaGG: 'Game Gear', n64: 'Nintendo 64', pce: 'PC Engine', ngp: 'Neo Geo Pocket',
     ws: 'WonderSwan', atari2600: 'Atari 2600', atari7800: 'Atari 7800',
     coleco: 'ColecoVision', lynx: 'Atari Lynx', jaguar: 'Jaguar', c64: 'Commodore 64',
-    vb: 'Virtual Boy', psx: 'PlayStation', nds: 'Nintendo DS', arcade: 'Arcade',
+    c128: 'Commodore 128', amiga: 'Amiga', vb: 'Virtual Boy',
+    psx: 'PlayStation', nds: 'Nintendo DS', arcade: 'Arcade',
   };
 
   const ARQUIVO_RECENTES_CHAVE = 'emugames.arquivo.recentes';
@@ -495,8 +507,12 @@
       // Mesmo fluxo do catalogo: recarrega a pagina e o BOOT entra no jogo.
       // O nome vai no `?arquivo=` porque a barra do jogo precisa dele ANTES de
       // o IndexedDB responder (a leitura e' assincrona).
+      //
+      // O hash TEM de ser `#/jogo/local:<nome>`: sem o prefixo `local:`, a rota
+      // parece um jogo do catalogo e o site responde "não está no catálogo".
       const enc = encodeURIComponent(nome);
-      location.href = `./?arquivo=${enc}#/jogo/${enc}`;
+      const idLocal = encodeURIComponent('local:' + nome);
+      location.href = `./?arquivo=${enc}#/jogo/${idLocal}`;
     } catch (e) {
       console.error('[EMUGAMES] falha ao guardar o arquivo', e);
       erro.hidden = false;
@@ -600,7 +616,9 @@
     capa.className = 'capa';
     const tag = document.createElement('span');
     tag.className = 'tag';
-    tag.textContent = (CONSOLES[l.console] && CONSOLES[l.console].emoji) || '📁';
+    // `CONSOLES` so cobre os consoles que o site ja usava; para os novos (c64,
+    // amiga, nds...) cai no emoji generico de controle, igual aos do catalogo.
+    tag.textContent = (CONSOLES[l.console] && CONSOLES[l.console].emoji) || '🎮';
     tag.title = NOMES_CONSOLE[l.console] || l.console;
     capa.appendChild(tag);
     card.appendChild(capa);
