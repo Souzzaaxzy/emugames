@@ -12,8 +12,28 @@
 <section id="catalogo">
   <header class="cabeca">
     <h1>EmuGames <span id="marca"></span></h1>
-    <p class="sub">Escolha um jogo para jogar</p>
+    <p class="sub">Jogos direto do seu navegador</p>
   </header>
+
+  <!-- Mini aba de CREDITOS: quem fez / com quem falar. -->
+  <section id="creditos" aria-label="Creditos">
+    <div class="perfil">
+      <p class="perfil-nome" data-bold="M06"></p>
+      <a class="perfil-zap" href="https://wa.me/5511919516409" target="_blank"
+        rel="noopener noreferrer">
+        <span class="zap-icone" aria-hidden="true">&#128172;</span>
+        <span>Fale comigo pelo WhatsApp</span>
+      </a>
+    </div>
+    <div class="perfil">
+      <p class="perfil-nome" data-bold="Kannon&#8202;ᰔ&#8202;gi"></p>
+      <a class="perfil-zap" href="https://wa.me/5511978819676" target="_blank"
+        rel="noopener noreferrer">
+        <span class="zap-icone" aria-hidden="true">&#128172;</span>
+        <span>Fale comigo pelo WhatsApp</span>
+      </a>
+    </div>
+  </section>
 
   <nav id="filtros" aria-label="Categorias"></nav>
 
@@ -118,6 +138,25 @@
     }).join('');
     var el = document.getElementById('marca');
     if (el) el.textContent = BOLD;
+  })();
+
+  // Nomes dos creditos no mesmo estilo do "Lizzy": MATHEMATICAL BOLD, montado
+  // por code point (o arquivo fica ASCII-safe) e lido do `data-bold`, onde os
+  // nomes vivem em HTML entities. O "ᰔ" nao tem versao bold -- entra como esta.
+  (function () {
+    var AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    function bold(txt) {
+      return txt.split('').map(function (c) {
+        var i = AZ.indexOf(c.toUpperCase());
+        if (i < 0) return c;                     // simbolo/espaco: fica igual
+        var base = 0x1D400 + i;
+        if (c === c.toLowerCase()) base += 0x1A; // bloco minusculo
+        return String.fromCodePoint(base);
+      }).join('');
+    }
+    for (var el of document.querySelectorAll('[data-bold]')) {
+      el.textContent = bold(el.dataset.bold);
+    }
   })();
 </script>
 
