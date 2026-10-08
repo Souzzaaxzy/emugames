@@ -12,7 +12,7 @@ emugames/                    <- ESTE repositório (o site)
 ├── jogos.json      ← catálogo (o bot guarda uma cópia: o `!arcade` lê dela)
 ├── wrangler.jsonc  ← config de publicação (Cloudflare Workers)
 ├── _headers        ← COOP/COEP (libera SharedArrayBuffer → núcleo com threads)
-├── .assetsignore   ← exclui o `kof97.zip` grande (a ROM vai em partes)
+├── .assetsignore   ← exclui `.git` e o `kof97.zip` grande (a ROM vai em partes)
 ├── capas/          ← capas dos jogos (GIF)
 ├── neogeo.zip      ← BIOS do Neo Geo (FBNeo)
 └── jogos/
@@ -83,6 +83,26 @@ Assim tudo sai do **mesmo host** do site. Ha teste que falha se uma ROM acima do
 limite nao estiver dividida, se alguma parte passar de 25 MiB, ou se as partes
 nao somarem o zip inteiro.
 
+#### O `.assetsignore` precisa excluir o `.git`
+
+O `wrangler` le a **raiz** do repositorio como `assets.directory` e **nao ignora
+o `.git` sozinho**. O pack do `.git` passa de 100 MiB e guarda o blob do
+`kof97.zip` (27,6 MiB) — entao, sem esta linha no `.assetsignore`, o deploy morre
+na etapa *"Building list of assets"* com:
+
+```
+[ERROR] Asset too large.
+  ...found a file /opt/buildhome/repo/.git/objects/... with a size of 27.6 MiB
+```
+
+Por isso o `.assetsignore` comeca com:
+
+```
+.git
+.wrangler
+node_modules
+```
+
 ### Cloudflare
 
 `wrangler.jsonc` (`assets.directory` = `.`) + `wrangler deploy`.
@@ -113,4 +133,3 @@ python3 -c "import json;print(len(json.load(open('jogos.json'))['jogos']))"
 > só para montar o card e a URL; quem serve a ROM e o `jogos.json` de verdade é
 > o **site**. Por isso o card aparece mesmo com o site desatualizado — mas o jogo
 > não abre até o deploy.
-
