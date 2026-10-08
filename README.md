@@ -114,26 +114,36 @@ metade de baixo é quase preta.
 Para trocar a imagem: gere em **1.91:1** (ex.: 1200×630) e atualize
 `og:image:width`/`height`.
 
-### PC (telas largas)
+### Duas versões: celular e desktop
 
-Em PC a janela é muito mais larga que um celular. Duas regras resolvem:
+O layout de **celular** é uma coluna única, e a home cabe na viewport sem
+rolagem. Isso funcionava bem no celular, mas no PC a mesma coluna virava uma
+**tira estreita no meio da tela** (com o teto de 620px, o conteúdo usava só
+24–45% da largura) — parecia "bugado".
 
-- **Teto de 620px** no conteúdo (`#home > *:not(.cabeca)`, `#biblioteca > *`):
-  sem ele os cards e botões esticavam até ~1900px. O `.cabeca` fica de fora
-  porque o vídeo mora dentro dele e precisa sangrar.
-- **Vídeo com `object-fit: fill`**: a faixa do topo é muito mais larga que o
-  vídeo (16:9). Com `cover` as laterais eram **cortadas**; com `fill` o quadro
-  inteiro aparece, só um pouco achatado.
+Por isso existe um bloco `DESKTOP` no fim do `style.css` (`@media (min-width:
+900px)`). Ele **não esconde nada**: usa a mesma linguagem visual e só
+reposiciona o conteúdo num painel de 1040px:
 
-A sangria do vídeo usa `calc(100% + 2 * --pad-lado)` + `margin-left` negativo —
-não `100vw`, que inclui a barra de rolagem e criava overflow horizontal.
+| | celular | desktop |
+|---|---|---|
+| cabeçalho | vídeo em cima, título embaixo (atravessado) | **vídeo à esquerda, título à direita** |
+| recentes | faixa que rola na horizontal | **grade** |
+| biblioteca / arquivo | um botão sob o outro | **lado a lado** |
+| cards de perfil | um embaixo do outro | **lado a lado** |
 
-Em laptops (`min-width: 900px` e `max-height: 800px`) o vídeo e os vãos
-encolhem para a home caber inteira.
+No desktop o vídeo mantém **16:9 exato** (`height: clamp(84px, 16vh, 190px)` e
+`width: calc(h * 16 / 9)`), então não achata e cabe na altura.
+
+> ⚠️ O bloco `DESKTOP` fica no **fim** do arquivo de propósito: assim ele vence
+> os blocos de `max-height` que também mexem na `#intro`.
 
 > ⚠️ Se mudar o `padding` lateral do `#home`, mude também `--pad-lado`: é ela
-> que o vídeo cancela para encostar nas bordas. (Já aconteceu de o padding de
-> paisagem virar 6px e a variável ficar 8px — sobrava overflow de 2px.)
+> que o vídeo cancela para encostar nas bordas.
+
+> ⚠️ O card de perfil **não tem padding lateral** (os botões precisam ir de
+> ponta a ponta). Quem tem respiro é o texto (`padding-inline: var(--pad-x)`).
+> Se devolver padding lateral ao card, os botões deixam de encostar nas bordas.
 
 ### Abrir um jogo do próprio aparelho
 

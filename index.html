@@ -54,7 +54,9 @@
     <p id="recentes-vazio" hidden>Abra um jogo e ele aparece aqui.</p>
   </section>
 
-  <button id="abrir-biblioteca" type="button">
+  <!-- Os dois acessos: no celular ficam empilhados; no PC, lado a lado. -->
+  <div class="bib-par">
+    <button id="abrir-biblioteca" type="button">
     <span class="bib-icone" aria-hidden="true">&#127918;</span>
     <span class="bib-texto">
       <span class="bib-titulo">Biblioteca de jogos</span>
@@ -73,6 +75,8 @@
     </span>
     <span class="bib-seta" aria-hidden="true">&#8250;</span>
   </button>
+  </div>
+
   <!-- SEM `accept`: com o filtro, o seletor do celular ESCONDE/desabilita ROMs
        que ele nao reconhece (no Android quase toda ROM cai em
        `application/octet-stream`). Sem filtro o usuario escolhe qualquer
