@@ -64,11 +64,18 @@ ao abrir o jogo; a home só o exibe.
 
 ### Home sem rolagem
 
-`#home` tem `height: 100dvh` (com fallback `100vh`) e distribui as quatro áreas
-com Flexbox + `justify-content: space-between`, então os créditos ficam sempre
-no rodapé. Em telas baixas (`max-height: 700px` / `560px`) os espaços e os cards
-encolhem — nada é escondido. A faixa de recentes rola na horizontal, nunca na
-vertical.
+`#home` tem `height: 100dvh` (com fallback `100vh`) e empilha as áreas com
+Flexbox; os créditos sobem para o rodapé via `margin-top: auto`. Em telas baixas
+(`max-height: 700px` / `560px`) os espaços e os cards encolhem — nada é
+escondido. A faixa de recentes rola na horizontal, nunca na vertical.
+
+### Intro em vídeo
+
+`intro.mp4` (540×300, H.264, ~260 KB) fica no topo da home com bordas
+arredondadas, mudo, em loop e `playsinline`. O título **atravessa** a base do
+vídeo: `margin-top: -0.55em` no `h1` põe metade dele sobre o vídeo e metade
+fora (não depende do tamanho do vídeo). O vídeo só roda na home — para na
+biblioteca e ao abrir um jogo, para não roubar CPU do emulador.
 
 ## Recursos
 

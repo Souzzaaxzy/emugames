@@ -13,6 +13,12 @@
      creditos no rodape. Cabe na viewport, sem rolagem vertical. -->
 <section id="home">
   <header class="cabeca">
+    <!-- Intro em video (bordas redondas). O titulo fica "atravessado" na base
+         do video: metade sobre ele, metade fora (ver `.cabeca` no CSS). -->
+    <div id="intro">
+      <video id="intro-video" src="./intro.mp4" autoplay muted loop playsinline
+        disablepictureinpicture preload="auto" aria-hidden="true"></video>
+    </div>
     <h1>EmuGames <span id="marca"></span></h1>
     <p class="sub">Jogos direto do seu navegador</p>
   </header>
@@ -184,6 +190,7 @@
   const recentesVazio = document.getElementById('recentes-vazio');
   const bibliotecaBtn = document.getElementById('abrir-biblioteca');
   const voltarHomeBtn = document.getElementById('voltar-home');
+  const introVideo = document.getElementById('intro-video');
   const alvo = document.getElementById('game');
   const subtitulo = document.getElementById('subtitulo');
   const erro = document.getElementById('erro');
@@ -391,13 +398,17 @@
     erro.hidden = true;
     document.body.classList.remove('jogando');
     document.title = 'EmuGames Lizzy';
+    // O video do topo so roda na home: fora dela, para (nao rouba CPU do jogo).
     if (nome === 'home') {
+      introVideo.play().catch(() => {});
       // A home tem a URL limpa (`/`, sem hash nem `?jogo=`). Sem recarregar:
       // aqui o emulador ja esta parado.
       if (location.hash || location.search) {
         history.replaceState(null, '', location.pathname);
       }
       montarRecentes();
+    } else {
+      introVideo.pause();
     }
   }
 
@@ -599,6 +610,8 @@
     biblioteca.hidden = true;
     erro.hidden = true;
     jogador.hidden = false;
+    // O video do topo para junto com a home (nao rouba CPU do emulador).
+    introVideo.pause();
     document.body.classList.add('jogando');
     document.title = j.nome + ' · EmuGames Lizzy';
 

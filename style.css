@@ -44,9 +44,8 @@ body:not(.jogando) { padding: 0; }
 #home {
   display: flex;
   flex-direction: column;
-  /* Distribui as quatro areas por igual na altura: nada de vazio no meio e os
-     creditos sempre no rodape. */
-  justify-content: space-between;
+  /* Empilha do topo: recentes e biblioteca ficam juntos e os creditos vao para
+     o rodape via `margin-top: auto` (ver `#creditos`). */
   gap: clamp(8px, 2vh, 16px);
   height: 100dvh;
   padding: calc(8px + env(safe-area-inset-top, 0px))
@@ -62,6 +61,39 @@ body:not(.jogando) { padding: 0; }
   #home { height: 100vh; }
 }
 #home .cabeca { padding: 4px 4px 0; }
+
+/* ==========================================================================
+   CABECALHO — intro em video com o titulo ATRAVESSADO na base.
+   O titulo e' puxado para CIMA com `margin-top` negativo: metade dele fica
+   sobre o video, metade para fora. Como a sobra de espaco e' dividida por
+   `space-between`, a home continua cabendo na tela (sem rolagem).
+   ========================================================================== */
+#intro {
+  --intro-h: clamp(72px, 20vh, 150px);
+  width: min(100%, calc(var(--intro-h) * 16 / 9));
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #05070a;
+  border: 1px solid var(--borda);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .45);
+  line-height: 0;
+}
+#intro-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+#home .cabeca h1 {
+  position: relative;
+  z-index: 1;
+  /* Puxa o titulo para cima: metade da altura dele entra no video e a outra
+     metade fica de fora. O h1 tem `line-height: 1.1`, entao `-0.55em` e'
+     exatamente metade da altura -- nao depende do tamanho do video. */
+  margin-top: -0.55em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .85);
+}
 
 /* A secao de recentes nao cresce alem do seu espaco: a faixa rola na
    horizontal e nunca empurra o resto para fora da tela. */
@@ -198,12 +230,17 @@ h1 #marca { letter-spacing: 2px; }
 
 /* Mini aba de CREDITOS: dois perfis lado a lado (esquerda/direita).
    Usa os mesmos tokens do resto do site (painel, borda, acento).
-   Fica no rodape da home via `justify-content: space-between` do `#home`. */
+   `margin-top: auto` empurra os cards para o RODAPE da home. */
 #creditos {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 10px;
+  /* sobe os cards: absorve a sobra da home, deixando-os no rodape. Antes o
+     `space-between` do `#home` empurrava TUDO (recentes e biblioteca ficavam
+     longe); agora so os creditos sobem. */
+  margin-top: auto;
+  margin-bottom: clamp(10px, 4vh, 40px);
 }
 .perfil {
   flex: 1 1 0;
