@@ -51,7 +51,11 @@ body:not(.jogando) { padding: 0; }
   /* Empilha do topo: recentes e biblioteca ficam juntos e os creditos vao para
      o rodape via `margin-top: auto` (ver `#creditos`). */
   gap: clamp(8px, 2vh, 16px);
-  height: 100dvh;
+  /* `min-height` em vez de `height` fixo: em tela ALTA a home ocupa exatamente
+     a viewport (e os cards de perfil absorvem a sobra, preenchendo o vazio);
+     em tela BAIXA ela cresce o necessario em vez de espremer/estourar. */
+  height: auto;
+  min-height: 100dvh;
   padding: var(--pad-top)
            calc(8px + env(safe-area-inset-right, 0px))
            calc(8px + env(safe-area-inset-bottom, 0px))
@@ -82,7 +86,7 @@ body:not(.jogando) { padding: 0; }
   margin-right: auto;
 }
 @supports not (height: 100dvh) {
-  #home { height: 100vh; }
+  #home { min-height: 100vh; }
 }
 #home .cabeca {
   /* Sem padding lateral: quem sangra e' o `#intro`, que precisa encostar nas
@@ -109,7 +113,7 @@ body:not(.jogando) { padding: 0; }
   margin-top: calc(-1 * (var(--pad-top) + var(--pad-cabeca-topo)));
   width: calc(100% + 2 * var(--pad-lado));
   margin-left: calc(-1 * var(--pad-lado));
-  height: clamp(108px, 24vh, 210px);
+  height: clamp(104px, 19vh, 210px);
   border-radius: 0 0 18px 18px;
   overflow: hidden;
   background: #05070a;
@@ -138,7 +142,9 @@ body:not(.jogando) { padding: 0; }
 /* A secao de recentes nao cresce alem do seu espaco: a faixa rola na
    horizontal e nunca empurra o resto para fora da tela. */
 #recentes {
-  min-height: 0;
+  /* Tamanho NATURAL e sem encolher: a faixa nunca e' cortada (tem overflow
+     hidden) nem espremida. Quem absorve a sobra sao os cards de perfil. */
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   gap: clamp(6px, 1.6vh, 12px);
@@ -304,22 +310,56 @@ h1 #marca { letter-spacing: 2px; }
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: auto;
+  /* Absorve TODA a sobra da home: e' isso que faz os cards ficarem grandes e
+     o vazio sumir. SEM `min-height: 0`: com ele o flex encolhia abaixo do
+     conteudo e os cards vazavam para fora da tela (o documento ganhava
+     rolagem). Assim ele cresce quando sobra e nunca encolhe abaixo do natural. */
+  flex: 1 1 auto;
+  margin-top: clamp(8px, 2vh, 16px);
   margin-bottom: clamp(2px, 1vh, 10px);
 }
-/* Retangular: papel + nome a esquerda e os botoes a direita, na MESMA linha.
-   Em tela estreita o `wrap` joga os botoes para a linha de baixo sozinho. */
+/* Os dois cards crescem igualmente e ficam com a MESMA altura (o nome do
+   Kannon e' maior e, sem isto, o card dele ficava mais alto que o do M06).
+   `min-content` impede que encolham ABAIXO do conteudo em telas muito baixas:
+   nesse caso a home cresce (rola) em vez de cortar o card. */
+.perfil { flex: 1 1 0; min-height: min-content; }
+/*
+  Card GRANDE e retangular, que ocupa o espaco que sobrava na home.
+  O conteudo fica CENTRALIZADO e o card CRESCE em altura (`flex: 1 1 0` dentro
+  do `#creditos`, que absorve a sobra do `#home`) -- por isso ele preenche o
+  vazio em vez de deixar buraco.
+
+  Em tela BAIXA nao ha sobra: o card fica no tamanho natural, e para caber ele
+  usa a linha (papel + nome a esquerda, botoes a direita). Em tela ALTA
+  (>= 700px de altura) o conteudo empilha, ficando com a cara pedida:
+  papel / nome / botoes.
+*/
 .perfil {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px 10px;
-  padding: 9px 12px;
+  justify-content: center;
+  gap: 6px 12px;
+  padding: clamp(8px, 2vh, 18px) clamp(10px, 3vw, 18px);
   background: var(--painel);
   border: 1px solid var(--borda);
-  border-radius: 14px;
-  text-align: left;
+  border-radius: 16px;
+  text-align: center;
 }
+
+/* Botoes: pilulas que dividem a largura do card. */
+.perfil-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 1 190px;
+  min-width: 0;
+}
+/* O card fica SEMPRE na linha (compacto): assim ele cabe em qualquer altura e
+   ainda CRESCE para preencher a sobra da home. Empilhar deixava o card 2x mais
+   alto e estourava a tela em celular/laptop -- e a sobra continua sendo
+   preenchida de qualquer forma, porque quem cresce e' o card. */
 /* Papel de cada um (Criador / Parceiro), discreto ao lado do nome. */
 .perfil-papel {
   font-size: clamp(9.5px, 2.7vw, 11px);
@@ -335,9 +375,9 @@ h1 #marca { letter-spacing: 2px; }
   letter-spacing: .5px;
   line-height: 1.2;
   color: var(--texto);
-  overflow-wrap: anywhere;
-  /* empurra os botoes para a direita, deixando o card retangular */
-  margin-right: auto;
+  /* Nunca quebra: o nome do Kannon e' maior e, quebrando, o card dele ficava
+     mais alto que o do M06. Assim os dois cards ficam identicos. */
+  white-space: nowrap;
 }
 
 /* Botao do canal, abaixo da caixinha do WhatsApp. */
@@ -345,7 +385,8 @@ h1 #marca { letter-spacing: 2px; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 7px 12px;
+  flex: 1 1 auto;
+  padding: 9px 12px;
   background: transparent;
   border: 1px solid var(--borda);
   border-radius: 999px;
@@ -370,7 +411,8 @@ h1 #marca { letter-spacing: 2px; }
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px 14px;
+  flex: 1 1 auto;
+  padding: 9px 14px;
   background: var(--painel2);
   border: 1px solid var(--borda);
   border-radius: 10px;
@@ -644,6 +686,15 @@ h1 #marca { letter-spacing: 2px; }
    HOME EM TELA BAIXA (celulares pequenos, ou paisagem)
    Compacta espacos e cards para tudo caber sem rolagem, SEM esconder nada.
    ========================================================================== */
+/* Telas de altura media (celular comum, laptop): o card de recentes encolhe um
+   pouco. Ele e' o maior bloco flexivel da home -- sem isso o total passava da
+   viewport e a pagina ganhava rolagem (ou o card era cortado). */
+@media (max-height: 900px) {
+  #recentes-lista .card-mini { width: clamp(84px, 12vh, 118px); }
+  #home { gap: clamp(6px, 1.4vh, 12px); }
+  #creditos { margin-top: clamp(6px, 1.4vh, 12px); margin-bottom: 2px; }
+}
+
 @media (max-height: 700px) {
   #home { gap: 6px; }
   #home .cabeca { --pad-cabeca-topo: 0px; }
@@ -662,13 +713,23 @@ h1 #marca { letter-spacing: 2px; }
   .perfil-canal { padding: 5px 8px; font-size: 10px; }
   .bib-icone { width: 34px; height: 34px; font-size: 17px; }
 }
-@media (max-height: 560px) {
-  #home { gap: 5px; }
-  #recentes-lista .card-mini { width: clamp(54px, 15vh, 72px); }
+/* Telas MUITO baixas (320x480, 320x568, paisagem): compacta tudo. Como a home
+   usa `min-height`, ela cresce em vez de cortar -- aqui so minimizamos o quanto
+   cresce, para caber na viewport sempre que der. */
+@media (max-height: 620px) {
+  #home { gap: 4px; }
+  #intro { height: clamp(84px, 17vh, 120px); }
+  #recentes .secao-titulo { font-size: 11px; }
+  #recentes-lista .card-mini { width: clamp(50px, 13vh, 68px); }
+  #recentes-lista .card-mini .nome { font-size: 9.5px; }
+  #abrir-biblioteca, #abrir-arquivo { padding: 6px 10px; }
+  .bib-icone { width: 30px; height: 30px; font-size: 15px; }
+  #creditos { gap: 5px; margin-top: 4px; margin-bottom: 2px; }
+  .perfil { padding: 5px 8px; gap: 2px 8px; }
+  .perfil-papel { font-size: 9px; }
+  .perfil-nome { font-size: 12.5px; }
+  .perfil-zap, .perfil-canal { padding: 5px 8px; font-size: 10px; }
   .bib-desc { display: none; }
-  .perfil { padding: 6px 6px; gap: 3px; }
-  .perfil-zap { padding: 5px 7px; }
-  .perfil-canal { padding: 4px 7px; }
 }
 
 /* ==========================================================================
@@ -1152,13 +1213,6 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
   /* Em paisagem o padding encolhe (6px): as DUAS variaveis tem de acompanhar,
      senao o video cancela um valor que nao e' o real e sobra overflow. */
   #home { --pad-top: 6px; --pad-lado: 6px; }
-  /* Deitado a altura e' pequena demais para caber tudo (video + recentes +
-     2 cards + creditos) sem esconder alguma coisa. Aqui a home pode rolar --
-     em RETRATO ela nunca rola. Assim nada some. */
-  #home { height: auto; min-height: 100dvh; }
-  @supports not (height: 100dvh) {
-    #home { min-height: 100vh; }
-  }
 
   /* Deitado, a secao do jogo passa a ocupar tudo SOZINHA — nao precisa mais
      tocar no botao de tela cheia. */

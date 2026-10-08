@@ -74,6 +74,33 @@ Flexbox; os créditos sobem para o rodapé via `margin-top: auto`. Em telas baix
 (`max-height: 700px` / `560px`) os espaços e os cards encolhem — nada é
 escondido. A faixa de recentes rola na horizontal, nunca na vertical.
 
+### Cards de perfil (créditos)
+
+Ficam **um embaixo do outro** (Kannon/Criador primeiro), retangulares e com o
+conteúdo centralizado. Eles **crescem para absorver a sobra** da home
+(`#creditos { flex: 1 1 auto }` + `.perfil { flex: 1 1 0 }`): é isso que
+preenche o vazio em vez de deixar buraco no rodapé.
+
+Duas armadilhas resolvidas aqui:
+
+- `min-height: min-content` no `.perfil` — sem isso o flex encolhia o card
+  **abaixo do conteúdo** em telas baixas e ele vazava para fora da tela.
+- `white-space: nowrap` no nome — o nome do Kannon é maior; quebrando, o card
+  dele ficava mais alto que o do M06.
+
+Em telas com pouca altura (`max-height: 900/620px`) os vãos, o vídeo e os cards
+de recentes encolhem para a home caber inteira.
+
+### Preview do link (Open Graph)
+
+`preview.jpg` é **1.91:1 (1536×804)** — a proporção do preview **grande** do
+WhatsApp. Com a imagem em 3:2 (1536×1024) ele cortava ou usava o card pequeno.
+O corte manteve o topo: o assunto da foto está todo nos 512px de cima e a
+metade de baixo é quase preta.
+
+Para trocar a imagem: gere em **1.91:1** (ex.: 1200×630) e atualize
+`og:image:width`/`height`.
+
 ### PC (telas largas)
 
 Em PC a janela é muito mais larga que um celular. Duas regras resolvem:
