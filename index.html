@@ -326,10 +326,16 @@
       // Uma <span> por letra: a animacao "acende" cada letra (branco > preto >
       // branco) em sequencia e o JS pinta cada uma. A ULTIMA letra (o "Y" de
       // Lizzy) leva o id `letra-alvo`, que ancora as 5 estrelas.
+      //
+      // ATENCAO: os caracteres MATHEMATICAL BOLD sao PARES SUBSTITUTOS (2
+      // unidades UTF-16 cada). Fatiar por indice (`BOLD[i]`) corta o par no
+      // meio e cada letra vira dois "?" -- por isso iteramos por CODE POINTS
+      // (`Array.from`), nao por unidades.
+      var letras = Array.from(BOLD);
       var html = '';
-      for (var i = 0; i < BOLD.length; i++) {
-        var id = (i === BOLD.length - 1) ? ' id="letra-alvo"' : '';
-        html += '<span class="letra"' + id + '>' + BOLD[i] + '</span>';
+      for (var i = 0; i < letras.length; i++) {
+        var id = (i === letras.length - 1) ? ' id="letra-alvo"' : '';
+        html += '<span class="letra"' + id + '>' + letras[i] + '</span>';
       }
       el.innerHTML = html;
     }
