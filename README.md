@@ -190,6 +190,24 @@ Com `prefers-reduced-motion: reduce` a animação é escondida (CSS) e o loop de
   ficam **+40px** maiores, flutuando sobre o jogo (o cabeçalho some e o PARAR vira
   um botão flutuante no canto)
 - **Tom por console** — a cor do tema muda conforme o console (dentro da paleta)
+- **Salvar / carregar** — botão **💾 SALVAR** abaixo do CONTROLE, com 3 slots
+  manuais (Salvar / Carregar / apagar) e um **auto-salvar**
+
+## Salvar / carregar (estado do jogo)
+
+O botão **💾 SALVAR** fica logo **abaixo do CONTROLE** (só aparece com um jogo
+aberto). Ele abre um mini menu com **3 slots** — cada um com **Salvar**,
+**Carregar** e apagar (🗑) — e o **auto-salvar**.
+
+O estado vem do `gameManager.getState()` do EmulatorJS (um `Uint8Array`) e é
+guardado no **IndexedDB** do aparelho (não no `localStorage`: o estado pode
+passar de alguns MB). Por isso o save **sobrevive a fechar a janela**.
+
+O **auto-salvar** grava quando você **sai do jogo** — pelo botão JOGOS, pelo
+"sair" do emulador, ao trocar de aba/janela (`visibilitychange`) e ao
+fechar/recarregar (`pagehide`) — e **aplica esse save** quando o jogo abre de
+novo (`EJS_onGameStart` → `loadState`). Dá pra desligar no próprio menu (fica
+salvo em `localStorage`).
 
 ## Tema visual
 

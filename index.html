@@ -251,6 +251,25 @@
   <span id="controle-icone">🎮</span><span id="controle-texto">CONTROLE</span>
 </button>
 
+<!-- SALVAR / CARREGAR: fica logo ABAIXO do botao CONTROLE. Abre um mini menu
+     com 3 slots de salvamento + salvar + auto-salvar. Guarda no IndexedDB do
+     aparelho (aguenta estado grande), entao sobrevive a fechar a janela. -->
+<button id="salvar-btn" type="button" title="Salvar / carregar" aria-label="Salvar e carregar">
+  <span aria-hidden="true">💾</span><span id="salvar-texto">SALVAR</span>
+</button>
+
+<div id="salvar-painel" hidden>
+  <div class="caixa">
+    <h2>💾 Salvar / Carregar</h2>
+    <p class="dica" id="salvar-dica">Salve a qualquer momento e continue de onde parou — fica guardado no seu aparelho.</p>
+    <div id="salvar-slots"></div>
+    <div class="acoes">
+      <button id="salvar-auto" type="button">Auto-salvar: ligado</button>
+      <button id="salvar-fechar" type="button">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <section id="jogador" hidden>
   <div id="barra">
     <span id="subtitulo"></span>
@@ -408,7 +427,14 @@
   // ==========================================================================
   function lerRota() {
     const h = String(location.hash || '').replace(/^#\/?/, '');
-    if (h.startsWith('jogo/')) return { tela: 'jogo', id: decodeURIComponent(h.slice(5)) };
+    if (h.startsWith('jogo/')) {
+      const cru = h.slice(5);
+      let id = cru;
+      // `decodeURIComponent` estoura em hash malformado (ex.: um `%` solto) e
+      // derrubava o roteamento -> cai no cru para nao travar.
+      try { id = decodeURIComponent(cru); } catch (e) { id = cru; }
+      return { tela: 'jogo', id: id };
+    }
     return { tela: 'home' };
   }
 
@@ -771,15 +797,26 @@
     location.href = `./#/jogo/${enc}`;
   }
 
+  // Quantos jogos tem em cada categoria (console).
+  function contarPorConsole() {
+    const n = {};
+    for (const j of catalogoJogos) n[j.console] = (n[j.console] || 0) + 1;
+    return n;
+  }
+
   function montarFiltros() {
     const vistos = [];
     for (const j of catalogoJogos) if (!vistos.includes(j.console)) vistos.push(j.console);
+    const cont = contarPorConsole();
 
-    const itens = [{ id: 'todos', rotulo: 'Todos', emoji: '✨' }].concat(vistos.map((c) => ({
-      id: c,
-      rotulo: (CONSOLES[c] && CONSOLES[c].nome) || c.toUpperCase(),
-      emoji: (CONSOLES[c] && CONSOLES[c].emoji) || '🎮',
-    })));
+    // Cada categoria leva a CONTAGEM do lado do nome: "Todos (362)".
+    const itens = [{ id: 'todos', rotulo: 'Todos', emoji: '✨', n: catalogoJogos.length }]
+      .concat(vistos.map((c) => ({
+        id: c,
+        rotulo: (CONSOLES[c] && CONSOLES[c].nome) || c.toUpperCase(),
+        emoji: (CONSOLES[c] && CONSOLES[c].emoji) || '🎮',
+        n: cont[c] || 0,
+      })));
 
     filtros.innerHTML = '';
     for (const it of itens) {
@@ -787,7 +824,8 @@
       b.type = 'button';
       b.className = 'aba' + (it.id === filtroAtual ? ' ativa' : '');
       b.dataset.cat = it.id;
-      b.textContent = `${it.emoji} ${it.rotulo}`;
+      // `num` separado do rotulo so' para o CSS estilizar (cor mais fraca).
+      b.innerHTML = `${it.emoji} ${it.rotulo} <span class="num">(${it.n})</span>`;
       b.addEventListener('click', () => {
         filtroAtual = it.id;
         for (const x of filtros.children) x.classList.toggle('ativa', x === b);
@@ -1036,6 +1074,7 @@
    * reabrir o jogo.
    */
   function voltarParaHomeDoJogo() {
+    autoSalvarAgora();   // auto-save ao sair pelo botao JOGOS
     if (estaEmTelaCheia()) alternarTelaCheia(false);
     if (!location.search && !location.hash) { mostrarTela('home'); return; }
     location.replace(location.pathname);
@@ -1054,6 +1093,7 @@
     jogoAtual = j;
     alvo.innerHTML = '';
     window.EJS_emulator = null;
+    estadoIniciado = false;   // o estado so' vale depois do `EJS_onGameStart`
 
     home.hidden = true;
     erro.hidden = true;
@@ -1215,6 +1255,26 @@
       .filter(Boolean)
       .map((g) => ({ id: g.id, index: g.index, mapping: g.mapping, nome: nomeDoControle(g.id) }));
 
+  /**
+   * Mostra/esconde os CONTROLES DE TELA conforme haja (ou nao) um controle
+   * fisico ligado.
+   *
+   * O EmulatorJS esconde os controles de toque quando um gamepad conecta, mas
+   * NAO os traz de volta quando ele desconecta -- era o bug (depois de usar o
+   * Bluetooth, os controles de tela sumiam para sempre). Aqui a gente comanda
+   * isso explicitamente: ligado = esconde; desligado = mostra.
+   */
+  function sincronizarControlesDeTela() {
+    const emu = window.EJS_emulator;
+    if (!emu || !emu.virtualGamepad) return;
+    // So' em aparelho de TOQUE: no PC o gamepad de tela e' desligado de
+    // proposito (o layout padrao decide), entao aqui nao mexemos nele.
+    const temToque = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+    if (!temToque) return;
+    const n = gamepadsConectados().length;
+    emu.virtualGamepad.style.display = n ? 'none' : '';
+  }
+
   /** Guarda o controle na lista (para reconhecer nas proximas visitas). */
   function salvarControle(gp) {
     const salvos = lerSalvos();
@@ -1347,6 +1407,11 @@
     addEventListener(ev, (e) => {
       if (ev === 'gamepadconnected' && e?.gamepad) salvarControle(e.gamepad);
       atualizarEstadoControle();
+      // Mostra/esconde os controles de TELA conforme o controle fisico. O
+      // `gamepaddisconnected` nao traz os controles de volta sozinho -> aqui
+      // eles voltam. (Pequeno atraso: o navegador atualiza a lista de gamepads
+      // logo depois do evento.)
+      setTimeout(sincronizarControlesDeTela, 60);
       // Conectou: fecha o painel sozinho depois de um instante.
       if (ev === 'gamepadconnected' && !controlePainel.hidden) setTimeout(() => abrirPainelControle(false), 1200);
     }));
@@ -1373,6 +1438,210 @@
   })();
 
   // ==========================================================================
+  // SALVAR / CARREGAR (estado do jogo no aparelho)
+  //
+  // O estado e' o `gameManager.getState()` do EmulatorJS (um Uint8Array). Guarda
+  // no IndexedDB (aguenta estado grande), entao sobrevive a fechar a janela.
+  // 3 slots manuais + 1 automatico. O auto-salvar grava ao SAIR do jogo (botao
+  // JOGOS, "sair" do emulador ou fechar/recarregar a janela) e o auto-carregar
+  // aplica esse save quando o jogo abre de novo.
+  // ==========================================================================
+  const salvarBtn = document.getElementById('salvar-btn');
+  const salvarPainel = document.getElementById('salvar-painel');
+  const salvarSlotsEl = document.getElementById('salvar-slots');
+  const salvarAutoBtn = document.getElementById('salvar-auto');
+  const SALVAR_SLOTS = 3;
+  let autoSalvar = true;
+  try { autoSalvar = localStorage.getItem('emugames.autosave') !== 'off'; } catch (e) { /* ok */ }
+  let estadoIniciado = false;   // o jogo terminou de ligar (o estado ja' e' valido)
+
+  function estadoJogoAtual() {
+    const emu = window.EJS_emulator;
+    if (!emu || !estadoIniciado) return null;
+    try { return emu.gameManager.getState(); } catch (e) { return null; }
+  }
+
+  function gravarEstado(id, buf) {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('emugames', 1);
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains('estados')) req.result.createObjectStore('estados');
+      };
+      req.onerror = () => reject(req.error);
+      req.onsuccess = () => {
+        const db = req.result;
+        const tx = db.transaction('estados', 'readwrite');
+        tx.objectStore('estados').put({ buf, quando: Date.now() }, id);
+        tx.oncomplete = () => { db.close(); resolve(); };
+        tx.onerror = () => { db.close(); reject(tx.error); };
+      };
+    });
+  }
+
+  function lerEstado(id) {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('emugames', 1);
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains('estados')) req.result.createObjectStore('estados');
+      };
+      req.onerror = () => reject(req.error);
+      req.onsuccess = () => {
+        const db = req.result;
+        const tx = db.transaction('estados', 'readonly');
+        const g = tx.objectStore('estados').get(id);
+        g.onsuccess = () => { db.close(); resolve(g.result || null); };
+        g.onerror = () => { db.close(); reject(g.error); };
+      };
+    });
+  }
+
+  function apagarEstado(id) {
+    return new Promise((resolve) => {
+      const req = indexedDB.open('emugames', 1);
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains('estados')) req.result.createObjectStore('estados');
+      };
+      req.onerror = () => resolve();
+      req.onsuccess = () => {
+        const db = req.result;
+        const tx = db.transaction('estados', 'readwrite');
+        tx.objectStore('estados').delete(id);
+        tx.oncomplete = () => { db.close(); resolve(); };
+        tx.onerror = () => { db.close(); resolve(); };
+      };
+    });
+  }
+
+  function chaveSlot(i) { return 'slot:' + (jogoAtual ? jogoAtual.id : '?') + ':' + i; }
+  function chaveAuto() { return 'auto:' + (jogoAtual ? jogoAtual.id : '?'); }
+
+  function dataBonita(ts) {
+    const d = new Date(ts);
+    const p = (n) => String(n).padStart(2, '0');
+    return `${p(d.getDate())}/${p(d.getMonth() + 1)} ${p(d.getHours())}:${p(d.getMinutes())}`;
+  }
+
+  // Desenha as 3 linhas NA HORA (nao espera o IndexedDB) e preenche o status
+  // ("vazio" / "salvo em ...") depois, de forma assincrona.
+  function montarSlots() {
+    salvarSlotsEl.innerHTML = '';
+    for (let i = 1; i <= SALVAR_SLOTS; i++) {
+      const linha = document.createElement('div');
+      linha.className = 'salvar-slot';
+      const info = document.createElement('div');
+      info.className = 'info';
+      const nome = document.createElement('span');
+      nome.className = 'nome';
+      nome.textContent = 'Slot ' + i;
+      const quando = document.createElement('span');
+      quando.className = 'quando';
+      quando.textContent = 'vazio';
+      info.appendChild(nome); info.appendChild(quando);
+
+      const acoes = document.createElement('div');
+      acoes.className = 'acoes-slot';
+      const bSalvar = document.createElement('button');
+      bSalvar.type = 'button'; bSalvar.textContent = 'Salvar';
+      bSalvar.addEventListener('click', async () => {
+        const st = estadoJogoAtual();
+        if (!st) { avisoSalvar('O jogo ainda não carregou.'); return; }
+        try { await gravarEstado(chaveSlot(i), st); } catch (e) { avisoSalvar('Não consegui salvar.'); return; }
+        avisoSalvar('Salvo no slot ' + i + '!');
+        atualizarSlot(i, quando, bCarregar, bApagar);
+      });
+      const bCarregar = document.createElement('button');
+      bCarregar.type = 'button'; bCarregar.textContent = 'Carregar';
+      bCarregar.disabled = true;
+      bCarregar.addEventListener('click', async () => {
+        let r = null;
+        try { r = await lerEstado(chaveSlot(i)); } catch (e) { /* ok */ }
+        if (!r) { avisoSalvar('Slot vazio.'); return; }
+        carregarEstado(r.buf);
+        avisoSalvar('Carregado do slot ' + i + '.');
+      });
+      const bApagar = document.createElement('button');
+      bApagar.type = 'button'; bApagar.textContent = '🗑';
+      bApagar.title = 'Apagar slot';
+      bApagar.disabled = true;
+      bApagar.addEventListener('click', async () => {
+        await apagarEstado(chaveSlot(i));
+        avisoSalvar('Slot ' + i + ' apagado.');
+        atualizarSlot(i, quando, bCarregar, bApagar);
+      });
+      acoes.appendChild(bSalvar); acoes.appendChild(bCarregar); acoes.appendChild(bApagar);
+      linha.appendChild(info); linha.appendChild(acoes);
+      salvarSlotsEl.appendChild(linha);
+      atualizarSlot(i, quando, bCarregar, bApagar);
+    }
+  }
+
+  // Le o slot i e ajusta o texto/estado dos botoes.
+  async function atualizarSlot(i, quando, bCarregar, bApagar) {
+    let reg = null;
+    try { reg = await lerEstado(chaveSlot(i)); } catch (e) { /* ok */ }
+    quando.textContent = reg ? 'salvo em ' + dataBonita(reg.quando) : 'vazio';
+    bCarregar.disabled = !reg;
+    bApagar.disabled = !reg;
+  }
+
+  function avisoSalvar(txt) {
+    const d = document.getElementById('salvar-dica');
+    if (d) d.textContent = txt;
+  }
+
+  function carregarEstado(buf) {
+    const emu = window.EJS_emulator;
+    if (!emu || !buf) return;
+    try { emu.gameManager.loadState(new Uint8Array(buf)); } catch (e) { /* ok */ }
+  }
+
+  // Grava o auto-save (se ligado e o jogo estiver pronto). Silencioso.
+  function autoSalvarAgora() {
+    if (!autoSalvar || !estadoIniciado) return;
+    const st = estadoJogoAtual();
+    if (!st) return;
+    gravarEstado(chaveAuto(), st).catch(() => {});
+  }
+
+  // Abre o jogo no ponto do auto-save (se existir). Chamado quando o jogo liga.
+  async function autoCarregarAgora() {
+    if (!autoSalvar) return;
+    let r = null;
+    try { r = await lerEstado(chaveAuto()); } catch (e) { /* ok */ }
+    if (r && r.buf) carregarEstado(r.buf);
+  }
+
+  function abrirPainelSalvar(abrir) {
+    salvarPainel.hidden = !abrir;
+    if (abrir) { avisoSalvar('Salve a qualquer momento e continue de onde parou — fica guardado no seu aparelho.'); montarSlots(); }
+  }
+
+  salvarBtn.addEventListener('click', () => abrirPainelSalvar(true));
+  document.getElementById('salvar-fechar').addEventListener('click', () => abrirPainelSalvar(false));
+  salvarPainel.addEventListener('click', (e) => { if (e.target === salvarPainel) abrirPainelSalvar(false); });
+  salvarAutoBtn.addEventListener('click', () => {
+    autoSalvar = !autoSalvar;
+    try { localStorage.setItem('emugames.autosave', autoSalvar ? 'on' : 'off'); } catch (e) { /* ok */ }
+    atualizarBotaoAuto();
+  });
+  function atualizarBotaoAuto() {
+    salvarAutoBtn.textContent = 'Auto-salvar: ' + (autoSalvar ? 'ligado' : 'desligado');
+    salvarAutoBtn.classList.toggle('off', !autoSalvar);
+  }
+  atualizarBotaoAuto();
+
+  // O jogo terminou de ligar: libera o estado, aplica o auto-save e acerta os
+  // controles de tela (o EmulatorJS cria o gamepad virtual logo depois do
+  // "start", entao conferimos aqui e de novo um instante depois).
+  window.EJS_onGameStart = () => {
+    estadoIniciado = true;
+    autoCarregarAgora();
+    sincronizarControlesDeTela();
+    setTimeout(sincronizarControlesDeTela, 500);
+    setTimeout(sincronizarControlesDeTela, 1500);
+  };
+
+  // ==========================================================================
   // EVENTOS
   // ==========================================================================
   pararBtn.addEventListener('click', parar);
@@ -1382,6 +1651,7 @@
 
   // O botao "sair" do proprio EmulatorJS volta para a home, igual ao JOGOS.
   window.EJS_onExit = () => {
+    autoSalvarAgora();   // auto-save antes de desmontar (o emulador ainda esta' vivo)
     window.EJS_emulator = null;
     aoSair();
     if (!jogador.hidden) voltarParaHomeDoJogo();
@@ -1428,7 +1698,14 @@
   // trocar de jogo); e' desnecessario, porque a pagina vai ser descartada de
   // qualquer forma. O `visibilitychange` cuidar so do audio e' suficiente.
   let saiu = false;
-  function aoSairDaPagina() { if (jogador.hidden) return; saiu = true; parar(); }
+  function aoSairDaPagina() {
+    if (jogador.hidden) return;
+    autoSalvarAgora();   // auto-save quando a aba/janela perde o foco
+    saiu = true;
+    parar();
+  }
+  // Fechar/recarregar a janela: ultimo instante pra gravar o auto-save.
+  addEventListener('pagehide', autoSalvarAgora);
   function aoVoltar() {
     if (jogador.hidden || !saiu) return;
     saiu = false;
@@ -1642,6 +1919,11 @@
   }
 
   (async () => {
+    // Anti-flash: se ja' entramos numa rota de JOGO, esconde a home enquanto o
+    // catalogo carrega (senao a home aparece por um instante e "pula" pro jogo,
+    // que era o que parecia bug ao recarregar dentro de um jogo).
+    if (location.hash.startsWith('#/jogo/')) home.hidden = true;
+
     let falhou = false;
     try {
       const r = await fetch('./jogos.json', { cache: 'no-store' });
@@ -1668,35 +1950,34 @@
     montarFiltros();
     renderCatalogo();
 
-    // Link antigo (`?jogo=id`) continua funcionando: vira a rota nova. O
-    // `hashchange` cuida de entrar no jogo.
     const params = new URLSearchParams(location.search);
     const antigo = params.get('jogo');
-    if (antigo && catalogoJogos.some((j) => j.id === antigo)) {
-      if (!location.hash) { location.hash = '#/jogo/' + encodeURIComponent(antigo); return; }
-    }
-
-    // Arquivo do proprio aparelho (`?arquivo=<nome>`): vira a rota `local:`.
     const arquivoNovo = params.get('arquivo');
-    if (arquivoNovo) {
-      if (!location.hash) {
-        location.hash = '#/jogo/' + encodeURIComponent('local:' + arquivoNovo);
-        return;
-      }
-    }
 
-    // Limpa a URL SEM recarregar (o documento aqui ja esta limpo). No JOGO so
-    // tira o `?jogo=`/`?arquivo=` -- a rota `#/jogo/<id>` precisa ficar, senao
-    // o jogo nao abre. Na HOME tira tambem o hash, deixando so `/`.
-    // `history` muda apenas a URL visivel; o botao "voltar" do aparelho segue
-    // saindo do site, que e' o esperado.
-    const rotaJogo = location.hash.startsWith('#/jogo/');
-    if (rotaJogo) {
+    // 1) Limpa a URL SEM recarregar (o documento aqui ja esta limpo). No JOGO
+    // so' tira o `?jogo=`/`?arquivo=` -- a rota `#/jogo/<id>` precisa ficar,
+    // senao o jogo nao abre. Fora do jogo tira o hash tambem, deixando so' `/`.
+    // Fica ANTES de entrar no jogo pelos atalhos antigos, para a URL nao ficar
+    // com o `?jogo=`/`?arquivo=` "grudado" (era o que deixava a URL suja e
+    // confundia o botao voltar). `history` muda so' a URL visivel; o botao
+    // "voltar" do aparelho segue saindo do site, que e' o esperado.
+    if (location.hash.startsWith('#/jogo/')) {
       if (params.has('jogo') || params.has('arquivo')) {
         history.replaceState(null, '', location.pathname + location.hash);
       }
     } else if (location.hash || params.has('jogo') || params.has('arquivo')) {
       history.replaceState(null, '', location.pathname);
+    }
+
+    // 2) Atalhos antigos viram a rota nova (`?jogo=` do catalogo e
+    // `?arquivo=` do aparelho). O `hashchange` entra no jogo.
+    if (!location.hash && antigo && catalogoJogos.some((j) => j.id === antigo)) {
+      location.hash = '#/jogo/' + encodeURIComponent(antigo);
+      return;
+    }
+    if (!location.hash && arquivoNovo) {
+      location.hash = '#/jogo/' + encodeURIComponent('local:' + arquivoNovo);
+      return;
     }
 
     aplicarRota();

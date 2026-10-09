@@ -197,15 +197,6 @@
       ]
     },
     {
-      "id": "1941",
-      "nome": "1941: Counter Attack",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "1941.gif",
-      "descricao": "1941: Counter Attack — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/1941.zip"
-    },
-    {
       "id": "1942",
       "nome": "1942",
       "emoji": "🕹️",
@@ -213,24 +204,6 @@
       "capa": "1942.gif",
       "descricao": "1942 — clássico de arcade (1984). Jogue direto no navegador.",
       "rom": "jogos/arcade/1942.zip"
-    },
-    {
-      "id": "1943kai",
-      "nome": "1943 Kai: Midway Kaisen",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "1943kai.gif",
-      "descricao": "1943 Kai: Midway Kaisen — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/1943kai.zip"
-    },
-    {
-      "id": "1943",
-      "nome": "1943: The Battle of Midway",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "1943.gif",
-      "descricao": "1943: The Battle of Midway — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/1943.zip"
     },
     {
       "id": "1944",
@@ -271,24 +244,6 @@
       "bios": "neogeo.zip"
     },
     {
-      "id": "64street",
-      "nome": "64th. Street: A Detective Story",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "64street.gif",
-      "descricao": "64th. Street: A Detective Story — clássico de arcade (1991). Jogue direto no navegador.",
-      "rom": "jogos/arcade/64street.zip"
-    },
-    {
-      "id": "actfancr",
-      "nome": "Act-Fancer Cybernetick Hyper Weapon",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "actfancr.gif",
-      "descricao": "Act-Fancer Cybernetick Hyper Weapon — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/actfancr.zip"
-    },
-    {
       "id": "aerofgt",
       "nome": "Aero Fighters",
       "emoji": "🕹️",
@@ -298,15 +253,6 @@
       "rom": "jogos/arcade/aerofgt.zip"
     },
     {
-      "id": "aburner2",
-      "nome": "After Burner II",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "aburner2.gif",
-      "descricao": "After Burner II — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/aburner2.zip"
-    },
-    {
       "id": "agallet",
       "nome": "Air Gallet",
       "emoji": "🕹️",
@@ -314,42 +260,6 @@
       "capa": "agallet.gif",
       "descricao": "Air Gallet — clássico de arcade (1996). Jogue direto no navegador.",
       "rom": "jogos/arcade/agallet.zip"
-    },
-    {
-      "id": "airwolf",
-      "nome": "Airwolf",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "airwolf.gif",
-      "descricao": "Airwolf — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/airwolf.zip"
-    },
-    {
-      "id": "ajax",
-      "nome": "Ajax",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "ajax.gif",
-      "descricao": "Ajax — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/ajax.zip"
-    },
-    {
-      "id": "astorm",
-      "nome": "Alien Storm",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "astorm.gif",
-      "descricao": "Alien Storm — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/astorm.zip"
-    },
-    {
-      "id": "aliensyn",
-      "nome": "Alien Syndrome",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "aliensyn.gif",
-      "descricao": "Alien Syndrome — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/aliensyn.zip"
     },
     {
       "id": "avsp",
@@ -398,34 +308,6 @@
       "rom": "jogos/arcade/altbeast.zip"
     },
     {
-      "id": "amidar",
-      "nome": "Amidar",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "amidar.gif",
-      "descricao": "Amidar — clássico de arcade (1982). Jogue direto no navegador.",
-      "rom": "jogos/arcade/amidar.zip"
-    },
-    {
-      "id": "androdun",
-      "nome": "Andro Dunos",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "androdun.gif",
-      "descricao": "Andro Dunos — clássico de arcade (1992). Jogue direto no navegador.",
-      "rom": "jogos/arcade/androdun.zip",
-      "bios": "neogeo.zip"
-    },
-    {
-      "id": "aquajack",
-      "nome": "Aqua Jack",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "aquajack.gif",
-      "descricao": "Aqua Jack — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/aquajack.zip"
-    },
-    {
       "id": "arkanoid",
       "nome": "Arkanoid",
       "emoji": "🕹️",
@@ -435,24 +317,6 @@
       "rom": "jogos/arcade/arkanoid.zip"
     },
     {
-      "id": "arknoid2",
-      "nome": "Arkanoid - Revenge of DOH",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "arknoid2.gif",
-      "descricao": "Arkanoid - Revenge of DOH — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/arknoid2.zip"
-    },
-    {
-      "id": "armwrest",
-      "nome": "Arm Wrestling",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "armwrest.gif",
-      "descricao": "Arm Wrestling — clássico de arcade (1985). Jogue direto no navegador.",
-      "rom": "jogos/arcade/armwrest.zip"
-    },
-    {
       "id": "batrider",
       "nome": "Armed Police Batrider",
       "emoji": "🕹️",
@@ -460,15 +324,6 @@
       "capa": "batrider.gif",
       "descricao": "Armed Police Batrider — clássico de arcade (1998). Jogue direto no navegador.",
       "rom": "jogos/arcade/batrider.zip"
-    },
-    {
-      "id": "armorcar",
-      "nome": "Armored Car",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "armorcar.gif",
-      "descricao": "Armored Car — clássico de arcade (1981). Jogue direto no navegador.",
-      "rom": "jogos/arcade/armorcar.zip"
     },
     {
       "id": "armwar",
@@ -537,51 +392,6 @@
       "rom": "jogos/arcade/astdelux.zip"
     },
     {
-      "id": "aurail",
-      "nome": "Aurail",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "aurail.gif",
-      "descricao": "Aurail — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/aurail.zip"
-    },
-    {
-      "id": "avengers",
-      "nome": "Avengers",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "avengers.gif",
-      "descricao": "Avengers — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/avengers.zip"
-    },
-    {
-      "id": "avspirit",
-      "nome": "Avenging Spirit",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "avspirit.gif",
-      "descricao": "Avenging Spirit — clássico de arcade (1991). Jogue direto no navegador.",
-      "rom": "jogos/arcade/avspirit.zip"
-    },
-    {
-      "id": "baddudes",
-      "nome": "Bad Dudes vs. Dragonninja",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "baddudes.gif",
-      "descricao": "Bad Dudes vs. Dragonninja — clássico de arcade (1988). Jogue direto no navegador.",
-      "rom": "jogos/arcade/baddudes.zip"
-    },
-    {
-      "id": "badlands",
-      "nome": "Bad Lands",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "badlands.gif",
-      "descricao": "Bad Lands — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/badlands.zip"
-    },
-    {
       "id": "bangbead",
       "nome": "Bang Bead",
       "emoji": "🕹️",
@@ -590,15 +400,6 @@
       "descricao": "Bang Bead — clássico de arcade (2000). Jogue direto no navegador.",
       "rom": "jogos/arcade/bangbead.zip",
       "bios": "neogeo.zip"
-    },
-    {
-      "id": "bankp",
-      "nome": "Bank Panic",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "bankp.gif",
-      "descricao": "Bank Panic — clássico de arcade (1984). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bankp.zip"
     },
     {
       "id": "bstars2",
@@ -666,15 +467,6 @@
       "rom": "jogos/arcade/btoads.zip"
     },
     {
-      "id": "blswhstl",
-      "nome": "Bells & Whistles",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "blswhstl.gif",
-      "descricao": "Bells & Whistles — clássico de arcade (1991). Jogue direto no navegador.",
-      "rom": "jogos/arcade/blswhstl.zip"
-    },
-    {
       "id": "berzerk",
       "nome": "Berzerk",
       "emoji": "🕹️",
@@ -682,15 +474,6 @@
       "capa": "berzerk.gif",
       "descricao": "Berzerk — clássico de arcade (1980). Jogue direto no navegador.",
       "rom": "jogos/arcade/berzerk.zip"
-    },
-    {
-      "id": "biomtoy",
-      "nome": "Biomechanical Toy",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "biomtoy.gif",
-      "descricao": "Biomechanical Toy — clássico de arcade (1995). Jogue direto no navegador.",
-      "rom": "jogos/arcade/biomtoy.zip"
     },
     {
       "id": "bionicc",
@@ -709,15 +492,6 @@
       "capa": "blktiger.gif",
       "descricao": "Black Tiger — clássico de arcade (1987). Jogue direto no navegador.",
       "rom": "jogos/arcade/blktiger.zip"
-    },
-    {
-      "id": "bwidow",
-      "nome": "Black Widow",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "bwidow.gif",
-      "descricao": "Black Widow — clássico de arcade (1982). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bwidow.zip"
     },
     {
       "id": "blstroid",
@@ -739,61 +513,6 @@
       "bios": "neogeo.zip"
     },
     {
-      "id": "blockade",
-      "nome": "Blockade",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "blockade.gif",
-      "descricao": "Blockade — clássico de arcade (1976). Jogue direto no navegador.",
-      "rom": "jogos/arcade/blockade.zip"
-    },
-    {
-      "id": "bloodbro",
-      "nome": "Blood Bros.",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "bloodbro.gif",
-      "descricao": "Blood Bros. — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bloodbro.zip"
-    },
-    {
-      "id": "bjourney",
-      "nome": "Blue's Journey",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "bjourney.gif",
-      "descricao": "Blue's Journey — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bjourney.zip",
-      "bios": "neogeo.zip"
-    },
-    {
-      "id": "bogeyman",
-      "nome": "Bogey Manor",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "bogeyman.gif",
-      "descricao": "Bogey Manor — clássico de arcade (1985). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bogeyman.zip"
-    },
-    {
-      "id": "bombjack",
-      "nome": "Bomb Jack",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "bombjack.gif",
-      "descricao": "Bomb Jack — clássico de arcade (1984). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bombjack.zip"
-    },
-    {
-      "id": "bongo",
-      "nome": "Bongo",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "bongo.gif",
-      "descricao": "Bongo — clássico de arcade (1983). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bongo.zip"
-    },
-    {
       "id": "boogwing",
       "nome": "Boogie Wings",
       "emoji": "🕹️",
@@ -801,15 +520,6 @@
       "capa": "boogwing.gif",
       "descricao": "Boogie Wings — clássico de arcade (1992). Jogue direto no navegador.",
       "rom": "jogos/arcade/boogwing.zip"
-    },
-    {
-      "id": "brkthru",
-      "nome": "Break Thru",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "brkthru.gif",
-      "descricao": "Break Thru — clássico de arcade (1986). Jogue direto no navegador.",
-      "rom": "jogos/arcade/brkthru.zip"
     },
     {
       "id": "breakrev",
@@ -840,24 +550,6 @@
       "rom": "jogos/arcade/bublbob2.zip"
     },
     {
-      "id": "bubbles",
-      "nome": "Bubbles",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "bubbles.gif",
-      "descricao": "Bubbles — clássico de arcade (1982). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bubbles.zip"
-    },
-    {
-      "id": "buckrog",
-      "nome": "Buck Rogers: Planet of Zoom",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "buckrog.gif",
-      "descricao": "Buck Rogers: Planet of Zoom — clássico de arcade (1982). Jogue direto no navegador.",
-      "rom": "jogos/arcade/buckrog.zip"
-    },
-    {
       "id": "bucky",
       "nome": "Bucky O'Hare",
       "emoji": "🕹️",
@@ -865,15 +557,6 @@
       "capa": "bucky.gif",
       "descricao": "Bucky O'Hare — clássico de arcade (1992). Jogue direto no navegador.",
       "rom": "jogos/arcade/bucky.zip"
-    },
-    {
-      "id": "bnj",
-      "nome": "Bump 'n' Jump",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "bnj.gif",
-      "descricao": "Bump 'n' Jump — clássico de arcade (1982). Jogue direto no navegador.",
-      "rom": "jogos/arcade/bnj.zip"
     },
     {
       "id": "btime",
@@ -902,15 +585,6 @@
       "capa": "bbros.gif",
       "descricao": "Buster Bros. — clássico de arcade (1989). Jogue direto no navegador.",
       "rom": "jogos/arcade/bbros.zip"
-    },
-    {
-      "id": "cabal",
-      "nome": "Cabal",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "cabal.gif",
-      "descricao": "Cabal — clássico de arcade (1988). Jogue direto no navegador.",
-      "rom": "jogos/arcade/cabal.zip"
     },
     {
       "id": "dino",
@@ -949,24 +623,6 @@
       "rom": "jogos/arcade/captcomm.zip"
     },
     {
-      "id": "carnival",
-      "nome": "Carnival",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "carnival.gif",
-      "descricao": "Carnival — clássico de arcade (1980). Jogue direto no navegador.",
-      "rom": "jogos/arcade/carnival.zip"
-    },
-    {
-      "id": "cawing",
-      "nome": "Carrier Air Wing",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "cawing.gif",
-      "descricao": "Carrier Air Wing — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/cawing.zip"
-    },
-    {
       "id": "centiped",
       "nome": "Centipede",
       "emoji": "🕹️",
@@ -974,15 +630,6 @@
       "capa": "centiped.gif",
       "descricao": "Centipede — clássico de arcade (1980). Jogue direto no navegador.",
       "rom": "jogos/arcade/centiped.zip"
-    },
-    {
-      "id": "chaknpop",
-      "nome": "Chack'n Pop",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "chaknpop.gif",
-      "descricao": "Chack'n Pop — clássico de arcade (1983). Jogue direto no navegador.",
-      "rom": "jogos/arcade/chaknpop.zip"
     },
     {
       "id": "chasehq",
@@ -994,24 +641,6 @@
       "rom": "jogos/arcade/chasehq.zip"
     },
     {
-      "id": "cheekyms",
-      "nome": "Cheeky Mouse",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "cheekyms.gif",
-      "descricao": "Cheeky Mouse — clássico de arcade (1980). Jogue direto no navegador.",
-      "rom": "jogos/arcade/cheekyms.zip"
-    },
-    {
-      "id": "chinagat",
-      "nome": "China Gate",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "chinagat.gif",
-      "descricao": "China Gate — clássico de arcade (1988). Jogue direto no navegador.",
-      "rom": "jogos/arcade/chinagat.zip"
-    },
-    {
       "id": "choplift",
       "nome": "Choplifter",
       "emoji": "🌀",
@@ -1019,15 +648,6 @@
       "capa": "choplift.gif",
       "descricao": "Choplifter — clássico de arcade (1985). Jogue direto no navegador.",
       "rom": "jogos/arcade/choplift.zip"
-    },
-    {
-      "id": "circusc",
-      "nome": "Circus Charlie",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "circusc.gif",
-      "descricao": "Circus Charlie — clássico de arcade (1984). Jogue direto no navegador.",
-      "rom": "jogos/arcade/circusc.zip"
     },
     {
       "id": "citycon",
@@ -1039,24 +659,6 @@
       "rom": "jogos/arcade/citycon.zip"
     },
     {
-      "id": "cleopatr",
-      "nome": "Cleopatra Fortune",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "cleopatr.gif",
-      "descricao": "Cleopatra Fortune — clássico de arcade (1996). Jogue direto no navegador.",
-      "rom": "jogos/arcade/cleopatr.zip"
-    },
-    {
-      "id": "columns",
-      "nome": "Columns",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "columns.gif",
-      "descricao": "Columns — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/columns.zip"
-    },
-    {
       "id": "commando",
       "nome": "Commando",
       "emoji": "🕹️",
@@ -1064,15 +666,6 @@
       "capa": "commando.gif",
       "descricao": "Commando — clássico de arcade (1985). Jogue direto no navegador.",
       "rom": "jogos/arcade/commando.zip"
-    },
-    {
-      "id": "congo",
-      "nome": "Congo Bongo",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "congo.gif",
-      "descricao": "Congo Bongo — clássico de arcade (1983). Jogue direto no navegador.",
-      "rom": "jogos/arcade/congo.zip"
     },
     {
       "id": "contra",
@@ -1084,15 +677,6 @@
       "rom": "jogos/arcade/contra.zip"
     },
     {
-      "id": "galivan",
-      "nome": "Cosmo Police Galivan",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "galivan.gif",
-      "descricao": "Cosmo Police Galivan — clássico de arcade (1985). Jogue direto no navegador.",
-      "rom": "jogos/arcade/galivan.zip"
-    },
-    {
       "id": "cotton",
       "nome": "Cotton",
       "emoji": "🌀",
@@ -1100,42 +684,6 @@
       "capa": "cotton.gif",
       "descricao": "Cotton — clássico de arcade (1991). Jogue direto no navegador.",
       "rom": "jogos/arcade/cotton.zip"
-    },
-    {
-      "id": "cclimber",
-      "nome": "Crazy Climber",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "cclimber.gif",
-      "descricao": "Crazy Climber — clássico de arcade (1980). Jogue direto no navegador.",
-      "rom": "jogos/arcade/cclimber.zip"
-    },
-    {
-      "id": "ckong",
-      "nome": "Crazy Kong",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "ckong.gif",
-      "descricao": "Crazy Kong — clássico de arcade (1981). Jogue direto no navegador.",
-      "rom": "jogos/arcade/ckong.zip"
-    },
-    {
-      "id": "ckongpt2",
-      "nome": "Crazy Kong Part II",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "ckongpt2.gif",
-      "descricao": "Crazy Kong Part II — clássico de arcade (1981). Jogue direto no navegador.",
-      "rom": "jogos/arcade/ckongpt2.zip"
-    },
-    {
-      "id": "crimfght",
-      "nome": "Crime Fighters",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "crimfght.gif",
-      "descricao": "Crime Fighters — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/crimfght.zip"
     },
     {
       "id": "crsword",
@@ -1156,24 +704,6 @@
       "descricao": "Crossed Swords 2 — clássico de arcade (1996). Jogue direto no navegador.",
       "rom": "jogos/arcade/crswd2bl.zip",
       "bios": "neogeo.zip"
-    },
-    {
-      "id": "ccastles",
-      "nome": "Crystal Castles",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "ccastles.gif",
-      "descricao": "Crystal Castles — clássico de arcade (1983). Jogue direto no navegador.",
-      "rom": "jogos/arcade/ccastles.zip"
-    },
-    {
-      "id": "eswat",
-      "nome": "Cyber Police ESWAT",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "eswat.gif",
-      "descricao": "Cyber Police ESWAT — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/eswat.zip"
     },
     {
       "id": "cybots",
@@ -1201,15 +731,6 @@
       "capa": "ddcrew2.gif",
       "descricao": "D. D. Crew — clássico de arcade (1991). Jogue direto no navegador.",
       "rom": "jogos/arcade/ddcrew2.zip"
-    },
-    {
-      "id": "darkseal",
-      "nome": "Dark Seal",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "darkseal.gif",
-      "descricao": "Dark Seal — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/darkseal.zip"
     },
     {
       "id": "dstlk",
@@ -1266,15 +787,6 @@
       "rom": "jogos/arcade/digdug.zip"
     },
     {
-      "id": "digdug2",
-      "nome": "Dig Dug II",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "digdug2.gif",
-      "descricao": "Dig Dug II — clássico de arcade (1985). Jogue direto no navegador.",
-      "rom": "jogos/arcade/digdug2.zip"
-    },
-    {
       "id": "dimahoo",
       "nome": "Dimahoo",
       "emoji": "🕹️",
@@ -1282,15 +794,6 @@
       "capa": "dimahoo.gif",
       "descricao": "Dimahoo — clássico de arcade (2000). Jogue direto no navegador.",
       "rom": "jogos/arcade/dimahoo.zip"
-    },
-    {
-      "id": "dondokod",
-      "nome": "Don Doko Don",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "dondokod.gif",
-      "descricao": "Don Doko Don — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/dondokod.zip"
     },
     {
       "id": "dkong",
@@ -1309,15 +812,6 @@
       "capa": "dkong3.gif",
       "descricao": "Donkey Kong 3 — clássico de arcade (1983). Jogue direto no navegador.",
       "rom": "jogos/arcade/dkong3.zip"
-    },
-    {
-      "id": "dkongjr",
-      "nome": "Donkey Kong Junior",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "dkongjr.gif",
-      "descricao": "Donkey Kong Junior — clássico de arcade (1982). Jogue direto no navegador.",
-      "rom": "jogos/arcade/dkongjr.zip"
     },
     {
       "id": "ddragon",
@@ -1357,15 +851,6 @@
       "rom": "jogos/arcade/ddragon2.zip"
     },
     {
-      "id": "drtoppel",
-      "nome": "Dr. Toppel's Adventure",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "drtoppel.gif",
-      "descricao": "Dr. Toppel's Adventure — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/drtoppel.zip"
-    },
-    {
       "id": "dbz",
       "nome": "Dragon Ball Z",
       "emoji": "🕹️",
@@ -1382,33 +867,6 @@
       "capa": "dbz2.gif",
       "descricao": "Dragon Ball Z 2 - Super Battle — clássico de arcade (1994). Jogue direto no navegador.",
       "rom": "jogos/arcade/dbz2.zip"
-    },
-    {
-      "id": "dbreed",
-      "nome": "Dragon Breed",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "dbreed.gif",
-      "descricao": "Dragon Breed — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/dbreed.zip"
-    },
-    {
-      "id": "drgnbstr",
-      "nome": "Dragon Buster",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "drgnbstr.gif",
-      "descricao": "Dragon Buster — clássico de arcade (1984). Jogue direto no navegador.",
-      "rom": "jogos/arcade/drgnbstr.zip"
-    },
-    {
-      "id": "dsaber",
-      "nome": "Dragon Saber",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "dsaber.gif",
-      "descricao": "Dragon Saber — clássico de arcade (1990). Jogue direto no navegador.",
-      "rom": "jogos/arcade/dsaber.zip"
     },
     {
       "id": "dsoccr94",
@@ -1445,24 +903,6 @@
       "capa": "dynagear.gif",
       "descricao": "Dyna Gear — clássico de arcade (1993). Jogue direto no navegador.",
       "rom": "jogos/arcade/dynagear.zip"
-    },
-    {
-      "id": "ddux",
-      "nome": "Dynamite Dux",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "ddux.gif",
-      "descricao": "Dynamite Dux — clássico de arcade (1988). Jogue direto no navegador.",
-      "rom": "jogos/arcade/ddux.zip"
-    },
-    {
-      "id": "dynwar",
-      "nome": "Dynasty Wars",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "dynwar.gif",
-      "descricao": "Dynasty Wars — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/dynwar.zip"
     },
     {
       "id": "ecofghtr",
@@ -1502,51 +942,6 @@
       "rom": "jogos/arcade/elvactr.zip"
     },
     {
-      "id": "elim2",
-      "nome": "Eliminator",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "elim2.gif",
-      "descricao": "Eliminator — clássico de arcade (1981). Jogue direto no navegador.",
-      "rom": "jogos/arcade/elim2.zip"
-    },
-    {
-      "id": "enduror",
-      "nome": "Enduro Racer",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "enduror.gif",
-      "descricao": "Enduro Racer — clássico de arcade (1986). Jogue direto no navegador.",
-      "rom": "jogos/arcade/enduror.zip"
-    },
-    {
-      "id": "eprom",
-      "nome": "Escape from the Planet of the Robot Monsters",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "eprom.gif",
-      "descricao": "Escape from the Planet of the Robot Monsters — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/eprom.zip"
-    },
-    {
-      "id": "exedexes",
-      "nome": "Exed Exes",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "exedexes.gif",
-      "descricao": "Exed Exes — clássico de arcade (1985). Jogue direto no navegador.",
-      "rom": "jogos/arcade/exedexes.zip"
-    },
-    {
-      "id": "fantasy",
-      "nome": "fantasy",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "fantasy.gif",
-      "descricao": "fantasy — clássico de arcade. Jogue direto no navegador.",
-      "rom": "jogos/arcade/fantasy.zip"
-    },
-    {
       "id": "fantzone",
       "nome": "Fantasy Zone",
       "emoji": "🌀",
@@ -1563,15 +958,6 @@
       "capa": "fantzn2.gif",
       "descricao": "Fantasy Zone II - The Tears of Opa-Opa — clássico de arcade (1988). Jogue direto no navegador.",
       "rom": "jogos/arcade/fantzn2.zip"
-    },
-    {
-      "id": "fastlane",
-      "nome": "Fast Lane",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "fastlane.gif",
-      "descricao": "Fast Lane — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/fastlane.zip"
     },
     {
       "id": "fatfury1",
@@ -1613,24 +999,6 @@
       "rom": "jogos/arcade/ffight.zip"
     },
     {
-      "id": "flicky",
-      "nome": "Flicky",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "flicky.gif",
-      "descricao": "Flicky — clássico de arcade (1984). Jogue direto no navegador.",
-      "rom": "jogos/arcade/flicky.zip"
-    },
-    {
-      "id": "foodf",
-      "nome": "Food Fight",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "foodf.gif",
-      "descricao": "Food Fight — clássico de arcade (1982). Jogue direto no navegador.",
-      "rom": "jogos/arcade/foodf.zip"
-    },
-    {
       "id": "forgottn",
       "nome": "Forgotten Worlds",
       "emoji": "🕹️",
@@ -1649,15 +1017,6 @@
       "rom": "jogos/arcade/frogger.zip"
     },
     {
-      "id": "funkyjet",
-      "nome": "Funky Jet",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "funkyjet.gif",
-      "descricao": "Funky Jet — clássico de arcade (1992). Jogue direto no navegador.",
-      "rom": "jogos/arcade/funkyjet.zip"
-    },
-    {
       "id": "gijoe",
       "nome": "G.I. Joe",
       "emoji": "🕹️",
@@ -1674,15 +1033,6 @@
       "capa": "gaia.gif",
       "descricao": "Gaia Crusaders — clássico de arcade (1999). Jogue direto no navegador.",
       "rom": "jogos/arcade/gaia.zip"
-    },
-    {
-      "id": "gground",
-      "nome": "Gain Ground",
-      "emoji": "🌀",
-      "console": "arcade",
-      "capa": "gground.gif",
-      "descricao": "Gain Ground — clássico de arcade (1988). Jogue direto no navegador.",
-      "rom": "jogos/arcade/gground.zip"
     },
     {
       "id": "galaga",
@@ -1712,24 +1062,6 @@
       "rom": "jogos/arcade/galaxian.zip"
     },
     {
-      "id": "galmedes",
-      "nome": "Galmedes",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "galmedes.gif",
-      "descricao": "Galmedes — clássico de arcade (1992). Jogue direto no navegador.",
-      "rom": "jogos/arcade/galmedes.zip"
-    },
-    {
-      "id": "gangwars",
-      "nome": "Gang Wars",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "gangwars.gif",
-      "descricao": "Gang Wars — clássico de arcade (1989). Jogue direto no navegador.",
-      "rom": "jogos/arcade/gangwars.zip"
-    },
-    {
       "id": "ganryu",
       "nome": "Ganryu",
       "emoji": "🕹️",
@@ -1738,15 +1070,6 @@
       "descricao": "Ganryu — clássico de arcade (1999). Jogue direto no navegador.",
       "rom": "jogos/arcade/ganryu.zip",
       "bios": "neogeo.zip"
-    },
-    {
-      "id": "gaplus",
-      "nome": "Gaplus",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "gaplus.gif",
-      "descricao": "Gaplus — clássico de arcade (1984). Jogue direto no navegador.",
-      "rom": "jogos/arcade/gaplus.zip"
     },
     {
       "id": "garou",
@@ -1774,24 +1097,6 @@
       "capa": "gauntlet2p.gif",
       "descricao": "Gauntlet — clássico de arcade (1985). Jogue direto no navegador.",
       "rom": "jogos/arcade/gauntlet2p.zip"
-    },
-    {
-      "id": "gaunt22p",
-      "nome": "Gauntlet II",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "gaunt22p.gif",
-      "descricao": "Gauntlet II — clássico de arcade (1986). Jogue direto no navegador.",
-      "rom": "jogos/arcade/gaunt22p.zip"
-    },
-    {
-      "id": "geebeeg",
-      "nome": "Gee Bee",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "geebeeg.gif",
-      "descricao": "Gee Bee — clássico de arcade (1978). Jogue direto no navegador.",
-      "rom": "jogos/arcade/geebeeg.zip"
     },
     {
       "id": "gng",
@@ -1885,15 +1190,6 @@
       "rom": "jogos/arcade/docastle.zip"
     },
     {
-      "id": "gaiden",
-      "nome": "Ninja Gaiden",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "gaiden.gif",
-      "descricao": "Ninja Gaiden — clássico de arcade (1988). Jogue direto no navegador.",
-      "rom": "jogos/arcade/gaiden.zip"
-    },
-    {
       "id": "gogomile",
       "nome": "Susume! Mile Smile",
       "emoji": "🕹️",
@@ -1930,15 +1226,6 @@
       "rom": "jogos/arcade/ctribe.zip"
     },
     {
-      "id": "ghostb",
-      "nome": "The Real Ghostbusters",
-      "emoji": "🕹️",
-      "console": "arcade",
-      "capa": "ghostb.gif",
-      "descricao": "The Real Ghostbusters — clássico de arcade (1987). Jogue direto no navegador.",
-      "rom": "jogos/arcade/ghostb.zip"
-    },
-    {
       "id": "3wonders",
       "nome": "Three Wonders",
       "emoji": "🕹️",
@@ -1946,6 +1233,2271 @@
       "capa": "3wonders.gif",
       "descricao": "Three Wonders — clássico de arcade (1991). Jogue direto no navegador.",
       "rom": "jogos/arcade/3wonders.zip"
+    },
+    {
+      "id": "sonicwi2",
+      "nome": "Aero Fighters 2",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sonicwi2.gif",
+      "descricao": "Aero Fighters 2 — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sonicwi2.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "sonicwi3",
+      "nome": "Aero Fighters 3",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sonicwi3.gif",
+      "descricao": "Aero Fighters 3 — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sonicwi3.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "kabukikl",
+      "nome": "Far East of Eden - Kabuki Klash",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "kabukikl.gif",
+      "descricao": "Far East of Eden - Kabuki Klash — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kabukikl.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "gstream",
+      "nome": "G-Stream G2020",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "gstream.gif",
+      "descricao": "G-Stream G2020 — clássico de arcade (2002). Jogue direto no navegador.",
+      "rom": "jogos/arcade/gstream.zip"
+    },
+    {
+      "id": "gpilots",
+      "nome": "Ghost Pilots",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "gpilots.gif",
+      "descricao": "Ghost Pilots — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/gpilots.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "gradius3",
+      "nome": "Gradius III",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "gradius3.gif",
+      "descricao": "Gradius III — clássico de arcade (1989). Jogue direto no navegador.",
+      "rom": "jogos/arcade/gradius3.zip"
+    },
+    {
+      "id": "growl",
+      "nome": "Growl",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "growl.gif",
+      "descricao": "Growl — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/growl.zip"
+    },
+    {
+      "id": "grdians",
+      "nome": "Guardians",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "grdians.gif",
+      "descricao": "Guardians — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/grdians.zip"
+    },
+    {
+      "id": "gunbird2",
+      "nome": "Gunbird 2",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "gunbird2.gif",
+      "descricao": "Gunbird 2 — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/gunbird2.zip"
+    },
+    {
+      "id": "gunlock",
+      "nome": "Gunlock",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "gunlock.gif",
+      "descricao": "Gunlock — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/gunlock.zip"
+    },
+    {
+      "id": "gyruss",
+      "nome": "Gyruss",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "gyruss.gif",
+      "descricao": "Gyruss — clássico de arcade (1983). Jogue direto no navegador.",
+      "rom": "jogos/arcade/gyruss.zip"
+    },
+    {
+      "id": "hvysmsh",
+      "nome": "Heavy Smash",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "hvysmsh.gif",
+      "descricao": "Heavy Smash — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/hvysmsh.zip"
+    },
+    {
+      "id": "hsf2",
+      "nome": "Hyper Street Fighter II: The Anniversary Edition",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "hsf2.gif",
+      "descricao": "Hyper Street Fighter II: The Anniversary Edition — clássico de arcade (2004). Jogue direto no navegador.",
+      "rom": "jogos/arcade/hsf2.zip"
+    },
+    {
+      "id": "inthunt",
+      "nome": "In The Hunt",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "inthunt.gif",
+      "descricao": "In The Hunt — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/inthunt.zip"
+    },
+    {
+      "id": "jackal",
+      "nome": "Jackal",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "jackal.gif",
+      "descricao": "Jackal — clássico de arcade (1986). Jogue direto no navegador.",
+      "rom": "jogos/arcade/jackal.zip"
+    },
+    {
+      "id": "journey",
+      "nome": "Journey",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "journey.gif",
+      "descricao": "Journey — clássico de arcade (1983). Jogue direto no navegador.",
+      "rom": "jogos/arcade/journey.zip"
+    },
+    {
+      "id": "joust",
+      "nome": "Joust",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "joust.gif",
+      "descricao": "Joust — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/joust.zip"
+    },
+    {
+      "id": "junglek",
+      "nome": "Jungle King",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "junglek.gif",
+      "descricao": "Jungle King — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/junglek.zip"
+    },
+    {
+      "id": "kchamp",
+      "nome": "Karate Champ",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "kchamp.gif",
+      "descricao": "Karate Champ — clássico de arcade (1984). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kchamp.zip"
+    },
+    {
+      "id": "karnov",
+      "nome": "Karnov",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "karnov.gif",
+      "descricao": "Karnov — clássico de arcade (1987). Jogue direto no navegador.",
+      "rom": "jogos/arcade/karnov.zip"
+    },
+    {
+      "id": "karnovr",
+      "nome": "Karnov's Revenge",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "karnovr.gif",
+      "descricao": "Karnov's Revenge — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/karnovr.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "kotm",
+      "nome": "King of the Monsters",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "kotm.gif",
+      "descricao": "King of the Monsters — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kotm.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "kotm2",
+      "nome": "King of the Monsters 2 - The Next Thing",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "kotm2.gif",
+      "descricao": "King of the Monsters 2 - The Next Thing — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kotm2.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "klax",
+      "nome": "Klax",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "klax.gif",
+      "descricao": "Klax — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/klax.zip"
+    },
+    {
+      "id": "kungfum",
+      "nome": "Kung-Fu Master",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "kungfum.gif",
+      "descricao": "Kung-Fu Master — clássico de arcade (1984). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kungfum.zip"
+    },
+    {
+      "id": "landmakr",
+      "nome": "Land Maker",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "landmakr.gif",
+      "descricao": "Land Maker — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/landmakr.zip"
+    },
+    {
+      "id": "lresort",
+      "nome": "Last Resort",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "lresort.gif",
+      "descricao": "Last Resort — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/lresort.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "lbowling",
+      "nome": "League Bowling",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "lbowling.gif",
+      "descricao": "League Bowling — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/lbowling.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "lethalth",
+      "nome": "Lethal Thunder",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "lethalth.gif",
+      "descricao": "Lethal Thunder — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/lethalth.zip"
+    },
+    {
+      "id": "lightbr",
+      "nome": "Light Bringer",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "lightbr.gif",
+      "descricao": "Light Bringer — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/lightbr.zip"
+    },
+    {
+      "id": "loderndf",
+      "nome": "Lode Runner - The Dig Fight",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "loderndf.gif",
+      "descricao": "Lode Runner - The Dig Fight — clássico de arcade (2000). Jogue direto no navegador.",
+      "rom": "jogos/arcade/loderndf.zip"
+    },
+    {
+      "id": "llander",
+      "nome": "Lunar Lander",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "llander.gif",
+      "descricao": "Lunar Lander — clássico de arcade (1979). Jogue direto no navegador.",
+      "rom": "jogos/arcade/llander.zip"
+    },
+    {
+      "id": "macrossp",
+      "nome": "Macross Plus",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "macrossp.gif",
+      "descricao": "Macross Plus — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/macrossp.zip"
+    },
+    {
+      "id": "magdrop2",
+      "nome": "Magical Drop II",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "magdrop2.gif",
+      "descricao": "Magical Drop II — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/magdrop2.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "magdrop3",
+      "nome": "Magical Drop III",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "magdrop3.gif",
+      "descricao": "Magical Drop III — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/magdrop3.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "maglord",
+      "nome": "Magician Lord",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "maglord.gif",
+      "descricao": "Magician Lord — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/maglord.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "mario",
+      "nome": "Mario Bros.",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mario.gif",
+      "descricao": "Mario Bros. — clássico de arcade (1983). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mario.zip"
+    },
+    {
+      "id": "mmatrix",
+      "nome": "Mars Matrix: Hyper Solid Shooting",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mmatrix.gif",
+      "descricao": "Mars Matrix: Hyper Solid Shooting — clássico de arcade (2000). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mmatrix.zip"
+    },
+    {
+      "id": "msh",
+      "nome": "Marvel Super Heroes",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "msh.gif",
+      "descricao": "Marvel Super Heroes — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/msh.zip"
+    },
+    {
+      "id": "mshvsf",
+      "nome": "Marvel Super Heroes Vs. Street Fighter",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mshvsf.gif",
+      "descricao": "Marvel Super Heroes Vs. Street Fighter — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mshvsf.zip"
+    },
+    {
+      "id": "mvsc",
+      "nome": "Marvel Vs. Capcom: Clash of Super Heroes",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mvsc.gif",
+      "descricao": "Marvel Vs. Capcom: Clash of Super Heroes — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mvsc.zip"
+    },
+    {
+      "id": "matrim",
+      "nome": "Matrimelee",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "matrim.gif",
+      "descricao": "Matrimelee — clássico de arcade (2003). Jogue direto no navegador.",
+      "rom": "jogos/arcade/matrim.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "matrim.zip.p1",
+        "matrim.zip.p2",
+        "matrim.zip.p3",
+        "matrim.zip.p4",
+        "matrim.zip.p5",
+        "matrim.zip.p6",
+        "matrim.zip.p7"
+      ]
+    },
+    {
+      "id": "megaman2",
+      "nome": "Mega Man 2: The Power Fighters",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "megaman2.gif",
+      "descricao": "Mega Man 2: The Power Fighters — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/megaman2.zip"
+    },
+    {
+      "id": "megaman",
+      "nome": "Mega Man: The Power Battle",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "megaman.gif",
+      "descricao": "Mega Man: The Power Battle — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/megaman.zip"
+    },
+    {
+      "id": "mercs",
+      "nome": "Mercs",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mercs.gif",
+      "descricao": "Mercs — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mercs.zip"
+    },
+    {
+      "id": "mslug3",
+      "nome": "Metal Slug 3",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "mslug3.gif",
+      "descricao": "Metal Slug 3 — clássico de arcade (2000). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mslug3.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "mslug3.zip.p1",
+        "mslug3.zip.p2",
+        "mslug3.zip.p3",
+        "mslug3.zip.p4",
+        "mslug3.zip.p5",
+        "mslug3.zip.p6"
+      ]
+    },
+    {
+      "id": "mslug4",
+      "nome": "Metal Slug 4",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mslug4.gif",
+      "descricao": "Metal Slug 4 — clássico de arcade (2002). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mslug4.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "mslug4.zip.p1",
+        "mslug4.zip.p2",
+        "mslug4.zip.p3",
+        "mslug4.zip.p4",
+        "mslug4.zip.p5"
+      ]
+    },
+    {
+      "id": "mslug5",
+      "nome": "Metal Slug 5",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "mslug5.gif",
+      "descricao": "Metal Slug 5 — clássico de arcade (2003). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mslug5.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "mslug5.zip.p1",
+        "mslug5.zip.p2",
+        "mslug5.zip.p3",
+        "mslug5.zip.p4",
+        "mslug5.zip.p5",
+        "mslug5.zip.p6"
+      ]
+    },
+    {
+      "id": "mslugx",
+      "nome": "Metal Slug X - Super Vehicle-001",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "mslugx.gif",
+      "descricao": "Metal Slug X - Super Vehicle-001 — clássico de arcade (1999). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mslugx.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "mslugx.zip.p1",
+        "mslugx.zip.p2",
+        "mslugx.zip.p3"
+      ]
+    },
+    {
+      "id": "metmqstr",
+      "nome": "Metamoqester",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "metmqstr.gif",
+      "descricao": "Metamoqester — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/metmqstr.zip"
+    },
+    {
+      "id": "metamrph",
+      "nome": "Metamorphic Force",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "metamrph.gif",
+      "descricao": "Metamorphic Force — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/metamrph.zip"
+    },
+    {
+      "id": "mpang",
+      "nome": "Mighty! Pang",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mpang.gif",
+      "descricao": "Mighty! Pang — clássico de arcade (2000). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mpang.zip"
+    },
+    {
+      "id": "gtmr2",
+      "nome": "Mille Miglia 2: Great 1000 Miles Rally",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "gtmr2.gif",
+      "descricao": "Mille Miglia 2: Great 1000 Miles Rally — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/gtmr2.zip"
+    },
+    {
+      "id": "missile",
+      "nome": "Missile Command",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "missile.gif",
+      "descricao": "Missile Command — clássico de arcade (1980). Jogue direto no navegador.",
+      "rom": "jogos/arcade/missile.zip"
+    },
+    {
+      "id": "mpatrol",
+      "nome": "Moon Patrol",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mpatrol.gif",
+      "descricao": "Moon Patrol — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mpatrol.zip"
+    },
+    {
+      "id": "mk-arcade",
+      "nome": "Mortal Kombat (Arcade)",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mk-arcade.gif",
+      "descricao": "Mortal Kombat — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mk.zip"
+    },
+    {
+      "id": "mk2-arcade",
+      "nome": "Mortal Kombat II (Arcade)",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mk2-arcade.gif",
+      "descricao": "Mortal Kombat II — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mk2.zip"
+    },
+    {
+      "id": "mrdo",
+      "nome": "Mr. Do!",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mrdo.gif",
+      "descricao": "Mr. Do! — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mrdo.zip"
+    },
+    {
+      "id": "mspacman",
+      "nome": "Ms. Pac-Man",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mspacman.gif",
+      "descricao": "Ms. Pac-Man — clássico de arcade (1981). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mspacman.zip"
+    },
+    {
+      "id": "mbombrd",
+      "nome": "Muscle Bomber Duo: Ultimate Team Battle",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mbombrd.gif",
+      "descricao": "Muscle Bomber Duo: Ultimate Team Battle — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mbombrd.zip"
+    },
+    {
+      "id": "mutnat",
+      "nome": "Mutation Nation",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "mutnat.gif",
+      "descricao": "Mutation Nation — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mutnat.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "mystwarr",
+      "nome": "Mystic Warriors",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "mystwarr.gif",
+      "descricao": "Mystic Warriors — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/mystwarr.zip"
+    },
+    {
+      "id": "nam1975",
+      "nome": "NAM-1975",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "nam1975.gif",
+      "descricao": "NAM-1975 — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/nam1975.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "narc",
+      "nome": "Narc",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "narc.gif",
+      "descricao": "Narc — clássico de arcade (1988). Jogue direto no navegador.",
+      "rom": "jogos/arcade/narc.zip"
+    },
+    {
+      "id": "natodef",
+      "nome": "NATO Defense",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "natodef.gif",
+      "descricao": "NATO Defense — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/natodef.zip"
+    },
+    {
+      "id": "nbajamte",
+      "nome": "NBA Jam Tournament Edition",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "nbajamte.gif",
+      "descricao": "NBA Jam Tournament Edition — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/nbajamte.zip"
+    },
+    {
+      "id": "neobombe",
+      "nome": "Neo Bomberman",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "neobombe.gif",
+      "descricao": "Neo Bomberman — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/neobombe.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "neodrift",
+      "nome": "Neo Drift Out - New Technology",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "neodrift.gif",
+      "descricao": "Neo Drift Out - New Technology — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/neodrift.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "turfmast",
+      "nome": "Neo Turf Masters",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "turfmast.gif",
+      "descricao": "Neo Turf Masters — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/turfmast.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "nslashers",
+      "nome": "Night Slashers",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "nslashers.gif",
+      "descricao": "Night Slashers — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/nslashers.zip"
+    },
+    {
+      "id": "nwarr",
+      "nome": "Night Warriors: Darkstalkers' Revenge",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "nwarr.gif",
+      "descricao": "Night Warriors: Darkstalkers' Revenge — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/nwarr.zip"
+    },
+    {
+      "id": "nitd",
+      "nome": "Nightmare in the Dark",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "nitd.gif",
+      "descricao": "Nightmare in the Dark — clássico de arcade (2000). Jogue direto no navegador.",
+      "rom": "jogos/arcade/nitd.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "nbbatman",
+      "nome": "Ninja Baseball Bat Man",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "nbbatman.gif",
+      "descricao": "Ninja Baseball Bat Man — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/nbbatman.zip"
+    },
+    {
+      "id": "ncommand",
+      "nome": "Ninja Commando",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "ncommand.gif",
+      "descricao": "Ninja Commando — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/ncommand.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "nitrobal",
+      "nome": "Nitro Ball",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "nitrobal.gif",
+      "descricao": "Nitro Ball — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/nitrobal.zip"
+    },
+    {
+      "id": "osman",
+      "nome": "Osman",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "osman.gif",
+      "descricao": "Osman — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/osman.zip"
+    },
+    {
+      "id": "outrun",
+      "nome": "Out Run",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "outrun.gif",
+      "descricao": "Out Run — clássico de arcade (1986). Jogue direto no navegador.",
+      "rom": "jogos/arcade/outrun.zip"
+    },
+    {
+      "id": "overtop",
+      "nome": "Over Top",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "overtop.gif",
+      "descricao": "Over Top — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/overtop.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "pacman",
+      "nome": "Pac-Man",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "pacman.gif",
+      "descricao": "Pac-Man — clássico de arcade (1980). Jogue direto no navegador.",
+      "rom": "jogos/arcade/pacman.zip"
+    },
+    {
+      "id": "parodius",
+      "nome": "Parodius Da!: Shinwa kara Owarai e",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "parodius.gif",
+      "descricao": "Parodius Da!: Shinwa kara Owarai e — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/parodius.zip"
+    },
+    {
+      "id": "pengo",
+      "nome": "Pengo",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "pengo.gif",
+      "descricao": "Pengo — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/pengo.zip"
+    },
+    {
+      "id": "penbros",
+      "nome": "Penguin Brothers",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "penbros.gif",
+      "descricao": "Penguin Brothers — clássico de arcade (2000). Jogue direto no navegador.",
+      "rom": "jogos/arcade/penbros.zip"
+    },
+    {
+      "id": "phoenix",
+      "nome": "Phoenix",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "phoenix.gif",
+      "descricao": "Phoenix — clássico de arcade (1980). Jogue direto no navegador.",
+      "rom": "jogos/arcade/phoenix.zip"
+    },
+    {
+      "id": "popeye",
+      "nome": "Popeye",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "popeye.gif",
+      "descricao": "Popeye — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/popeye.zip"
+    },
+    {
+      "id": "preisle2",
+      "nome": "Prehistoric Isle 2",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "preisle2.gif",
+      "descricao": "Prehistoric Isle 2 — clássico de arcade (1999). Jogue direto no navegador.",
+      "rom": "jogos/arcade/preisle2.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "preisle2.zip.p1",
+        "preisle2.zip.p2",
+        "preisle2.zip.p3",
+        "preisle2.zip.p4",
+        "preisle2.zip.p5"
+      ]
+    },
+    {
+      "id": "sailormn",
+      "nome": "Pretty Soldier Sailor Moon",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sailormn.gif",
+      "descricao": "Pretty Soldier Sailor Moon — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sailormn.zip"
+    },
+    {
+      "id": "progear",
+      "nome": "Progear",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "progear.gif",
+      "descricao": "Progear — clássico de arcade (2001). Jogue direto no navegador.",
+      "rom": "jogos/arcade/progear.zip"
+    },
+    {
+      "id": "pulstar",
+      "nome": "Pulstar",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "pulstar.gif",
+      "descricao": "Pulstar — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/pulstar.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "punchout",
+      "nome": "Punch-Out!!",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "punchout.gif",
+      "descricao": "Punch-Out!! — clássico de arcade (1984). Jogue direto no navegador.",
+      "rom": "jogos/arcade/punchout.zip"
+    },
+    {
+      "id": "puyo",
+      "nome": "Puyo Puyo",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "puyo.gif",
+      "descricao": "Puyo Puyo — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/puyo.zip"
+    },
+    {
+      "id": "puyopuy2",
+      "nome": "Puyo Puyo 2",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "puyopuy2.gif",
+      "descricao": "Puyo Puyo 2 — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/puyopuy2.zip"
+    },
+    {
+      "id": "puzzloop",
+      "nome": "Puzz Loop",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "puzzloop.gif",
+      "descricao": "Puzz Loop — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/puzzloop.zip"
+    },
+    {
+      "id": "pzloop2",
+      "nome": "Puzz Loop 2",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "pzloop2.gif",
+      "descricao": "Puzz Loop 2 — clássico de arcade (2001). Jogue direto no navegador.",
+      "rom": "jogos/arcade/pzloop2.zip"
+    },
+    {
+      "id": "pbobblen",
+      "nome": "Puzzle Bobble",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "pbobblen.gif",
+      "descricao": "Puzzle Bobble — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/pbobblen.zip"
+    },
+    {
+      "id": "pbobbl2n",
+      "nome": "Puzzle Bobble 2",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "pbobbl2n.gif",
+      "descricao": "Puzzle Bobble 2 — clássico de arcade (1999). Jogue direto no navegador.",
+      "rom": "jogos/arcade/pbobbl2n.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "pbobble3",
+      "nome": "Puzzle Bobble 3",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "pbobble3.gif",
+      "descricao": "Puzzle Bobble 3 — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/pbobble3.zip"
+    },
+    {
+      "id": "qbert",
+      "nome": "Q*bert",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "qbert.gif",
+      "descricao": "Q*bert — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/qbert.zip"
+    },
+    {
+      "id": "rtype",
+      "nome": "R-Type",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rtype.gif",
+      "descricao": "R-Type — clássico de arcade (1987). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rtype.zip"
+    },
+    {
+      "id": "rtype2",
+      "nome": "R-Type II",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rtype2.gif",
+      "descricao": "R-Type II — clássico de arcade (1989). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rtype2.zip"
+    },
+    {
+      "id": "rtypeleo",
+      "nome": "R-Type Leo",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rtypeleo.gif",
+      "descricao": "R-Type Leo — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rtypeleo.zip"
+    },
+    {
+      "id": "radm",
+      "nome": "Rad Mobile",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "radm.gif",
+      "descricao": "Rad Mobile — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/radm.zip"
+    },
+    {
+      "id": "rotd",
+      "nome": "Rage of the Dragons",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rotd.gif",
+      "descricao": "Rage of the Dragons — clássico de arcade (2002). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rotd.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "rotd.zip.p1",
+        "rotd.zip.p2",
+        "rotd.zip.p3",
+        "rotd.zip.p4",
+        "rotd.zip.p5",
+        "rotd.zip.p6"
+      ]
+    },
+    {
+      "id": "raiden2",
+      "nome": "Raiden II",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "raiden2.gif",
+      "descricao": "Raiden II — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/raiden2.zip"
+    },
+    {
+      "id": "rbisland",
+      "nome": "Rainbow Islands",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rbisland.gif",
+      "descricao": "Rainbow Islands — clássico de arcade (1987). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rbisland.zip"
+    },
+    {
+      "id": "rambo3",
+      "nome": "Rambo III",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rambo3.gif",
+      "descricao": "Rambo III — clássico de arcade (1989). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rambo3.zip"
+    },
+    {
+      "id": "rampage",
+      "nome": "Rampage",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rampage.gif",
+      "descricao": "Rampage — clássico de arcade (1986). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rampage.zip"
+    },
+    {
+      "id": "rastan",
+      "nome": "Rastan",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rastan.gif",
+      "descricao": "Rastan — clássico de arcade (1987). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rastan.zip"
+    },
+    {
+      "id": "rbff1",
+      "nome": "Real Bout Fatal Fury",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "rbff1.gif",
+      "descricao": "Real Bout Fatal Fury — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rbff1.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "rbff2",
+      "nome": "Real Bout Fatal Fury 2 - The Newcomers",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "rbff2.gif",
+      "descricao": "Real Bout Fatal Fury 2 - The Newcomers — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rbff2.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "rbff2.zip.p1",
+        "rbff2.zip.p2",
+        "rbff2.zip.p3"
+      ]
+    },
+    {
+      "id": "rbffspec",
+      "nome": "Real Bout Fatal Fury Special",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "rbffspec.gif",
+      "descricao": "Real Bout Fatal Fury Special — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rbffspec.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "ringdest",
+      "nome": "Ring of Destruction: Slammasters II",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "ringdest.gif",
+      "descricao": "Ring of Destruction: Slammasters II — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/ringdest.zip"
+    },
+    {
+      "id": "roboarmy",
+      "nome": "Robo Army",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "roboarmy.gif",
+      "descricao": "Robo Army — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/roboarmy.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "robocop",
+      "nome": "Robocop",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "robocop.gif",
+      "descricao": "Robocop — clássico de arcade (1988). Jogue direto no navegador.",
+      "rom": "jogos/arcade/robocop.zip"
+    },
+    {
+      "id": "robotron",
+      "nome": "Robotron: 2084",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "robotron.gif",
+      "descricao": "Robotron: 2084 — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/robotron.zip"
+    },
+    {
+      "id": "rohga",
+      "nome": "Rohga: Armor Force",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rohga.gif",
+      "descricao": "Rohga: Armor Force — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rohga.zip"
+    },
+    {
+      "id": "rthunder",
+      "nome": "Rolling Thunder",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rthunder.gif",
+      "descricao": "Rolling Thunder — clássico de arcade (1986). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rthunder.zip"
+    },
+    {
+      "id": "rushatck",
+      "nome": "Rush'n Attack",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "rushatck.gif",
+      "descricao": "Rush'n Attack — clássico de arcade (1985). Jogue direto no navegador.",
+      "rom": "jogos/arcade/rushatck.zip"
+    },
+    {
+      "id": "salamand",
+      "nome": "Salamander",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "salamand.gif",
+      "descricao": "Salamander — clássico de arcade (1986). Jogue direto no navegador.",
+      "rom": "jogos/arcade/salamand.zip"
+    },
+    {
+      "id": "samsho",
+      "nome": "Samurai Shodown",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "samsho.gif",
+      "descricao": "Samurai Shodown — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/samsho.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "samsho2",
+      "nome": "Samurai Shodown II",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "samsho2.gif",
+      "descricao": "Samurai Shodown II — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/samsho2.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "samsho3",
+      "nome": "Samurai Shodown III",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "samsho3.gif",
+      "descricao": "Samurai Shodown III — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/samsho3.zip"
+    },
+    {
+      "id": "samsho4",
+      "nome": "Samurai Shodown IV - Amakusa's Revenge",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "samsho4.gif",
+      "descricao": "Samurai Shodown IV - Amakusa's Revenge — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/samsho4.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "samsh5fe",
+      "nome": "Samurai Shodown V Special",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "samsh5fe.gif",
+      "descricao": "Samurai Shodown V Special — clássico de arcade (2004). Jogue direto no navegador.",
+      "rom": "jogos/arcade/samsh5fe.zip",
+      "partes": [
+        "samsh5fe.zip.p1",
+        "samsh5fe.zip.p2",
+        "samsh5fe.zip.p3"
+      ]
+    },
+    {
+      "id": "shollow",
+      "nome": "Satan's Hollow",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "shollow.gif",
+      "descricao": "Satan's Hollow — clássico de arcade (1981). Jogue direto no navegador.",
+      "rom": "jogos/arcade/shollow.zip"
+    },
+    {
+      "id": "slammast",
+      "nome": "Saturday Night Slam Masters",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "slammast.gif",
+      "descricao": "Saturday Night Slam Masters — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/slammast.zip"
+    },
+    {
+      "id": "scramble",
+      "nome": "Scramble",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "scramble.gif",
+      "descricao": "Scramble — clássico de arcade (1981). Jogue direto no navegador.",
+      "rom": "jogos/arcade/scramble.zip"
+    },
+    {
+      "id": "sonic",
+      "nome": "SegaSonic The Hedgehog",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sonic.gif",
+      "descricao": "SegaSonic The Hedgehog — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sonic.zip"
+    },
+    {
+      "id": "sengoku",
+      "nome": "Sengoku",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "sengoku.gif",
+      "descricao": "Sengoku — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sengoku.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "sengoku2",
+      "nome": "Sengoku 2",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "sengoku2.gif",
+      "descricao": "Sengoku 2 — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sengoku2.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "sengoku3",
+      "nome": "Sengoku 3",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "sengoku3.gif",
+      "descricao": "Sengoku 3 — clássico de arcade (2001). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sengoku3.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "sengoku3.zip.p1",
+        "sengoku3.zip.p2",
+        "sengoku3.zip.p3",
+        "sengoku3.zip.p4"
+      ]
+    },
+    {
+      "id": "shdancer",
+      "nome": "Shadow Dancer",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "shdancer.gif",
+      "descricao": "Shadow Dancer — clássico de arcade (1989). Jogue direto no navegador.",
+      "rom": "jogos/arcade/shdancer.zip"
+    },
+    {
+      "id": "shadfrce",
+      "nome": "Shadow Force",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "shadfrce.gif",
+      "descricao": "Shadow Force — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/shadfrce.zip"
+    },
+    {
+      "id": "shinobi",
+      "nome": "Shinobi",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "shinobi.gif",
+      "descricao": "Shinobi — clássico de arcade (1987). Jogue direto no navegador.",
+      "rom": "jogos/arcade/shinobi.zip"
+    },
+    {
+      "id": "shocktro",
+      "nome": "Shock Troopers",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "shocktro.gif",
+      "descricao": "Shock Troopers — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/shocktro.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "shocktr2",
+      "nome": "Shock Troopers - 2nd Squad",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "shocktr2.gif",
+      "descricao": "Shock Troopers - 2nd Squad — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/shocktr2.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "shocktr2.zip.p1",
+        "shocktr2.zip.p2",
+        "shocktr2.zip.p3"
+      ]
+    },
+    {
+      "id": "sinistar",
+      "nome": "Sinistar",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sinistar.gif",
+      "descricao": "Sinistar — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sinistar.zip"
+    },
+    {
+      "id": "smashtv",
+      "nome": "Smash T.V.",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "smashtv.gif",
+      "descricao": "Smash T.V. — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/smashtv.zip"
+    },
+    {
+      "id": "svc",
+      "nome": "SNK vs. Capcom - SVC Chaos",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "svc.gif",
+      "descricao": "SNK vs. Capcom - SVC Chaos — clássico de arcade (2003). Jogue direto no navegador.",
+      "rom": "jogos/arcade/svc.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "svc.zip.p1",
+        "svc.zip.p2",
+        "svc.zip.p3",
+        "svc.zip.p4",
+        "svc.zip.p5",
+        "svc.zip.p6",
+        "svc.zip.p7"
+      ]
+    },
+    {
+      "id": "snowbros",
+      "nome": "Snow Bros. - Nick & Tom",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "snowbros.gif",
+      "descricao": "Snow Bros. - Nick & Tom — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/snowbros.zip"
+    },
+    {
+      "id": "sharrier",
+      "nome": "Space Harrier",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sharrier.gif",
+      "descricao": "Space Harrier — clássico de arcade (1985). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sharrier.zip"
+    },
+    {
+      "id": "invaders",
+      "nome": "Space Invaders",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "invaders.gif",
+      "descricao": "Space Invaders — clássico de arcade (1978). Jogue direto no navegador.",
+      "rom": "jogos/arcade/invaders.zip"
+    },
+    {
+      "id": "spcinv95",
+      "nome": "Space Invaders '95: The Attack Of Lunar Loonies",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "spcinv95.gif",
+      "descricao": "Space Invaders '95: The Attack Of Lunar Loonies — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/spcinv95.zip"
+    },
+    {
+      "id": "spidman",
+      "nome": "Spider-Man: The Videogame",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "spidman.gif",
+      "descricao": "Spider-Man: The Videogame — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/spidman.zip"
+    },
+    {
+      "id": "spinmast",
+      "nome": "Spin Master",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "spinmast.gif",
+      "descricao": "Spin Master — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/spinmast.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "splatter",
+      "nome": "Splatterhouse",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "splatter.gif",
+      "descricao": "Splatterhouse — clássico de arcade (1988). Jogue direto no navegador.",
+      "rom": "jogos/arcade/splatter.zip"
+    },
+    {
+      "id": "spyhunt",
+      "nome": "Spy Hunter",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "spyhunt.gif",
+      "descricao": "Spy Hunter — clássico de arcade (1983). Jogue direto no navegador.",
+      "rom": "jogos/arcade/spyhunt.zip"
+    },
+    {
+      "id": "starwars",
+      "nome": "Star Wars",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "starwars.gif",
+      "descricao": "Star Wars — clássico de arcade (1983). Jogue direto no navegador.",
+      "rom": "jogos/arcade/starwars.zip"
+    },
+    {
+      "id": "stmblade",
+      "nome": "Storm Blade",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "stmblade.gif",
+      "descricao": "Storm Blade — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/stmblade.zip"
+    },
+    {
+      "id": "sf",
+      "nome": "Street Fighter",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sf.gif",
+      "descricao": "Street Fighter — clássico de arcade (1987). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sf.zip"
+    },
+    {
+      "id": "sfa2",
+      "nome": "Street Fighter Alpha 2",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sfa2.gif",
+      "descricao": "Street Fighter Alpha 2 — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sfa2.zip"
+    },
+    {
+      "id": "sfa3",
+      "nome": "Street Fighter Alpha 3",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sfa3.gif",
+      "descricao": "Street Fighter Alpha 3 — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sfa3.zip"
+    },
+    {
+      "id": "sfa",
+      "nome": "Street Fighter Alpha: Warriors' Dreams",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sfa.gif",
+      "descricao": "Street Fighter Alpha: Warriors' Dreams — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sfa.zip"
+    },
+    {
+      "id": "sf2ce",
+      "nome": "Street Fighter II': Champion Edition",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sf2ce.gif",
+      "descricao": "Street Fighter II': Champion Edition — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sf2ce.zip"
+    },
+    {
+      "id": "sf2hf",
+      "nome": "Street Fighter II': Hyper Fighting",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sf2hf.gif",
+      "descricao": "Street Fighter II': Hyper Fighting — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sf2hf.zip"
+    },
+    {
+      "id": "sf2",
+      "nome": "Street Fighter II: The World Warrior",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sf2.gif",
+      "descricao": "Street Fighter II: The World Warrior — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sf2.zip"
+    },
+    {
+      "id": "sfz2al",
+      "nome": "Street Fighter Zero 2 Alpha",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sfz2al.gif",
+      "descricao": "Street Fighter Zero 2 Alpha — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sfz2al.zip"
+    },
+    {
+      "id": "strhoop",
+      "nome": "Street Hoop",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "strhoop.gif",
+      "descricao": "Street Hoop — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/strhoop.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "strider",
+      "nome": "Strider",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "strider.gif",
+      "descricao": "Strider — clássico de arcade (1989). Jogue direto no navegador.",
+      "rom": "jogos/arcade/strider.zip"
+    },
+    {
+      "id": "s1945",
+      "nome": "Strikers 1945",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "s1945.gif",
+      "descricao": "Strikers 1945 — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/s1945.zip"
+    },
+    {
+      "id": "s1945ii",
+      "nome": "Strikers 1945 II",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "s1945ii.gif",
+      "descricao": "Strikers 1945 II — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/s1945ii.zip"
+    },
+    {
+      "id": "s1945iii",
+      "nome": "Strikers 1945 III",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "s1945iii.gif",
+      "descricao": "Strikers 1945 III — clássico de arcade (1999). Jogue direto no navegador.",
+      "rom": "jogos/arcade/s1945iii.zip"
+    },
+    {
+      "id": "ssridersubc",
+      "nome": "Sunset Riders",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "ssridersubc.gif",
+      "descricao": "Sunset Riders — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/ssridersubc.zip"
+    },
+    {
+      "id": "sdodgeb",
+      "nome": "Super Dodge Ball",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sdodgeb.gif",
+      "descricao": "Super Dodge Ball — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sdodgeb.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "sgemf",
+      "nome": "Super Gem Fighter: Mini Mix",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "sgemf.gif",
+      "descricao": "Super Gem Fighter: Mini Mix — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/sgemf.zip"
+    },
+    {
+      "id": "spnchout",
+      "nome": "Super Punch-Out!!",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "spnchout.gif",
+      "descricao": "Super Punch-Out!! — clássico de arcade (1984). Jogue direto no navegador.",
+      "rom": "jogos/arcade/spnchout.zip"
+    },
+    {
+      "id": "spf2t",
+      "nome": "Super Puzzle Fighter II Turbo",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "spf2t.gif",
+      "descricao": "Super Puzzle Fighter II Turbo — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/spf2t.zip"
+    },
+    {
+      "id": "macross2",
+      "nome": "Super Spacefortress Macross II",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "macross2.gif",
+      "descricao": "Super Spacefortress Macross II — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/macross2.zip"
+    },
+    {
+      "id": "ssf2t",
+      "nome": "Super Street Fighter II Turbo",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "ssf2t.gif",
+      "descricao": "Super Street Fighter II Turbo — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/ssf2t.zip"
+    },
+    {
+      "id": "ssf2",
+      "nome": "Super Street Fighter II: The New Challengers",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "ssf2.gif",
+      "descricao": "Super Street Fighter II: The New Challengers — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/ssf2.zip"
+    },
+    {
+      "id": "tapper",
+      "nome": "Tapper",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "tapper.gif",
+      "descricao": "Tapper — clássico de arcade (1983). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tapper.zip"
+    },
+    {
+      "id": "tmnt2pj",
+      "nome": "Teenage Mutant Ninja Turtles",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "tmnt2pj.gif",
+      "descricao": "Teenage Mutant Ninja Turtles — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tmnt2pj.zip"
+    },
+    {
+      "id": "tmnt22pu",
+      "nome": "Teenage Mutant Ninja Turtles - Turtles in Time",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "tmnt22pu.gif",
+      "descricao": "Teenage Mutant Ninja Turtles - Turtles in Time — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tmnt22pu.zip"
+    },
+    {
+      "id": "tempest",
+      "nome": "Tempest",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "tempest.gif",
+      "descricao": "Tempest — clássico de arcade (1980). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tempest.zip"
+    },
+    {
+      "id": "tengai",
+      "nome": "Tengai",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "tengai.gif",
+      "descricao": "Tengai — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tengai.zip"
+    },
+    {
+      "id": "tetrisp2",
+      "nome": "Tetris Plus 2",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "tetrisp2.gif",
+      "descricao": "Tetris Plus 2 — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tetrisp2.zip"
+    },
+    {
+      "id": "tgm2p",
+      "nome": "Tetris: The Absolute - The Grand Master 2 Plus",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "tgm2p.gif",
+      "descricao": "Tetris: The Absolute - The Grand Master 2 Plus — clássico de arcade (2000). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tgm2p.zip"
+    },
+    {
+      "id": "irrmaze",
+      "nome": "The Irritating Maze",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "irrmaze.gif",
+      "descricao": "The Irritating Maze — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/irrmaze.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "kod",
+      "nome": "The King of Dragons",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "kod.gif",
+      "descricao": "The King of Dragons — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kod.zip"
+    },
+    {
+      "id": "kof94",
+      "nome": "The King of Fighters '94",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "kof94.gif",
+      "descricao": "The King of Fighters '94 — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof94.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "kof95",
+      "nome": "The King of Fighters '95",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "kof95.gif",
+      "descricao": "The King of Fighters '95 — clássico de arcade (1995). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof95.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "kof96",
+      "nome": "The King of Fighters '96",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "kof96.gif",
+      "descricao": "The King of Fighters '96 — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof96.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "kof98",
+      "nome": "The King of Fighters '98 - The Slugfest",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "kof98.gif",
+      "descricao": "The King of Fighters '98 - The Slugfest — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof98.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "kof98.zip.p1",
+        "kof98.zip.p2",
+        "kof98.zip.p3"
+      ]
+    },
+    {
+      "id": "kof99",
+      "nome": "The King of Fighters '99 - Millennium Battle",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "kof99.gif",
+      "descricao": "The King of Fighters '99 - Millennium Battle — clássico de arcade (1999). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof99.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "kof99.zip.p1",
+        "kof99.zip.p2",
+        "kof99.zip.p3",
+        "kof99.zip.p4",
+        "kof99.zip.p5",
+        "kof99.zip.p6"
+      ]
+    },
+    {
+      "id": "kof2000",
+      "nome": "The King of Fighters 2000",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "kof2000.gif",
+      "descricao": "The King of Fighters 2000 — clássico de arcade (2000). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof2000.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "kof2000.zip.p1",
+        "kof2000.zip.p2",
+        "kof2000.zip.p3",
+        "kof2000.zip.p4",
+        "kof2000.zip.p5",
+        "kof2000.zip.p6"
+      ]
+    },
+    {
+      "id": "kof2001",
+      "nome": "The King of Fighters 2001",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "kof2001.gif",
+      "descricao": "The King of Fighters 2001 — clássico de arcade (2001). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof2001.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "kof2001.zip.p1",
+        "kof2001.zip.p2",
+        "kof2001.zip.p3",
+        "kof2001.zip.p4",
+        "kof2001.zip.p5",
+        "kof2001.zip.p6"
+      ]
+    },
+    {
+      "id": "kof2002",
+      "nome": "The King of Fighters 2002",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "kof2002.gif",
+      "descricao": "The King of Fighters 2002 — clássico de arcade (2002). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof2002.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "kof2002.zip.p1",
+        "kof2002.zip.p2",
+        "kof2002.zip.p3",
+        "kof2002.zip.p4",
+        "kof2002.zip.p5",
+        "kof2002.zip.p6",
+        "kof2002.zip.p7"
+      ]
+    },
+    {
+      "id": "kof2003",
+      "nome": "The King of Fighters 2003",
+      "emoji": "🥊",
+      "console": "arcade",
+      "capa": "kof2003.gif",
+      "descricao": "The King of Fighters 2003 — clássico de arcade (2003). Jogue direto no navegador.",
+      "rom": "jogos/arcade/kof2003.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "kof2003.zip.p1",
+        "kof2003.zip.p2",
+        "kof2003.zip.p3",
+        "kof2003.zip.p4",
+        "kof2003.zip.p5",
+        "kof2003.zip.p6",
+        "kof2003.zip.p7"
+      ]
+    },
+    {
+      "id": "lastblad",
+      "nome": "The Last Blade",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "lastblad.gif",
+      "descricao": "The Last Blade — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/lastblad.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "lastblad.zip.p1",
+        "lastblad.zip.p2"
+      ]
+    },
+    {
+      "id": "lastbld2",
+      "nome": "The Last Blade 2",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "lastbld2.gif",
+      "descricao": "The Last Blade 2 — clássico de arcade (1998). Jogue direto no navegador.",
+      "rom": "jogos/arcade/lastbld2.zip",
+      "bios": "neogeo.zip",
+      "partes": [
+        "lastbld2.zip.p1",
+        "lastbld2.zip.p2",
+        "lastbld2.zip.p3"
+      ]
+    },
+    {
+      "id": "outfxies",
+      "nome": "The Outfoxies",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "outfxies.gif",
+      "descricao": "The Outfoxies — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/outfxies.zip"
+    },
+    {
+      "id": "punisher",
+      "nome": "The Punisher",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "punisher.gif",
+      "descricao": "The Punisher — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/punisher.zip"
+    },
+    {
+      "id": "simpsons2p",
+      "nome": "The Simpsons",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "simpsons2p.gif",
+      "descricao": "The Simpsons — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/simpsons2p.zip"
+    },
+    {
+      "id": "superspy",
+      "nome": "The Super Spy",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "superspy.gif",
+      "descricao": "The Super Spy — clássico de arcade (1990). Jogue direto no navegador.",
+      "rom": "jogos/arcade/superspy.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "ssideki4",
+      "nome": "The Ultimate 11 - The SNK Football Championship",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "ssideki4.gif",
+      "descricao": "The Ultimate 11 - The SNK Football Championship — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/ssideki4.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "timeplt",
+      "nome": "Time Pilot",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "timeplt.gif",
+      "descricao": "Time Pilot — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/timeplt.zip"
+    },
+    {
+      "id": "toki",
+      "nome": "Toki",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "toki.gif",
+      "descricao": "Toki — clássico de arcade (1989). Jogue direto no navegador.",
+      "rom": "jogos/arcade/toki.zip"
+    },
+    {
+      "id": "tophuntr",
+      "nome": "Top Hunter - Roddy & Cathy",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "tophuntr.gif",
+      "descricao": "Top Hunter - Roddy & Cathy — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tophuntr.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "trackfld",
+      "nome": "Track & Field",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "trackfld.gif",
+      "descricao": "Track & Field — clássico de arcade (1983). Jogue direto no navegador.",
+      "rom": "jogos/arcade/trackfld.zip"
+    },
+    {
+      "id": "tron",
+      "nome": "Tron",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "tron.gif",
+      "descricao": "Tron — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/tron.zip"
+    },
+    {
+      "id": "twinspri",
+      "nome": "Twinkle Star Sprites",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "twinspri.gif",
+      "descricao": "Twinkle Star Sprites — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/twinspri.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "umk3-arcade",
+      "nome": "Ultimate Mortal Kombat 3 (Arcade)",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "umk3-arcade.gif",
+      "descricao": "Ultimate Mortal Kombat 3 — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/umk3.zip"
+    },
+    {
+      "id": "uccops",
+      "nome": "Undercover Cops",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "uccops.gif",
+      "descricao": "Undercover Cops — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/uccops.zip"
+    },
+    {
+      "id": "vhunt2",
+      "nome": "Vampire Hunter 2: Darkstalkers Revenge",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "vhunt2.gif",
+      "descricao": "Vampire Hunter 2: Darkstalkers Revenge — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/vhunt2.zip"
+    },
+    {
+      "id": "vsav2",
+      "nome": "Vampire Savior 2: The Lord of Vampire",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "vsav2.gif",
+      "descricao": "Vampire Savior 2: The Lord of Vampire — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/vsav2.zip"
+    },
+    {
+      "id": "vsav",
+      "nome": "Vampire Savior: The Lord of Vampire",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "vsav.gif",
+      "descricao": "Vampire Savior: The Lord of Vampire — clássico de arcade (1997). Jogue direto no navegador.",
+      "rom": "jogos/arcade/vsav.zip"
+    },
+    {
+      "id": "vanguard",
+      "nome": "Vanguard",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "vanguard.gif",
+      "descricao": "Vanguard — clássico de arcade (1981). Jogue direto no navegador.",
+      "rom": "jogos/arcade/vanguard.zip"
+    },
+    {
+      "id": "vendetta2pu",
+      "nome": "Vendetta",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "vendetta2pu.gif",
+      "descricao": "Vendetta — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/vendetta2pu.zip"
+    },
+    {
+      "id": "viewpoin",
+      "nome": "Viewpoint",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "viewpoin.gif",
+      "descricao": "Viewpoint — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/viewpoin.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "viostorm",
+      "nome": "Violent Storm",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "viostorm.gif",
+      "descricao": "Violent Storm — clássico de arcade (1993). Jogue direto no navegador.",
+      "rom": "jogos/arcade/viostorm.zip"
+    },
+    {
+      "id": "wakuwak7",
+      "nome": "Waku Waku 7",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "wakuwak7.gif",
+      "descricao": "Waku Waku 7 — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/wakuwak7.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "wof",
+      "nome": "Warriors of Fate",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "wof.gif",
+      "descricao": "Warriors of Fate — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/wof.zip"
+    },
+    {
+      "id": "moomesa",
+      "nome": "Wild West C.O.W.-Boys of Moo Mesa",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "moomesa.gif",
+      "descricao": "Wild West C.O.W.-Boys of Moo Mesa — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/moomesa.zip"
+    },
+    {
+      "id": "wjammers",
+      "nome": "Windjammers",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "wjammers.gif",
+      "descricao": "Windjammers — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/wjammers.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "wizdfire",
+      "nome": "Wizard Fire",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "wizdfire.gif",
+      "descricao": "Wizard Fire — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/wizdfire.zip"
+    },
+    {
+      "id": "wboy",
+      "nome": "Wonder Boy",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "wboy.gif",
+      "descricao": "Wonder Boy — clássico de arcade (1986). Jogue direto no navegador.",
+      "rom": "jogos/arcade/wboy.zip"
+    },
+    {
+      "id": "wb3",
+      "nome": "Wonder Boy III - Monster Lair",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "wb3.gif",
+      "descricao": "Wonder Boy III - Monster Lair — clássico de arcade (1988). Jogue direto no navegador.",
+      "rom": "jogos/arcade/wb3.zip"
+    },
+    {
+      "id": "wbml",
+      "nome": "Wonder Boy: Monster Land",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "wbml.gif",
+      "descricao": "Wonder Boy: Monster Land — clássico de arcade (1987). Jogue direto no navegador.",
+      "rom": "jogos/arcade/wbml.zip"
+    },
+    {
+      "id": "wwfwfest",
+      "nome": "WWF WrestleFest",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "wwfwfest.gif",
+      "descricao": "WWF WrestleFest — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/wwfwfest.zip"
+    },
+    {
+      "id": "xmen2pa",
+      "nome": "X-Men",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "xmen2pa.gif",
+      "descricao": "X-Men — clássico de arcade (1992). Jogue direto no navegador.",
+      "rom": "jogos/arcade/xmen2pa.zip"
+    },
+    {
+      "id": "xmvsf",
+      "nome": "X-Men Vs. Street Fighter",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "xmvsf.gif",
+      "descricao": "X-Men Vs. Street Fighter — clássico de arcade (1996). Jogue direto no navegador.",
+      "rom": "jogos/arcade/xmvsf.zip"
+    },
+    {
+      "id": "xmcota",
+      "nome": "X-Men: Children of the Atom",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "xmcota.gif",
+      "descricao": "X-Men: Children of the Atom — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/xmcota.zip"
+    },
+    {
+      "id": "xevious",
+      "nome": "Xevious",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "xevious.gif",
+      "descricao": "Xevious — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/xevious.zip"
+    },
+    {
+      "id": "xexex",
+      "nome": "Xexex",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "xexex.gif",
+      "descricao": "Xexex — clássico de arcade (1991). Jogue direto no navegador.",
+      "rom": "jogos/arcade/xexex.zip"
+    },
+    {
+      "id": "xybots",
+      "nome": "Xybots",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "xybots.gif",
+      "descricao": "Xybots — clássico de arcade (1987). Jogue direto no navegador.",
+      "rom": "jogos/arcade/xybots.zip"
+    },
+    {
+      "id": "yiear",
+      "nome": "Yie Ar Kung-Fu",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "yiear.gif",
+      "descricao": "Yie Ar Kung-Fu — clássico de arcade (1985). Jogue direto no navegador.",
+      "rom": "jogos/arcade/yiear.zip"
+    },
+    {
+      "id": "zaxxon",
+      "nome": "Zaxxon",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "zaxxon.gif",
+      "descricao": "Zaxxon — clássico de arcade (1982). Jogue direto no navegador.",
+      "rom": "jogos/arcade/zaxxon.zip"
+    },
+    {
+      "id": "zedblade",
+      "nome": "Zed Blade",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "zedblade.gif",
+      "descricao": "Zed Blade — clássico de arcade (1994). Jogue direto no navegador.",
+      "rom": "jogos/arcade/zedblade.zip",
+      "bios": "neogeo.zip"
+    },
+    {
+      "id": "zerohour",
+      "nome": "Zero Hour",
+      "emoji": "🕹️",
+      "console": "arcade",
+      "capa": "zerohour.gif",
+      "descricao": "Zero Hour — clássico de arcade (1980). Jogue direto no navegador.",
+      "rom": "jogos/arcade/zerohour.zip"
+    },
+    {
+      "id": "zupapa",
+      "nome": "Zupapa!",
+      "emoji": "🦾",
+      "console": "arcade",
+      "capa": "zupapa.gif",
+      "descricao": "Zupapa! — clássico de arcade (2001). Jogue direto no navegador.",
+      "rom": "jogos/arcade/zupapa.zip",
+      "bios": "neogeo.zip"
     }
   ]
 }

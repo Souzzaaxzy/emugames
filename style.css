@@ -464,6 +464,9 @@ h1 #marca { letter-spacing: 2px; }
 
 .aba {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   background: var(--painel2);
   color: var(--texto);
   border: 1px solid var(--borda);
@@ -476,6 +479,9 @@ h1 #marca { letter-spacing: 2px; }
   cursor: pointer;
   transition: background var(--t-rapida) var(--curva), border-color var(--t-rapida) var(--curva), color var(--t-rapida) var(--curva), transform var(--t-rapida) var(--curva);
 }
+/* Contagem ao lado do nome da categoria: "Nintendo (19)" */
+.aba .num { color: var(--fraco); font-weight: 700; }
+.aba.ativa .num { color: var(--sobre-acento); opacity: .7; }
 .aba.ativa {
   background: var(--acento);
   border-color: var(--acento);
@@ -855,6 +861,108 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
   cursor: pointer;
 }
 #controle-painel .acoes button:active { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+
+/* ==========================================================================
+   SALVAR / CARREGAR
+   O botao fica logo ABAIXO do CONTROLE (mesmo estilo, so' desce um pouco).
+   O painel segue o mesmo padrao do `#controle-painel`.
+   ========================================================================== */
+#salvar-btn { display: none; }
+body.jogando #salvar-btn {
+  position: fixed;
+  top: calc(10px + env(safe-area-inset-top, 0px) + 44px);
+  left: calc(10px + env(safe-area-inset-left, 0px));
+  z-index: 58;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--painel2);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  font-family: inherit;
+  cursor: pointer;
+  opacity: .9;
+}
+#salvar-btn:active { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+body.cheia #salvar-btn,
+body.girado #salvar-btn { opacity: .55; }
+body.cheia #salvar-btn:active,
+body.girado #salvar-btn:active { opacity: 1; }
+body.girado #salvar-btn { top: calc(10px + env(safe-area-inset-top, 0px) + 44px); }
+
+#salvar-painel {
+  position: fixed;
+  inset: 0;
+  z-index: 91;
+  background: rgba(4, 5, 7, .78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+#salvar-painel[hidden] { display: none; }
+#salvar-painel .caixa {
+  width: 100%;
+  max-width: 420px;
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+#salvar-painel h2 { font-size: 15px; margin-bottom: 10px; }
+#salvar-painel .dica { color: var(--fraco); font-size: 12px; margin: 6px 0 12px; }
+#salvar-slots { display: flex; flex-direction: column; gap: 8px; }
+.salvar-slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--painel2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.salvar-slot .info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.salvar-slot .nome { font-weight: 700; }
+.salvar-slot .quando { color: var(--fraco); font-size: 11px; }
+.salvar-slot .acoes-slot { display: flex; gap: 6px; flex: 0 0 auto; }
+.salvar-slot button {
+  background: var(--painel);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 11.5px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+.salvar-slot button:active { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+.salvar-slot button[disabled] { opacity: .45; cursor: default; }
+#salvar-painel .acoes { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+#salvar-painel .acoes button {
+  flex: 1 1 auto;
+  background: var(--painel2);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+#salvar-painel .acoes button:active { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+#salvar-auto.off { color: var(--fraco); }
 
 /* Lista de aparelhos que a busca encontra */
 #controle-lista { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
