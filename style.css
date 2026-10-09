@@ -157,7 +157,7 @@ body:not(.jogando) { padding: 0; }
 }
 
 /* ==========================================================================
-   ANIMACAO DO TITULO — linha preta -> estrela, em fase com a gif do topo.
+   ANIMACAO DO TITULO — linha preta -> 5 estrelas, em fase com a gif do topo.
    O JS (secao "ANIMACAO DO TITULO" no index.html) mede o titulo, marca o "Y"
    e publica `--p` (0..1) a cada quadro, lendo o `currentTime` do video. Aqui
    so traduzimos `--p` em posicao/opacidade -- nada de tempo no CSS, entao o
@@ -165,18 +165,19 @@ body:not(.jogando) { padding: 0; }
    Fases do ciclo (fracao de `--p`), todas determinadas por `calc`:
      0.00..0.05 -> a linha "acende" (fade in)
      0.10..0.40 -> varre da esquerda ate o "Y"
-     0.40..0.72 -> a linha DESCE ate o ponto da estrela
-     0.72..0.74 -> some a linha, nasce a estrela (POP + zoom)
+     0.40..0.72 -> a linha DESCE ate o ponto das estrelas
+     0.72..0.74 -> some a linha, nascem as 5 estrelas (POP + zoom)
      0.74..0.90 -> brilho estavel (pulso de 2s, quase exatos)
-     0.90..0.98 -> a estrela "fecha" e apaga
+     0.90..0.98 -> as estrelas "fecham" e apagam
      1.00       -> recomeca
    ========================================================================== */
 #titulo-linha,
-#titulo-estrela { position: absolute; left: 0; top: 0; pointer-events: none; }
+#titulo-estrelas { position: absolute; left: 0; top: 0; pointer-events: none; }
+#titulo-linha { line-height: 0; }
 
-/* Taxas (familiaridade 0..1) calculadas a partir de `--p`. */
+/* Taxas (fracao 0..1) calculadas a partir de `--p`. */
 #titulo-linha,
-#titulo-estrela {
+#titulo-estrelas {
   --varre: clamp(0, (var(--p, 0) - 0.10) / 0.30, 1);   /* 0.10 -> 0.40 (X) */
   --desce: clamp(0, (var(--p, 0) - 0.40) / 0.32, 1);   /* 0.40 -> 0.72 (Y) */
   --some:  clamp(0, (var(--p, 0) - 0.72) / 0.02, 1);   /* fade da linha    */
@@ -191,39 +192,48 @@ body:not(.jogando) { padding: 0; }
   ));
   top: var(--linha-top, 0px);
   width: 2px;
-  height: 0.92em;
-  margin-top: -0.46em;                 /* centra a linha na linha de base */
+  /* a LINHA pega a letra TODA: `--linha-h` vem do JS (altura do "Y") */
+  height: var(--linha-h, 1em);
+  margin-top: calc(var(--linha-h, 1em) / -2); /* centra na linha de base */
   background: #050608;
   border-radius: 2px;
   box-shadow: 0 0 7px rgba(0, 0, 0, .6);
-  /* nasce devagar, morre no instante em que a estrela aparece */
+  /* nasce devagar, morre no instante em que as estrelas aparecem */
   opacity: clamp(0, var(--p, 0) / 0.05, 1) * (1 - var(--some, 0));
 }
 
-/* A estrela so' existe depois que a linha desce (`--estrela-*` vem do JS). */
-#titulo-estrela {
-  --nasce: clamp(0, (var(--p, 0) - 0.72) / 0.02, 1);   /* acende a estrela  */
+/* As 5 estrelas (`left`/`top`/`font-size` vem do JS). As taxas ficam no
+   wrapper (os filhos herdam `--p` e as taxas); a ESCALA/opacidade vao em cada
+   estrela -- nao no wrapper. O wrapper tem 0x0 (os filhos sao absolutos),
+   entao `scale()` nele escalaria em torno da origem do h1 e MOVERIA todas as
+   estrelas; em cada estrela a escala gira em torno do proprio centro
+   (o `translate(-50%,-50%)` ja' a centrou). */
+#titulo-estrelas {
+  --nasce: clamp(0, (var(--p, 0) - 0.72) / 0.02, 1);    /* acende as estrelas */
   --pulso: clamp(0, 1 - (var(--p, 0) - 0.74) / 0.16, 1); /* 1 -> 0 ate 0.90  */
-  --apaga: clamp(0, (var(--p, 0) - 0.90) / 0.08, 1);   /* some no fim       */
-  left: var(--estrela-x, 0px);
-  top: var(--estrela-y, 0px);
+  --apaga: clamp(0, (var(--p, 0) - 0.90) / 0.08, 1);     /* somem no fim     */
+}
+#titulo-estrelas .titulo-estrela {
+  position: absolute;
+  /* nascem encolhidas e crescem com um leve "respiro" */
   transform: translate(-50%, -50%)
              scale(calc(var(--nasce, 0) * (1 + 0.12 * var(--pulso, 0))));
+  opacity: var(--nasce, 0) * (1 - var(--apaga, 0));
   line-height: 1;
+  font-style: normal;
   color: #F1F1EE;
   text-shadow:
     0 0 6px rgba(255, 255, 255, .95),
     0 0 14px rgba(255, 255, 255, .7),
     0 0 26px rgba(255, 255, 255, .45);
-  opacity: var(--nasce, 0) * (1 - var(--apaga, 0));
 }
 
 #letra-y { position: relative; }
 
-/* Quem pede menos movimento: a animacao nao existe (os dois ficam invisiveis
+/* Quem pede menos movimento: a animacao nao existe (as pecas ficam invisiveis
    o tempo todo; o titulo continua legivel). */
 @media (prefers-reduced-motion: reduce) {
-  #titulo-linha, #titulo-estrela { display: none !important; }
+  #titulo-linha, #titulo-estrelas { display: none !important; }
 }
 
 /* A secao de recentes nao cresce alem do seu espaco: a faixa rola na
