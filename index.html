@@ -427,7 +427,14 @@
   // ==========================================================================
   function lerRota() {
     const h = String(location.hash || '').replace(/^#\/?/, '');
-    if (h.startsWith('jogo/')) return { tela: 'jogo', id: decodeURIComponent(h.slice(5)) };
+    if (h.startsWith('jogo/')) {
+      const cru = h.slice(5);
+      let id = cru;
+      // `decodeURIComponent` estoura em hash malformado (ex.: um `%` solto) e
+      // derrubava o roteamento -> cai no cru para nao travar.
+      try { id = decodeURIComponent(cru); } catch (e) { id = cru; }
+      return { tela: 'jogo', id: id };
+    }
     return { tela: 'home' };
   }
 
@@ -1912,6 +1919,11 @@
   }
 
   (async () => {
+    // Anti-flash: se ja' entramos numa rota de JOGO, esconde a home enquanto o
+    // catalogo carrega (senao a home aparece por um instante e "pula" pro jogo,
+    // que era o que parecia bug ao recarregar dentro de um jogo).
+    if (location.hash.startsWith('#/jogo/')) home.hidden = true;
+
     let falhou = false;
     try {
       const r = await fetch('./jogos.json', { cache: 'no-store' });
@@ -1938,35 +1950,34 @@
     montarFiltros();
     renderCatalogo();
 
-    // Link antigo (`?jogo=id`) continua funcionando: vira a rota nova. O
-    // `hashchange` cuida de entrar no jogo.
     const params = new URLSearchParams(location.search);
     const antigo = params.get('jogo');
-    if (antigo && catalogoJogos.some((j) => j.id === antigo)) {
-      if (!location.hash) { location.hash = '#/jogo/' + encodeURIComponent(antigo); return; }
-    }
-
-    // Arquivo do proprio aparelho (`?arquivo=<nome>`): vira a rota `local:`.
     const arquivoNovo = params.get('arquivo');
-    if (arquivoNovo) {
-      if (!location.hash) {
-        location.hash = '#/jogo/' + encodeURIComponent('local:' + arquivoNovo);
-        return;
-      }
-    }
 
-    // Limpa a URL SEM recarregar (o documento aqui ja esta limpo). No JOGO so
-    // tira o `?jogo=`/`?arquivo=` -- a rota `#/jogo/<id>` precisa ficar, senao
-    // o jogo nao abre. Na HOME tira tambem o hash, deixando so `/`.
-    // `history` muda apenas a URL visivel; o botao "voltar" do aparelho segue
-    // saindo do site, que e' o esperado.
-    const rotaJogo = location.hash.startsWith('#/jogo/');
-    if (rotaJogo) {
+    // 1) Limpa a URL SEM recarregar (o documento aqui ja esta limpo). No JOGO
+    // so' tira o `?jogo=`/`?arquivo=` -- a rota `#/jogo/<id>` precisa ficar,
+    // senao o jogo nao abre. Fora do jogo tira o hash tambem, deixando so' `/`.
+    // Fica ANTES de entrar no jogo pelos atalhos antigos, para a URL nao ficar
+    // com o `?jogo=`/`?arquivo=` "grudado" (era o que deixava a URL suja e
+    // confundia o botao voltar). `history` muda so' a URL visivel; o botao
+    // "voltar" do aparelho segue saindo do site, que e' o esperado.
+    if (location.hash.startsWith('#/jogo/')) {
       if (params.has('jogo') || params.has('arquivo')) {
         history.replaceState(null, '', location.pathname + location.hash);
       }
     } else if (location.hash || params.has('jogo') || params.has('arquivo')) {
       history.replaceState(null, '', location.pathname);
+    }
+
+    // 2) Atalhos antigos viram a rota nova (`?jogo=` do catalogo e
+    // `?arquivo=` do aparelho). O `hashchange` entra no jogo.
+    if (!location.hash && antigo && catalogoJogos.some((j) => j.id === antigo)) {
+      location.hash = '#/jogo/' + encodeURIComponent(antigo);
+      return;
+    }
+    if (!location.hash && arquivoNovo) {
+      location.hash = '#/jogo/' + encodeURIComponent('local:' + arquivoNovo);
+      return;
     }
 
     aplicarRota();
