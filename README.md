@@ -116,7 +116,40 @@ biblioteca e ao abrir um jogo, para não roubar CPU do emulador.
 - **Paisagem** — com o celular deitado o jogo ocupa a **tela cheia** e os controles
   ficam **+40px** maiores, flutuando sobre o jogo (o cabeçalho some e o PARAR vira
   um botão flutuante no canto)
-- **Cores por console** — a cor do tema muda conforme o console
+- **Tom por console** — a cor do tema muda conforme o console (dentro da paleta)
+
+## Tema visual
+
+Identidade **monocromática** (preto profundo / branco-gelo / cinza-prata), com
+toque japonês discreto. Todas as cores vivem em variáveis no `:root` do
+`style.css` — os nomes (`--painel`, `--acento`, ...) foram mantidos de
+propósito: como o CSS inteiro já os usa, trocar só os valores repinta o site
+sem tocar em nenhuma regra de layout.
+
+| variável | valor | uso |
+|---|---|---|
+| `--fundo` | `#08090B` | fundo principal |
+| `--painel` | `#15161A` | superfície dos cards |
+| `--painel2` | `#1B1C21` | superfície elevada |
+| `--borda` | `#2B2D33` | borda discreta |
+| `--texto` | `#F1F1EE` | branco principal |
+| `--texto2` | `#D1D2D5` | branco secundário |
+| `--fraco` | `#9699A2` | texto secundário |
+| `--acento` | `#E8E9E6` | destaque (era azul `#1d4ed8`) |
+| `--sobre-acento` | `#0B0C0F` | texto **sobre** o acento (acento claro) |
+
+Como o acento passou de azul (escuro) para branco-gelo (claro), todo lugar que
+usa `--acento` **como fundo** também troca a cor do texto para
+`--sobre-acento` — senão o texto sumiria.
+
+**As capas dos jogos continuam coloridas**: nenhum filtro global é aplicado. O
+`#game` (palco do emulador) tem `filter: none` e `mix-blend-mode: normal`,
+verificado por medição.
+
+Transições: `--t-rapida` (130ms) e `--t-media` (190ms) com `--curva`
+(`cubic-bezier`). Priorizam `opacity`/`transform`. Há
+`@media (prefers-reduced-motion: reduce)` desligando tudo para quem pede menos
+movimento.
 
 ## Hospedagem
 

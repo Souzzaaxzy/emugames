@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#08090B">
 <title>EmuGames Lizzy</title>
 <link rel="stylesheet" href="./style.css">
 
@@ -262,8 +263,10 @@
     psx: { nome: 'PlayStation', emoji: '🎮' },
     arcade: { nome: 'Arcade', emoji: '🕹️' },
   };
-  const CORES = { snes: '#1d4ed8', nes: '#b91c1c', gba: '#7c3aed', gb: '#166534',
-    genesis: '#0369a1', psx: '#475569', arcade: '#b45309' };
+  /* Tom neutro do tema, por console (era cor viva: azul, vermelho, roxo...).
+     Mantem o recurso de "a cor muda conforme o console" dentro da paleta. */
+  const CORES = { snes: '#E8E9E6', nes: '#D1D2D5', gba: '#C4C6CA', gb: '#B4B7BC',
+    genesis: '#A8ABB2', psx: '#9A9DA5', arcade: '#8E9199' };
 
   let catalogoJogos = [];
   let jogoAtual = null;
@@ -434,8 +437,8 @@
     window.EJS_pathtodata = DATA;
     window.EJS_startOnLoaded = true;
     window.EJS_language = 'pt-BR';
-    window.EJS_color = '#1d4ed8';
-    window.EJS_backgroundColor = '#0b0d12';
+    window.EJS_color = '#E8E9E6';
+    window.EJS_backgroundColor = '#08090B';
     window.EJS_volume = 0.6;
     window.EJS_askBeforeExit = false;
     window.EJS_controlScheme = j.console;
@@ -976,8 +979,8 @@
     window.EJS_pathtodata = DATA;
     window.EJS_startOnLoaded = true;
     window.EJS_language = 'pt-BR';
-    window.EJS_color = CORES[j.console] || '#1d4ed8';
-    window.EJS_backgroundColor = '#0b0d12';
+    window.EJS_color = CORES[j.console] || '#E8E9E6';
+    window.EJS_backgroundColor = '#08090B';
     window.EJS_volume = 0.6;
     window.EJS_askBeforeExit = false;
     window.EJS_controlScheme = j.console;
