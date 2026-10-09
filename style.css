@@ -1226,7 +1226,11 @@ code { background: #1a2029; padding: 1px 5px; border-radius: 4px; font-size: 12p
    vence qualquer ajuste de altura feito antes. */
 @media (min-aspect-ratio: 1/1) {
   #intro {
-    --intro-h: clamp(84px, 16vh, 190px);
+    /* Medido: no PC sobrava bastante altura (89px em 1366x768, 318px em
+       1920x1080), entao o banner de 84-190px ficava um quadradinho perdido.
+       Aqui ele usa essa sobra: ~24vh, com teto de 300px para nao virar o
+       elemento dominante da pagina. */
+    --intro-h: clamp(120px, 24vh, 300px);
     width: calc(var(--intro-h) * 16 / 9);
     max-width: 100%;
     height: var(--intro-h);
