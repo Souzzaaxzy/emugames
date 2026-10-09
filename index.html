@@ -771,15 +771,26 @@
     location.href = `./#/jogo/${enc}`;
   }
 
+  // Quantos jogos tem em cada categoria (console).
+  function contarPorConsole() {
+    const n = {};
+    for (const j of catalogoJogos) n[j.console] = (n[j.console] || 0) + 1;
+    return n;
+  }
+
   function montarFiltros() {
     const vistos = [];
     for (const j of catalogoJogos) if (!vistos.includes(j.console)) vistos.push(j.console);
+    const cont = contarPorConsole();
 
-    const itens = [{ id: 'todos', rotulo: 'Todos', emoji: '✨' }].concat(vistos.map((c) => ({
-      id: c,
-      rotulo: (CONSOLES[c] && CONSOLES[c].nome) || c.toUpperCase(),
-      emoji: (CONSOLES[c] && CONSOLES[c].emoji) || '🎮',
-    })));
+    // Cada categoria leva a CONTAGEM do lado do nome: "Todos (362)".
+    const itens = [{ id: 'todos', rotulo: 'Todos', emoji: '✨', n: catalogoJogos.length }]
+      .concat(vistos.map((c) => ({
+        id: c,
+        rotulo: (CONSOLES[c] && CONSOLES[c].nome) || c.toUpperCase(),
+        emoji: (CONSOLES[c] && CONSOLES[c].emoji) || '🎮',
+        n: cont[c] || 0,
+      })));
 
     filtros.innerHTML = '';
     for (const it of itens) {
@@ -787,7 +798,8 @@
       b.type = 'button';
       b.className = 'aba' + (it.id === filtroAtual ? ' ativa' : '');
       b.dataset.cat = it.id;
-      b.textContent = `${it.emoji} ${it.rotulo}`;
+      // `num` separado do rotulo so' para o CSS estilizar (cor mais fraca).
+      b.innerHTML = `${it.emoji} ${it.rotulo} <span class="num">(${it.n})</span>`;
       b.addEventListener('click', () => {
         filtroAtual = it.id;
         for (const x of filtros.children) x.classList.toggle('ativa', x === b);

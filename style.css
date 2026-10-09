@@ -464,6 +464,9 @@ h1 #marca { letter-spacing: 2px; }
 
 .aba {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   background: var(--painel2);
   color: var(--texto);
   border: 1px solid var(--borda);
@@ -476,6 +479,9 @@ h1 #marca { letter-spacing: 2px; }
   cursor: pointer;
   transition: background var(--t-rapida) var(--curva), border-color var(--t-rapida) var(--curva), color var(--t-rapida) var(--curva), transform var(--t-rapida) var(--curva);
 }
+/* Contagem ao lado do nome da categoria: "Nintendo (19)" */
+.aba .num { color: var(--fraco); font-weight: 700; }
+.aba.ativa .num { color: var(--sobre-acento); opacity: .7; }
 .aba.ativa {
   background: var(--acento);
   border-color: var(--acento);
