@@ -116,13 +116,26 @@ boot, então voltar/recarregar continua funcionando.
 > de Mega Drive vs. de PlayStation). `.zip`/`.7z` caem em `arcade`, que exige o
 > romset completo **e** a BIOS.
 
-### Intro em vídeo
+### Banner do topo
 
-`intro.mp4` (540×300, H.264, ~260 KB) fica no topo da home com bordas
-arredondadas, mudo, em loop e `playsinline`. O título **atravessa** a base do
-vídeo: `margin-top: -0.55em` no `h1` põe metade dele sobre o vídeo e metade
-fora (não depende do tamanho do vídeo). O vídeo só roda na home — para ao abrir
-um jogo, para não roubar CPU do emulador.
+`intro.mp4` (540×300, H.264, ~260 KB) fica no topo da home, **de ponta a ponta**
+(sem bordas arredondadas), mudo, em loop e `playsinline`. O título **atravessa**
+a base do banner: `margin-top: -0.55em` no `h1` põe metade dele sobre o banner e
+metade fora (não depende do tamanho do banner). O vídeo só roda na home — para
+ao abrir um jogo, para não roubar CPU do emulador.
+
+A **altura** do banner sai de `clamp()` por `vw`, com valor próprio por tela:
+
+| tela | altura |
+|---|---|
+| base | `clamp(220px, 30vw, 450px)` |
+| PC (`min-width: 769px`) | `clamp(260px, 30vw, 480px)` |
+| celular (`max-width: 768px`) | `clamp(180px, 45vw, 300px)` |
+
+O conteúdo (o `<video>`, ou um `<img>`/GIF) usa `object-fit: cover` +
+`object-position: center`. Como o banner é full-bleed (sangra `2 × --pad-lado`
+para fora), a `<section id="home">` recebe `overflow-x: clip` para esse sangra
+não criar **rolagem horizontal**.
 
 ### Animação do título (sincronizada com o vídeo)
 

@@ -88,6 +88,11 @@ body:not(.jogando) { padding: 0; }
      `margin-top: auto`), que agora pode passar da viewport. */
   gap: clamp(8px, 2vh, 16px);
   min-height: 100dvh;
+  /* O banner do topo e' full-bleed (sangra 2 x --pad-lado para fora). O clip
+     impede que esse sangra crie ROLAGEM HORIZONTAL em telas estreitas.
+     `clip` (nao `hidden`) mantem o eixo Y visivel, sem virar container de
+     rolagem -- a home rola na vertical normal. */
+  overflow-x: clip;
   padding: var(--pad-top)
            calc(8px + env(safe-area-inset-right, 0px))
            calc(8px + env(safe-area-inset-bottom, 0px))
@@ -111,28 +116,44 @@ body:not(.jogando) { padding: 0; }
    sobre o video, metade para fora. Como a sobra de espaco e' dividida por
    `space-between`, a home continua cabendo na tela (sem rolagem).
    ========================================================================== */
-/* O video SANGRА para as bordas: ocupa o topo INTEIRO, de ponta a ponta.
+/* O banner SANGRА para as bordas: ocupa o topo INTEIRO, de ponta a ponta.
    Ele cresce `2 * --pad-lado` alem da coluna e volta esse mesmo valor em
    `margin-left`, encostando nas duas bordas. O `margin-top` negativo cancela o
    padding de topo do `#home` e do `.cabeca` -- mas PRESERVA a safe area do
-   notch (ela nao entra na conta). */
+   notch (ela nao entra na conta).
+   ALTURA: o banner nao e' mais a faixa fina de antes -- usa a altura pedida
+   (`clamp` por `vw`), com valor proprio no PC e no celular. */
 #intro {
   /* cancela exatamente o padding de topo (o do `#home` + o do `.cabeca`) */
   margin-top: calc(-1 * (var(--pad-top) + var(--pad-cabeca-topo)));
   width: calc(100% + 2 * var(--pad-lado));
   margin-left: calc(-1 * var(--pad-lado));
-  height: clamp(108px, 24vh, 210px);
-  border-radius: 0 0 18px 18px;
+  /* BANNER PRINCIPAL */
+  height: clamp(220px, 30vw, 450px);
+  display: block;
+  position: relative;
   overflow: hidden;
+  border-radius: 0;
   background: #000;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, .45);
   line-height: 0;
 }
-#intro-video {
+/* GIF/video dentro do banner: preenche a caixa e corta o excesso, centrado.
+   Cobre o `<video>` atual E um `<img>` (caso troque por um GIF). */
+#intro-video,
+#intro img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+}
+/* COMPUTADOR */
+@media (min-width: 769px) {
+  #intro { height: clamp(260px, 30vw, 480px); }
+}
+/* CELULAR */
+@media (max-width: 768px) {
+  #intro { height: clamp(180px, 45vw, 300px); }
 }
 /* Vinheta discreta sobre a moldura do banner (cinematografico). Nao encosta no
    canvas do emulador: o emulador vive em `#game`, nao aqui. */
@@ -149,9 +170,9 @@ body:not(.jogando) { padding: 0; }
 #home .cabeca h1 {
   position: relative;
   z-index: 1;
-  /* Puxa o titulo para cima: metade da altura dele entra no video e a outra
-     metade fica de fora. O h1 tem `line-height: 1.1`, entao `-0.55em` e'
-     exatamente metade da altura -- nao depende do tamanho do video. */
+  /* Sobe o titulo sobre a base do banner: metade da altura dele entra no banner
+     e a outra metade fica de fora. O h1 tem `line-height: 1.1`, entao `-0.55em`
+     e' exatamente metade da altura -- nao depende do tamanho do banner. */
   margin-top: -0.55em;
   text-shadow: 0 2px 12px rgba(0, 0, 0, .85);
 }
@@ -1287,31 +1308,11 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
 .dica { color: var(--fraco); font-size: 12px; margin-top: 8px; }
 code { background: var(--painel2); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
 
-/* VÍDEO DO TOPO: banner 16:9 quando a tela e' larga/deitada.
-   De ponta a ponta a faixa vira um risco (medido: 1366x184 = 7,4:1 e
-   1920x210 = 9,1:1) e o `cover` cortava quase todo o video. Aqui ela passa a
-   ser um banner com a PROPORCAO REAL do video: altura e largura saem da mesma
-   conta, entao nao distorce e sempre cabe.
-   `min-aspect-ratio: 1/1` cobre PC, tablet deitado E celular deitado. Em
-   retrato (celular em pe) a faixa segue de ponta a ponta, que la ela e' quase
-   16:9 e o `cover` corta muito pouco.
-   Fica no FIM do arquivo de proposito: e' o ultimo a falar da `#intro`, entao
-   vence qualquer ajuste de altura feito antes. */
-@media (min-aspect-ratio: 1/1) {
-  #intro {
-    /* Medido: no PC sobrava bastante altura (89px em 1366x768, 318px em
-       1920x1080), entao o banner de 84-190px ficava um quadradinho perdido.
-       Aqui ele usa essa sobra: ~24vh, com teto de 300px para nao virar o
-       elemento dominante da pagina. */
-    --intro-h: clamp(120px, 24vh, 300px);
-    width: calc(var(--intro-h) * 16 / 9);
-    max-width: 100%;
-    height: var(--intro-h);
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 16px;
-  }
-}
+/* O banner do topo agora e' de ponta a ponta em TODAS as telas (nao ha mais a
+   versao 16:9 centralizada): a altura sai do `clamp` por `vw` definido acima,
+   com valores proprios para PC (`min-width: 769px`) e celular
+   (`max-width: 768px`). Fica de proposito FORA de media de orientacao, para a
+   regra do PC/celular mandar na altura em qualquer orientacao. */
 
 /* ==========================================================================
    FUNDO: kanji/simbolos japoneses espalhados, bem discretos.
