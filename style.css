@@ -45,6 +45,7 @@ body:not(.jogando) { padding: 0; }
   /* O padding do topo e' uma variavel para o video poder cancela-lo exatamente
      (ver `#intro`). Assim o full-bleed funciona em qualquer tela. */
   --pad-top: calc(8px + env(safe-area-inset-top, 0px));
+  --pad-lado: calc(8px + env(safe-area-inset-left, 0px));
   display: flex;
   flex-direction: column;
   /* Empilha do topo: recentes e biblioteca ficam juntos e os creditos vao para
@@ -54,7 +55,7 @@ body:not(.jogando) { padding: 0; }
   padding: var(--pad-top)
            calc(8px + env(safe-area-inset-right, 0px))
            calc(8px + env(safe-area-inset-bottom, 0px))
-           calc(8px + env(safe-area-inset-left, 0px));
+           var(--pad-lado);
 }
 /* `display` acima sobrepoe o `[hidden]` do navegador: sem isto, a tela
    "escondida" continuaria no layout (mesmo padrao do `#controle-painel`). */
@@ -83,9 +84,8 @@ body:not(.jogando) { padding: 0; }
 #intro {
   /* cancela exatamente o padding de topo (o do `#home` + o do `.cabeca`) */
   margin-top: calc(-1 * (var(--pad-top) + var(--pad-cabeca-topo)));
-  width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  width: calc(100% + 2 * var(--pad-lado));
+  margin-left: calc(-1 * var(--pad-lado));
   height: clamp(108px, 24vh, 210px);
   border-radius: 0 0 18px 18px;
   overflow: hidden;
@@ -1116,7 +1116,7 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
   #home, #biblioteca { padding: 6px; }
   /* Em paisagem o padding encolhe: o video tem de cancelar o valor NOVO,
      senao ele passaria do topo da tela. */
-  #home { --pad-top: 6px; }
+  #home { --pad-top: 6px; --pad-lado: 6px; }
   /* Deitado a altura e' pequena demais para caber tudo (video + recentes +
      2 cards + creditos) sem esconder alguma coisa. Aqui a home pode rolar --
      em RETRATO ela nunca rola. Assim nada some. */
@@ -1213,3 +1213,25 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
 }
 .dica { color: var(--fraco); font-size: 12px; margin-top: 8px; }
 code { background: #1a2029; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+
+/* VÍDEO DO TOPO: banner 16:9 quando a tela e' larga/deitada.
+   De ponta a ponta a faixa vira um risco (medido: 1366x184 = 7,4:1 e
+   1920x210 = 9,1:1) e o `cover` cortava quase todo o video. Aqui ela passa a
+   ser um banner com a PROPORCAO REAL do video: altura e largura saem da mesma
+   conta, entao nao distorce e sempre cabe.
+   `min-aspect-ratio: 1/1` cobre PC, tablet deitado E celular deitado. Em
+   retrato (celular em pe) a faixa segue de ponta a ponta, que la ela e' quase
+   16:9 e o `cover` corta muito pouco.
+   Fica no FIM do arquivo de proposito: e' o ultimo a falar da `#intro`, entao
+   vence qualquer ajuste de altura feito antes. */
+@media (min-aspect-ratio: 1/1) {
+  #intro {
+    --intro-h: clamp(84px, 16vh, 190px);
+    width: calc(var(--intro-h) * 16 / 9);
+    max-width: 100%;
+    height: var(--intro-h);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 16px;
+  }
+}
