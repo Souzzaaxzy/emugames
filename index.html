@@ -1248,6 +1248,26 @@
       .filter(Boolean)
       .map((g) => ({ id: g.id, index: g.index, mapping: g.mapping, nome: nomeDoControle(g.id) }));
 
+  /**
+   * Mostra/esconde os CONTROLES DE TELA conforme haja (ou nao) um controle
+   * fisico ligado.
+   *
+   * O EmulatorJS esconde os controles de toque quando um gamepad conecta, mas
+   * NAO os traz de volta quando ele desconecta -- era o bug (depois de usar o
+   * Bluetooth, os controles de tela sumiam para sempre). Aqui a gente comanda
+   * isso explicitamente: ligado = esconde; desligado = mostra.
+   */
+  function sincronizarControlesDeTela() {
+    const emu = window.EJS_emulator;
+    if (!emu || !emu.virtualGamepad) return;
+    // So' em aparelho de TOQUE: no PC o gamepad de tela e' desligado de
+    // proposito (o layout padrao decide), entao aqui nao mexemos nele.
+    const temToque = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+    if (!temToque) return;
+    const n = gamepadsConectados().length;
+    emu.virtualGamepad.style.display = n ? 'none' : '';
+  }
+
   /** Guarda o controle na lista (para reconhecer nas proximas visitas). */
   function salvarControle(gp) {
     const salvos = lerSalvos();
@@ -1380,6 +1400,11 @@
     addEventListener(ev, (e) => {
       if (ev === 'gamepadconnected' && e?.gamepad) salvarControle(e.gamepad);
       atualizarEstadoControle();
+      // Mostra/esconde os controles de TELA conforme o controle fisico. O
+      // `gamepaddisconnected` nao traz os controles de volta sozinho -> aqui
+      // eles voltam. (Pequeno atraso: o navegador atualiza a lista de gamepads
+      // logo depois do evento.)
+      setTimeout(sincronizarControlesDeTela, 60);
       // Conectou: fecha o painel sozinho depois de um instante.
       if (ev === 'gamepadconnected' && !controlePainel.hidden) setTimeout(() => abrirPainelControle(false), 1200);
     }));
@@ -1598,10 +1623,15 @@
   }
   atualizarBotaoAuto();
 
-  // O jogo terminou de ligar: libera o estado e aplica o auto-save.
+  // O jogo terminou de ligar: libera o estado, aplica o auto-save e acerta os
+  // controles de tela (o EmulatorJS cria o gamepad virtual logo depois do
+  // "start", entao conferimos aqui e de novo um instante depois).
   window.EJS_onGameStart = () => {
     estadoIniciado = true;
     autoCarregarAgora();
+    sincronizarControlesDeTela();
+    setTimeout(sincronizarControlesDeTela, 500);
+    setTimeout(sincronizarControlesDeTela, 1500);
   };
 
   // ==========================================================================
