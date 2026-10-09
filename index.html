@@ -170,9 +170,9 @@
         disablepictureinpicture preload="auto" aria-hidden="true"></video>
     </div>
     <h1>EmuGames <span id="marca"></span>
-      <!-- Animacao: a linha PRETA varre o titulo e, ao chegar no Y de "Lizzy",
-           desce e vira as 5 ESTRELAS ao redor do Y. Posicoes no JS. -->
-      <span id="titulo-linha" aria-hidden="true"></span>
+      <!-- Animacao: cada letra de "Lizzy" ACENDE (branco>preto>branco) em
+           sequencia ate o "Y" e volta; ao chegar no Y nascem as 5 ESTRELAS ao
+           redor dele. As letras sao montadas no JS; as estrelas sao aqui. -->
       <span id="titulo-estrelas" aria-hidden="true"></span>
     </h1>
     <p class="sub">Jogos direto do seu navegador</p>
@@ -323,9 +323,15 @@
     }).join('');
     var el = document.getElementById('marca');
     if (el) {
-      // O "Y" da animacao e a PRIMEIRA letra da marca ("L" de Lizzy). Marcado
-      // com um id so para o JS medir a posicao da linha.
-      el.innerHTML = '<span id="letra-y">' + BOLD.charAt(0) + '</span>' + BOLD.slice(1);
+      // Uma <span> por letra: a animacao "acende" cada letra (branco > preto >
+      // branco) em sequencia e o JS pinta cada uma. A ULTIMA letra (o "Y" de
+      // Lizzy) leva o id `letra-alvo`, que ancora as 5 estrelas.
+      var html = '';
+      for (var i = 0; i < BOLD.length; i++) {
+        var id = (i === BOLD.length - 1) ? ' id="letra-alvo"' : '';
+        html += '<span class="letra"' + id + '>' + BOLD[i] + '</span>';
+      }
+      el.innerHTML = html;
     }
   })();
 
@@ -1463,19 +1469,28 @@
   }, 5000);
 
   // ==========================================================================
-  // ANIMACAO DO TITULO (linha -> estrela), SINCRONIZADA COM O VIDEO DO TOPO
-  // A linha preta varre "EmuGames Lizzy" da esquerda para a direita, vinda de
-  // baixo; quando chega no "Y" (a marca "Lizzy") ela desce ate embaixo e vira
-  // uma estrela que brilha por 2s. Depois o ciclo recomeca.
+  // ANIMACAO DO TITULO (letras acendendo + estrelas), EM FASE COM O VIDEO
+  // Cada letra de "Lizzy" passa por branco > preto > branco em sequencia,
+  // indo da primeira ate' o "Y" e depois VOLTANDO. Quando a frente chega no Y,
+  // as 5 estrelas ao redor dele acendem.
   //
   // O ciclo inteiro dura o MESMO que uma volta do video (`intro.mp4` = 3.08s,
   // lido do proprio video), entao os dois ficam em fase -- a cada reinicio do
-  // video a linha volta ao comeco.
+  // video a animacao volta ao comeco.
   // ==========================================================================
-  const linhaTitulo = document.getElementById('titulo-linha');
   const estrelasEl = document.getElementById('titulo-estrelas');
-  const letraY = document.getElementById('letra-y');
+  const letraAlvo = document.getElementById('letra-alvo');
+  const letras = document.querySelectorAll('#marca .letra');
   const CICLO_PADRAO = 3080; // uma volta do intro.mp4, usada so como fallback
+  const N_LETRAS = letras.length;
+  // Fases do ciclo (fracao de `--p`): ida (letra 0 -> Y) e volta (Y -> letra 0).
+  const T_IDA = [0.08, 0.55];
+  const T_VOLTA = [0.55, 0.92];
+  // Meia-largura da "frente" (em letras): 0.7 = uma letra preta por vez, com o
+  // vizinho ainda parcialmente escurecido enquanto a frente se move.
+  const LARGURA = 0.7;
+  // Cores da letra: papel (normal) e preto (bem acesa).
+  const COR_PAPEL = [241, 241, 238], COR_PRETO = [9, 10, 13];
   // 5 estrelas ao redor do "Y". `x`/`y` sao deslocamentos relativos ao centro
   // do Y (em fracao da caixa dele) e `s` o tamanho relativo.
   const ESTRELAS = [
@@ -1490,8 +1505,8 @@
   let iniciotitulo = 0;
   const estrelaEls = [];
 
-  // Cria as 5 estrelas uma unica vez. Sao filhas ABSOLUTAS do `<h1>` (igual a
-  // linha), posicionadas por `left`/`top` com translate(-50%,-50%).
+  // Cria as 5 estrelas uma unica vez. Sao filhas ABSOLUTAS do `<h1>`,
+  // posicionadas por `left`/`top` com translate(-50%,-50%).
   if (estrelasEl) {
     for (let i = 0; i < ESTRELAS.length; i++) {
       const s = document.createElement('i');
@@ -1502,47 +1517,53 @@
     }
   }
 
-  // Duracao de UMA volta do video (= a "gif"). A linha fica em fase com ela.
+  // Duracao de UMA volta do video (= a "gif"). A animacao fica em fase com ela.
   function durCiclo() {
     const d = introVideo && introVideo.duration;
     return (d && isFinite(d)) ? d * 1000 : CICLO_PADRAO;
   }
 
-  // Mede o titulo e o "Y" e posiciona a linha/estrela. Roda no inicio e a cada
-  // redimensionamento (as medidas estao em px).
-  //
-  // ATENCAO (dois detalhes que ja' causaram bug):
-  //  1. a linha e a estrela sao filhas ABSOLUTAS do `<h1>`, entao `top`/`left`/
-  //     `translate` sao medidos a partir do titulo -- nao do viewport. Tudo
-  //     aqui vira coordenada LOCAL ao h1 (subtrai o canto do titulo).
-  //  2. as medidas em px vao no PROPRIO `<h1>` (ancestral comum), nao em cada
-  //     filho: a linha le `--estrela-y` (para descer) e a estrela le
-  //     `--estrela-x/-y`; se cada var ficasse so' no seu elemento, quem le a do
-  //     outro cairia no fallback (0) e a "descida" subiria.
+  function limita01(v) { return v < 0 ? 0 : (v > 1 ? 1 : v); }
+
+  /**
+   * Pinta as letras para a fracao do ciclo `p` (0..1):
+   *  - a "frente" anda de antes da letra 0 ate' o Y (ida) e volta;
+   *  - a letra sob a frente fica PRETA; as vizinhas vao clareando conforme a
+   *    frente se afasta -- o que produz branco > preto > branco por letra.
+   */
+  function pintaLetras(p) {
+    if (!N_LETRAS) return;
+    const ultima = N_LETRAS - 1;
+    const passos = ultima + LARGURA;   // de -LARGURA (fora) ate' ultima
+    let pos;
+    if (p < T_IDA[0]) {
+      pos = -LARGURA;                  // parada: tudo claro
+    } else if (p < T_IDA[1]) {
+      pos = -LARGURA + ((p - T_IDA[0]) / (T_IDA[1] - T_IDA[0])) * passos;
+    } else if (p < T_VOLTA[1]) {
+      pos = -LARGURA + (1 - (p - T_VOLTA[0]) / (T_VOLTA[1] - T_VOLTA[0])) * passos;
+    } else {
+      pos = -LARGURA;                  // parada: tudo claro
+    }
+    for (let i = 0; i < N_LETRAS; i++) {
+      const a = limita01(1 - Math.abs(pos - i) / LARGURA);
+      const r = Math.round(COR_PAPEL[0] + (COR_PRETO[0] - COR_PAPEL[0]) * a);
+      const g = Math.round(COR_PAPEL[1] + (COR_PRETO[1] - COR_PAPEL[1]) * a);
+      const b = Math.round(COR_PAPEL[2] + (COR_PRETO[2] - COR_PAPEL[2]) * a);
+      letras[i].style.color = 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+  }
+
+  // Mede o "Y" e posiciona as estrelas ao redor dele. Roda no inicio e a cada
+  // redimensionamento (as medidas estao em px, LOCAIS ao `<h1>`, porque as
+  // estrelas sao filhas absolutas dele -- nao do viewport).
   function olharTitulo() {
     const h1 = document.querySelector('#home .cabeca h1');
-    if (!h1 || !linhaTitulo || !estrelasEl || !letraY) return;
-    const cs = getComputedStyle(h1);
-    const lh = cs.lineHeight === 'normal' ? parseFloat(cs.fontSize) * 1.2 : parseFloat(cs.lineHeight);
+    if (!h1 || !estrelasEl || !letraAlvo) return;
     const h1r = h1.getBoundingClientRect();
-    const y = letraY.getBoundingClientRect();
-
-    const linhaTopo = lh * 0.5;                         // linha um pouco acima do centro
-    const centroY = (y.top - h1r.top) + y.height * 0.5; // centro do "Y", local
-    const linhaFimX = (y.left - h1r.left) + y.width * 0.5;  // centro do "Y"
+    const y = letraAlvo.getBoundingClientRect();
     const estrelaX = (y.left - h1r.left) + y.width * 0.5;
-    // A linha desce ate' logo abaixo do "Y" e as estrelas se distribuem ao
-    // redor desse ponto (colado na letra).
-    const estrelaY = centroY + y.height * 0.5;
-
-    h1.style.setProperty('--linha-top', linhaTopo + 'px');
-    h1.style.setProperty('--linha-comeca', '-14px');   // comeca fora, a' esquerda
-    h1.style.setProperty('--linha-fim', linhaFimX + 'px');
-    h1.style.setProperty('--estrela-x', estrelaX + 'px');
-    h1.style.setProperty('--estrela-y', estrelaY + 'px');
-    // A linha pega a LETRA TODA do Y (altura completa), nao so um trecho.
-    if (y.height) h1.style.setProperty('--linha-h', y.height + 'px');
-    // Cada estrela ao redor do Y (deslocamento em fracao da caixa dele).
+    const estrelaY = (y.top - h1r.top) + y.height * 1.0; // logo abaixo do Y
     for (let i = 0; i < estrelaEls.length; i++) {
       const e = ESTRELAS[i];
       const st = estrelaEls[i].style;
@@ -1553,10 +1574,11 @@
   }
 
   function iniciarAnimTitulo() {
-    if (!linhaTitulo || !estrelasEl || !letraY) return;
+    if (!estrelasEl || !letraAlvo || !N_LETRAS) return;
     olharTitulo();
-    // Quem pede menos movimento nao ve a animacao (o CSS a esconde): nao vale
-    // gastar um quadro por frame com ela.
+    pintaLetras(0); // titulo todo claro ate' a animacao comecar
+    // Quem pede menos movimento nao ve a animacao (o CSS esconde as estrelas):
+    // nao vale gastar um quadro por frame com ela.
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     iniciotitulo = 0;
     if (animTitulo == null) animTitulo = requestAnimationFrame(andarTitulo);
@@ -1565,15 +1587,14 @@
   function pararAnimTitulo() {
     if (animTitulo != null) cancelAnimationFrame(animTitulo);
     animTitulo = null;
-    // Deixa a linha/estrelas escondidas quando a home sai de cena.
-    if (linhaTitulo) linhaTitulo.style.setProperty('--p', '0');
+    pintaLetras(0); // deixa o titulo claro quando a home sai de cena
     if (estrelasEl) estrelasEl.style.setProperty('--p', '0');
   }
 
   function andarTitulo(ts) {
     if (!iniciotitulo) iniciotitulo = ts;
     const v = introVideo;
-    // Fonte de verdade: o VIDEO. Assim a linha fica SEMPRE em fase com a gif.
+    // Fonte de verdade: o VIDEO. Assim a animacao fica SEMPRE em fase com a gif.
     // Sem metadados (ou video parado), cai no relogio com a mesma duracao.
     let frac;
     if (v && v.duration && isFinite(v.duration) && !v.paused) {
@@ -1581,9 +1602,9 @@
     } else {
       frac = ((ts - iniciotitulo) / durCiclo()) % 1;
     }
-    const p = Math.min(0.9999, Math.max(0, frac)).toFixed(4);
-    linhaTitulo.style.setProperty('--p', p);
-    estrelasEl.style.setProperty('--p', p);
+    const p = Math.min(0.9999, Math.max(0, frac));
+    pintaLetras(p);
+    estrelasEl.style.setProperty('--p', p.toFixed(4));
     animTitulo = requestAnimationFrame(andarTitulo);
   }
 

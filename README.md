@@ -119,30 +119,31 @@ um jogo, para não roubar CPU do emulador.
 
 ### Animação do título (sincronizada com o vídeo)
 
-O título **EmuGames Lizzy** tem uma animação em loop: uma **linha preta** (que
-cobre a **altura toda** da letra) varre o nome da esquerda para a direita; ao
-chegar no **"Y"** (a marca "Lizzy") ela **desce** e viram **5 estrelas** que
-brilham por cerca de 2s, distribuídas **ao redor do Y**. Depois o ciclo
-recomeça.
+O título **EmuGames Lizzy** tem uma animação em loop. Cada letra de "Lizzy"
+**acende** em sequência — passa por **branco → preto → branco** — indo da
+primeira letra até o **"Y"** e depois **voltando**. Quando a frente chega no Y,
+acendem **5 estrelas** ao redor dele, que brilham por cerca de 2s. Depois o
+ciclo recomeça.
 
 O truque está na **sincronia**: o JS lê o `currentTime` e a `duration` do
-`intro.mp4` e publica a fração do ciclo em `--p` (0..1) no `<h1>`, a cada
-quadro. O CSS só traduz `--p` em posição/opacidade via
-`clamp(0, (var(--p) - a) / b, 1)` — nada de tempo no CSS, então a linha
-**nunca sai de fase com a gif**: a cada reinício do vídeo a linha volta ao
-começo. O player do título dura 3,08s (uma volta do vídeo).
+`intro.mp4` e usa a fração do ciclo (0..1) a cada quadro. Ele **pinta a cor de
+cada letra** direto (`rgb(...)`) e publica a mesma fração em `--p` no wrapper
+das estrelas — então nada **nunca sai de fase com a gif**: a cada reinício do
+vídeo a animação volta ao começo. O ciclo dura 3,08s (uma volta do vídeo).
 
-O JS mede o `<h1>` e a letra `#letra-y` e escreve as medidas em px **no
-próprio `<h1>`** (ancestral comum das peças). Três cuidados que já quebraram a
-animação: as peças são filhas **absolutas** do `h1`, então as medidas são
-**locais ao h1** (não ao viewport); as variáveis de medida ficam no `h1` porque
-a linha lê `--estrela-y` para descer — se cada `--var` ficasse só no seu
-elemento, quem lê a do outro cairia no fallback `0`; e o `scale()` do "pop"
-fica **em cada estrela**, não no wrapper (o wrapper tem 0×0, então um
-`scale()` nele escalaria em torno da origem do `h1` e **moveria** as estrelas).
+O "preenchimento" é uma **frente** que anda pelo índice das letras: a letra sob
+a frente fica preta e as vizinhas clareiam conforme ela se afasta — o que
+produz o branco→preto→branco por letra. As fases (ida `0.08..0.55`, volta
+`0.55..0.92`) e a largura da frente estão no topo da seção, no `index.html`.
 
-As 5 estrelas são posicionadas por deslocamentos relativos ao centro do Y
-(frações da caixa dele) no array `ESTRELAS`, no topo da seção.
+As letras são montadas no JS: uma `<span class="letra">` por caractere, e a
+última (o "Y") leva o id `letra-alvo`, que ancora as estrelas. As 5 estrelas
+são posicionadas por deslocamentos relativos ao centro do Y (frações da caixa
+dele) no array `ESTRELAS`. Dois cuidados que já quebraram a animação: as
+estrelas são filhas **absolutas** do `<h1>`, então as medidas são **locais ao
+h1** (não ao viewport); e o `scale()` do "pop" fica **em cada estrela**, não no
+wrapper (o wrapper tem 0×0, então um `scale()` nele escalaria em torno da
+origem do `h1` e **moveria** as estrelas).
 
 Com `prefers-reduced-motion: reduce` a animação é escondida (CSS) e o loop de
 `requestAnimationFrame` nem começa (JS).
