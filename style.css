@@ -45,45 +45,28 @@ body:not(.jogando) { padding: 0; }
   /* O padding do topo e' uma variavel para o video poder cancela-lo exatamente
      (ver `#intro`). Assim o full-bleed funciona em qualquer tela. */
   --pad-top: calc(8px + env(safe-area-inset-top, 0px));
-  --pad-lado: calc(8px + env(safe-area-inset-left, 0px));
   display: flex;
   flex-direction: column;
   /* Empilha do topo: recentes e biblioteca ficam juntos e os creditos vao para
      o rodape via `margin-top: auto` (ver `#creditos`). */
   gap: clamp(8px, 2vh, 16px);
-  /* `min-height` em vez de `height` fixo: em tela ALTA a home ocupa exatamente
-     a viewport (e os cards de perfil absorvem a sobra, preenchendo o vazio);
-     em tela BAIXA ela cresce o necessario em vez de espremer/estourar. */
-  height: auto;
-  min-height: 100dvh;
+  height: 100dvh;
   padding: var(--pad-top)
            calc(8px + env(safe-area-inset-right, 0px))
            calc(8px + env(safe-area-inset-bottom, 0px))
-           var(--pad-lado);
+           calc(8px + env(safe-area-inset-left, 0px));
 }
 /* `display` acima sobrepoe o `[hidden]` do navegador: sem isto, a tela
    "escondida" continuaria no layout (mesmo padrao do `#controle-painel`). */
 #home[hidden],
 #biblioteca[hidden] { display: none; }
-
-/*
-  O conteudo ocupa a largura toda da tela; quem limita e' o PC (ver o bloco
-  `DESKTOP` no fim do arquivo), onde a coluna vira 2 colunas lado a lado.
-  Aqui so garantimos que nada estoure a largura.
-*/
-#home > *,
-#biblioteca > * {
-  width: 100%;
-  max-width: 100%;
-}
 @supports not (height: 100dvh) {
-  #home { min-height: 100vh; }
+  #home { height: 100vh; }
 }
 #home .cabeca {
-  /* Sem padding lateral: quem sangra e' o `#intro`, que precisa encostar nas
-     bordas. O topo continua sendo um valor cancelavel pelo video. */
+  /* o padding do topo e' o do `#home`; aqui so os 4px laterais + base */
   --pad-cabeca-topo: 4px;
-  padding: var(--pad-cabeca-topo) 0 0;
+  padding: var(--pad-cabeca-topo) 4px 0;
 }
 
 /* ==========================================================================
@@ -93,20 +76,18 @@ body:not(.jogando) { padding: 0; }
    `space-between`, a home continua cabendo na tela (sem rolagem).
    ========================================================================== */
 /* O video SANGRА para as bordas: ocupa o topo INTEIRO, de ponta a ponta.
-   Ele cresce `2 * --pad-lado` alem da coluna e volta esse mesmo valor em
-   `margin-left`, encostando nas duas bordas. O `margin-top` negativo cancela o
-   padding de topo do `#home` e do `.cabeca` -- mas PRESERVA a safe area do
-   notch (ela nao entra na conta). */
+   `width: 100vw` + o truque do `translateX(-50%)` deixa o elemento mais largo
+   que o container. O `margin-top` negativo cancela o padding do `.cabeca` (4)
+   e o do `#home` (8), encostando o video no topo -- mas PRESERVANDO a safe
+   area do notch (ela nao entra na conta). */
 #intro {
-  /* cancela exatamente o padding de topo e o LATERAL: sem isso o video
-     ficaria 8px menor que a tela de cada lado. `calc(100% + 2*pad)` em vez de
-     `100vw` -- o `100vw` inclui a barra de rolagem e criava overflow. */
+  /* cancela exatamente o padding de topo (o do `#home` + o do `.cabeca`) */
   margin-top: calc(-1 * (var(--pad-top) + var(--pad-cabeca-topo)));
-  width: calc(100% + 2 * var(--pad-lado));
-  margin-left: calc(-1 * var(--pad-lado));
-  height: clamp(104px, 19vh, 210px);
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: clamp(108px, 24vh, 210px);
   border-radius: 0 0 18px 18px;
-
   overflow: hidden;
   background: #05070a;
   box-shadow: 0 8px 22px rgba(0, 0, 0, .45);
@@ -116,8 +97,6 @@ body:not(.jogando) { padding: 0; }
   display: block;
   width: 100%;
   height: 100%;
-  /* `cover`: mantem a proporcao e cobre a faixa. Com `fill` o video era
-     ESTICADO (achatado) -- no PC a faixa e' muito mais larga que o video. */
   object-fit: cover;
 }
 #home .cabeca h1 {
@@ -133,9 +112,7 @@ body:not(.jogando) { padding: 0; }
 /* A secao de recentes nao cresce alem do seu espaco: a faixa rola na
    horizontal e nunca empurra o resto para fora da tela. */
 #recentes {
-  /* Tamanho NATURAL e sem encolher: a faixa nunca e' cortada (tem overflow
-     hidden) nem espremida. Quem absorve a sobra sao os cards de perfil. */
-  flex: 0 0 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: clamp(6px, 1.6vh, 12px);
@@ -294,85 +271,48 @@ h1 {
 h1 #marca { letter-spacing: 2px; }
 .cabeca .sub { color: var(--fraco); font-size: 13px; margin-top: 7px; }
 
-/* Mini aba de CREDITOS: um card RETANGULAR embaixo do outro (Kannon primeiro).
+/* Mini aba de CREDITOS: dois perfis lado a lado (esquerda/direita).
    Usa os mesmos tokens do resto do site (painel, borda, acento).
    `margin-top: auto` empurra os cards para o RODAPE da home. */
 #creditos {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  /* Absorve TODA a sobra da home: e' isso que faz os cards ficarem grandes e
-     o vazio sumir. SEM `min-height: 0`: com ele o flex encolhia abaixo do
-     conteudo e os cards vazavam para fora da tela (o documento ganhava
-     rolagem). Assim ele cresce quando sobra e nunca encolhe abaixo do natural. */
-  flex: 1 1 auto;
-  margin-top: clamp(8px, 2vh, 16px);
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 10px;
+  /* Sobe os cards para o rodape (a sobra da home vira este `auto`). O rodape
+     ficou mais alto com papel + nome + 2 botoes, entao a folga de baixo e'
+     minima -- em tela baixa quem cede sao os cards de recentes. */
+  margin-top: auto;
   margin-bottom: clamp(2px, 1vh, 10px);
 }
-/* Os dois cards crescem igualmente e ficam com a MESMA altura (o nome do
-   Kannon e' maior e, sem isto, o card dele ficava mais alto que o do M06).
-   `min-content` impede que encolham ABAIXO do conteudo em telas muito baixas:
-   nesse caso a home cresce (rola) em vez de cortar o card. */
-.perfil { flex: 1 1 0; min-height: min-content; }
-/*
-  Card retangular com TUDO empilhado e centralizado:
-      papel
-      nome
-      [ botao do WhatsApp ]
-      [ botao do canal ]
-  O card CRESCE em altura (`flex: 1 1 0` dentro do `#creditos`, que absorve a
-  sobra do `#home`), entao ele preenche o vazio do rodape em vez de deixar
-  buraco.
-*/
 .perfil {
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  /* O padding lateral e' uma variavel: os botoes cancelam ele para irem de
-     PONTA A PONTA do card (ver `.perfil-botoes`). */
-  --pad-x: clamp(10px, 3vw, 18px);
-  gap: clamp(2px, 0.5vh, 5px);
-  /* Tudo em `vh`: o card encolhe junto com a tela, entao os dois cabem sem
-     empurrar a home para fora. */
-  padding: clamp(6px, 1.3vh, 16px) 0 clamp(6px, 1.3vh, 14px);
+  gap: 8px;
+  padding: 12px 10px;
   background: var(--painel);
   border: 1px solid var(--borda);
-  border-radius: 16px;
+  border-radius: 14px;
   text-align: center;
 }
-/* Botoes UM EMBAIXO DO OUTRO, cada um de PONTA A PONTA do card.
-   As margens negativas cancelam o padding lateral do card, entao os botoes
-   ocupam a largura INTEIRA dele. */
-.perfil-botoes {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  align-self: stretch;
-  gap: clamp(4px, 0.8vh, 7px);
-  width: 100%;
-  margin: clamp(5px, 1vh, 10px) 0 0;
-}
-/* Papel de cada um (Criador / Parceiro), discreto ao lado do nome. */
+/* Papel de cada um (Criador / Parceiro), discreto acima do nome. */
 .perfil-papel {
-  padding-inline: var(--pad-x);
   font-size: clamp(9.5px, 2.7vw, 11px);
   font-weight: 800;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--fraco);
-  white-space: nowrap;
 }
 .perfil-nome {
   font-size: clamp(14px, 4.4vw, 17px);
   font-weight: 800;
   letter-spacing: .5px;
   line-height: 1.2;
-  padding-inline: var(--pad-x);
   color: var(--texto);
-  /* Nunca quebra: o nome do Kannon e' maior e, quebrando, o card dele ficava
-     mais alto que o do M06. Assim os dois cards ficam identicos. */
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 /* Botao do canal, abaixo da caixinha do WhatsApp. */
@@ -381,7 +321,7 @@ h1 #marca { letter-spacing: 2px; }
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: clamp(6px, 1vh, 10px) 12px;
+  padding: 7px 10px;
   background: transparent;
   border: 1px solid var(--borda);
   border-radius: 999px;
@@ -407,7 +347,7 @@ h1 #marca { letter-spacing: 2px; }
   justify-content: center;
   gap: 6px;
   width: 100%;
-  padding: clamp(6px, 1vh, 10px) 14px;
+  padding: 9px 12px;
   background: var(--painel2);
   border: 1px solid var(--borda);
   border-radius: 10px;
@@ -432,10 +372,8 @@ h1 #marca { letter-spacing: 2px; }
   outline-offset: 2px;
   border-color: #fbbf24;
 }
-/* Em telas MUITO estreitas os botoes do canal encolhem para caber na linha. */
-@media (max-width: 360px) {
-  .perfil-canal { padding: 7px 9px; font-size: 10px; }
-}
+/* Os dois perfis ficam SEMPRE lado a lado: empilhar roubaria altura e
+   quebraria a regra de "home sem rolagem". Em tela estreita eles so encolhem. */
 
 /* Abas de categoria: rolam na horizontal quando nao cabem */
 #filtros {
@@ -653,9 +591,6 @@ h1 #marca { letter-spacing: 2px; }
   border-color: #fbbf24;
 }
 .card:focus-visible { transform: scale(1.04); z-index: 2; }
-
-
-
 @media (min-width: 1400px) {
   #grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
   .aba { padding: 12px 20px; font-size: 14px; }
@@ -674,68 +609,31 @@ h1 #marca { letter-spacing: 2px; }
    HOME EM TELA BAIXA (celulares pequenos, ou paisagem)
    Compacta espacos e cards para tudo caber sem rolagem, SEM esconder nada.
    ========================================================================== */
-/* Telas de altura media (celular comum, laptop): o card de recentes encolhe um
-   pouco. Ele e' o maior bloco flexivel da home -- sem isso o total passava da
-   viewport e a pagina ganhava rolagem (ou o card era cortado). */
-@media (max-height: 980px) {
-  /* O video cede altura e os vaos encolhem: o espaco liberado vai para os
-     cards de perfil, que ficam ~5px mais altos (o pedido era +15px, mas o
-     espaco esta apertado -- entao fica o +5px). */
-  #intro { height: clamp(80px, 11.5vh, 140px); }
-  #recentes-lista .card-mini { width: clamp(80px, 11vh, 112px); }
-  #home { gap: clamp(5px, 1vh, 10px); }
-  #creditos { margin-top: clamp(5px, 1vh, 10px); margin-bottom: 2px; }
-}
-
-/* Laptops e celulares de altura media: os cards de perfil (que agora tem os
-   DOIS botoes empilhados) precisam encolher mais para a home caber. */
-@media (max-height: 820px) {
-  .perfil { padding: 6px 0; gap: 1px; }
-  .perfil-botoes { gap: 4px; margin-top: 4px; }
-  .perfil-zap, .perfil-canal { padding: 5px 12px; font-size: 10.5px; }
-  .perfil-nome { font-size: 14px; }
-  .perfil-papel { font-size: 9.5px; }
-}
-
 @media (max-height: 700px) {
-  #home { gap: 5px; }
+  #home { gap: 6px; }
   #home .cabeca { --pad-cabeca-topo: 0px; }
   h1 { font-size: clamp(20px, 5.6vw, 26px); }
-  .cabeca .sub { margin-top: 3px; font-size: 12px; }
+  .cabeca .sub { margin-top: 4px; font-size: 12px; }
   #recentes .secao-titulo { font-size: 11.5px; }
-  #recentes-lista { padding-bottom: 3px; }
+  #recentes-lista { padding-bottom: 4px; }
   /* o card ENCOLHE: sem isso o titulo + o card nao caberiam e a faixa cortava */
-  #recentes-lista .card-mini { width: clamp(58px, 14vh, 84px); }
+  #recentes-lista .card-mini { width: clamp(62px, 17vh, 92px); }
   #recentes-lista .card-mini .nome { font-size: 10px; }
   #recentes-vazio { padding: 7px 0; font-size: 11.5px; }
-  #abrir-biblioteca, #abrir-arquivo { padding: 7px 12px; }
-  .bib-icone { width: 32px; height: 32px; font-size: 16px; }
-  #creditos { gap: 5px; margin-top: 4px; margin-bottom: 2px; }
-  .perfil { padding: 5px 0; gap: 1px; }
+  .perfil { padding: 7px 8px; gap: 4px; }
   .perfil-papel { font-size: 9.5px; }
-  .perfil-nome { font-size: 13px; }
-  .perfil-botoes { gap: 4px; margin-top: 4px; }
-  .perfil-zap, .perfil-canal { padding: 5px 10px; font-size: 10px; }
+  .perfil-nome { font-size: 13.5px; }
+  .perfil-zap { padding: 6px 9px; font-size: 10.5px; }
+  .perfil-canal { padding: 5px 8px; font-size: 10px; }
+  .bib-icone { width: 34px; height: 34px; font-size: 17px; }
 }
-/* Telas MUITO baixas (320x480, 320x568, paisagem): compacta tudo. Como a home
-   usa `min-height`, ela cresce em vez de cortar -- aqui so minimizamos o quanto
-   cresce, para caber na viewport sempre que der. */
-@media (max-height: 620px) {
-  #home { gap: 4px; }
-  /* O video cede mais altura aqui para os cards de perfil crescerem. */
-  #intro { height: clamp(60px, 12.5vh, 100px); }
-  #recentes .secao-titulo { font-size: 11px; }
-  #recentes-lista .card-mini { width: clamp(46px, 12vh, 64px); }
-  #recentes-lista .card-mini .nome { font-size: 9.5px; }
-  #abrir-biblioteca, #abrir-arquivo { padding: 6px 10px; }
-  .bib-icone { width: 30px; height: 30px; font-size: 15px; }
+@media (max-height: 560px) {
+  #home { gap: 5px; }
+  #recentes-lista .card-mini { width: clamp(54px, 15vh, 72px); }
   .bib-desc { display: none; }
-  #creditos { gap: 4px; margin-top: 2px; margin-bottom: 2px; }
-  .perfil { padding: 4px 0; gap: 1px; }
-  .perfil-papel { font-size: 9px; }
-  .perfil-nome { font-size: 12px; }
-  .perfil-botoes { gap: 3px; margin-top: 3px; }
-  .perfil-zap, .perfil-canal { padding: 4px 10px; font-size: 9.5px; }
+  .perfil { padding: 6px 6px; gap: 3px; }
+  .perfil-zap { padding: 5px 7px; }
+  .perfil-canal { padding: 4px 7px; }
 }
 
 /* ==========================================================================
@@ -1216,9 +1114,16 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
   body { padding: 0; }
   #barra, #controles { display: none; }
   #home, #biblioteca { padding: 6px; }
-  /* Em paisagem o padding encolhe (6px): as DUAS variaveis tem de acompanhar,
-     senao o video cancela um valor que nao e' o real e sobra overflow. */
-  #home { --pad-top: 6px; --pad-lado: 6px; }
+  /* Em paisagem o padding encolhe: o video tem de cancelar o valor NOVO,
+     senao ele passaria do topo da tela. */
+  #home { --pad-top: 6px; }
+  /* Deitado a altura e' pequena demais para caber tudo (video + recentes +
+     2 cards + creditos) sem esconder alguma coisa. Aqui a home pode rolar --
+     em RETRATO ela nunca rola. Assim nada some. */
+  #home { height: auto; min-height: 100dvh; }
+  @supports not (height: 100dvh) {
+    #home { min-height: 100vh; }
+  }
 
   /* Deitado, a secao do jogo passa a ocupar tudo SOZINHA — nao precisa mais
      tocar no botao de tela cheia. */
@@ -1308,67 +1213,3 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
 }
 .dica { color: var(--fraco); font-size: 12px; margin-top: 8px; }
 code { background: #1a2029; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
-
-/* ==========================================================================
-   DESKTOP (>= 900px)
-   O layout de celular (coluna unica) ficava uma tira estreita no meio da tela,
-   com muito vazio dos lados. Aqui a MESMA linguagem visual vira um painel:
-   conteudo com teto de largura, recentes em grade e os dois cards de perfil
-   lado a lado. Nada e' escondido -- so' reposicionado.
-   ========================================================================== */
-@media (min-width: 900px) {
-  #home {
-    /* `100%` com o padding do #home ja descontado: sem isso o painel estoura
-       a largura em telas largas e BAIXAS (paisagem de celular, 740x360). */
-    --desk: min(100%, 1040px);
-    max-width: 100%;
-    gap: clamp(10px, 1.6vh, 20px);
-  }
-  /* Conteudo centralizado num painel; o video fica de fora (sangra) */
-  #home > *:not(.cabeca) {
-    width: 100%;
-    max-width: var(--desk);
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Cabecalho: video de um lado, titulo do outro (aproveita a largura) */
-  #home .cabeca {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: clamp(14px, 2vw, 28px);
-    max-width: var(--desk);
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    padding-bottom: clamp(4px, 1vh, 10px);
-  }
-  #home .cabeca h1 { margin-top: 0; }
-  #intro {
-    /* 16:9 sempre (sem achatar) e cabendo na altura disponivel */
-    --intro-h: clamp(84px, 16vh, 190px);
-    height: var(--intro-h);
-    width: calc(var(--intro-h) * 16 / 9);
-    max-width: 100%;
-    margin: 0;
-    border-radius: 16px;
-  }
-
-  /* Recentes: grade (aproveita a largura) em vez de faixa que rola */
-  #recentes-lista {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
-    overflow: visible;
-    padding-bottom: 0;
-  }
-  #recentes-lista .card-mini { width: auto; }
-
-  /* Os botoes de acesso lado a lado (em vez de um sob o outro) */
-  #home .bib-par { display: flex; gap: 12px; }
-  #home .bib-par > * { margin-top: 0; flex: 1 1 0; }
-
-  /* Os dois cards de perfil LADO A LADO (a home tem largura de sobra) */
-  #creditos { flex-direction: row; gap: 14px; }
-  #creditos .perfil { flex: 1 1 0; }
-}
