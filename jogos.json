@@ -1321,7 +1321,7 @@
     },
     {
       "id": "ddragon",
-      "nome": "Double Dragon",
+      "nome": "Double Dragon (World)",
       "emoji": "🕹️",
       "console": "arcade",
       "capa": "ddragon.gif",
@@ -1330,7 +1330,7 @@
     },
     {
       "id": "doubledr",
-      "nome": "Double Dragon",
+      "nome": "Double Dragon (Neo-Geo)",
       "emoji": "🕹️",
       "console": "arcade",
       "capa": "doubledr.gif",
