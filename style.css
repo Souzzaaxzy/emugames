@@ -324,16 +324,16 @@ h1 #marca { letter-spacing: 2px; }
 
 /* Mini aba de CREDITOS: dois perfis lado a lado (esquerda/direita).
    Usa os mesmos tokens do resto do site (painel, borda, acento).
-   Fica no FIM natural da home (depois de todos os jogos). */
+   Fica LOGO ABAIXO do cabecalho, antes de "Jogados recentemente". */
 #creditos {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  gap: 10px;
-  /* So um respiro antes dos perfis: como a home agora rola, os creditos sao o
-     ultimo bloco da pagina, nao mais um rodape fixo de uma tela so. */
-  margin-top: clamp(6px, 2vh, 20px);
-  margin-bottom: clamp(2px, 1vh, 10px);
+  /* 25% menor em ALTURA: so' o ritmo VERTICAL encolhe (gap e paddings de
+     cima/baixo). O padding de LADO fica igual, entao a LARGURA nao muda. */
+  gap: 7.5px;                 /* era 10px  (-25%) */
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .perfil {
   flex: 1 1 0;
@@ -341,23 +341,24 @@ h1 #marca { letter-spacing: 2px; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 12px 10px;
+  gap: 6px;                   /* era 8px   (-25%) */
+  padding: 9px 10px;          /* topo/base 12 -> 9 (-25%); lados intactos */
   background: var(--painel);
   border: 1px solid var(--borda);
   border-radius: 14px;
   text-align: center;
 }
-/* Papel de cada um (Criador / Parceiro), discreto acima do nome. */
+/* Papel de cada um (Criador / Parceiro), discreto acima do nome.
+   As fontes encolhem 25% para a altura cair junto (os vh/vw tambem). */
 .perfil-papel {
-  font-size: clamp(9.5px, 2.7vw, 11px);
+  font-size: clamp(7.1px, 2.03vw, 8.25px);  /* era 9.5 / 2.7vw / 11 */
   font-weight: 800;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--fraco);
 }
 .perfil-nome {
-  font-size: clamp(14px, 4.4vw, 17px);
+  font-size: clamp(10.5px, 3.3vw, 12.75px);  /* era 14 / 4.4vw / 17 */
   font-weight: 800;
   letter-spacing: .5px;
   line-height: 1.2;
@@ -371,12 +372,12 @@ h1 #marca { letter-spacing: 2px; }
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 7px 10px;
+  padding: 5.25px 10px;   /* topo/base 7 -> 5.25 (-25%); lados intactos */
   background: transparent;
   border: 1px solid var(--borda);
   border-radius: 999px;
   color: var(--fraco);
-  font-size: 10.5px;
+  font-size: 7.875px;     /* era 10.5 (-25%) */
   font-weight: 700;
   letter-spacing: .4px;
   text-decoration: none;
@@ -395,20 +396,20 @@ h1 #marca { letter-spacing: 2px; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4.5px;             /* era 6px (-25%) */
   width: 100%;
-  padding: 9px 12px;
+  padding: 6.75px 12px;   /* topo/base 9 -> 6.75 (-25%); lados intactos */
   background: var(--painel2);
   border: 1px solid var(--borda);
   border-radius: 10px;
   color: var(--texto);
-  font-size: 11.5px;
+  font-size: 8.625px;     /* era 11.5 (-25%) */
   font-weight: 700;
   letter-spacing: .4px;
   text-decoration: none;
   transition: background var(--t-rapida) var(--curva), border-color var(--t-rapida) var(--curva), color var(--t-rapida) var(--curva), transform var(--t-rapida) var(--curva);
 }
-.perfil-zap .zap-icone { font-size: 14px; line-height: 1; }
+.perfil-zap .zap-icone { font-size: 10.5px; line-height: 1; }
 .perfil-zap:active { transform: scale(.97); }
 @media (hover: hover) {
   .perfil-zap:hover {
@@ -696,20 +697,21 @@ h1 #marca { letter-spacing: 2px; }
   #recentes-lista .card-mini { width: clamp(62px, 17vh, 92px); }
   #recentes-lista .card-mini .nome { font-size: 10px; }
   #recentes-vazio { padding: 7px 0; font-size: 11.5px; }
-  .perfil { padding: 7px 8px; gap: 4px; }
-  .perfil-papel { font-size: 9.5px; }
-  .perfil-nome { font-size: 13.5px; }
-  .perfil-zap { padding: 6px 9px; font-size: 10.5px; }
-  .perfil-canal { padding: 5px 8px; font-size: 10px; }
+  /* perfis 25% menores tambem nestas telas (so' o eixo vertical) */
+  .perfil { padding: 5.25px 8px; gap: 3px; }
+  .perfil-papel { font-size: 7.125px; }
+  .perfil-nome { font-size: 10.125px; }
+  .perfil-zap { padding: 4.5px 9px; font-size: 7.875px; }
+  .perfil-canal { padding: 3.75px 8px; font-size: 7.5px; }
   .bib-icone { width: 34px; height: 34px; font-size: 17px; }
 }
 @media (max-height: 560px) {
   #home { gap: 5px; }
   #recentes-lista .card-mini { width: clamp(54px, 15vh, 72px); }
   .bib-desc { display: none; }
-  .perfil { padding: 6px 6px; gap: 3px; }
-  .perfil-zap { padding: 5px 7px; }
-  .perfil-canal { padding: 4px 7px; }
+  .perfil { padding: 4.5px 6px; gap: 2.25px; }
+  .perfil-zap { padding: 3.75px 7px; }
+  .perfil-canal { padding: 3px 7px; }
 }
 
 /* ==========================================================================

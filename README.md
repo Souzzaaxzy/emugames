@@ -42,10 +42,10 @@ emugames/                    <- ESTE repositório (o site)
 
 ## Telas e rotas
 
-Só existe **uma tela** (a home): cabeçalho, jogos recentes, botão de abrir do
-aparelho, **busca**, **categorias** e **todos os jogos** — e, no fim da página,
-o card de perfis (créditos). A antiga tela de **biblioteca** deixou de existir;
-a lista completa vive na própria home.
+Só existe **uma tela** (a home): cabeçalho, **card de perfis (créditos)** logo
+abaixo dele, jogos recentes, botão de abrir do aparelho, **busca**,
+**categorias** e **todos os jogos**. A antiga tela de **biblioteca** deixou de
+existir; a lista completa vive na própria home.
 
 ```
 /                        → home (URL limpa, sem hash)
@@ -68,9 +68,16 @@ ao abrir o jogo; a home só o exibe.
 ### Home rolável
 
 `#home` tem `min-height: 100dvh` (com fallback `100vh`) e empilha as áreas com
-Flexbox. Como agora ela mostra a lista completa, a página **rola na vertical**;
-os créditos são o último bloco (já não usam `margin-top: auto`). A faixa de
-recentes e a barra de categorias rolam na horizontal.
+Flexbox. Como agora ela mostra a lista completa, a página **rola na vertical**.
+A faixa de recentes e a barra de categorias rolam na horizontal.
+
+### Card de perfis
+
+Os perfis (Criador / Parceiro) ficam **logo abaixo do cabeçalho, antes de
+"Jogados recentemente"**. Eles são **25% mais baixos** que o tamanho original:
+o encolhimento é só no **ritmo vertical** (paddings de topo/base, gaps e
+fontes), então a **largura fica intacta**. As telas baixas
+(`max-height: 700px` / `560px`) mantêm a mesma proporção.
 
 ### Grade de jogos
 
