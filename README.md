@@ -12,7 +12,7 @@ emugames/                    <- ESTE repositório (o site)
 ├── jogos.json      ← catálogo (o bot guarda uma cópia: o `!arcade` lê dela)
 ├── wrangler.jsonc  ← config de publicação (Cloudflare Workers)
 ├── _headers        ← COOP/COEP (libera SharedArrayBuffer → núcleo com threads)
-├── .assetsignore   ← exclui `.git` e o `kof97.zip` grande (a ROM vai em partes)
+├── .assetsignore   ← exclui `.git` e os romsets grandes (a ROM vai em partes)
 ├── capas/          ← capas dos jogos (GIF)
 ├── neogeo.zip      ← BIOS do Neo Geo (FBNeo)
 └── jogos/
@@ -24,6 +24,18 @@ emugames/                    <- ESTE repositório (o site)
 > (`dados/emugames/`) e foi separado para o bot não carregar 113 MB em cada
 > `!atualizar`. O bot guarda só o `jogos.json` (o catálogo que o menu lê) e a
 > URL pública.
+
+## Catálogo de arcade (romsets do FBNeo)
+
+Os jogos de `console: "arcade"` são **romsets do FinalBurn Neo (FBNeo)** — o
+mesmo core que o EmulatorJS usa para `arcade`. Baixe sempre em **non-merged /
+split** (um `.zip` por jogo); sets **merged** não funcionam (o FBNeo procura os
+arquivos dentro do zip daquele jogo e dá *"one of your romsets is missing
+files"*). Os jogos de Neo Geo também levam **`"bios": "neogeo.zip"`**.
+
+Ao adicionar um romset, o `id` é o **nome do zip sem a extensão** (o código do
+FBNeo, ex.: `mslug`, `kof97`), porque em arcade o core procura o romset **pelo
+nome do arquivo**.
 
 ### ⚠️ Os DOIS `jogos.json`
 
@@ -237,7 +249,8 @@ repo); deploy com `wrangler deploy`.
 O Cloudflare limita **cada asset a 25 MiB** — e se algum arquivo passar disso,
 **o deploy inteiro falha**. Foi o que acontecia com o `kof97.zip` (27,6 MiB).
 
-Por isso a ROM grande vai em **PARTES** (`kof97.zip.p1/.p2`, ~13,8 MiB cada):
+Por isso as ROMs grandes vão em **PARTES** (`kof97.zip.p1/.p2...`,
+`garou.zip.p1...`, ~13 MiB cada):
 
 1. o **zip inteiro** fica no `.assetsignore` e **nao** sobe;
 2. as **partes** sobem normalmente e o player as baixa e **remonta num Blob**;

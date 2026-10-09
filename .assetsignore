@@ -6,8 +6,9 @@
 .git
 .wrangler
 node_modules
-# O Cloudflare limita cada asset a 25 MiB. O kof97.zip tem ~27,6 MiB, o que
-# faria o deploy inteiro falhar. Ele NAO sobe; no lugar dele sobem as PARTES
-# (kof97.zip.p1/.p2, ~13,8 MiB cada), que o player baixa e remonta num Blob
-# (campo "partes" no jogos.json). Assim tudo sai do MESMO host do site.
+# O Cloudflare limita cada asset a 25 MiB. Os romsets que passam disso NAO
+# sobem inteiros; no lugar deles sobem as PARTES (~13 MiB cada, nome
+# `<rom>.zip.p1`, `.p2`, ...), que o player baixa e remonta num Blob (campo
+# "partes" no jogos.json). Assim tudo sai do MESMO host do site.
 jogos/arcade/kof97.zip
+jogos/arcade/garou.zip
