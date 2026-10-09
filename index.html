@@ -451,7 +451,8 @@
   function limparUrlDaHome() {
     const p = new URLSearchParams(location.search);
     if (location.hash || p.has('jogo') || p.has('arquivo')) {
-      location.replace(location.pathname);
+      // Volta pra RAIZ do site (nao so' o pathname), deixando a URL limpa.
+      location.replace(location.origin + '/');
       return true;
     }
     return false;
@@ -1073,11 +1074,19 @@
    * ficarem no historico -- o botao "voltar" do aparelho sai do site em vez de
    * reabrir o jogo.
    */
+  // Deixa a URL na RAIZ do site (`https://emugames.kannonmtx.workers.dev/`),
+  // sem hash e sem parametro. `replace` para nao empilhar historico.
+  function irParaRaiz() {
+    const raiz = location.origin + '/';
+    if (location.href !== raiz) location.replace(raiz);
+  }
+
   function voltarParaHomeDoJogo() {
     autoSalvarAgora();   // auto-save ao sair pelo botao JOGOS
     if (estaEmTelaCheia()) alternarTelaCheia(false);
-    if (!location.search && !location.hash) { mostrarTela('home'); return; }
-    location.replace(location.pathname);
+    // Sempre volta pra RAIZ do site (URL limpa).
+    if (location.search || location.hash) { irParaRaiz(); return; }
+    mostrarTela('home');
   }
 
   /**
@@ -1521,64 +1530,77 @@
     return `${p(d.getDate())}/${p(d.getMonth() + 1)} ${p(d.getHours())}:${p(d.getMinutes())}`;
   }
 
-  // Desenha as 3 linhas NA HORA (nao espera o IndexedDB) e preenche o status
-  // ("vazio" / "salvo em ...") depois, de forma assincrona.
-  function montarSlots() {
-    salvarSlotsEl.innerHTML = '';
-    for (let i = 1; i <= SALVAR_SLOTS; i++) {
-      const linha = document.createElement('div');
-      linha.className = 'salvar-slot';
-      const info = document.createElement('div');
-      info.className = 'info';
-      const nome = document.createElement('span');
-      nome.className = 'nome';
-      nome.textContent = 'Slot ' + i;
-      const quando = document.createElement('span');
-      quando.className = 'quando';
-      quando.textContent = 'vazio';
-      info.appendChild(nome); info.appendChild(quando);
+  // Cria uma linha do menu. `chave` e' a chave no IndexedDB; `podeSalvar`
+  // (true nos slots manuais) mostra o botao "Salvar".
+  function criarLinhaSlot(chave, rotulo, podeSalvar) {
+    const linha = document.createElement('div');
+    linha.className = 'salvar-slot';
+    const info = document.createElement('div');
+    info.className = 'info';
+    const nome = document.createElement('span');
+    nome.className = 'nome';
+    nome.textContent = rotulo;
+    const quando = document.createElement('span');
+    quando.className = 'quando';
+    quando.textContent = 'vazio';
+    info.appendChild(nome); info.appendChild(quando);
 
-      const acoes = document.createElement('div');
-      acoes.className = 'acoes-slot';
-      const bSalvar = document.createElement('button');
+    const acoes = document.createElement('div');
+    acoes.className = 'acoes-slot';
+    let bSalvar = null;
+    if (podeSalvar) {
+      bSalvar = document.createElement('button');
       bSalvar.type = 'button'; bSalvar.textContent = 'Salvar';
       bSalvar.addEventListener('click', async () => {
         const st = estadoJogoAtual();
         if (!st) { avisoSalvar('O jogo ainda não carregou.'); return; }
-        try { await gravarEstado(chaveSlot(i), st); } catch (e) { avisoSalvar('Não consegui salvar.'); return; }
-        avisoSalvar('Salvo no slot ' + i + '!');
-        atualizarSlot(i, quando, bCarregar, bApagar);
+        try { await gravarEstado(chave, st); } catch (e) { avisoSalvar('Não consegui salvar.'); return; }
+        avisoSalvar(rotulo + ': salvo!');
+        atualizarLinha(chave, quando, bCarregar, bApagar);
       });
-      const bCarregar = document.createElement('button');
-      bCarregar.type = 'button'; bCarregar.textContent = 'Carregar';
-      bCarregar.disabled = true;
-      bCarregar.addEventListener('click', async () => {
-        let r = null;
-        try { r = await lerEstado(chaveSlot(i)); } catch (e) { /* ok */ }
-        if (!r) { avisoSalvar('Slot vazio.'); return; }
-        carregarEstado(r.buf);
-        avisoSalvar('Carregado do slot ' + i + '.');
-      });
-      const bApagar = document.createElement('button');
-      bApagar.type = 'button'; bApagar.textContent = '🗑';
-      bApagar.title = 'Apagar slot';
-      bApagar.disabled = true;
-      bApagar.addEventListener('click', async () => {
-        await apagarEstado(chaveSlot(i));
-        avisoSalvar('Slot ' + i + ' apagado.');
-        atualizarSlot(i, quando, bCarregar, bApagar);
-      });
-      acoes.appendChild(bSalvar); acoes.appendChild(bCarregar); acoes.appendChild(bApagar);
-      linha.appendChild(info); linha.appendChild(acoes);
-      salvarSlotsEl.appendChild(linha);
-      atualizarSlot(i, quando, bCarregar, bApagar);
+    }
+    const bCarregar = document.createElement('button');
+    bCarregar.type = 'button'; bCarregar.textContent = 'Carregar';
+    bCarregar.disabled = true;
+    bCarregar.addEventListener('click', async () => {
+      let r = null;
+      try { r = await lerEstado(chave); } catch (e) { /* ok */ }
+      if (!r) { avisoSalvar(rotulo + ': vazio.'); return; }
+      carregarEstado(r.buf);
+      avisoSalvar('Carregado: ' + rotulo + '.');
+    });
+    const bApagar = document.createElement('button');
+    bApagar.type = 'button'; bApagar.textContent = '🗑';
+    bApagar.title = 'Apagar';
+    bApagar.disabled = true;
+    bApagar.addEventListener('click', async () => {
+      await apagarEstado(chave);
+      avisoSalvar(rotulo + ': apagado.');
+      atualizarLinha(chave, quando, bCarregar, bApagar);
+    });
+    if (bSalvar) acoes.appendChild(bSalvar);
+    acoes.appendChild(bCarregar); acoes.appendChild(bApagar);
+    linha.appendChild(info); linha.appendChild(acoes);
+    atualizarLinha(chave, quando, bCarregar, bApagar);
+    return linha;
+  }
+
+  // Desenha as linhas NA HORA (nao espera o IndexedDB) e preenche o status
+  // ("vazio" / "salvo em ...") depois, de forma assincrona.
+  // A PRIMEIRA caixinha e' o AUTO-SALVAR (nao tem "Salvar": ele grava sozinho
+  // ao sair do jogo); abaixo vem os 3 slots manuais.
+  function montarSlots() {
+    salvarSlotsEl.innerHTML = '';
+    salvarSlotsEl.appendChild(criarLinhaSlot(chaveAuto(), 'Auto-salvar', false));
+    for (let i = 1; i <= SALVAR_SLOTS; i++) {
+      salvarSlotsEl.appendChild(criarLinhaSlot(chaveSlot(i), 'Slot ' + i, true));
     }
   }
 
-  // Le o slot i e ajusta o texto/estado dos botoes.
-  async function atualizarSlot(i, quando, bCarregar, bApagar) {
+  // Le a chave e ajusta o texto/estado dos botoes.
+  async function atualizarLinha(chave, quando, bCarregar, bApagar) {
     let reg = null;
-    try { reg = await lerEstado(chaveSlot(i)); } catch (e) { /* ok */ }
+    try { reg = await lerEstado(chave); } catch (e) { /* ok */ }
     quando.textContent = reg ? 'salvo em ' + dataBonita(reg.quando) : 'vazio';
     bCarregar.disabled = !reg;
     bApagar.disabled = !reg;
