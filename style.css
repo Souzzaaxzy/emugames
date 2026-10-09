@@ -1323,11 +1323,15 @@ code { background: var(--painel2); padding: 1px 5px; border-radius: 4px; font-si
 #fundo-jp {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  /* `z-index: 0` (nao -1): com -1 a camada ficava ATRAS do fundo opaco do
+     `body` e nao aparecia. Agora ela fica acima do fundo e abaixo das telas. */
+  z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  /* bem apagado: e' textura de fundo, nao conteudo */
-  opacity: 0.10;
+  /* Discreto, mas VISIVEL. Calibrado por medicao (pico de luminancia numa
+     area vazia): 0.10 -> 32 (apagado demais), 0.18 -> 50 (escolhido),
+     0.34 -> 87 (ja' competia com o conteudo). */
+  opacity: 0.18;
   font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "MS Gothic", sans-serif;
   font-weight: 700;
   line-height: 1;
@@ -1347,5 +1351,18 @@ code { background: var(--painel2); padding: 1px 5px; border-radius: 4px; font-si
 /* Respeita quem pede menos movimento: aqui nao ha animacao, entao nada a fazer.
    O bloco existe para deixar explicito que o fundo nao anima. */
 @media (prefers-reduced-motion: reduce) {
-  #fundo-jp { opacity: 0.08; }
+  #fundo-jp { opacity: 0.15; }
 }
+
+/* As telas ficam ACIMA da camada de kanji (`z-index: 0`). Sem isto o fundo
+   cobriria o conteudo; com isto, os kanji aparecem atras do conteudo.
+   `#jogador` NAO entra aqui de proposito: com um jogo aberto a camada de kanji
+   fica escondida atras do palco do emulador (que tem fundo proprio), entao os
+   simbolos nao aparecem dentro do jogo. */
+#home,
+#biblioteca {
+  position: relative;
+  z-index: 1;
+}
+/* Com um jogo aberto os kanji saem de cena (nao aparecem dentro do jogo). */
+body.jogando #fundo-jp { display: none; }
