@@ -3498,6 +3498,1986 @@
       "descricao": "Zupapa! — clássico de arcade (2001). Jogue direto no navegador.",
       "rom": "jogos/arcade/zupapa.zip",
       "bios": "neogeo.zip"
+    },
+    {
+      "id": "3ninjaskickback",
+      "nome": "3 Ninjas Kick Back",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "3ninjaskickback.gif",
+      "descricao": "3 Ninjas Kick Back — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/3 Ninjas Kick Back.smc"
+    },
+    {
+      "id": "7thsagathe",
+      "nome": "7th Saga, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "7thsagathe.gif",
+      "descricao": "7th Saga, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/7th Saga, The.smc"
+    },
+    {
+      "id": "aaahhrealmonsters",
+      "nome": "Aaahh!!! Real Monsters",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "aaahhrealmonsters.gif",
+      "descricao": "Aaahh!!! Real Monsters — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Aaahh!!! Real Monsters.sfc"
+    },
+    {
+      "id": "actraiser",
+      "nome": "ActRaiser",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "actraiser.gif",
+      "descricao": "ActRaiser — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/ActRaiser.sfc"
+    },
+    {
+      "id": "actraiser2",
+      "nome": "ActRaiser 2",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "actraiser2.gif",
+      "descricao": "ActRaiser 2 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/ActRaiser 2.smc"
+    },
+    {
+      "id": "addamsfamilythepugsleysscavengerhunt",
+      "nome": "Addams Family, The - Pugsley's Scavenger Hunt",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "addamsfamilythepugsleysscavengerhunt.gif",
+      "descricao": "Addams Family, The - Pugsley's Scavenger Hunt — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Addams Family, The - Pugsley's Scavenger Hunt.smc"
+    },
+    {
+      "id": "adventuresofdrfrankenthe",
+      "nome": "Adventures of Dr. Franken, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "adventuresofdrfrankenthe.gif",
+      "descricao": "Adventures of Dr. Franken, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Adventures of Dr. Franken, The.smc"
+    },
+    {
+      "id": "aerobiz",
+      "nome": "Aerobiz",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "aerobiz.gif",
+      "descricao": "Aerobiz — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Aerobiz.sfc"
+    },
+    {
+      "id": "aircavalry",
+      "nome": "Air Cavalry",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "aircavalry.gif",
+      "descricao": "Air Cavalry — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Air Cavalry.sfc"
+    },
+    {
+      "id": "aladdin",
+      "nome": "Aladdin",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "aladdin.gif",
+      "descricao": "Aladdin — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Aladdin.smc"
+    },
+    {
+      "id": "alcahest",
+      "nome": "Alcahest",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "alcahest.gif",
+      "descricao": "Alcahest — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Alcahest.sfc"
+    },
+    {
+      "id": "alien3",
+      "nome": "Alien 3",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "alien3.gif",
+      "descricao": "Alien 3 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Alien 3.smc"
+    },
+    {
+      "id": "alienvspredator",
+      "nome": "Alien vs. Predator",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "alienvspredator.gif",
+      "descricao": "Alien vs. Predator — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Alien vs. Predator.smc"
+    },
+    {
+      "id": "animaniacs",
+      "nome": "Animaniacs",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "animaniacs.gif",
+      "descricao": "Animaniacs — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Animaniacs.smc"
+    },
+    {
+      "id": "arcana",
+      "nome": "Arcana",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "arcana.gif",
+      "descricao": "Arcana — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Arcana.smc"
+    },
+    {
+      "id": "arkanoiddohitagain",
+      "nome": "Arkanoid - Doh It Again",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "arkanoiddohitagain.gif",
+      "descricao": "Arkanoid - Doh It Again — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Arkanoid - Doh It Again.smc"
+    },
+    {
+      "id": "battlecars",
+      "nome": "Battle Cars",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "battlecars.gif",
+      "descricao": "Battle Cars — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Battle Cars.smc"
+    },
+    {
+      "id": "battlesoccerfieldnohasha",
+      "nome": "Battle Soccer - Field no Hasha",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "battlesoccerfieldnohasha.gif",
+      "descricao": "Battle Soccer - Field no Hasha — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Battle Soccer - Field no Hasha.smc"
+    },
+    {
+      "id": "battletoadsdoubledragon",
+      "nome": "Battletoads & Double Dragon",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "battletoadsdoubledragon.gif",
+      "descricao": "Battletoads & Double Dragon — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Battletoads & Double Dragon.smc"
+    },
+    {
+      "id": "battletoadsinbattlemaniacs",
+      "nome": "Battletoads in Battlemaniacs",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "battletoadsinbattlemaniacs.gif",
+      "descricao": "Battletoads in Battlemaniacs — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Battletoads in Battlemaniacs.smc"
+    },
+    {
+      "id": "bikermicefrommars",
+      "nome": "Biker Mice from Mars",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "bikermicefrommars.gif",
+      "descricao": "Biker Mice from Mars — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Biker Mice from Mars.smc"
+    },
+    {
+      "id": "biometal",
+      "nome": "BioMetal",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "biometal.gif",
+      "descricao": "BioMetal — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/BioMetal.sfc"
+    },
+    {
+      "id": "bishoujosenshisailormoonr",
+      "nome": "Bishoujo Senshi Sailor Moon R",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "bishoujosenshisailormoonr.gif",
+      "descricao": "Bishoujo Senshi Sailor Moon R — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Bishoujo Senshi Sailor Moon R.smc"
+    },
+    {
+      "id": "blackthorne",
+      "nome": "Blackthorne",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "blackthorne.gif",
+      "descricao": "Blackthorne — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Blackthorne.smc"
+    },
+    {
+      "id": "bluesbrothersthe",
+      "nome": "Blues Brothers, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "bluesbrothersthe.gif",
+      "descricao": "Blues Brothers, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Blues Brothers, The.sfc"
+    },
+    {
+      "id": "bobbysworld",
+      "nome": "Bobby's World",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "bobbysworld.gif",
+      "descricao": "Bobby's World — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Bobby's World.smc"
+    },
+    {
+      "id": "bonkers",
+      "nome": "Bonkers",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "bonkers.gif",
+      "descricao": "Bonkers — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Bonkers.sfc"
+    },
+    {
+      "id": "brainlord",
+      "nome": "Brain Lord",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "brainlord.gif",
+      "descricao": "Brain Lord — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Brain Lord.smc"
+    },
+    {
+      "id": "brainiesthe",
+      "nome": "Brainies, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "brainiesthe.gif",
+      "descricao": "Brainies, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Brainies, The.sfc"
+    },
+    {
+      "id": "brandish",
+      "nome": "Brandish",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "brandish.gif",
+      "descricao": "Brandish — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Brandish.smc"
+    },
+    {
+      "id": "breathoffire",
+      "nome": "Breath of Fire",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "breathoffire.gif",
+      "descricao": "Breath of Fire — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Breath of Fire.smc"
+    },
+    {
+      "id": "breathoffireii",
+      "nome": "Breath of Fire II",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "breathoffireii.gif",
+      "descricao": "Breath of Fire II — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Breath of Fire II.smc"
+    },
+    {
+      "id": "bubsyii",
+      "nome": "Bubsy II",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "bubsyii.gif",
+      "descricao": "Bubsy II — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Bubsy II.smc"
+    },
+    {
+      "id": "bubsyinclawsencountersofthefurredkind",
+      "nome": "Bubsy in Claws Encounters of the Furred Kind",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "bubsyinclawsencountersofthefurredkind.gif",
+      "descricao": "Bubsy in Claws Encounters of the Furred Kind — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Bubsy in Claws Encounters of the Furred Kind.smc"
+    },
+    {
+      "id": "bugsbunnyrabbitrampage",
+      "nome": "Bugs Bunny - Rabbit Rampage",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "bugsbunnyrabbitrampage.gif",
+      "descricao": "Bugs Bunny - Rabbit Rampage — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Bugs Bunny - Rabbit Rampage.sfc"
+    },
+    {
+      "id": "captaintsubasavhashanoshougoucampione",
+      "nome": "Captain Tsubasa V - Hasha no Shougou Campione",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "captaintsubasavhashanoshougoucampione.gif",
+      "descricao": "Captain Tsubasa V - Hasha no Shougou Campione — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Captain Tsubasa V - Hasha no Shougou Campione.smc"
+    },
+    {
+      "id": "choplifteriiirescuesurvive",
+      "nome": "Choplifter III - Rescue & Survive",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "choplifteriiirescuesurvive.gif",
+      "descricao": "Choplifter III - Rescue & Survive — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Choplifter III - Rescue & Survive.smc"
+    },
+    {
+      "id": "chronotrigger",
+      "nome": "Chrono Trigger",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "chronotrigger.gif",
+      "descricao": "Chrono Trigger — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Chrono Trigger.smc"
+    },
+    {
+      "id": "civilization",
+      "nome": "Civilization",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "civilization.gif",
+      "descricao": "Civilization — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Civilization.sfc"
+    },
+    {
+      "id": "claymates",
+      "nome": "Claymates",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "claymates.gif",
+      "descricao": "Claymates — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Claymates.sfc"
+    },
+    {
+      "id": "cliffhanger",
+      "nome": "Cliffhanger",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "cliffhanger.gif",
+      "descricao": "Cliffhanger — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Cliffhanger.sfc"
+    },
+    {
+      "id": "clocktower",
+      "nome": "Clock Tower",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "clocktower.gif",
+      "descricao": "Clock Tower — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Clock Tower.smc"
+    },
+    {
+      "id": "combatribesthe",
+      "nome": "Combatribes, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "combatribesthe.gif",
+      "descricao": "Combatribes, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Combatribes, The.sfc"
+    },
+    {
+      "id": "contraiii",
+      "nome": "Contra III",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "contraiii.gif",
+      "descricao": "Contra III — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Contra III.smc"
+    },
+    {
+      "id": "coolspot",
+      "nome": "Cool Spot",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "coolspot.gif",
+      "descricao": "Cool Spot — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Cool Spot.sfc"
+    },
+    {
+      "id": "cutthroatisland",
+      "nome": "Cutthroat Island",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "cutthroatisland.gif",
+      "descricao": "Cutthroat Island — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Cutthroat Island.sfc"
+    },
+    {
+      "id": "cybernator",
+      "nome": "Cybernator",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "cybernator.gif",
+      "descricao": "Cybernator — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Cybernator.smc"
+    },
+    {
+      "id": "daffyduckthemarvinmissions",
+      "nome": "Daffy Duck - The Marvin Missions",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "daffyduckthemarvinmissions.gif",
+      "descricao": "Daffy Duck - The Marvin Missions — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Daffy Duck - The Marvin Missions.smc"
+    },
+    {
+      "id": "dazebeforechristmas",
+      "nome": "Daze Before Christmas",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dazebeforechristmas.gif",
+      "descricao": "Daze Before Christmas — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Daze Before Christmas.sfc"
+    },
+    {
+      "id": "deathandreturnofsupermanthe",
+      "nome": "Death and Return of Superman The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "deathandreturnofsupermanthe.gif",
+      "descricao": "Death and Return of Superman The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Death and Return of Superman The.sfc"
+    },
+    {
+      "id": "demolitionman",
+      "nome": "Demolition Man",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "demolitionman.gif",
+      "descricao": "Demolition Man — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Demolition Man.sfc"
+    },
+    {
+      "id": "demonscrest",
+      "nome": "Demon's Crest",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "demonscrest.gif",
+      "descricao": "Demon's Crest — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Demon's Crest.smc"
+    },
+    {
+      "id": "dixiekongsdoubletrouble",
+      "nome": "Dixie Kong's Double Trouble",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dixiekongsdoubletrouble.gif",
+      "descricao": "Dixie Kong's Double Trouble — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Dixie Kong's Double Trouble (U).zip"
+    },
+    {
+      "id": "donkeykongcountry2diddyskongquest",
+      "nome": "Donkey Kong Country 2 - Diddy's Kong Quest",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "donkeykongcountry2diddyskongquest.gif",
+      "descricao": "Donkey Kong Country 2 - Diddy's Kong Quest — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Donkey Kong Country 2 - Diddy's Kong Quest.smc"
+    },
+    {
+      "id": "dragonthebruceleestory",
+      "nome": "Dragon - The Bruce Lee Story",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dragonthebruceleestory.gif",
+      "descricao": "Dragon - The Bruce Lee Story — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Dragon - The Bruce Lee Story.smc"
+    },
+    {
+      "id": "dragonballzhyperdimension",
+      "nome": "Dragon Ball Z - Hyper Dimension",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dragonballzhyperdimension.gif",
+      "descricao": "Dragon Ball Z - Hyper Dimension — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Dragon Ball Z - Hyper Dimension.smc"
+    },
+    {
+      "id": "dragonballzsuperbutoden",
+      "nome": "Dragon Ball Z - Super Butoden",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dragonballzsuperbutoden.gif",
+      "descricao": "Dragon Ball Z - Super Butoden — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Dragon Ball Z - Super Butoden.smc"
+    },
+    {
+      "id": "dragonballzsupergokuudentotsugekihen",
+      "nome": "Dragon Ball Z - Super Gokuu Den Totsugeki Hen",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dragonballzsupergokuudentotsugekihen.gif",
+      "descricao": "Dragon Ball Z - Super Gokuu Den Totsugeki Hen — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Dragon Ball Z - Super Gokuu Den Totsugeki Hen (J).zip"
+    },
+    {
+      "id": "dragonballzsupersaiyadensetsu",
+      "nome": "Dragon Ball Z - Super Saiya Densetsu",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dragonballzsupersaiyadensetsu.gif",
+      "descricao": "Dragon Ball Z - Super Saiya Densetsu — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Dragon Ball Z - Super Saiya Densetsu.smc"
+    },
+    {
+      "id": "dragonquestiii",
+      "nome": "Dragon Quest I & II",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dragonquestiii.gif",
+      "descricao": "Dragon Quest I & II — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Dragon Quest I & II.smc"
+    },
+    {
+      "id": "dragonslair",
+      "nome": "Dragon's Lair",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "dragonslair.gif",
+      "descricao": "Dragon's Lair — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Dragon's Lair.sfc"
+    },
+    {
+      "id": "evosearchforeden",
+      "nome": "E.V.O. - Search for Eden",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "evosearchforeden.gif",
+      "descricao": "E.V.O. - Search for Eden — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/E.V.O. - Search for Eden.smc"
+    },
+    {
+      "id": "earthbound",
+      "nome": "Earthbound",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "earthbound.gif",
+      "descricao": "Earthbound — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Earthbound.smc"
+    },
+    {
+      "id": "earthwormjim2",
+      "nome": "Earthworm Jim 2",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "earthwormjim2.gif",
+      "descricao": "Earthworm Jim 2 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Earthworm Jim 2.sfc"
+    },
+    {
+      "id": "fzero",
+      "nome": "F-Zero",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "fzero.gif",
+      "descricao": "F-Zero — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/F-Zero.sfc"
+    },
+    {
+      "id": "fifainternationalsoccer",
+      "nome": "FIFA International Soccer",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "fifainternationalsoccer.gif",
+      "descricao": "FIFA International Soccer — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/FIFA International Soccer.smc"
+    },
+    {
+      "id": "finalfantasyii",
+      "nome": "Final Fantasy II",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "finalfantasyii.gif",
+      "descricao": "Final Fantasy II — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Final Fantasy II.smc"
+    },
+    {
+      "id": "finalfantasyiii",
+      "nome": "Final Fantasy III",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "finalfantasyiii.gif",
+      "descricao": "Final Fantasy III — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Final Fantasy III.smc"
+    },
+    {
+      "id": "finalfantasyv",
+      "nome": "Final Fantasy V",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "finalfantasyv.gif",
+      "descricao": "Final Fantasy V — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Final Fantasy V.smc"
+    },
+    {
+      "id": "finalfight2",
+      "nome": "Final Fight 2",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "finalfight2.gif",
+      "descricao": "Final Fight 2 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Final Fight 2.sfc"
+    },
+    {
+      "id": "finalfight3",
+      "nome": "Final Fight 3",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "finalfight3.gif",
+      "descricao": "Final Fight 3 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Final Fight 3.zip"
+    },
+    {
+      "id": "finalfightguy",
+      "nome": "Final Fight Guy",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "finalfightguy.gif",
+      "descricao": "Final Fight Guy — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Final Fight Guy.smc"
+    },
+    {
+      "id": "firestriker",
+      "nome": "Fire Striker",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "firestriker.gif",
+      "descricao": "Fire Striker — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Fire Striker.smc"
+    },
+    {
+      "id": "firepower2000",
+      "nome": "Firepower 2000",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "firepower2000.gif",
+      "descricao": "Firepower 2000 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Firepower 2000.sfc"
+    },
+    {
+      "id": "flashbackthequestforidentity",
+      "nome": "Flashback - The Quest for Identity",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "flashbackthequestforidentity.gif",
+      "descricao": "Flashback - The Quest for Identity — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Flashback - The Quest for Identity.smc"
+    },
+    {
+      "id": "frontmission",
+      "nome": "Front Mission",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "frontmission.gif",
+      "descricao": "Front Mission — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Front Mission.smc"
+    },
+    {
+      "id": "futebolbrasileiro96",
+      "nome": "Futebol Brasileiro '96",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "futebolbrasileiro96.gif",
+      "descricao": "Futebol Brasileiro '96 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Futebol Brasileiro '96.smc"
+    },
+    {
+      "id": "ganpurugunmansproof",
+      "nome": "Ganpuru - Gunman's Proof",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ganpurugunmansproof.gif",
+      "descricao": "Ganpuru - Gunman's Proof — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ganpuru - Gunman's Proof.smc"
+    },
+    {
+      "id": "ghoulpatrol",
+      "nome": "Ghoul Patrol",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ghoulpatrol.gif",
+      "descricao": "Ghoul Patrol — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ghoul Patrol.smc"
+    },
+    {
+      "id": "gogoackman",
+      "nome": "Go Go Ackman",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "gogoackman.gif",
+      "descricao": "Go Go Ackman — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Go Go Ackman.smc"
+    },
+    {
+      "id": "gooftroop",
+      "nome": "Goof Troop",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "gooftroop.gif",
+      "descricao": "Goof Troop — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Goof Troop.smc"
+    },
+    {
+      "id": "gp1partii",
+      "nome": "GP-1 - Part II",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "gp1partii.gif",
+      "descricao": "GP-1 - Part II — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/GP-1 - Part II.smc"
+    },
+    {
+      "id": "greatcircusmysterystarringmickeyminniethe",
+      "nome": "Great Circus Mystery Starring Mickey & Minnie, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "greatcircusmysterystarringmickeyminniethe.gif",
+      "descricao": "Great Circus Mystery Starring Mickey & Minnie, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Great Circus Mystery Starring Mickey & Minnie, The.smc"
+    },
+    {
+      "id": "hamelinnoviolinhiki",
+      "nome": "Hamelin no Violin Hiki",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "hamelinnoviolinhiki.gif",
+      "descricao": "Hamelin no Violin Hiki — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Hamelin no Violin Hiki.smc"
+    },
+    {
+      "id": "hamelnnoviolinhiki",
+      "nome": "Hameln no Violin Hiki",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "hamelnnoviolinhiki.gif",
+      "descricao": "Hameln no Violin Hiki — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Hameln no Violin Hiki.smc"
+    },
+    {
+      "id": "harleyshumongousadventure",
+      "nome": "Harley's Humongous Adventure",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "harleyshumongousadventure.gif",
+      "descricao": "Harley's Humongous Adventure — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Harley's Humongous Adventure.sfc"
+    },
+    {
+      "id": "harvestmoon",
+      "nome": "Harvest Moon",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "harvestmoon.gif",
+      "descricao": "Harvest Moon — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Harvest Moon.smc"
+    },
+    {
+      "id": "hypervball",
+      "nome": "Hyper V-Ball",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "hypervball.gif",
+      "descricao": "Hyper V-Ball — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Hyper V-Ball.smc"
+    },
+    {
+      "id": "ignitionfactorthe",
+      "nome": "Ignition Factor, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ignitionfactorthe.gif",
+      "descricao": "Ignition Factor, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ignition Factor, The.smc"
+    },
+    {
+      "id": "illusionofgaia",
+      "nome": "Illusion of Gaia",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "illusionofgaia.gif",
+      "descricao": "Illusion of Gaia — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Illusion of Gaia.smc"
+    },
+    {
+      "id": "inazumaservedasuperbeachvolley",
+      "nome": "Inazuma Serve da! Super Beach Volley",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "inazumaservedasuperbeachvolley.gif",
+      "descricao": "Inazuma Serve da! Super Beach Volley — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Inazuma Serve da! Super Beach Volley.SMC"
+    },
+    {
+      "id": "inindowayoftheninja",
+      "nome": "Inindo - Way of the Ninja",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "inindowayoftheninja.gif",
+      "descricao": "Inindo - Way of the Ninja — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Inindo - Way of the Ninja.sfc"
+    },
+    {
+      "id": "inspectorgadget",
+      "nome": "Inspector Gadget",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "inspectorgadget.gif",
+      "descricao": "Inspector Gadget — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Inspector Gadget.smc"
+    },
+    {
+      "id": "internationalsuperstarsoccerdeluxefutebolbrasileiro2007",
+      "nome": "International Super Star Soccer Deluxe - Futebol Brasileiro 2007",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "internationalsuperstarsoccerdeluxefutebolbrasileiro2007.gif",
+      "descricao": "International Super Star Soccer Deluxe - Futebol Brasileiro 2007 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/International Super Star Soccer Deluxe - Futebol Brasileiro 2007.smc"
+    },
+    {
+      "id": "internationalsuperstarsoccerdeluxefutebolbrasileiro2008",
+      "nome": "International Super Star Soccer Deluxe - Futebol Brasileiro 2008",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "internationalsuperstarsoccerdeluxefutebolbrasileiro2008.gif",
+      "descricao": "International Super Star Soccer Deluxe - Futebol Brasileiro 2008 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/International Super Star Soccer Deluxe - Futebol Brasileiro 2008.smc"
+    },
+    {
+      "id": "internationalsuperstarsoccerdeluxeronaldinhosoccer97",
+      "nome": "International Super Star Soccer Deluxe - Ronaldinho Soccer 97",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "internationalsuperstarsoccerdeluxeronaldinhosoccer97.gif",
+      "descricao": "International Super Star Soccer Deluxe - Ronaldinho Soccer 97 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/International Super Star Soccer Deluxe - Ronaldinho Soccer 97.smc"
+    },
+    {
+      "id": "internationalsuperstarsoccerdeluxeworldcupfrance98",
+      "nome": "International Super Star Soccer Deluxe - World Cup France 98",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "internationalsuperstarsoccerdeluxeworldcupfrance98.gif",
+      "descricao": "International Super Star Soccer Deluxe - World Cup France 98 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/International Super Star Soccer Deluxe - World Cup France 98.smc"
+    },
+    {
+      "id": "ironcommandokoutetsunosenshi",
+      "nome": "Iron Commando - Koutetsu no Senshi",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ironcommandokoutetsunosenshi.gif",
+      "descricao": "Iron Commando - Koutetsu no Senshi — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Iron Commando - Koutetsu no Senshi.smc"
+    },
+    {
+      "id": "jetsonstheinvasionoftheplanetpirates",
+      "nome": "Jetsons, The - Invasion of the Planet Pirates",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "jetsonstheinvasionoftheplanetpirates.gif",
+      "descricao": "Jetsons, The - Invasion of the Planet Pirates — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Jetsons, The - Invasion of the Planet Pirates.sfc"
+    },
+    {
+      "id": "joemac2lostinthetropics",
+      "nome": "Joe & Mac 2 - Lost in the Tropics",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "joemac2lostinthetropics.gif",
+      "descricao": "Joe & Mac 2 - Lost in the Tropics — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Joe & Mac 2 - Lost in the Tropics.sfc"
+    },
+    {
+      "id": "jrrtolkiensthelordoftheringsvolume1",
+      "nome": "JRR Tolkien's The Lord of the Rings - Volume 1",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "jrrtolkiensthelordoftheringsvolume1.gif",
+      "descricao": "JRR Tolkien's The Lord of the Rings - Volume 1 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/JRR Tolkien's The Lord of the Rings - Volume 1.smc"
+    },
+    {
+      "id": "junglebookthe",
+      "nome": "Jungle Book, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "junglebookthe.gif",
+      "descricao": "Jungle Book, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Jungle Book, The.sfc"
+    },
+    {
+      "id": "jurassicparkiithechaoscontinues",
+      "nome": "Jurassic Park II - The Chaos Continues",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "jurassicparkiithechaoscontinues.gif",
+      "descricao": "Jurassic Park II - The Chaos Continues — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Jurassic Park II - The Chaos Continues.smc"
+    },
+    {
+      "id": "kendorage",
+      "nome": "Kendo Rage",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "kendorage.gif",
+      "descricao": "Kendo Rage — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Kendo Rage.smc"
+    },
+    {
+      "id": "killerinstinct",
+      "nome": "Killer Instinct",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "killerinstinct.gif",
+      "descricao": "Killer Instinct — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Killer Instinct.smc"
+    },
+    {
+      "id": "kingarthursworld",
+      "nome": "King Arthur's World",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "kingarthursworld.gif",
+      "descricao": "King Arthur's World — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/King Arthur's World.smc"
+    },
+    {
+      "id": "kingofdragons",
+      "nome": "King of Dragons",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "kingofdragons.gif",
+      "descricao": "King of Dragons — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/King of Dragons.sfc"
+    },
+    {
+      "id": "knightsoftheround",
+      "nome": "Knights of the Round",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "knightsoftheround.gif",
+      "descricao": "Knights of the Round — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Knights of the Round.smc"
+    },
+    {
+      "id": "lamborghiniamericanchallenge",
+      "nome": "Lamborghini American Challenge",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "lamborghiniamericanchallenge.gif",
+      "descricao": "Lamborghini American Challenge — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Lamborghini American Challenge.smc"
+    },
+    {
+      "id": "lastactionhero",
+      "nome": "Last Action Hero",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "lastactionhero.gif",
+      "descricao": "Last Action Hero — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Last Action Hero.sfc"
+    },
+    {
+      "id": "legend",
+      "nome": "Legend",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "legend.gif",
+      "descricao": "Legend — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Legend.sfc"
+    },
+    {
+      "id": "legendofzeldathealinktothepast",
+      "nome": "Legend of Zelda, The - A Link to the Past",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "legendofzeldathealinktothepast.gif",
+      "descricao": "Legend of Zelda, The - A Link to the Past — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Legend of Zelda, The - A Link to the Past.smc"
+    },
+    {
+      "id": "lemmings",
+      "nome": "Lemmings",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "lemmings.gif",
+      "descricao": "Lemmings — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Lemmings.smc"
+    },
+    {
+      "id": "lionkingthe",
+      "nome": "Lion King, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "lionkingthe.gif",
+      "descricao": "Lion King, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Lion King, The.smc"
+    },
+    {
+      "id": "looneytunesbball",
+      "nome": "Looney Tunes B-Ball",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "looneytunesbball.gif",
+      "descricao": "Looney Tunes B-Ball — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Looney Tunes B-Ball.sfc"
+    },
+    {
+      "id": "lostvikings2",
+      "nome": "Lost Vikings 2",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "lostvikings2.gif",
+      "descricao": "Lost Vikings 2 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Lost Vikings 2.smc"
+    },
+    {
+      "id": "lostvikingsthe",
+      "nome": "Lost Vikings, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "lostvikingsthe.gif",
+      "descricao": "Lost Vikings, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Lost Vikings, The.smc"
+    },
+    {
+      "id": "lufiathefortressofdoom",
+      "nome": "Lufia & The Fortress of Doom",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "lufiathefortressofdoom.gif",
+      "descricao": "Lufia & The Fortress of Doom — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Lufia & The Fortress of Doom.sfc"
+    },
+    {
+      "id": "magicknightrayearth",
+      "nome": "Magic Knight Rayearth",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "magicknightrayearth.gif",
+      "descricao": "Magic Knight Rayearth — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Magic Knight Rayearth.smc"
+    },
+    {
+      "id": "magicalqueststarringmickeymousethe",
+      "nome": "Magical Quest Starring Mickey Mouse, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "magicalqueststarringmickeymousethe.gif",
+      "descricao": "Magical Quest Starring Mickey Mouse, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Magical Quest Starring Mickey Mouse, The.smc"
+    },
+    {
+      "id": "marvelsuperheroeswarofthegems",
+      "nome": "Marvel Super Heroes - War of the Gems",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "marvelsuperheroeswarofthegems.gif",
+      "descricao": "Marvel Super Heroes - War of the Gems — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Marvel Super Heroes - War of the Gems.smc"
+    },
+    {
+      "id": "megaman7",
+      "nome": "Mega Man 7",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "megaman7.gif",
+      "descricao": "Mega Man 7 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Mega Man 7.smc"
+    },
+    {
+      "id": "megamanx",
+      "nome": "Mega Man X",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "megamanx.gif",
+      "descricao": "Mega Man X — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Mega Man X.smc"
+    },
+    {
+      "id": "megamanx2",
+      "nome": "Mega Man X2",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "megamanx2.gif",
+      "descricao": "Mega Man X2 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Mega Man X2.smc"
+    },
+    {
+      "id": "megamanx3",
+      "nome": "Mega Man X3",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "megamanx3.gif",
+      "descricao": "Mega Man X3 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Mega Man X3.smc"
+    },
+    {
+      "id": "megamanbass",
+      "nome": "Megaman & Bass",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "megamanbass.gif",
+      "descricao": "Megaman & Bass — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Megaman & Bass.smc"
+    },
+    {
+      "id": "metalwarriors",
+      "nome": "Metal Warriors",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "metalwarriors.gif",
+      "descricao": "Metal Warriors — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Metal Warriors.smc"
+    },
+    {
+      "id": "mickeymousethemagicalquest",
+      "nome": "Mickey Mouse - The Magical Quest",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "mickeymousethemagicalquest.gif",
+      "descricao": "Mickey Mouse - The Magical Quest — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Mickey Mouse - The Magical Quest.smc"
+    },
+    {
+      "id": "mickeytodonaldmagicaladventure3",
+      "nome": "Mickey to Donald - Magical Adventure 3",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "mickeytodonaldmagicaladventure3.gif",
+      "descricao": "Mickey to Donald - Magical Adventure 3 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Mickey to Donald - Magical Adventure 3.smc"
+    },
+    {
+      "id": "monstania",
+      "nome": "Monstania",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "monstania.gif",
+      "descricao": "Monstania — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Monstania.smc"
+    },
+    {
+      "id": "mortalkombat3",
+      "nome": "Mortal Kombat 3",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "mortalkombat3.gif",
+      "descricao": "Mortal Kombat 3 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Mortal Kombat 3.sfc"
+    },
+    {
+      "id": "nbalive95",
+      "nome": "NBA Live 95",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "nbalive95.gif",
+      "descricao": "NBA Live 95 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/NBA Live 95.smc"
+    },
+    {
+      "id": "nbalive98",
+      "nome": "NBA Live 98",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "nbalive98.gif",
+      "descricao": "NBA Live 98 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/NBA Live 98.zip"
+    },
+    {
+      "id": "ninjagaidentrilogy",
+      "nome": "Ninja Gaiden Trilogy",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ninjagaidentrilogy.gif",
+      "descricao": "Ninja Gaiden Trilogy — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ninja Gaiden Trilogy.smc"
+    },
+    {
+      "id": "ninjawarriorsthe",
+      "nome": "Ninja Warriors, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ninjawarriorsthe.gif",
+      "descricao": "Ninja Warriors, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ninja Warriors, The (E) [!].zip"
+    },
+    {
+      "id": "ogrebattlethemarchoftheblackqueen",
+      "nome": "Ogre Battle - The March of the Black Queen",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ogrebattlethemarchoftheblackqueen.gif",
+      "descricao": "Ogre Battle - The March of the Black Queen — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ogre Battle - The March of the Black Queen.smc"
+    },
+    {
+      "id": "panicinnakayoshiworld",
+      "nome": "Panic in Nakayoshi World",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "panicinnakayoshiworld.gif",
+      "descricao": "Panic in Nakayoshi World — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Panic in Nakayoshi World.smc"
+    },
+    {
+      "id": "paperboy2",
+      "nome": "Paperboy 2",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "paperboy2.gif",
+      "descricao": "Paperboy 2 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Paperboy 2.sfc"
+    },
+    {
+      "id": "piratesofdarkwaterthe",
+      "nome": "Pirates of Dark Water, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "piratesofdarkwaterthe.gif",
+      "descricao": "Pirates of Dark Water, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Pirates of Dark Water, The.smc"
+    },
+    {
+      "id": "pitfallthemayanadventure",
+      "nome": "Pitfall - The Mayan Adventure",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "pitfallthemayanadventure.gif",
+      "descricao": "Pitfall - The Mayan Adventure — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Pitfall - The Mayan Adventure.sfc"
+    },
+    {
+      "id": "popeyeijiwarumajoseahagnomaki",
+      "nome": "Popeye - Ijiwaru Majo Sea Hag no Maki",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "popeyeijiwarumajoseahagnomaki.gif",
+      "descricao": "Popeye - Ijiwaru Majo Sea Hag no Maki — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Popeye - Ijiwaru Majo Sea Hag no Maki.sfc"
+    },
+    {
+      "id": "powerdrive",
+      "nome": "Power Drive",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "powerdrive.gif",
+      "descricao": "Power Drive — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Power Drive.sfc"
+    },
+    {
+      "id": "princeofpersia",
+      "nome": "Prince of Persia",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "princeofpersia.gif",
+      "descricao": "Prince of Persia — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Prince of Persia.smc"
+    },
+    {
+      "id": "princeofpersia2theshadowtheflame",
+      "nome": "Prince of Persia 2 - The Shadow & The Flame",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "princeofpersia2theshadowtheflame.gif",
+      "descricao": "Prince of Persia 2 - The Shadow & The Flame — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Prince of Persia 2 - The Shadow & The Flame.smc"
+    },
+    {
+      "id": "radicaldreamers",
+      "nome": "Radical Dreamers",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "radicaldreamers.gif",
+      "descricao": "Radical Dreamers — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Radical Dreamers.sfc"
+    },
+    {
+      "id": "raidentrad",
+      "nome": "Raiden Trad",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "raidentrad.gif",
+      "descricao": "Raiden Trad — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Raiden Trad.smc"
+    },
+    {
+      "id": "ranma12akanekodantekihihou",
+      "nome": "Ranma 1-2 - Akanekodan Teki Hihou",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ranma12akanekodantekihihou.gif",
+      "descricao": "Ranma 1-2 - Akanekodan Teki Hihou — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ranma 1-2 - Akanekodan Teki Hihou.smc"
+    },
+    {
+      "id": "rocknrollracing",
+      "nome": "Rock n' Roll Racing",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "rocknrollracing.gif",
+      "descricao": "Rock n' Roll Racing — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Rock n' Roll Racing.smc"
+    },
+    {
+      "id": "rockmanforte",
+      "nome": "Rockman & Forte",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "rockmanforte.gif",
+      "descricao": "Rockman & Forte — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Rockman & Forte.smc"
+    },
+    {
+      "id": "rockosmodernlifespunkysdangerousday",
+      "nome": "Rocko's Modern Life - Spunky's Dangerous Day",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "rockosmodernlifespunkysdangerousday.gif",
+      "descricao": "Rocko's Modern Life - Spunky's Dangerous Day — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Rocko's Modern Life - Spunky's Dangerous Day.sfc"
+    },
+    {
+      "id": "romancingsaga3",
+      "nome": "Romancing SaGa 3",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "romancingsaga3.gif",
+      "descricao": "Romancing SaGa 3 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Romancing SaGa 3.smc"
+    },
+    {
+      "id": "ronaldinhofutebolbrasileiro2011",
+      "nome": "Ronaldinho futebol brasileiro 2011",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ronaldinhofutebolbrasileiro2011.gif",
+      "descricao": "Ronaldinho futebol brasileiro 2011 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ronaldinho futebol brasileiro 2011.smc"
+    },
+    {
+      "id": "ronaldinhosoccer97",
+      "nome": "Ronaldinho Soccer 97",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "ronaldinhosoccer97.gif",
+      "descricao": "Ronaldinho Soccer 97 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Ronaldinho Soccer 97.smc"
+    },
+    {
+      "id": "rushingbeat",
+      "nome": "Rushing Beat",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "rushingbeat.gif",
+      "descricao": "Rushing Beat — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Rushing Beat.sfc"
+    },
+    {
+      "id": "scoobydoomystery",
+      "nome": "Scooby-Doo Mystery",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "scoobydoomystery.gif",
+      "descricao": "Scooby-Doo Mystery — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Scooby-Doo Mystery.smc"
+    },
+    {
+      "id": "secretofmana",
+      "nome": "Secret of Mana",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "secretofmana.gif",
+      "descricao": "Secret of Mana — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Secret of Mana.smc"
+    },
+    {
+      "id": "secretofthestars",
+      "nome": "Secret of the Stars",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "secretofthestars.gif",
+      "descricao": "Secret of the Stars — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Secret of the Stars.smc"
+    },
+    {
+      "id": "seikendensetsu3",
+      "nome": "Seiken Densetsu 3",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "seikendensetsu3.gif",
+      "descricao": "Seiken Densetsu 3 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Seiken Densetsu 3.smc"
+    },
+    {
+      "id": "shadowthe",
+      "nome": "Shadow, The",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "shadowthe.gif",
+      "descricao": "Shadow, The — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Shadow, The.sfc"
+    },
+    {
+      "id": "shadowrun",
+      "nome": "Shadowrun",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "shadowrun.gif",
+      "descricao": "Shadowrun — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Shadowrun.smc"
+    },
+    {
+      "id": "shinkidousenkigundamwendlessduel",
+      "nome": "Shin Kidou Senki Gundam W - Endless Duel",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "shinkidousenkigundamwendlessduel.gif",
+      "descricao": "Shin Kidou Senki Gundam W - Endless Duel — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Shin Kidou Senki Gundam W - Endless Duel.smc"
+    },
+    {
+      "id": "sidepocket",
+      "nome": "Side Pocket",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "sidepocket.gif",
+      "descricao": "Side Pocket — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Side Pocket.sfc"
+    },
+    {
+      "id": "simcity",
+      "nome": "SimCity",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "simcity.gif",
+      "descricao": "SimCity — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/SimCity.smc"
+    },
+    {
+      "id": "skyblazer",
+      "nome": "Skyblazer",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "skyblazer.gif",
+      "descricao": "Skyblazer — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Skyblazer.smc"
+    },
+    {
+      "id": "snoopyconcert",
+      "nome": "Snoopy Concert",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "snoopyconcert.gif",
+      "descricao": "Snoopy Concert — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Snoopy Concert.smc"
+    },
+    {
+      "id": "soldiersoffortune",
+      "nome": "Soldiers of Fortune",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "soldiersoffortune.gif",
+      "descricao": "Soldiers of Fortune — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Soldiers of Fortune.smc"
+    },
+    {
+      "id": "sonicthehedgehog",
+      "nome": "Sonic the Hedgehog",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "sonicthehedgehog.gif",
+      "descricao": "Sonic the Hedgehog — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Sonic the Hedgehog.smc"
+    },
+    {
+      "id": "spaceace",
+      "nome": "Space Ace",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "spaceace.gif",
+      "descricao": "Space Ace — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Space Ace.smc"
+    },
+    {
+      "id": "sparkster",
+      "nome": "Sparkster",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "sparkster.gif",
+      "descricao": "Sparkster — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Sparkster.sfc"
+    },
+    {
+      "id": "spawn",
+      "nome": "Spawn",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "spawn.gif",
+      "descricao": "Spawn — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Spawn.smc"
+    },
+    {
+      "id": "speedygonzaleslosgatosbandidos",
+      "nome": "Speedy Gonzales - Los Gatos Bandidos",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "speedygonzaleslosgatosbandidos.gif",
+      "descricao": "Speedy Gonzales - Los Gatos Bandidos — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Speedy Gonzales - Los Gatos Bandidos.sfc"
+    },
+    {
+      "id": "spellcraft",
+      "nome": "SpellCraft",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "spellcraft.gif",
+      "descricao": "SpellCraft — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/SpellCraft.smc"
+    },
+    {
+      "id": "spidermanvenomseparationanxiety",
+      "nome": "Spider-Man & Venom - Separation Anxiety",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "spidermanvenomseparationanxiety.gif",
+      "descricao": "Spider-Man & Venom - Separation Anxiety — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Spider-Man & Venom - Separation Anxiety.smc"
+    },
+    {
+      "id": "spidermanandthexmen",
+      "nome": "Spider-Man and the X-Men",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "spidermanandthexmen.gif",
+      "descricao": "Spider-Man and the X-Men — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Spider-Man and the X-Men (E).zip"
+    },
+    {
+      "id": "spidermanandthexmenarcadesrevenge",
+      "nome": "Spider-Man and the X-Men - Arcade's Revenge",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "spidermanandthexmenarcadesrevenge.gif",
+      "descricao": "Spider-Man and the X-Men - Arcade's Revenge — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Spider-Man and the X-Men - Arcade's Revenge.smc"
+    },
+    {
+      "id": "spidermanseparationanxiety",
+      "nome": "Spider-Man_ Separation Anxiety",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "spidermanseparationanxiety.gif",
+      "descricao": "Spider-Man_ Separation Anxiety — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/ Spider-Man_ Separation Anxiety.zip"
+    },
+    {
+      "id": "starfox",
+      "nome": "Star Fox",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "starfox.gif",
+      "descricao": "Star Fox — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Star Fox.smc"
+    },
+    {
+      "id": "stargate",
+      "nome": "Stargate",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "stargate.gif",
+      "descricao": "Stargate — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Stargate.smc"
+    },
+    {
+      "id": "stoneprotectors",
+      "nome": "Stone Protectors",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "stoneprotectors.gif",
+      "descricao": "Stone Protectors — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Stone Protectors.smc"
+    },
+    {
+      "id": "streetfighterii",
+      "nome": "Street Fighter II",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "streetfighterii.gif",
+      "descricao": "Street Fighter II — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Street Fighter II.smc"
+    },
+    {
+      "id": "streetfighteriichampedition",
+      "nome": "Street Fighter II Champ. Edition",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "streetfighteriichampedition.gif",
+      "descricao": "Street Fighter II Champ. Edition — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Street Fighter II Champ. Edition (Hack).zip"
+    },
+    {
+      "id": "strikegunner",
+      "nome": "Strike Gunner",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "strikegunner.gif",
+      "descricao": "Strike Gunner — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Strike Gunner.smc"
+    },
+    {
+      "id": "superadventureislandii",
+      "nome": "Super Adventure Island II",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "superadventureislandii.gif",
+      "descricao": "Super Adventure Island II — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Adventure Island II.zip"
+    },
+    {
+      "id": "superaleste",
+      "nome": "Super Aleste",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "superaleste.gif",
+      "descricao": "Super Aleste — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Aleste.sfc"
+    },
+    {
+      "id": "superbomberman2",
+      "nome": "Super Bomberman 2",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "superbomberman2.gif",
+      "descricao": "Super Bomberman 2 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Bomberman 2.smc"
+    },
+    {
+      "id": "supercastlevaniaiv",
+      "nome": "Super Castlevania IV",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "supercastlevaniaiv.gif",
+      "descricao": "Super Castlevania IV — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Castlevania IV.smc"
+    },
+    {
+      "id": "superdonkeykong",
+      "nome": "Super Donkey Kong",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "superdonkeykong.gif",
+      "descricao": "Super Donkey Kong — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Donkey Kong (V1.1) (J).zip"
+    },
+    {
+      "id": "supermarioallstarssupermarioworld",
+      "nome": "Super Mario All-Stars + Super Mario World",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "supermarioallstarssupermarioworld.gif",
+      "descricao": "Super Mario All-Stars + Super Mario World — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Mario All-Stars + Super Mario World.zip"
+    },
+    {
+      "id": "supermariorpglegendofthesevenstars",
+      "nome": "Super Mario RPG - Legend of the Seven Stars",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "supermariorpglegendofthesevenstars.gif",
+      "descricao": "Super Mario RPG - Legend of the Seven Stars — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Mario RPG - Legend of the Seven Stars.smc"
+    },
+    {
+      "id": "supermarioworld2yoshisisland",
+      "nome": "Super Mario World 2 - Yoshi's Island",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "supermarioworld2yoshisisland.gif",
+      "descricao": "Super Mario World 2 - Yoshi's Island — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Mario World 2 - Yoshi's Island.smc"
+    },
+    {
+      "id": "supermetroid",
+      "nome": "Super Metroid",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "supermetroid.gif",
+      "descricao": "Super Metroid — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Metroid.smc"
+    },
+    {
+      "id": "supermorph",
+      "nome": "Super Morph",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "supermorph.gif",
+      "descricao": "Super Morph — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Morph.sfc"
+    },
+    {
+      "id": "superrtype",
+      "nome": "Super R-Type",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "superrtype.gif",
+      "descricao": "Super R-Type — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super R-Type.smc"
+    },
+    {
+      "id": "supersoccer",
+      "nome": "Super Soccer",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "supersoccer.gif",
+      "descricao": "Super Soccer — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Soccer.sfc"
+    },
+    {
+      "id": "superstreetfighterii",
+      "nome": "Super Street Fighter II",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "superstreetfighterii.gif",
+      "descricao": "Super Street Fighter II — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Super Street Fighter II.smc"
+    },
+    {
+      "id": "talesofphantasia",
+      "nome": "Tales of Phantasia",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "talesofphantasia.gif",
+      "descricao": "Tales of Phantasia — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Tales of Phantasia.smc"
+    },
+    {
+      "id": "tecmosecretofthestars",
+      "nome": "Tecmo Secret of the Stars",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "tecmosecretofthestars.gif",
+      "descricao": "Tecmo Secret of the Stars — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Tecmo Secret of the Stars.smc"
+    },
+    {
+      "id": "teenagemutantheroturtlesivturtlesintime",
+      "nome": "Teenage Mutant Hero Turtles IV - Turtles in Time",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "teenagemutantheroturtlesivturtlesintime.gif",
+      "descricao": "Teenage Mutant Hero Turtles IV - Turtles in Time — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Teenage Mutant Hero Turtles IV - Turtles in Time (E).zip"
+    },
+    {
+      "id": "teenagemutantninjaturtlestournamentfighters",
+      "nome": "Teenage Mutant Ninja Turtles - Tournament Fighters",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "teenagemutantninjaturtlestournamentfighters.gif",
+      "descricao": "Teenage Mutant Ninja Turtles - Tournament Fighters — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Teenage Mutant Ninja Turtles - Tournament Fighters.sfc"
+    },
+    {
+      "id": "teenagemutantninjaturtlesivturtlesintime",
+      "nome": "Teenage Mutant Ninja Turtles IV Turtles In Time",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "teenagemutantninjaturtlesivturtlesintime.gif",
+      "descricao": "Teenage Mutant Ninja Turtles IV Turtles In Time — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Teenage Mutant Ninja Turtles IV Turtles In Time.smc"
+    },
+    {
+      "id": "tenchimuyougamehen",
+      "nome": "Tenchi Muyou! - Game Hen",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "tenchimuyougamehen.gif",
+      "descricao": "Tenchi Muyou! - Game Hen — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Tenchi Muyou! - Game Hen.smc"
+    },
+    {
+      "id": "terranigma",
+      "nome": "Terranigma",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "terranigma.gif",
+      "descricao": "Terranigma — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Terranigma.smc"
+    },
+    {
+      "id": "tetrisattack",
+      "nome": "Tetris Attack",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "tetrisattack.gif",
+      "descricao": "Tetris Attack — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Tetris Attack.zip"
+    },
+    {
+      "id": "theignitionfactor",
+      "nome": "The Ignition Factor",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "theignitionfactor.gif",
+      "descricao": "The Ignition Factor — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/The Ignition Factor.smc"
+    },
+    {
+      "id": "themask",
+      "nome": "The Mask",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "themask.gif",
+      "descricao": "The Mask — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/The Mask.sfc"
+    },
+    {
+      "id": "timeslip",
+      "nome": "Time Slip",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "timeslip.gif",
+      "descricao": "Time Slip — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Time Slip.sfc"
+    },
+    {
+      "id": "timecop",
+      "nome": "Timecop",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "timecop.gif",
+      "descricao": "Timecop — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Timecop.sfc"
+    },
+    {
+      "id": "tinytoonadventureswackysportschallenge",
+      "nome": "Tiny Toon Adventures - Wacky Sports Challenge",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "tinytoonadventureswackysportschallenge.gif",
+      "descricao": "Tiny Toon Adventures - Wacky Sports Challenge — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Tiny Toon Adventures - Wacky Sports Challenge.smc"
+    },
+    {
+      "id": "tomandjerry",
+      "nome": "Tom and Jerry",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "tomandjerry.gif",
+      "descricao": "Tom and Jerry — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Tom and Jerry.sfc"
+    },
+    {
+      "id": "topgear3000",
+      "nome": "Top Gear 3000",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "topgear3000.gif",
+      "descricao": "Top Gear 3000 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Top Gear 3000.sfc"
+    },
+    {
+      "id": "topracer",
+      "nome": "Top Racer",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "topracer.gif",
+      "descricao": "Top Racer — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Top Racer.smc"
+    },
+    {
+      "id": "truelies",
+      "nome": "True Lies",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "truelies.gif",
+      "descricao": "True Lies — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/True Lies.smc"
+    },
+    {
+      "id": "unsquadron",
+      "nome": "U.N. Squadron",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "unsquadron.gif",
+      "descricao": "U.N. Squadron — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/U.N. Squadron.smc"
+    },
+    {
+      "id": "warlock",
+      "nome": "Warlock",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "warlock.gif",
+      "descricao": "Warlock — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Warlock.smc"
+    },
+    {
+      "id": "winterolympicgameslillehammer94",
+      "nome": "Winter Olympic Games - Lillehammer '94",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "winterolympicgameslillehammer94.gif",
+      "descricao": "Winter Olympic Games - Lillehammer '94 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Winter Olympic Games - Lillehammer '94.smc"
+    },
+    {
+      "id": "wolfchild",
+      "nome": "Wolfchild",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "wolfchild.gif",
+      "descricao": "Wolfchild — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Wolfchild.sfc"
+    },
+    {
+      "id": "wonderprojectjkikainoshounenpino",
+      "nome": "Wonder Project J - Kikai no Shounen Pino",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "wonderprojectjkikainoshounenpino.gif",
+      "descricao": "Wonder Project J - Kikai no Shounen Pino — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Wonder Project J - Kikai no Shounen Pino.smc"
+    },
+    {
+      "id": "worldcupfrance98",
+      "nome": "World Cup France 98",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "worldcupfrance98.gif",
+      "descricao": "World Cup France 98 — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/World Cup France 98.smc"
+    },
+    {
+      "id": "worms",
+      "nome": "Worms",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "worms.gif",
+      "descricao": "Worms — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/Worms.smc"
+    },
+    {
+      "id": "xmenmutantapocalypse",
+      "nome": "X-Men - Mutant Apocalypse",
+      "emoji": "🎮",
+      "console": "snes",
+      "capa": "xmenmutantapocalypse.gif",
+      "descricao": "X-Men - Mutant Apocalypse — clássico de Super Nintendo. Jogue direto no navegador.",
+      "rom": "jogos/snes/X-Men - Mutant Apocalypse.smc"
     }
   ]
 }
