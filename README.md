@@ -101,7 +101,23 @@ ela se repete e preenche a largura toda na tela do PC, de um lado ao outro.
 
 As categorias ("Todos", "Nintendo", ...) ficam **abaixo da barra de pesquisa**,
 dentro de um retângulo de bordas arredondadas (`#filtros`) que rola na
-horizontal quando não cabem.
+horizontal quando não cabem. Cada categoria mostra a **contagem** ao lado do
+nome, contada direto do catálogo: "Todos (587)", "Super Nintendo (19)",
+"Arcade (568)".
+
+### Analógico de toque
+
+O analógico (joystick) é **próprio** — `#ejs-stick`, um anel em CSS com o
+botão que segue o dedo — e **não** o `stick` do EmulatorJS. O do EmulatorJS
+(tipo `zone`) mandava os **quatro** direcionais de uma vez em arcade, o que
+prendia o personagem **para baixo**; o próprio manda só a direção dominante
+(as diagonais certas) nos índices 4/5/6/7, que é o que os cores leem, via
+`emu.gameManager.simulateInput`. As medidas ficam no `#jogador` (ancestral
+comum), não no `#game` — senão `var(--stick)` resolve vazio no analogógico
+(nasce com 0px). O `iniciar()` chama `ligarAnalogo()`.
+
+O **D-pad** continua vindo do EmulatorJS (`EJS_VirtualGamepadSettings`), e
+escreve nos mesmos índices.
 
 ### Abrir um jogo do próprio aparelho
 

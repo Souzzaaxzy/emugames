@@ -260,6 +260,10 @@
   </div>
 
   <div id="game"></div>
+  <!-- ANALOGICO proprio (nao usa o "stick" do EmulatorJS): a zona dele mandava
+       os 4 direcionais juntos, o que prendia o personagem para baixo. Este e'
+       um joystick simples desenhado em CSS que fala direto com o core. -->
+  <div id="ejs-stick" class="ejs-stick" aria-hidden="true"><span class="knob"></span></div>
 
   <div id="controles">
     <button id="parar" type="button" disabled>■ PARAR</button>
@@ -576,6 +580,7 @@
     rodando = true;
     pararBtn.disabled = false;
     marcarAtividade();
+    ligarAnalogo();
 
     const s = document.createElement('script');
     s.src = DATA + 'loader.js';
@@ -771,15 +776,26 @@
     location.href = `./#/jogo/${enc}`;
   }
 
+  // Quantos jogos tem em cada categoria (console).
+  function contarPorConsole() {
+    const n = {};
+    for (const j of catalogoJogos) n[j.console] = (n[j.console] || 0) + 1;
+    return n;
+  }
+
   function montarFiltros() {
     const vistos = [];
     for (const j of catalogoJogos) if (!vistos.includes(j.console)) vistos.push(j.console);
+    const cont = contarPorConsole();
 
-    const itens = [{ id: 'todos', rotulo: 'Todos', emoji: '✨' }].concat(vistos.map((c) => ({
-      id: c,
-      rotulo: (CONSOLES[c] && CONSOLES[c].nome) || c.toUpperCase(),
-      emoji: (CONSOLES[c] && CONSOLES[c].emoji) || '🎮',
-    })));
+    // Cada categoria leva a CONTAGEM do lado do nome: "Nintendo (19)".
+    const itens = [{ id: 'todos', rotulo: 'Todos', emoji: '✨', n: catalogoJogos.length }]
+      .concat(vistos.map((c) => ({
+        id: c,
+        rotulo: (CONSOLES[c] && CONSOLES[c].nome) || c.toUpperCase(),
+        emoji: (CONSOLES[c] && CONSOLES[c].emoji) || '🎮',
+        n: cont[c] || 0,
+      })));
 
     filtros.innerHTML = '';
     for (const it of itens) {
@@ -787,7 +803,8 @@
       b.type = 'button';
       b.className = 'aba' + (it.id === filtroAtual ? ' ativa' : '');
       b.dataset.cat = it.id;
-      b.textContent = `${it.emoji} ${it.rotulo}`;
+      // `num` separado do rotulo so' para o CSS estilizar (cor mais fraca).
+      b.innerHTML = `${it.emoji} ${it.rotulo} <span class="num">(${it.n})</span>`;
       b.addEventListener('click', () => {
         filtroAtual = it.id;
         for (const x of filtros.children) x.classList.toggle('ativa', x === b);
@@ -938,23 +955,15 @@
   // ==========================================================================
   // GAMEPAD de toque (EJS_VirtualGamepadSettings)
   //
-  // O EmulatorJS ja tem um layout por console, mas o do SNES vem SO com D-pad.
-  // Aqui TODOS os jogos recebem os dois: um ANALOGICO (zona/nipple) EMBAIXO e o
-  // D-PAD (as quatro setinhas) ACIMA dele -- pedido do dono.
+  // Aqui entra so' o D-PAD. O ANALOGICO e' proprio (`#ejs-stick`) e vive em
+  // `ligarAnalogo`: o "stick" do EmulatorJS (tipo `zone`) mandava os QUATRO
+  // direcionais de uma vez -- o personagem ficava preso para baixo.
   //
-  // Os dois escrevem nos MESMOS indices do controle (4=UP, 5=DOWN, 6=LEFT,
-  // 7=RIGHT), entao o jogador pode usar qualquer um.
-  //
-  // POR QUE O ANALOGICO USA OS INDICES DO DIRECIONAL (4..7) e nao os do
-  // analogico de verdade (16..19): medido no `emulator.js`, a zona com
-  // `joystickInput: true` manda o valor do eixo em 16..19 -- e o SNES NAO TEM
-  // analogico, o core so le 4..7. O analogico pareceria morto. Com
-  // `joystickInput: false` a zona manda 1/0 nos indices que ela declarar,
-  // exatamente como o D-pad (mesmo codigo do `dpad`). Ou seja: a alavanca anda
-  // o personagem, que e' o que importa.
+  // Tanto o D-pad quanto o analogico escrevem nos MESMOS indices do controle
+  // (4=UP, 5=DOWN, 6=LEFT, 7=RIGHT), que e' o que os cores de SNES e arcade
+  // leem. O jogador pode usar qualquer um dos dois.
   // ==========================================================================
   const DPAD = { type: 'dpad', id: 'dpad', location: 'left', left: '50%', top: '0%', joystickInput: false, inputValues: [4, 5, 6, 7] };
-  const ANALOGICO = { type: 'zone', id: 'stick', location: 'left', left: '50%', top: '100%', joystickInput: false, inputValues: [4, 5, 6, 7] };
 
   // Botoes que NAO podem faltar em cada console (id -> rotulo/valor do SNES).
   const BOTOES_SNES = [
@@ -984,10 +993,64 @@
    * conhecemos ficam como estavam).
    */
   function gamepadDoJogo(console) {
-    if (console === 'snes') return [ANALOGICO, DPAD, ...BOTOES_SNES, ...CENTRO, ...OMBROS_SNES];
+    // O ANALOGICO nao entra aqui: o "stick" do EmulatorJS mandava os quatro
+    // direcionais de uma vez (personagem preso para baixo). Ele e' o
+    // `#ejs-stick`, um joystick proprio tratado em `ligarAnalogo`.
+    if (console === 'snes') return [DPAD, ...BOTOES_SNES, ...CENTRO, ...OMBROS_SNES];
     // Arcade usa o mesmo diamante do SNES (o CSS padroniza isso) e nao tem L/R.
-    if (console === 'arcade') return [ANALOGICO, DPAD, ...BOTOES_ARCADE, ...CENTRO];
+    if (console === 'arcade') return [DPAD, ...BOTOES_ARCADE, ...CENTRO];
     return null;
+  }
+
+  // ==========================================================================
+  // ANALOGICO PROPRIO
+  // D-pad e analogico escrevem nos MESMOS indices (4=UP, 5=DOWN, 6=LEFT,
+  // 7=RIGHT), que e' o que os cores de SNES e arcade leem. O analogico manda
+  // SO a direcao dominante (e as diagonais certas), com 0 nas outras -- por
+  // isso nao "gruda" para baixo.
+  // ==========================================================================
+  const STICK = document.getElementById('ejs-stick');
+
+  function ligarAnalogo() {
+    if (!STICK || STICK.dataset.ligado) return;
+    STICK.dataset.ligado = '1';
+    const knob = STICK.querySelector('.knob');
+    let ativo = null;
+
+    function solta() {
+      const emu = window.EJS_emulator;
+      for (const i of [4, 5, 6, 7]) { try { emu && emu.gameManager.simulateInput(0, i, 0); } catch (e) {} }
+      if (knob) knob.style.transform = 'translate(-50%, -50%)';
+    }
+
+    function move(ev) {
+      const r = STICK.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      let dx = ev.clientX - cx, dy = ev.clientY - cy;
+      const raio = r.width * 0.42;
+      const d = Math.hypot(dx, dy);
+      if (d > raio) { dx = dx / d * raio; dy = dy / d * raio; }
+      // knob visual
+      if (knob) knob.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+      // direcao dominante (com zona morta)
+      const morto = raio * 0.28;
+      const u = dy < -morto, dn = dy > morto, l = dx < -morto, rt = dx > morto;
+      const emu = window.EJS_emulator;
+      if (!emu) return;
+      const s = (i, v) => { try { emu.gameManager.simulateInput(0, i, v); } catch (e) {} };
+      s(4, u ? 1 : 0); s(5, dn ? 1 : 0); s(6, l ? 1 : 0); s(7, rt ? 1 : 0);
+    }
+
+    STICK.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      if (STICK.setPointerCapture) STICK.setPointerCapture(e.pointerId);
+      ativo = e.pointerId; move(e);
+    });
+    STICK.addEventListener('pointermove', (e) => { if (e.pointerId === ativo) { e.preventDefault(); move(e); } });
+    const fim = (e) => { if (ativo === null || e.pointerId === ativo) { ativo = null; solta(); } };
+    STICK.addEventListener('pointerup', fim);
+    STICK.addEventListener('pointercancel', fim);
+    STICK.addEventListener('lostpointercapture', fim);
   }
 
   // ROM acima de 25 MiB nao cabe num asset do Cloudflare. Nesses casos o zip e
@@ -1142,6 +1205,7 @@
     rodando = true;
     pararBtn.disabled = false;
     marcarAtividade();
+    ligarAnalogo();
 
     // O loader so pode ser injetado UMA vez por documento -- por isso abrir um
     // jogo recarrega a pagina (ver `abrirJogo`).

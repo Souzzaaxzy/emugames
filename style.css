@@ -464,6 +464,9 @@ h1 #marca { letter-spacing: 2px; }
 
 .aba {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   background: var(--painel2);
   color: var(--texto);
   border: 1px solid var(--borda);
@@ -476,6 +479,9 @@ h1 #marca { letter-spacing: 2px; }
   cursor: pointer;
   transition: background var(--t-rapida) var(--curva), border-color var(--t-rapida) var(--curva), color var(--t-rapida) var(--curva), transform var(--t-rapida) var(--curva);
 }
+/* Contagem ao lado do nome da categoria: "Nintendo (19)" */
+.aba .num { color: var(--fraco); font-weight: 700; }
+.aba.ativa .num { color: var(--sobre-acento); opacity: .7; }
 .aba.ativa {
   background: var(--acento);
   border-color: var(--acento);
@@ -919,7 +925,10 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
     --btn-scale  botoes redondos
     --mid-scale  start/select/rapido/lento (base 50x31)
 */
-#game {
+/* As medidas do controle vivem no `#jogador` (nao no `#game`): o ANALOGICO
+   proprio (`#ejs-stick`) e' IRMAO do `#game`, entao precisa das variaveis no
+   ancestral comum -- senao `var(--stick)` resolve vazio e ele nasce com 0px. */
+#jogador {
   /* Tamanhos 100% responsivos: derivados do menor eixo do viewport, com teto
      para nao ficarem gigantes em telas largas. Nada de px fixo como regra. */
   --gap: clamp(13px, 3.5vmin, 26px);
@@ -930,13 +939,16 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
   --knob: calc(var(--stick) * 0.55);
   --dpad-up: 20px;
   --stick-right: 25px;
+  --pad-esq: clamp(6px, 3vw, 26px);   /* margem esquerda da coluna de controle */
   --bar: calc(var(--dpad) * 0.28);
   --stack: calc(var(--dpad) + var(--stick) + var(--gap));
   /* a faixa de controles e' exatamente o que os dois ocupam + o vao */
   --ctl: calc(var(--dpad) + var(--stick) + var(--gap) + 22px);
   --btn-scale: 1.55;
   --mid-scale: 1;
+}
 
+#game {
   width: 100%;
   background: #000;
   border: 1px solid var(--borda);
@@ -978,17 +990,56 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
   do analogico. A altura da coluna e a soma dos dois + o vao.
 */
 #game .ejs_virtualGamepad_left {
-  left: clamp(6px, 3vw, 26px) !important;
+  left: var(--pad-esq) !important;
   top: 11px;
   bottom: 11px;
   height: auto;
-  width: var(--stick);
+  width: var(--dpad);
   transform: none;
 }
 
+/* ==========================================================================
+   ANALOGICO PROPRIO (joystick de toque)
+   Substitui o "stick" do EmulatorJS, que em arcade mandava os QUATRO
+   direcionais juntos (personagem preso para baixo). Aqui o anel fica no mesmo
+   lugar do antigo (base da coluna da esquerda) e o botao segue o dedo.
+   ========================================================================== */
+@keyframes stick-entra { 0% { opacity: 0; transform: translateY(8px) scale(.9); } 100% { opacity: 1; transform: none; } }
+.ejs-stick {
+  position: absolute;
+  left: calc(var(--pad-esq) + (var(--dpad) * 0.5));
+  bottom: calc(11px + var(--stick) * 0.5);
+  width: var(--stick);
+  height: var(--stick);
+  margin-left: calc(var(--stick) * -0.5);
+  margin-bottom: calc(var(--stick) * -0.5);
+  border-radius: 50%;
+  /* anel AO REDOR: cinza opaco (igual ao antigo) */
+  background: #8b8b8b;
+  z-index: 3;
+  touch-action: none;
+  cursor: pointer;
+  animation: stick-entra var(--t-media) var(--curva) both;
+}
+.ejs-stick .knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--knob);
+  height: var(--knob);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  /* joystick NO MEIO: preto com bolinhas cinzas bem pequenas */
+  background-color: #000;
+  background-image: radial-gradient(rgba(160,160,160,.85) 1px, transparent 1.5px);
+  background-size: 7px 7px;
+  pointer-events: none;
+}
+
+/* D-pad: no topo da coluna, centralizado na largura do D-pad */
 #game .ejs_virtualGamepad_left .b_dpad {
   position: absolute !important;
-  left: calc((var(--stick) - var(--dpad)) / 2 - var(--stick-right)) !important;
+  left: 0 !important;
   top: 0 !important;
   width: var(--dpad) !important;
   height: var(--dpad) !important;
@@ -998,46 +1049,6 @@ body.girado #controle { top: calc(10px + env(safe-area-inset-top, 0px)); }
 #game .ejs_virtualGamepad_left .ejs_dpad_main { width: 100%; height: 100%; opacity: .85; }
 #game .ejs_dpad_vertical { width: var(--bar); }
 #game .ejs_dpad_horizontal { height: var(--bar); }
-
-/*
-  O `.b_stick` e' um PONTO (0x0), como o EmulatorJS/nipplejs espera: o nipplejs
-  calcula o centro de input como `retangulo da zona + top:100%`. Uma caixa COM
-  tamanho deslocaria esse centro e o giro sairia enviesado (so uma direcao
-  certa). Com 0x0, `top:100%` coincide com o centro visivel do analogico.
-*/
-#game .ejs_virtualGamepad_left .b_stick {
-  position: absolute !important;
-  left: calc(50% + var(--stick-right)) !important;
-  top: auto !important;
-  bottom: calc(var(--stick) * 0.5) !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-}
-#game .b_stick > div { left: 50% !important; top: 100% !important; }
-#game .b_stick .back {
-  width: var(--stick) !important;
-  height: var(--stick) !important;
-  left: 50% !important;
-  top: 50% !important;
-  margin-left: calc(var(--stick) * -0.5) !important;
-  margin-top: calc(var(--stick) * -0.5) !important;
-  /* anel AO REDOR: cinza opaco */
-  background-color: #8b8b8b !important;
-  background-image: none !important;
-  opacity: 1 !important;
-}
-#game .b_stick .front {
-  width: var(--knob) !important;
-  height: var(--knob) !important;
-  margin-left: calc(var(--knob) * -0.5) !important;
-  margin-top: calc(var(--knob) * -0.5) !important;
-  /* joystick NO MEIO: preto com bolinhas cinzas bem pequenas */
-  background-color: #000 !important;
-  background-image: radial-gradient(rgba(160,160,160,.85) 1px, transparent 1.5px) !important;
-  background-size: 7px 7px !important;
-  opacity: 1 !important;
-}
 
 #game .ejs_virtualGamepad_right {
   bottom: 18px;
