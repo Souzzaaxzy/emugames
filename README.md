@@ -161,6 +161,15 @@ Transições: `--t-rapida` (130ms) e `--t-media` (190ms) com `--curva`
 `@media (prefers-reduced-motion: reduce)` desligando tudo para quem pede menos
 movimento.
 
+### Brilhos dentro das caixas
+
+Os cards (jogos e recentes), os perfis, a busca, as categorias, o aviso de
+vazio, o erro e o painel do controle levam um padrão de **símbolos** (⊹ ⋆ ✩ ⭒
+✧ ˖) no fundo. É um único `background-image` — um SVG em `data:` na variável
+`--brilho` (no fim do `style.css`), repetido a cada `170px`. Fica **atrás** do
+conteúdo, não intercepta toque (não é pseudo-elemento) e não muda o layout. O
+**fundo da página não** usa o padrão.
+
 ## Hospedagem
 
 Servido por **Cloudflare Workers** (static assets) — é o único host usado.
