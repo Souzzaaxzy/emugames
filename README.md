@@ -117,6 +117,30 @@ vídeo: `margin-top: -0.55em` no `h1` põe metade dele sobre o vídeo e metade
 fora (não depende do tamanho do vídeo). O vídeo só roda na home — para ao abrir
 um jogo, para não roubar CPU do emulador.
 
+### Animação do título (sincronizada com o vídeo)
+
+O título **EmuGames Lizzy** tem uma animação em loop: uma **linha preta** varre
+o nome da esquerda para a direita, vinda de baixo; ao chegar no **"Y"** (a
+marca "Lizzy") ela **desce** e vira uma **estrela que brilha** por cerca de 2s.
+Depois o ciclo recomeça.
+
+O truque está na **sincronia**: o JS lê o `currentTime` e a `duration` do
+`intro.mp4` e publica a fração do ciclo em `--p` (0..1) no `<h1>`, a cada
+quadro. O CSS só traduz `--p` em posição/opacidade via
+`clamp(0, (var(--p) - a) / b, 1)` — nada de tempo no CSS, então a linha
+**nunca sai de fase com a gif**: a cada reinício do vídeo a linha volta ao
+começo. O player do título dura 3,08s (uma volta do vídeo).
+
+O JS mede o `<h1>` e a letra `#letra-y` e escreve as medidas em px **no
+próprio `<h1>`** (ancestral comum das duas peças). Dois cuidados que já
+quebraram a animação: as peças são filhas **absolutas** do `h1`, então as
+medidas são **locais ao h1** (não ao viewport); e as variáveis de medida
+ficam no `h1` porque a linha lê `--estrela-y` para descer — se cada `--var`
+ficasse só no seu elemento, quem lê a do outro cairia no fallback `0`.
+
+Com `prefers-reduced-motion: reduce` a animação é escondida (CSS) e o loop de
+`requestAnimationFrame` nem começa (JS).
+
 ## Recursos
 
 - **PARAR** — desliga o emulador

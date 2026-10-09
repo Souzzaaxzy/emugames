@@ -169,7 +169,12 @@
       <video id="intro-video" src="./intro.mp4" autoplay muted loop playsinline
         disablepictureinpicture preload="auto" aria-hidden="true"></video>
     </div>
-    <h1>EmuGames <span id="marca"></span></h1>
+    <h1>EmuGames <span id="marca"></span>
+      <!-- Animacao: a linha PRETA varre o titulo e, ao chegar no Y de "Lizzy",
+           desce e vira a ESTRELA brilhante. Posicoes calculadas no JS. -->
+      <span id="titulo-linha" aria-hidden="true"></span>
+      <span id="titulo-estrela" aria-hidden="true"></span>
+    </h1>
     <p class="sub">Jogos direto do seu navegador</p>
   </header>
 
@@ -317,7 +322,11 @@
       return String.fromCodePoint(base);
     }).join('');
     var el = document.getElementById('marca');
-    if (el) el.textContent = BOLD;
+    if (el) {
+      // O "Y" da animacao e a PRIMEIRA letra da marca ("L" de Lizzy). Marcado
+      // com um id so para o JS medir a posicao da linha.
+      el.innerHTML = '<span id="letra-y">' + BOLD.charAt(0) + '</span>' + BOLD.slice(1);
+    }
   })();
 
 </script>
@@ -819,6 +828,7 @@
     // O video do topo so roda na home (nao rouba CPU do jogo).
     if (nome === 'home') {
       introVideo.play().catch(() => {});
+      iniciarAnimTitulo();
       // A home tem a URL limpa (`/`, sem hash nem `?jogo=`). Sem recarregar:
       // aqui o emulador ja esta parado.
       if (location.hash || location.search) {
@@ -827,6 +837,7 @@
       montarRecentes();
     } else {
       introVideo.pause();
+      pararAnimTitulo();
     }
   }
 
@@ -1450,6 +1461,101 @@
     if (Date.now() - ocioso < LIMITE) return;
     voltarParaHome();
   }, 5000);
+
+  // ==========================================================================
+  // ANIMACAO DO TITULO (linha -> estrela), SINCRONIZADA COM O VIDEO DO TOPO
+  // A linha preta varre "EmuGames Lizzy" da esquerda para a direita, vinda de
+  // baixo; quando chega no "Y" (a marca "Lizzy") ela desce ate embaixo e vira
+  // uma estrela que brilha por 2s. Depois o ciclo recomeca.
+  //
+  // O ciclo inteiro dura o MESMO que uma volta do video (`intro.mp4` = 3.08s,
+  // lido do proprio video), entao os dois ficam em fase -- a cada reinicio do
+  // video a linha volta ao comeco.
+  // ==========================================================================
+  const linhaTitulo = document.getElementById('titulo-linha');
+  const estrelaTitulo = document.getElementById('titulo-estrela');
+  const letraY = document.getElementById('letra-y');
+  const CICLO_PADRAO = 3080; // uma volta do intro.mp4, usada so como fallback
+
+  let animTitulo = null;
+  let iniciotitulo = 0;
+
+  if (estrelaTitulo) estrelaTitulo.textContent = '\u2726'; // ✦ (a "estrela")
+
+  // Duracao de UMA volta do video (= a "gif"). A linha fica em fase com ela.
+  function durCiclo() {
+    const d = introVideo && introVideo.duration;
+    return (d && isFinite(d)) ? d * 1000 : CICLO_PADRAO;
+  }
+
+  // Mede o titulo e o "Y" e posiciona a linha/estrela. Roda no inicio e a cada
+  // redimensionamento (as medidas estao em px).
+  //
+  // ATENCAO (dois detalhes que ja' causaram bug):
+  //  1. a linha e a estrela sao filhas ABSOLUTAS do `<h1>`, entao `top`/`left`/
+  //     `translate` sao medidos a partir do titulo -- nao do viewport. Tudo
+  //     aqui vira coordenada LOCAL ao h1 (subtrai o canto do titulo).
+  //  2. as medidas em px vao no PROPRIO `<h1>` (ancestral comum), nao em cada
+  //     filho: a linha le `--estrela-y` (para descer) e a estrela le
+  //     `--estrela-x/-y`; se cada var ficasse so' no seu elemento, quem le a do
+  //     outro cairia no fallback (0) e a "descida" subiria.
+  function olharTitulo() {
+    const h1 = document.querySelector('#home .cabeca h1');
+    if (!h1 || !linhaTitulo || !estrelaTitulo || !letraY) return;
+    const cs = getComputedStyle(h1);
+    const lh = cs.lineHeight === 'normal' ? parseFloat(cs.fontSize) * 1.2 : parseFloat(cs.lineHeight);
+    const h1r = h1.getBoundingClientRect();
+    const y = letraY.getBoundingClientRect();
+
+    const linhaTopo = lh * 0.62;                       // altura da linha de base, local
+    const linhaFimX = (y.left - h1r.left) + 2;         // o "Y", local
+    const estrelaX = (y.left - h1r.left) + y.width / 2;
+    const estrelaY = linhaTopo + Math.min(72, Math.max(30, lh * 1.6)); // a estrela cai
+
+    h1.style.setProperty('--linha-top', linhaTopo + 'px');
+    h1.style.setProperty('--linha-comeca', '-14px');   // comeca fora, a' esquerda
+    h1.style.setProperty('--linha-fim', linhaFimX + 'px');
+    h1.style.setProperty('--estrela-x', estrelaX + 'px');
+    h1.style.setProperty('--estrela-y', estrelaY + 'px');
+    if (y.height) estrelaTitulo.style.fontSize = y.height + 'px';
+  }
+
+  function iniciarAnimTitulo() {
+    if (!linhaTitulo || !estrelaTitulo || !letraY) return;
+    olharTitulo();
+    // Quem pede menos movimento nao ve a animacao (o CSS a esconde): nao vale
+    // gastar um quadro por frame com ela.
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    iniciotitulo = 0;
+    if (animTitulo == null) animTitulo = requestAnimationFrame(andarTitulo);
+  }
+
+  function pararAnimTitulo() {
+    if (animTitulo != null) cancelAnimationFrame(animTitulo);
+    animTitulo = null;
+    // Deixa a linha/estrela escondidas quando a home sai de cena.
+    if (linhaTitulo) linhaTitulo.style.setProperty('--p', '0');
+    if (estrelaTitulo) estrelaTitulo.style.setProperty('--p', '0');
+  }
+
+  function andarTitulo(ts) {
+    if (!iniciotitulo) iniciotitulo = ts;
+    const v = introVideo;
+    // Fonte de verdade: o VIDEO. Assim a linha fica SEMPRE em fase com a gif.
+    // Sem metadados (ou video parado), cai no relogio com a mesma duracao.
+    let frac;
+    if (v && v.duration && isFinite(v.duration) && !v.paused) {
+      frac = v.currentTime / v.duration;
+    } else {
+      frac = ((ts - iniciotitulo) / durCiclo()) % 1;
+    }
+    const p = Math.min(0.9999, Math.max(0, frac)).toFixed(4);
+    linhaTitulo.style.setProperty('--p', p);
+    estrelaTitulo.style.setProperty('--p', p);
+    animTitulo = requestAnimationFrame(andarTitulo);
+  }
+
+  addEventListener('resize', olharTitulo);
 
   // ==========================================================================
   // BOOT
