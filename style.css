@@ -332,7 +332,6 @@ h1 {
   font-weight: 800;
   letter-spacing: 1.5px;
   line-height: 1.1;
-  text-transform: uppercase;
 }
 h1 #marca { letter-spacing: 2px; }
 .cabeca .sub { color: var(--fraco); font-size: 13px; margin-top: 7px; }
@@ -1314,4 +1313,36 @@ code { background: var(--painel2); padding: 1px 5px; border-radius: 4px; font-si
     margin-right: auto;
     border-radius: 16px;
   }
+}
+
+/* ==========================================================================
+   FUNDO: kanji/simbolos japoneses espalhados, bem discretos.
+   Estatico de proposito (sem animacao, sem canvas, sem timer). Fica atras de
+   tudo (`z-index: -1`) e nao intercepta toque (`pointer-events: none`).
+   ========================================================================== */
+#fundo-jp {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  /* bem apagado: e' textura de fundo, nao conteudo */
+  opacity: 0.10;
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "MS Gothic", sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+  -webkit-user-select: none;
+}
+#fundo-jp span {
+  position: absolute;
+  /* `--s` (tamanho) e `--r` (rotacao) vem inline, por simbolo */
+  font-size: var(--s, 60px);
+  transform: rotate(var(--r, 0deg));
+  white-space: nowrap;
+}
+/* Respeita quem pede menos movimento: aqui nao ha animacao, entao nada a fazer.
+   O bloco existe para deixar explicito que o fundo nao anima. */
+@media (prefers-reduced-motion: reduce) {
+  #fundo-jp { opacity: 0.08; }
 }
