@@ -1336,9 +1336,12 @@ code { background: var(--painel2); padding: 1px 5px; border-radius: 4px; font-si
 }
 #fundo-jp span {
   position: absolute;
-  /* `--s` (tamanho) e `--r` (rotacao) vem inline, por simbolo */
+  /* `--s` (tamanho), `--r` (rotacao) e `--o` (intensidade) vem inline, por
+     simbolo -- assim cada um tem variacao sem precisar de 63 regras. */
   font-size: var(--s, 60px);
   transform: rotate(var(--r, 0deg));
+  /* A intensidade e' multiplicada pela opacidade da camada (0.10). */
+  opacity: var(--o, 1);
   white-space: nowrap;
 }
 /* Respeita quem pede menos movimento: aqui nao ha animacao, entao nada a fazer.
