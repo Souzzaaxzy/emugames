@@ -201,13 +201,17 @@ vazio, o erro e o painel do controle levam um padrão de **símbolos** (⊹ ⋆ 
 conteúdo, não intercepta toque (não é pseudo-elemento) e não muda o layout. O
 **fundo da página não** usa o padrão.
 
-Os brilhos **flutuam**: uma animação `brilho-flutua` (14s, `ease-in-out`,
-infinita) desliza o `background-position` na diagonal e volta. Como o padrão é
-um tile, deslocar pouco é suave e não mostra emenda, e os keyframes começam e
-terminam iguais (o loop não "pula"). Uso `background-position` (e não um
-pseudo-elemento) porque funciona igual em todos os elementos, inclusive no
-`<input id="busca">`. Quem pede menos movimento recebe isso desligado pelo
-`prefers-reduced-motion` global (que reduz a duração a 1ms).
+Os brilhos **se balançam**: uma animação `brilho-flutua` (6s, `ease-in-out`,
+infinita) desliza o `background-position` na diagonal — de `0 0` até
+`92px -62px` e volta. Como o padrão é um tile de 170px, o deslocamento é suave
+e não mostra emenda, e os keyframes começam e terminam iguais (o loop não
+"pula"). As caixas levam atrasos diferentes (`animation-delay`), então balançam
+fora de fase — fica mais vivo.
+
+Uso `background-position` (e não um pseudo-elemento) porque funciona igual em
+todos os elementos, inclusive no `<input id="busca">` (input não tem `::after`).
+Quem pede menos movimento recebe isso desligado pelo `prefers-reduced-motion`
+global (que reduz a duração a 1ms).
 
 ## Hospedagem
 
