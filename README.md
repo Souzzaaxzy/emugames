@@ -42,42 +42,52 @@ emugames/                    <- ESTE repositório (o site)
 
 ## Telas e rotas
 
-A **home** é um launcher de uma tela só (cabe na viewport, sem rolagem
-vertical): cabeçalho, jogos recentes, card da biblioteca e os créditos no
-rodapé. A **biblioteca** é a tela separada com a pesquisa, os filtros e todos
-os jogos.
+Só existe **uma tela** (a home): cabeçalho, jogos recentes, botão de abrir do
+aparelho, **busca**, **categorias** e **todos os jogos** — e, no fim da página,
+o card de perfis (créditos). A antiga tela de **biblioteca** deixou de existir;
+a lista completa vive na própria home.
 
 ```
 /                        → home (URL limpa, sem hash)
-/#/biblioteca            → biblioteca completa
 /#/jogo/topgear2         → jogo específico
 /?jogo=topgear2          → link antigo (redireciona para a rota `#/jogo/`)
 ```
 
 Navegação de volta:
 
-- **‹ JOGOS** (dentro do jogo) → **biblioteca** (`#/biblioteca`), para escolher
-  outro jogo direto. Vale para jogos do catálogo e para os do aparelho.
-- **‹ INÍCIO** (na biblioteca) → **home**, com a URL limpa (`/`).
+- **‹ JOGOS** (dentro do jogo) → **home**, para escolher outro jogo. Vale para
+  jogos do catálogo e para os do aparelho.
 - **Inatividade** (10 min sem toque) → home.
 
-Os dois usam `location.replace`, então a rota antiga não fica no histórico — o
-botão "voltar" do aparelho sai do site em vez de reabrir o jogo.
+O botão de voltar usa `location.replace`, então a rota antiga não fica no
+histórico — o botão "voltar" do aparelho sai do site em vez de reabrir o jogo.
 
 O histórico de recentes é o mesmo `localStorage` (`emugames.recentes`), gravado
 ao abrir o jogo; a home só o exibe.
 
-### Home sem rolagem
+### Home rolável
 
-`#home` tem `height: 100dvh` (com fallback `100vh`) e empilha as áreas com
-Flexbox; os créditos sobem para o rodapé via `margin-top: auto`. Em telas baixas
-(`max-height: 700px` / `560px`) os espaços e os cards encolhem — nada é
-escondido. A faixa de recentes rola na horizontal, nunca na vertical.
+`#home` tem `min-height: 100dvh` (com fallback `100vh`) e empilha as áreas com
+Flexbox. Como agora ela mostra a lista completa, a página **rola na vertical**;
+os créditos são o último bloco (já não usam `margin-top: auto`). A faixa de
+recentes e a barra de categorias rolam na horizontal.
+
+### Grade de jogos
+
+`#grid` usa **4 colunas fixas no celular** (como pedido) e, a partir de
+`min-width: 640px`, passa para `repeat(auto-fill, minmax(140px, 1fr))` — assim
+ela se repete e preenche a largura toda na tela do PC, de um lado ao outro.
+
+### Categorias
+
+As categorias ("Todos", "Nintendo", ...) ficam **abaixo da barra de pesquisa**,
+dentro de um retângulo de bordas arredondadas (`#filtros`) que rola na
+horizontal quando não cabem.
 
 ### Abrir um jogo do próprio aparelho
 
-O botão **Abrir do meu aparelho** (abaixo do da biblioteca, na home) deixa o
-usuário escolher **qualquer arquivo** do celular. O input **não tem `accept`**
+O botão **Abrir do meu aparelho** (na home) deixa o usuário escolher **qualquer
+arquivo** do celular. O input **não tem `accept`**
 de propósito: com o filtro, o seletor do Android esconde/desabilita ROMs que
 ele não reconhece (quase toda ROM chega como `application/octet-stream`). O
 console é detectado **depois**, pela extensão do arquivo (`.sfc` → `snes`,
@@ -104,8 +114,8 @@ boot, então voltar/recarregar continua funcionando.
 `intro.mp4` (540×300, H.264, ~260 KB) fica no topo da home com bordas
 arredondadas, mudo, em loop e `playsinline`. O título **atravessa** a base do
 vídeo: `margin-top: -0.55em` no `h1` põe metade dele sobre o vídeo e metade
-fora (não depende do tamanho do vídeo). O vídeo só roda na home — para na
-biblioteca e ao abrir um jogo, para não roubar CPU do emulador.
+fora (não depende do tamanho do vídeo). O vídeo só roda na home — para ao abrir
+um jogo, para não roubar CPU do emulador.
 
 ## Recursos
 

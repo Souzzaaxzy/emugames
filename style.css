@@ -64,19 +64,18 @@ body {
            calc(10px + env(safe-area-inset-left, 0px));
 }
 
-/* Nas telas de catalogo quem cuida do espacamento e' a propria tela (`#home`,
-   `#biblioteca`), que dimensiona pela viewport. Sem zerar aqui, o padding do
-   `body` somaria a eles e a home passaria da altura da tela. Com um jogo
+/* Na tela de catalogo quem cuida do espacamento e' a propria tela (`#home`),
+   que dimensiona pela viewport e cuida da safe area. Sem zerar aqui, o padding
+   do `body` somaria a ela e a home ficaria maior que a tela. Com um jogo
    aberto (`body.jogando`) o padding do body continua valendo, como sempre. */
 body:not(.jogando) { padding: 0; }
 
 .seta { font-size: 18px; line-height: 1; }
 
 /* ==========================================================================
-   HOME (launcher) — uma tela, sem rolagem vertical.
-   A altura e' a viewport (`100dvh` acompanha a barra do navegador mobile);
-   a coluna usa `grid-template-rows: auto minmax(0,1fr) auto auto` para os
-   creditos ficarem sempre no rodape, com os recentes absorvendo a sobra.
+   HOME — a tela unica do site: cabecalho, recentes, busca, categorias, TODOS
+   os jogos e os creditos no final. ROLA na vertical (a lista completa nao
+   caberia numa viewport).
    ========================================================================== */
 #home {
   /* O padding do topo e' uma variavel para o video poder cancela-lo exatamente
@@ -85,10 +84,10 @@ body:not(.jogando) { padding: 0; }
   --pad-lado: calc(8px + env(safe-area-inset-left, 0px));
   display: flex;
   flex-direction: column;
-  /* Empilha do topo: recentes e biblioteca ficam juntos e os creditos vao para
-     o rodape via `margin-top: auto` (ver `#creditos`). */
+  /* Empilha do topo. Os creditos ficam no FIM natural da pagina (sem
+     `margin-top: auto`), que agora pode passar da viewport. */
   gap: clamp(8px, 2vh, 16px);
-  height: 100dvh;
+  min-height: 100dvh;
   padding: var(--pad-top)
            calc(8px + env(safe-area-inset-right, 0px))
            calc(8px + env(safe-area-inset-bottom, 0px))
@@ -96,10 +95,9 @@ body:not(.jogando) { padding: 0; }
 }
 /* `display` acima sobrepoe o `[hidden]` do navegador: sem isto, a tela
    "escondida" continuaria no layout (mesmo padrao do `#controle-painel`). */
-#home[hidden],
-#biblioteca[hidden] { display: none; }
+#home[hidden] { display: none; }
 @supports not (height: 100dvh) {
-  #home { height: 100vh; }
+  #home { min-height: 100vh; }
 }
 #home .cabeca {
   /* o padding do topo e' o do `#home`; aqui so os 4px laterais + base */
@@ -171,54 +169,7 @@ body:not(.jogando) { padding: 0; }
 
 
 
-/* ==========================================================================
-   BIBLIOTECA — tela separada, com a lista completa (pode rolar).
-   ========================================================================== */
-#biblioteca {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-height: 100dvh;
-  padding: calc(10px + env(safe-area-inset-top, 0px))
-           calc(10px + env(safe-area-inset-right, 0px))
-           calc(10px + env(safe-area-inset-bottom, 0px))
-           calc(10px + env(safe-area-inset-left, 0px));
-}
-@supports not (height: 100dvh) {
-  #biblioteca { min-height: 100vh; }
-}
-#barra-biblioteca {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 2px 0 10px;
-}
-#barra-biblioteca h2 {
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: .6px;
-  text-transform: uppercase;
-  color: var(--texto2);
-}
-#voltar-home {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--painel2);
-  color: var(--texto);
-  border: 1px solid var(--borda);
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  font-family: inherit;
-  cursor: pointer;
-}
-#voltar-home:active { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
-
-/* Cards de acesso (biblioteca e abrir do aparelho), na home */
-#abrir-biblioteca,
+/* Card de acesso ("abrir do aparelho"), na home */
 #abrir-arquivo {
   display: flex;
   align-items: center;
@@ -235,15 +186,11 @@ body:not(.jogando) { padding: 0; }
   box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
   transition: transform var(--t-rapida) var(--curva), border-color var(--t-rapida) var(--curva), box-shadow var(--t-rapida) var(--curva);
 }
-/* o segundo card fica mais colado no primeiro: os dois sao um bloco */
-#abrir-arquivo { margin-top: calc(clamp(8px, 2vh, 16px) * -1 + 8px); }
-#abrir-biblioteca:active,
 #abrir-arquivo:active {
   transform: scale(.98);
   border-color: var(--acento);
 }
 @media (hover: hover) {
-  #abrir-biblioteca:hover,
   #abrir-arquivo:hover { transform: translateY(-2px); border-color: var(--realce); }
 }
 .bib-icone {
@@ -257,8 +204,6 @@ body:not(.jogando) { padding: 0; }
   color: var(--sobre-acento);
   font-size: clamp(18px, 5vw, 22px);
 }
-/* o card do aparelho usa um tom mais discreto para nao competir com o da
-   biblioteca (que e' a acao principal) */
 #abrir-arquivo .bib-icone {
   background: var(--painel2);
   box-shadow: none;
@@ -266,7 +211,6 @@ body:not(.jogando) { padding: 0; }
 .bib-texto { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 /* Fio de luz no topo dos cards de destaque: leitura de neve / corte
    cinematografico. Estatico de proposito (custo zero). */
-#abrir-biblioteca::before,
 #abrir-arquivo::before,
 .perfil::before {
   content: "";
@@ -278,7 +222,6 @@ body:not(.jogando) { padding: 0; }
   background: linear-gradient(90deg, transparent, rgba(241, 241, 238, .28), transparent);
   pointer-events: none;
 }
-#abrir-biblioteca,
 #abrir-arquivo,
 .perfil { position: relative; }
 .bib-titulo { font-size: clamp(14px, 4vw, 16px); font-weight: 800; }
@@ -290,10 +233,8 @@ body:not(.jogando) { padding: 0; }
   color: var(--fraco);
   transition: transform var(--t-rapida) var(--curva), color var(--t-rapida) var(--curva);
 }
-#abrir-biblioteca:active .bib-seta,
 #abrir-arquivo:active .bib-seta { color: var(--acento); transform: translateX(3px); }
 @media (hover: hover) {
-  #abrir-biblioteca:hover .bib-seta,
   #abrir-arquivo:hover .bib-seta { color: var(--acento); transform: translateX(3px); }
 }
 
@@ -338,16 +279,15 @@ h1 #marca { letter-spacing: 2px; }
 
 /* Mini aba de CREDITOS: dois perfis lado a lado (esquerda/direita).
    Usa os mesmos tokens do resto do site (painel, borda, acento).
-   `margin-top: auto` empurra os cards para o RODAPE da home. */
+   Fica no FIM natural da home (depois de todos os jogos). */
 #creditos {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 10px;
-  /* Sobe os cards para o rodape (a sobra da home vira este `auto`). O rodape
-     ficou mais alto com papel + nome + 2 botoes, entao a folga de baixo e'
-     minima -- em tela baixa quem cede sao os cards de recentes. */
-  margin-top: auto;
+  /* So um respiro antes dos perfis: como a home agora rola, os creditos sao o
+     ultimo bloco da pagina, nao mais um rodape fixo de uma tela so. */
+  margin-top: clamp(6px, 2vh, 20px);
   margin-bottom: clamp(2px, 1vh, 10px);
 }
 .perfil {
@@ -437,15 +377,19 @@ h1 #marca { letter-spacing: 2px; }
   outline-offset: 2px;
   border-color: var(--acento-forte);
 }
-/* Os dois perfis ficam SEMPRE lado a lado: empilhar roubaria altura e
-   quebraria a regra de "home sem rolagem". Em tela estreita eles so encolhem. */
+/* Os dois perfis ficam SEMPRE lado a lado; em tela estreita eles so encolhem. */
 
-/* Abas de categoria: rolam na horizontal quando nao cabem */
+/* Abas de categoria: um RETANGULO de bordas arredondadas que rola na
+   horizontal quando as categorias nao cabem. */
 #filtros {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 16px 2px 4px;
+  padding: 8px;
+  margin-top: 12px;
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -477,7 +421,7 @@ h1 #marca { letter-spacing: 2px; }
   position: relative;
   display: flex;
   align-items: center;
-  margin: 14px 0 6px;
+  margin: 14px 0 0;
 }
 .busca-icone {
   position: absolute;
@@ -542,12 +486,20 @@ h1 #marca { letter-spacing: 2px; }
 }
 #recentes-lista .card-mini .nome { font-size: 11.5px; }
 
-/* Grade de cartoes (responsiva: adapta o numero de colunas ao espaco) */
+/* Grade de cartoes. No CELULAR fica SEMPRE com 4 por fileira (como pedido);
+   em telas maiores a grade se repete sozinha (`auto-fill`) e preenche a largura
+   toda, de um lado ao outro. */
 #grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(6px, 2.2vw, 12px);
   padding-bottom: 24px;
+}
+@media (min-width: 640px) {
+  #grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
 }
 
 .card {
@@ -619,6 +571,7 @@ h1 #marca { letter-spacing: 2px; }
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
   padding: 9px 11px 11px;
 }
 .card .nome {
@@ -636,6 +589,11 @@ h1 #marca { letter-spacing: 2px; }
   letter-spacing: .4px;
   text-transform: uppercase;
   color: var(--fraco);
+  /* Numa fileira de 4 no celular o rotulo do console e' estreito: corta com
+     reticencias em vez de vazar para fora do card. */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 #vazio {
@@ -670,7 +628,7 @@ h1 #marca { letter-spacing: 2px; }
   .card .nome { font-size: 15px; }
   .card .plat { font-size: 12px; }
   .capa .tag { font-size: 15px; padding: 4px 9px; }
-  #voltar, #controle, #parar, #cheia, #voltar-home { padding: 12px 18px; font-size: 13px; }
+  #voltar, #controle, #parar, #cheia { padding: 12px 18px; font-size: 13px; }
   h1 { font-size: 34px; }
   .cabeca .sub { font-size: 15px; }
   .secao-titulo { font-size: 15px; }
@@ -1186,17 +1144,10 @@ body.girado #cheia { opacity: .6; padding: 7px 12px; font-size: 11px; }
 @media (orientation: landscape) {
   body { padding: 0; }
   #barra, #controles { display: none; }
-  #home, #biblioteca { padding: 6px; }
+  #home { padding: 6px; }
   /* Em paisagem o padding encolhe: o video tem de cancelar o valor NOVO,
      senao ele passaria do topo da tela. */
   #home { --pad-top: 6px; --pad-lado: 6px; }
-  /* Deitado a altura e' pequena demais para caber tudo (video + recentes +
-     2 cards + creditos) sem esconder alguma coisa. Aqui a home pode rolar --
-     em RETRATO ela nunca rola. Assim nada some. */
-  #home { height: auto; min-height: 100dvh; }
-  @supports not (height: 100dvh) {
-    #home { min-height: 100vh; }
-  }
 
   /* Deitado, a secao do jogo passa a ocupar tudo SOZINHA — nao precisa mais
      tocar no botao de tela cheia. */
@@ -1354,13 +1305,12 @@ code { background: var(--painel2); padding: 1px 5px; border-radius: 4px; font-si
   #fundo-jp { opacity: 0.15; }
 }
 
-/* As telas ficam ACIMA da camada de kanji (`z-index: 0`). Sem isto o fundo
+/* A home fica ACIMA da camada de kanji (`z-index: 0`). Sem isto o fundo
    cobriria o conteudo; com isto, os kanji aparecem atras do conteudo.
    `#jogador` NAO entra aqui de proposito: com um jogo aberto a camada de kanji
    fica escondida atras do palco do emulador (que tem fundo proprio), entao os
    simbolos nao aparecem dentro do jogo. */
-#home,
-#biblioteca {
+#home {
   position: relative;
   z-index: 1;
 }

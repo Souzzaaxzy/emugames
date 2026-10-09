@@ -158,8 +158,9 @@
 </div>
 
 <!-- ============================== HOME ============================== -->
-<!-- Tela unica (launcher): cabecalho, recentes, acesso a biblioteca e
-     creditos no rodape. Cabe na viewport, sem rolagem vertical. -->
+<!-- Tela unica: cabecalho, recentes, busca, categorias, TODOS os jogos e os
+     creditos no final. Pode rolar na vertical (a lista completa nao caberia
+     numa viewport). -->
 <section id="home">
   <header class="cabeca">
     <!-- Intro em video (bordas redondas). O titulo fica "atravessado" na base
@@ -178,15 +179,6 @@
     <p id="recentes-vazio" hidden>Abra um jogo e ele aparece aqui.</p>
   </section>
 
-  <button id="abrir-biblioteca" type="button">
-    <span class="bib-icone" aria-hidden="true">&#127918;</span>
-    <span class="bib-texto">
-      <span class="bib-titulo">Biblioteca de jogos</span>
-      <span class="bib-desc">Explore todos os seus jogos retrô</span>
-    </span>
-    <span class="bib-seta" aria-hidden="true">&#8250;</span>
-  </button>
-
   <!-- Abre um arquivo do proprio aparelho. O console e' detectado pela extensao
        e o emulador roda igual ao de um jogo do catalogo. -->
   <button id="abrir-arquivo" type="button">
@@ -202,6 +194,21 @@
        `application/octet-stream`). Sem filtro o usuario escolhe qualquer
        arquivo e o console e' detectado depois, pela extensao. -->
   <input id="arquivo" type="file" hidden>
+
+  <div class="busca-wrap">
+    <span class="busca-icone" aria-hidden="true">&#128269;</span>
+    <input id="busca" type="search" inputmode="search" autocomplete="off"
+      placeholder="Pesquisar jogos..." aria-label="Pesquisar jogos">
+  </div>
+
+  <nav id="filtros" aria-label="Categorias"></nav>
+
+  <section class="todos" aria-labelledby="todos-titulo">
+    <h2 class="secao-titulo" id="todos-titulo">&#127918; Todos os jogos</h2>
+    <div id="grid"></div>
+  </section>
+
+  <p id="vazio" hidden>&#128533; Nenhum jogo encontrado</p>
 
   <footer id="creditos" aria-label="Créditos">
     <div class="perfil">
@@ -229,32 +236,6 @@
   </footer>
 </section>
 
-<!-- =========================== BIBLIOTECA =========================== -->
-<!-- Catalogo completo: pesquisa, filtros e todos os jogos. -->
-<section id="biblioteca" hidden>
-  <div id="barra-biblioteca">
-    <button id="voltar-home" type="button" title="Voltar ao início" aria-label="Voltar ao início">
-      <span class="seta">&#8249;</span> INÍCIO
-    </button>
-    <h2>Biblioteca</h2>
-  </div>
-
-  <nav id="filtros" aria-label="Categorias"></nav>
-
-  <div class="busca-wrap">
-    <span class="busca-icone" aria-hidden="true">&#128269;</span>
-    <input id="busca" type="search" inputmode="search" autocomplete="off"
-      placeholder="Pesquisar jogos..." aria-label="Pesquisar jogos">
-  </div>
-
-  <section class="todos" aria-labelledby="todos-titulo">
-    <h2 class="secao-titulo" id="todos-titulo">&#127918; Todos os jogos</h2>
-    <div id="grid"></div>
-  </section>
-
-  <p id="vazio" hidden>&#128533; Nenhum jogo encontrado</p>
-</section>
-
 <!-- ============================= JOGADOR ============================= -->
 <!-- Botao de CONTROLE no canto superior esquerdo.
      Fica FORA de `#jogador` de proposito: em tela cheia o layout inteiro e'
@@ -268,7 +249,7 @@
 <section id="jogador" hidden>
   <div id="barra">
     <span id="subtitulo"></span>
-    <button id="voltar" type="button" title="Voltar à biblioteca" aria-label="Voltar à biblioteca">
+    <button id="voltar" type="button" title="Voltar aos jogos" aria-label="Voltar aos jogos">
       <span class="seta">&#8249;</span> JOGOS
     </button>
   </div>
@@ -350,7 +331,6 @@
 
   // Elementos
   const home = document.getElementById('home');
-  const biblioteca = document.getElementById('biblioteca');
   const jogador = document.getElementById('jogador');
   const grid = document.getElementById('grid');
   const filtros = document.getElementById('filtros');
@@ -359,10 +339,8 @@
   const recentesEl = document.getElementById('recentes');
   const recentesLista = document.getElementById('recentes-lista');
   const recentesVazio = document.getElementById('recentes-vazio');
-  const bibliotecaBtn = document.getElementById('abrir-biblioteca');
   const arquivoBtn = document.getElementById('abrir-arquivo');
   const arquivoEl = document.getElementById('arquivo');
-  const voltarHomeBtn = document.getElementById('voltar-home');
   const introVideo = document.getElementById('intro-video');
   const alvo = document.getElementById('game');
   const subtitulo = document.getElementById('subtitulo');
@@ -402,7 +380,7 @@
   function marcarAtividade() { ocioso = Date.now(); }
 
   // ==========================================================================
-  // ROTAS  (URL limpa = HOME   |   #/biblioteca   |   #/jogo/<id>)
+  // ROTAS  (URL limpa = HOME   |   #/jogo/<id>)
   // Usamos o HASH porque ele funciona em qualquer host estatico (o site mora
   // no Cloudflare) e da para trocar de tela sem recarregar a pagina. A HOME
   // nao tem hash: o endereco volta a ser so `/` (sem `#/`).
@@ -410,7 +388,6 @@
   function lerRota() {
     const h = String(location.hash || '').replace(/^#\/?/, '');
     if (h.startsWith('jogo/')) return { tela: 'jogo', id: decodeURIComponent(h.slice(5)) };
-    if (h.startsWith('biblioteca')) return { tela: 'biblioteca' };
     return { tela: 'home' };
   }
 
@@ -546,7 +523,6 @@
     window.EJS_emulator = null;
 
     home.hidden = true;
-    biblioteca.hidden = true;
     erro.hidden = true;
     jogador.hidden = false;
     introVideo.pause();
@@ -831,17 +807,16 @@
     location.href = `./?jogo=${encodeURIComponent(id)}#/jogo/${encodeURIComponent(id)}`;
   }
 
-  // Mostra uma das telas de catalogo (home ou biblioteca) e esconde as outras.
+  // Mostra a tela inicial (a unica tela de catalogo) e esconde o jogador.
   function mostrarTela(nome) {
     parar();
     jogoAtual = null;
     home.hidden = nome !== 'home';
-    biblioteca.hidden = nome !== 'biblioteca';
     jogador.hidden = true;
     erro.hidden = true;
     document.body.classList.remove('jogando');
     document.title = 'EmuGames Lizzy';
-    // O video do topo so roda na home: fora dela, para (nao rouba CPU do jogo).
+    // O video do topo so roda na home (nao rouba CPU do jogo).
     if (nome === 'home') {
       introVideo.play().catch(() => {});
       // A home tem a URL limpa (`/`, sem hash nem `?jogo=`). Sem recarregar:
@@ -853,11 +828,6 @@
     } else {
       introVideo.pause();
     }
-  }
-
-  function abrirBiblioteca() {
-    if (location.hash === '#/biblioteca') { mostrarTela('biblioteca'); return; }
-    location.hash = '#/biblioteca'; // dispara `hashchange` -> aplicarRota()
   }
 
   // ==========================================================================
@@ -1036,23 +1006,20 @@
   }
 
   /**
-   * Volta de um jogo para a BIBLIOTECA (nao para a home). Recarrega a pagina:
-   * o EmulatorJS so pode ser montado uma vez por documento, entao sair do jogo
-   * exige uma navegacao nova (ver `abrirJogo`). A URL final e' `#/biblioteca`,
-   * com o `?jogo=`/`?arquivo=` removido.
+   * Volta de um jogo para a HOME. Recarrega a pagina: o EmulatorJS so pode ser
+   * montado uma vez por documento, entao sair do jogo exige uma navegacao nova
+   * (ver `abrirJogo`). Usa `replace` para o `?jogo=`/`?arquivo=` e o hash nao
+   * ficarem no historico -- o botao "voltar" do aparelho sai do site em vez de
+   * reabrir o jogo.
    */
-  function voltarParaBiblioteca() {
+  function voltarParaHomeDoJogo() {
     if (estaEmTelaCheia()) alternarTelaCheia(false);
-    if (location.hash === '#/biblioteca' && !location.search) {
-      mostrarTela('biblioteca');
-      return;
-    }
-    location.replace(location.pathname + '#/biblioteca');
+    if (!location.search && !location.hash) { mostrarTela('home'); return; }
+    location.replace(location.pathname);
   }
 
   /**
-   * Volta para a HOME (tela inicial, URL limpa). Usado pelo botao INICIO da
-   * biblioteca e pela inatividade.
+   * Volta para a HOME (tela inicial, URL limpa). Usado pela inatividade.
    */
   function voltarParaHome() {
     if (estaEmTelaCheia()) alternarTelaCheia(false);
@@ -1066,7 +1033,6 @@
     window.EJS_emulator = null;
 
     home.hidden = true;
-    biblioteca.hidden = true;
     erro.hidden = true;
     jogador.hidden = false;
     // O video do topo para junto com a home (nao rouba CPU do emulador).
@@ -1387,17 +1353,15 @@
   // EVENTOS
   // ==========================================================================
   pararBtn.addEventListener('click', parar);
-  voltarBtn.addEventListener('click', voltarParaBiblioteca);
+  voltarBtn.addEventListener('click', voltarParaHomeDoJogo);
   cheiaBtn.addEventListener('click', () => alternarTelaCheia());
-  bibliotecaBtn.addEventListener('click', abrirBiblioteca);
   arquivoBtn.addEventListener('click', escolherArquivo);
-  voltarHomeBtn.addEventListener('click', voltarParaHome);
 
-  // O botao "sair" do proprio EmulatorJS volta para a biblioteca, igual ao JOGOS.
+  // O botao "sair" do proprio EmulatorJS volta para a home, igual ao JOGOS.
   window.EJS_onExit = () => {
     window.EJS_emulator = null;
     aoSair();
-    if (!jogador.hidden) voltarParaBiblioteca();
+    if (!jogador.hidden) voltarParaHomeDoJogo();
   };
 
   window.addEventListener('hashchange', aplicarRota);
@@ -1503,7 +1467,7 @@
         if (!jogoAtual || jogoAtual.id !== j.id) iniciar(j);
         return;
       }
-      mostrarTela('biblioteca');
+      mostrarTela('home');
       erro.hidden = false;
       erroTitulo.textContent = `Jogo "${r.id}" não está no catálogo.`;
       erroDica.textContent = 'Escolha outro jogo na lista.';
@@ -1527,7 +1491,6 @@
 
     if (falhou || !catalogoJogos.length) {
       home.hidden = true;
-      biblioteca.hidden = true;
       jogador.hidden = true;
       erro.hidden = false;
       erroTitulo.textContent = falhou
@@ -1559,17 +1522,15 @@
 
     // Limpa a URL SEM recarregar (o documento aqui ja esta limpo). No JOGO so
     // tira o `?jogo=`/`?arquivo=` -- a rota `#/jogo/<id>` precisa ficar, senao
-    // o jogo nao abre. Na HOME tira tambem o hash, deixando so `/`; na
-    // biblioteca o `#/biblioteca` fica (mantem a tela ao recarregar).
+    // o jogo nao abre. Na HOME tira tambem o hash, deixando so `/`.
     // `history` muda apenas a URL visivel; o botao "voltar" do aparelho segue
-    // saindo do site, que e' o esperado nas telas de catalogo.
+    // saindo do site, que e' o esperado.
     const rotaJogo = location.hash.startsWith('#/jogo/');
     if (rotaJogo) {
       if (params.has('jogo') || params.has('arquivo')) {
         history.replaceState(null, '', location.pathname + location.hash);
       }
-    } else if (!location.hash.startsWith('#/biblioteca')
-      && (location.hash || params.has('jogo') || params.has('arquivo'))) {
+    } else if (location.hash || params.has('jogo') || params.has('arquivo')) {
       history.replaceState(null, '', location.pathname);
     }
 
