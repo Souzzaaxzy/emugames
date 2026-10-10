@@ -204,12 +204,14 @@
               <use href="#braco-floco" transform="rotate(300 50 50)"/>
             </g>
           </svg>
-          <!-- Player no MEIO do floco: icones DESENHADOS (SVG preto), sem emoji. -->
+          <!-- Player no MEIO do floco: icones DESENHADOS (SVG), sem emoji. -->
           <button id="musica-toggle" type="button" title="Tocar / pausar" aria-label="Tocar ou pausar">
             <svg class="icone icone-play" viewBox="0 0 24 24" aria-hidden="true"><polygon points="7,4.5 20,12 7,19.5" fill="#F1F1EE"/></svg>
             <svg class="icone icone-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1" fill="#F1F1EE"/><rect x="13.8" y="5" width="4.2" height="14" rx="1" fill="#F1F1EE"/></svg>
           </button>
         </div>
+        <!-- Elemento de audio (invisivel). O som e' liberado no 1o gesto. -->
+        <audio id="bgMusic" loop preload="auto" playsinline hidden></audio>
       </div>
       <span class="creditos-marca">𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤</span>
     </div>
@@ -1710,11 +1712,11 @@
   // primeira interacao do usuario comeca a tocar.
   // ==========================================================================
   const musicaBtn = document.getElementById('musica-toggle');
-  let audio = null;
+  const music = document.getElementById('bgMusic');   // <audio id="bgMusic">
   let listaMusicas = [];
   let musicaIdx = -1;
+  let audioLiberado = false;   // true = o usuario ja deu um gesto (som liberado)
   let usuarioPausou = false;   // true = o usuario pausou de proposito
-  let audioLiberado = false;   // true = o usuario ja interagiu (som liberado)
 
   async function carregarListaMusicas() {
     try {
@@ -1727,18 +1729,8 @@
     } catch (e) { listaMusicas = []; }
   }
 
-  function criarAudio() {
-    if (audio) return;
-    audio = new Audio();
-    audio.loop = true;
-    audio.volume = 0.7;
-    audio.preload = 'auto';
-    audio.addEventListener('play', atualizarBotaoMusica);
-    audio.addEventListener('pause', atualizarBotaoMusica);
-  }
-
-  // Notificacao de midia (tela de bloqueio / notificacoes do sistema) com a
-  // FOTO do preview como capa. O navegador mostra o titulo/artista/capa.
+  // Notificacao de midia (tela de bloqueio / notificacoes) com a FOTO do
+  // preview como capa.
   function montarMediaSession() {
     if (!('mediaSession' in navigator)) return;
     const img = new URL('preview.jpg', location.href).href;
@@ -1752,81 +1744,75 @@
           { src: img, sizes: '512x268', type: 'image/jpeg' },
         ],
       });
-      navigator.mediaSession.setActionHandler('play', () => { audio && audio.play().catch(() => {}); });
-      navigator.mediaSession.setActionHandler('pause', () => { audio && audio.pause(); });
+      navigator.mediaSession.setActionHandler('play', () => { music.play().catch(() => {}); });
+      navigator.mediaSession.setActionHandler('pause', () => { music.pause(); });
     } catch (e) { /* ok */ }
   }
 
-  // Toca uma faixa ALEATORIA. Tenta com SOM; se o navegador bloquear, tenta
-  // MUDO (autoplay mudo e' permitido) -- assim ja' "toca" ao entrar, e a 1a
-  // interacao libera o som.
-  function tocarAleatoria() {
+  // Sorteia uma faixa e aponta o <audio> pra ela. NAO toca (o play e' feito
+  // pelo gesto do usuario, senao o navegador bloqueia o som).
+  function escolherAleatoria() {
     if (!listaMusicas.length) return;
     let i = Math.floor(Math.random() * listaMusicas.length);
     if (listaMusicas.length > 1 && i === musicaIdx) i = (i + 1) % listaMusicas.length;
     musicaIdx = i;
-    usuarioPausou = false;
-    criarAudio();
-    audio.src = 'musicas/' + encodeURIComponent(listaMusicas[i]);
-    // Se o usuario JA interagiu alguma vez (som liberado), toca com som; senao
-    // comeca MUDO -- autoplay mudo e' sempre permitido, entao a musica ja'
-    // "roda" ao entrar e o som entra no primeiro toque.
-    audio.muted = !audioLiberado;
-    audio.play().then(atualizarBotaoMusica).catch(() => {
-      audio.muted = true;
-      audio.play().then(atualizarBotaoMusica).catch(atualizarBotaoMusica);
-    });
+    music.src = 'musicas/' + encodeURIComponent(listaMusicas[i]);
+    music.muted = false;
     montarMediaSession();
   }
 
   function atualizarBotaoMusica() {
     if (!musicaBtn) return;
-    musicaBtn.classList.toggle('tocando', !!(audio && !audio.paused));
+    musicaBtn.classList.toggle('tocando', !music.paused);
+  }
+  music.addEventListener('play', atualizarBotaoMusica);
+  music.addEventListener('pause', atualizarBotaoMusica);
+
+  // Toca (COM SOM). So' funciona depois de um gesto do usuario; se o navegador
+  // ainda nao aceitou, retorna sem marcar como liberado (tenta no proximo).
+  function tentarTocar() {
+    if (usuarioPausou) return;
+    if (!jogador.hidden) return;   // com um jogo aberto, nao liga a musica
+    if (!music.paused && !music.muted) { audioLiberado = true; return; }
+    music.muted = false;
+    return music.play().then(() => { audioLiberado = true; atualizarBotaoMusica(); })
+      .catch(() => { /* sem gesto valido ainda */ });
   }
 
-  // QUALQUER gesto do usuario libera o SOM (se o navegador tinha bloqueado).
-  // Fica em CAPTURE no documento, entao roda antes de qualquer outro handler
-  // (mesmo os que param a propagacao). Nao mexe se o usuario pausou de
-  // proposito nem com um jogo aberto.
-  // Libera o SOM. IMPORTANTE: so' marca `audioLiberado` quando o audio
-  // REALMENTE toca com som. (Antes marcava antes do play, entao um evento sem
-  // gesto de verdade -- scroll/mousemove no carregamento -- marcava como
-  // liberado e TRAVAVA os toques reais. Era o bug.)
-  function liberarAudio() {
-    if (usuarioPausou || !audio) return;
-    if (!jogador.hidden) return;
-    if (!audio.muted && !audio.paused) { audioLiberado = true; return; } // ja' tocando com som
-    if (audio.muted) audio.muted = false;
-    audio.play().then(() => { audioLiberado = true; atualizarBotaoMusica(); })
-      .catch(() => { /* ainda sem gesto valido: tenta no proximo */ });
-  }
-  // Eventos que destravam o som. IMPORTANTE: `touchcancel`/`pointercancel`
-  // entram porque um DESLIZE (rolagem) termina em `touchcancel` -- e nao em
-  // `touchend`. Sem eles, o deslize nunca liberava o som (era o que faltava).
-  ['pointerdown', 'touchstart', 'mousedown',
-   'pointermove', 'touchmove', 'scroll', 'wheel',
-   'touchend', 'touchcancel', 'pointerup', 'pointercancel', 'keydown', 'click']
-    .forEach((ev) => document.addEventListener(ev, liberarAudio, { capture: true, passive: true }));
+  // ---- Gesto do usuario: libera o som -------------------------------------
+  // Toque/clique/tecla comeam; o DESLIZAR (touchmove) tambem entra -- e' o
+  // gesto mais comum no celular. Todos com `passive` e, no toque, em capture
+  // pra rodar antes de qualquer outro handler.
+  document.addEventListener('touchstart', tentarTocar, { capture: true, passive: true });
+  document.addEventListener('touchmove', tentarTocar, { capture: true, passive: true });
+  document.addEventListener('pointerdown', tentarTocar, { capture: true, passive: true });
+  document.addEventListener('mousedown', tentarTocar, { capture: true, passive: true });
+  document.addEventListener('keydown', tentarTocar, { capture: true, passive: true });
+  document.addEventListener('scroll', tentarTocar, { capture: true, passive: true });
 
+  // Botao do player: pausa/retoma.
   musicaBtn && musicaBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (!audio) { tocarAleatoria(); return; }
-    audioLiberado = true;
-    // Decide pelo que o USUARIO quer (nao pelo estado, que o `liberarAudio`
-    // pode ter mudado um instante antes neste mesmo clique).
-    if (usuarioPausou) { usuarioPausou = false; audio.muted = false; audio.play().catch(() => {}); }
-    else { usuarioPausou = true; audio.pause(); }
+    if (music.paused) {
+      usuarioPausou = false;
+      music.muted = false;
+      music.play().then(() => { audioLiberado = true; atualizarBotaoMusica(); })
+        .catch(() => atualizarBotaoMusica());
+    } else {
+      usuarioPausou = true;
+      music.pause();
+    }
     atualizarBotaoMusica();
   });
 
   // Ao ENTRAR no jogo: para a musica (nao competir com o audio do jogo).
-  // Ao SAIR do jogo: troca pra outra faixa.
+  // Ao SAIR do jogo: escolhe OUTRA faixa.
   function musicaAoEntrarNoJogo() {
-    if (audio) audio.pause();
+    music.pause();
     atualizarBotaoMusica();
   }
   function musicaAoSairDoJogo() {
-    tocarAleatoria();
+    escolherAleatoria();
   }
 
   // ==========================================================================
@@ -2170,11 +2156,12 @@
 
     aplicarRota();
 
-    // Musica: carrega a lista e toca uma ALEATORIA (so' se estivermos na home;
-    // se a rota for de jogo, ela comeca quando voltar). Se o navegador
-    // bloquear o autoplay, a 1a interacao dispara.
+    // Musica: carrega a lista e ja' deixa uma faixa ALEATORIA pronta (sorteada).
+    // O play e' feito no 1o gesto do usuario (toque/deslize/clique) -- o
+    // navegador nao deixa tocar som sem interacao. Se a rota for de jogo, o
+    // 1o gesto tambem nao liga (ver `tentarTocar`).
     await carregarListaMusicas();
-    if (!location.hash.startsWith('#/jogo/')) tocarAleatoria();
+    if (!location.hash.startsWith('#/jogo/')) escolherAleatoria();
     atualizarBotaoMusica();
   })();
 })();
