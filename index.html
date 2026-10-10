@@ -1800,10 +1800,12 @@
     audio.play().then(() => { audioLiberado = true; atualizarBotaoMusica(); })
       .catch(() => { /* ainda sem gesto valido: tenta no proximo */ });
   }
-  // Eventos que contam como GESTO do usuario (user activation) e destravam o
-  // som: toque/clique/tecla. O "deslizar" tambem destrava, porque comeca com
-  // um `touchstart`/`pointerdown`.
-  ['pointerdown', 'touchstart', 'mousedown', 'touchend', 'pointerup', 'keydown', 'click']
+  // Eventos que destravam o som. Inclui os de DESLIZAR (touchmove/pointermove/
+  // scroll) -- seguro agora: se nao houver gesto valido o play() falha e NAO
+  // marca como liberado, entao continua tentando nos proximos eventos.
+  ['pointerdown', 'touchstart', 'mousedown',
+   'pointermove', 'touchmove', 'scroll', 'wheel',
+   'touchend', 'pointerup', 'keydown', 'click']
     .forEach((ev) => document.addEventListener(ev, liberarAudio, { capture: true, passive: true }));
 
   musicaBtn && musicaBtn.addEventListener('click', (e) => {
