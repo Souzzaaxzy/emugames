@@ -179,6 +179,16 @@
   </header>
 
   <footer id="creditos" aria-label="Créditos">
+    <!-- Linha de cima (sem caixinha): PLAYER de musica a' esquerda e a marca
+         MATRIX a' direita, cada um centralizado em cima do seu card. -->
+    <div class="creditos-topo">
+      <div class="musica" id="musica">
+        <span class="musica-floco" aria-hidden="true">&#10052;&#65039;</span>
+        <button id="musica-toggle" type="button" title="Tocar / pausar" aria-label="Tocar ou pausar">&#9197;&#65038;</button>
+      </div>
+      <span class="creditos-marca">𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤</span>
+    </div>
+    <div class="creditos-cards">
     <div class="perfil">
       <p class="perfil-papel">Criador</p>
       <p class="perfil-nome">𝐊𝐚𝐧𝐧𝐨𝐧ᰔ𝐠𝐢</p>
@@ -200,6 +210,7 @@
       </a>
       <a class="perfil-canal" href="https://whatsapp.com/channel/0029Vb70POs9MF8tO5vFak1v"
         target="_blank" rel="noopener noreferrer">Canal no WhatsApp</a>
+    </div>
     </div>
   </footer>
 
@@ -1083,6 +1094,7 @@
 
   function voltarParaHomeDoJogo() {
     autoSalvarAgora();   // auto-save ao sair pelo botao JOGOS
+    musicaAoSairDoJogo(); // troca a musica ao voltar pra home
     if (estaEmTelaCheia()) alternarTelaCheia(false);
     // Sempre volta pra RAIZ do site (URL limpa).
     if (location.search || location.hash) { irParaRaiz(); return; }
@@ -1661,7 +1673,78 @@
     sincronizarControlesDeTela();
     setTimeout(sincronizarControlesDeTela, 500);
     setTimeout(sincronizarControlesDeTela, 1500);
+    musicaAoEntrarNoJogo();
   };
+
+  // ==========================================================================
+  // MUSICA DE FUNDO (player a' esquerda, marca MATRIX a' direita)
+  //
+  // Toca uma faixa ALEATORIA ao entrar na home e TROCA ao sair de um jogo.
+  // A lista fica em `musicas.json` (array de nomes de arquivo dentro de
+  // `musicas/`). Nao ha' autoplay garantido: se o navegador bloquear, a
+  // primeira interacao do usuario comeca a tocar.
+  // ==========================================================================
+  const musicaEl = document.getElementById('musica');
+  const musicaBtn = document.getElementById('musica-toggle');
+  let audio = null;
+  let listaMusicas = [];
+  let musicaIdx = -1;
+
+  async function carregarListaMusicas() {
+    try {
+      const r = await fetch('./musicas.json', { cache: 'no-store' });
+      if (!r.ok) return;
+      const d = await r.json();
+      listaMusicas = (Array.isArray(d) ? d : (d.musicas || []))
+        .map((x) => (typeof x === 'string' ? x : (x && x.arquivo)))
+        .filter(Boolean);
+    } catch (e) { listaMusicas = []; }
+  }
+
+  function tocarAleatoria() {
+    if (!listaMusicas.length) return;
+    let i = Math.floor(Math.random() * listaMusicas.length);
+    if (listaMusicas.length > 1 && i === musicaIdx) i = (i + 1) % listaMusicas.length;
+    musicaIdx = i;
+    if (!audio) {
+      audio = new Audio();
+      audio.loop = true;
+      audio.volume = 0.7;
+      audio.addEventListener('play', atualizarBotaoMusica);
+      audio.addEventListener('pause', atualizarBotaoMusica);
+    }
+    audio.src = 'musicas/' + encodeURIComponent(listaMusicas[i]);
+    audio.play().then(atualizarBotaoMusica).catch(() => atualizarBotaoMusica());
+  }
+
+  function atualizarBotaoMusica() {
+    if (!musicaBtn) return;
+    const tocando = audio && !audio.paused;
+    musicaBtn.textContent = tocando ? '\u23F8\uFE0E' : '\u23EF\uFE0E'; // ⏸ / ⏯
+  }
+
+  // Se o navegador bloquear o autoplay, toca na 1a interacao.
+  function tocarNaInteracao() {
+    if (audio && audio.paused) audio.play().catch(() => {});
+  }
+
+  musicaBtn && musicaBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!audio) { tocarAleatoria(); return; }
+    if (audio.paused) audio.play().catch(() => {}); else audio.pause();
+    atualizarBotaoMusica();
+  });
+  ['pointerdown', 'keydown', 'touchstart'].forEach((ev) =>
+    addEventListener(ev, tocarNaInteracao, { passive: true }));
+
+  // Ao SAIR do jogo: troca a musica (nao volta pra mesma faixa).
+  function musicaAoEntrarNoJogo() {
+    if (audio) { audio.pause(); }
+    atualizarBotaoMusica();
+  }
+  function musicaAoSairDoJogo() {
+    tocarAleatoria();
+  }
 
   // ==========================================================================
   // EVENTOS
@@ -2003,6 +2086,13 @@
     }
 
     aplicarRota();
+
+    // Musica: carrega a lista e toca uma ALEATORIA (so' se estivermos na home;
+    // se a rota for de jogo, ela comeca quando voltar). Se o navegador
+    // bloquear o autoplay, a 1a interacao dispara.
+    await carregarListaMusicas();
+    if (!location.hash.startsWith('#/jogo/')) tocarAleatoria();
+    atualizarBotaoMusica();
   })();
 })();
 </script>

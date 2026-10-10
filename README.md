@@ -192,6 +192,22 @@ Com `prefers-reduced-motion: reduce` a animação é escondida (CSS) e o loop de
 - **Tom por console** — a cor do tema muda conforme o console (dentro da paleta)
 - **Salvar / carregar** — botão **💾 SALVAR** abaixo do CONTROLE, com 3 slots
   manuais (Salvar / Carregar / apagar) e um **auto-salvar**
+- **Música de fundo** — player à esquerda (floco ❄️ branco + botão preto
+  ⏸/⏯) e a marca **𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤** à direita, em cima do card de perfil
+
+## Música de fundo
+
+O rodapé de créditos tem, em cima dos cards de perfil, um **player** (à
+esquerda) e a marca **𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤** (à direita) — sem caixinha, cada um
+centralizado em cima do seu card.
+
+As faixas ficam em **`musicas/`** e a lista em **`musicas.json`** (raiz). O
+player toca uma faixa **aleatória** ao entrar na home e **troca** ao sair de um
+jogo (não repete a mesma na sequência). O botão preto pausa/retoma.
+
+> O navegador pode **bloquear autoplay** antes de qualquer interação. Nesse
+> caso, a música começa na **primeira interação** (toque/clique/tecla) — o
+> botão também liga/desliga.
 
 ## Salvar / carregar (estado do jogo)
 

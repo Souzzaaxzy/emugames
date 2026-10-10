@@ -348,13 +348,54 @@ h1 #marca { letter-spacing: 2px; }
    Fica LOGO ABAIXO do cabecalho, antes de "Jogados recentemente". */
 #creditos {
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  /* 25% menor em ALTURA: so' o ritmo VERTICAL encolhe (gap e paddings de
-     cima/baixo). O padding de LADO fica igual, entao a LARGURA nao muda. */
-  gap: 7.5px;                 /* era 10px  (-25%) */
+  flex-direction: column;
+  gap: 7.5px;
   margin-top: 0;
   margin-bottom: 0;
+}
+/* Linha de cima: player (esquerda) + marca MATRIX (direita), SEM caixinha.
+   Cada metade e' centralizada sobre o card que fica embaixo. */
+.creditos-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.creditos-topo > * { flex: 1 1 0; min-width: 0; }
+.musica { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.creditos-marca {
+  text-align: center;
+  font-size: clamp(13px, 3.6vw, 17px);
+  font-weight: 800;
+  letter-spacing: .5px;
+  color: var(--texto);
+  overflow-wrap: anywhere;
+}
+/* Floco de neve BRANCO (sem caixinha) + botao preto com o icone. */
+.musica-floco {
+  font-size: clamp(22px, 6vw, 30px);
+  line-height: 1;
+  color: #F1F1EE;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, .45));
+}
+#musica-toggle {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: clamp(20px, 5.4vw, 27px);
+  line-height: 1;
+  cursor: pointer;
+  color: #000;                 /* icone PRETO */
+  transition: transform var(--t-rapida) var(--curva), opacity var(--t-rapida) var(--curva);
+}
+#musica-toggle:active { transform: scale(.9); }
+@media (hover: hover) { #musica-toggle:hover { opacity: .7; } }
+/* Card de perfis: os dois lado a lado (como antes). */
+.creditos-cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 7.5px;
 }
 .perfil {
   flex: 1 1 0;
