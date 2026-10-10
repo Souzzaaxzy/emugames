@@ -206,8 +206,8 @@
           </svg>
           <!-- Player no MEIO do floco: icones DESENHADOS (SVG preto), sem emoji. -->
           <button id="musica-toggle" type="button" title="Tocar / pausar" aria-label="Tocar ou pausar">
-            <svg class="icone icone-play" viewBox="0 0 24 24" aria-hidden="true"><polygon points="7,4.5 20,12 7,19.5" fill="#000"/></svg>
-            <svg class="icone icone-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1" fill="#000"/><rect x="13.8" y="5" width="4.2" height="14" rx="1" fill="#000"/></svg>
+            <svg class="icone icone-play" viewBox="0 0 24 24" aria-hidden="true"><polygon points="7,4.5 20,12 7,19.5" fill="#F1F1EE"/></svg>
+            <svg class="icone icone-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1" fill="#F1F1EE"/><rect x="13.8" y="5" width="4.2" height="14" rx="1" fill="#F1F1EE"/></svg>
           </button>
         </div>
       </div>
@@ -1713,7 +1713,7 @@
   let audio = null;
   let listaMusicas = [];
   let musicaIdx = -1;
-  let tentandoTocar = false;   // autoplay pendente (esperando a 1a interacao)
+  let usuarioPausou = false;   // true = o usuario pausou de proposito
 
   async function carregarListaMusicas() {
     try {
@@ -1764,16 +1764,14 @@
     let i = Math.floor(Math.random() * listaMusicas.length);
     if (listaMusicas.length > 1 && i === musicaIdx) i = (i + 1) % listaMusicas.length;
     musicaIdx = i;
+    usuarioPausou = false;
     criarAudio();
     audio.src = 'musicas/' + encodeURIComponent(listaMusicas[i]);
-    tentandoTocar = true;
     audio.muted = false;
-    audio.play().then(() => { tentandoTocar = false; atualizarBotaoMusica(); })
-      .catch(() => {
-        audio.muted = true;
-        audio.play().then(() => { tentandoTocar = true; atualizarBotaoMusica(); })
-          .catch(() => { tentandoTocar = false; atualizarBotaoMusica(); });
-      });
+    audio.play().then(atualizarBotaoMusica).catch(() => {
+      audio.muted = true;
+      audio.play().then(atualizarBotaoMusica).catch(atualizarBotaoMusica);
+    });
     montarMediaSession();
   }
 
@@ -1782,9 +1780,13 @@
     musicaBtn.classList.toggle('tocando', !!(audio && !audio.paused));
   }
 
-  // 1a interacao: libera o SOM (se estava tocando mudo por causa do autoplay).
+  // QUALQUER interacao do usuario: libera o som e da' o play (se o navegador
+  // tinha bloqueado o autoplay). Nao mexe se o usuario PAUSOU de proposito.
+  // So' age se ja' existe audio (criado na home); numa pagina de jogo nao
+  // inicia musica.
   function tocarNaInteracao() {
-    if (!tentandoTocar || !audio) return;
+    if (usuarioPausou || !audio) return;
+    if (!jogador.hidden) return;   // com um jogo aberto, nao liga a musica
     if (audio.muted) audio.muted = false;
     if (audio.paused) audio.play().catch(() => {});
   }
@@ -1792,11 +1794,11 @@
   musicaBtn && musicaBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (!audio) { tocarAleatoria(); return; }
-    if (audio.paused) { tentandoTocar = false; audio.muted = false; audio.play().catch(() => {}); }
-    else { tentandoTocar = false; audio.pause(); }
+    if (audio.paused) { usuarioPausou = false; audio.muted = false; audio.play().catch(() => {}); }
+    else { usuarioPausou = true; audio.pause(); }
     atualizarBotaoMusica();
   });
-  ['pointerdown', 'keydown', 'touchstart'].forEach((ev) =>
+  ['pointerdown', 'keydown', 'touchstart', 'click'].forEach((ev) =>
     addEventListener(ev, tocarNaInteracao, { passive: true }));
 
   // Ao ENTRAR no jogo: para a musica (nao competir com o audio do jogo).
