@@ -1798,15 +1798,15 @@
   }
 
   // ---- Gesto do usuario: libera o som -------------------------------------
-  // Toque/clique/tecla comeam; o DESLIZAR (touchmove) tambem entra -- e' o
-  // gesto mais comum no celular. Todos com `passive` e, no toque, em capture
-  // pra rodar antes de qualquer outro handler.
-  document.addEventListener('touchstart', tentarTocar, { capture: true, passive: true });
-  document.addEventListener('touchmove', tentarTocar, { capture: true, passive: true });
-  document.addEventListener('pointerdown', tentarTocar, { capture: true, passive: true });
-  document.addEventListener('mousedown', tentarTocar, { capture: true, passive: true });
-  document.addEventListener('keydown', tentarTocar, { capture: true, passive: true });
-  document.addEventListener('scroll', tentarTocar, { capture: true, passive: true });
+  // O navegador costuma liberar o som no FIM de um gesto (touchend/click), nao
+  // no inicio. Por isso escutamos TODOS: inicio (touchstart/pointerdown), meio
+  // (touchmove/pointermove) e fim (touchend/touchcancel/pointerup/click).
+  // Assim funciona no toque E no deslizar. `passive` (nao trava a rolagem) e
+  // `capture` (roda antes de qualquer outro handler).
+  ['touchstart', 'touchmove', 'touchend', 'touchcancel',
+   'pointerdown', 'pointermove', 'pointerup', 'pointercancel',
+   'mousedown', 'mouseup', 'click', 'keydown', 'scroll', 'wheel']
+    .forEach((ev) => document.addEventListener(ev, tentarTocar, { capture: true, passive: true }));
 
   // Botao do player: pausa/retoma.
   musicaBtn && musicaBtn.addEventListener('click', (e) => {
