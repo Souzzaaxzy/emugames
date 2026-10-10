@@ -210,8 +210,10 @@
             <svg class="icone icone-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1" fill="#F1F1EE"/><rect x="13.8" y="5" width="4.2" height="14" rx="1" fill="#F1F1EE"/></svg>
           </button>
         </div>
-        <!-- Elemento de audio (invisivel). O som e' liberado no 1o gesto. -->
-        <audio id="bgMusic" loop preload="auto" playsinline hidden></audio>
+        <!-- Elemento de audio (sem `controls`, entao fica invisivel sozinho).
+             NAO usamos o atributo `hidden`: alguns navegadores (iOS Safari)
+             recusam audio de elemento escondido. -->
+        <audio id="bgMusic" loop preload="auto" playsinline style="width:0;height:0;display:block"></audio>
       </div>
       <span class="creditos-marca">𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤</span>
     </div>
@@ -1774,9 +1776,25 @@
     if (usuarioPausou) return;
     if (!jogador.hidden) return;   // com um jogo aberto, nao liga a musica
     if (!music.paused && !music.muted) { audioLiberado = true; return; }
+    // 1) tenta com SOM.
     music.muted = false;
-    return music.play().then(() => { audioLiberado = true; atualizarBotaoMusica(); })
-      .catch(() => { /* sem gesto valido ainda */ });
+    let p;
+    try { p = music.play(); } catch (e) { return; }
+    if (p && p.then) {
+      p.then(() => { audioLiberado = true; atualizarBotaoMusica(); })
+        // 2) bloqueou? toca MUDO (sempre permitido) e tenta liberar o som
+        //    logo em seguida -- isso destrava em iOS/Safari e webviews.
+        .catch(() => {
+          music.muted = true;
+          let q;
+          try { q = music.play(); } catch (e) { return; }
+          if (q && q.then) q.then(() => {
+            audioLiberado = true;
+            atualizarBotaoMusica();
+            setTimeout(() => { if (!usuarioPausou) music.muted = false; }, 80);
+          }).catch(() => { /* ainda bloqueado: tenta no proximo gesto */ });
+        });
+    }
   }
 
   // ---- Gesto do usuario: libera o som -------------------------------------
