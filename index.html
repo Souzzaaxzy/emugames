@@ -183,8 +183,30 @@
          MATRIX a' direita, cada um centralizado em cima do seu card. -->
     <div class="creditos-topo">
       <div class="musica" id="musica">
-        <span class="musica-floco" aria-hidden="true">&#10052;&#65039;</span>
-        <button id="musica-toggle" type="button" title="Tocar / pausar" aria-label="Tocar ou pausar">&#9197;&#65038;</button>
+        <div class="floco-wrap">
+          <!-- FLOC DE NEVE desenhado (SVG), sem emoji. 6 bracos + raminhos. -->
+          <svg class="floco" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <defs>
+              <g id="braco-floco">
+                <line x1="50" y1="50" x2="50" y2="9"/>
+                <line x1="50" y1="31" x2="39" y2="20"/>
+                <line x1="50" y1="31" x2="61" y2="20"/>
+                <line x1="50" y1="17" x2="42" y2="9"/>
+                <line x1="50" y1="17" x2="58" y2="9"/>
+              </g>
+            </defs>
+            <g stroke="#F1F1EE" stroke-width="3.4" stroke-linecap="round" fill="none">
+              <use href="#braco-floco"/>
+              <use href="#braco-floco" transform="rotate(60 50 50)"/>
+              <use href="#braco-floco" transform="rotate(120 50 50)"/>
+              <use href="#braco-floco" transform="rotate(180 50 50)"/>
+              <use href="#braco-floco" transform="rotate(240 50 50)"/>
+              <use href="#braco-floco" transform="rotate(300 50 50)"/>
+            </g>
+          </svg>
+          <!-- Player no MEIO do floco. -->
+          <button id="musica-toggle" type="button" title="Tocar / pausar" aria-label="Tocar ou pausar">&#9197;&#65038;</button>
+        </div>
       </div>
       <span class="creditos-marca">𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤</span>
     </div>
@@ -1684,11 +1706,11 @@
   // `musicas/`). Nao ha' autoplay garantido: se o navegador bloquear, a
   // primeira interacao do usuario comeca a tocar.
   // ==========================================================================
-  const musicaEl = document.getElementById('musica');
   const musicaBtn = document.getElementById('musica-toggle');
   let audio = null;
   let listaMusicas = [];
   let musicaIdx = -1;
+  let tentandoTocar = false;   // autoplay pendente (esperando a 1a interacao)
 
   async function carregarListaMusicas() {
     try {
@@ -1714,7 +1736,9 @@
       audio.addEventListener('pause', atualizarBotaoMusica);
     }
     audio.src = 'musicas/' + encodeURIComponent(listaMusicas[i]);
-    audio.play().then(atualizarBotaoMusica).catch(() => atualizarBotaoMusica());
+    tentandoTocar = true;
+    audio.play().then(() => { tentandoTocar = false; atualizarBotaoMusica(); })
+      .catch(() => { tentandoTocar = false; atualizarBotaoMusica(); });
   }
 
   function atualizarBotaoMusica() {
@@ -1723,23 +1747,28 @@
     musicaBtn.textContent = tocando ? '\u23F8\uFE0E' : '\u23EF\uFE0E'; // ⏸ / ⏯
   }
 
-  // Se o navegador bloquear o autoplay, toca na 1a interacao.
+  // Autoplay bloqueado: o navegador so' deixa tocar depois de uma interacao.
+  // Nesse caso a 1a interacao comeca a musica -- mas se o usuario PAUSOU de
+  // proposito, nao retomamos sozinhos.
   function tocarNaInteracao() {
+    if (!tentandoTocar) return;
     if (audio && audio.paused) audio.play().catch(() => {});
   }
 
   musicaBtn && musicaBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (!audio) { tocarAleatoria(); return; }
-    if (audio.paused) audio.play().catch(() => {}); else audio.pause();
+    if (audio.paused) { tentandoTocar = false; audio.play().catch(() => {}); }
+    else { tentandoTocar = false; audio.pause(); }
     atualizarBotaoMusica();
   });
   ['pointerdown', 'keydown', 'touchstart'].forEach((ev) =>
     addEventListener(ev, tocarNaInteracao, { passive: true }));
 
-  // Ao SAIR do jogo: troca a musica (nao volta pra mesma faixa).
+  // Ao ENTRAR no jogo: para a musica (nao competir com o audio do jogo).
+  // Ao SAIR do jogo: troca pra outra faixa.
   function musicaAoEntrarNoJogo() {
-    if (audio) { audio.pause(); }
+    if (audio) audio.pause();
     atualizarBotaoMusica();
   }
   function musicaAoSairDoJogo() {
