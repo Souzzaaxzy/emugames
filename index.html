@@ -1789,13 +1789,18 @@
   // (mesmo os que param a propagacao). Nao mexe se o usuario pausou de
   // proposito nem com um jogo aberto.
   function liberarAudio() {
+    if (audioLiberado) return;        // ja' liberou: nada a fazer (evita custo)
     if (usuarioPausou || !audio) return;
     if (!jogador.hidden) return;
     audioLiberado = true;
     if (audio.muted) audio.muted = false;
     if (audio.paused) audio.play().catch(() => {});
   }
-  ['pointerdown', 'touchstart', 'keydown', 'click'].forEach((ev) =>
+  // Qualquer gesto libera o som: toque, DESLIZAR o dedo, rolar a tela, tecla,
+  // clique ou girar o mouse. Em CAPTURE, entao roda antes de qualquer outro
+  // handler (mesmo os que param a propagacao).
+  ['pointerdown', 'pointermove', 'touchstart', 'touchmove',
+   'keydown', 'click', 'wheel', 'scroll', 'mousemove'].forEach((ev) =>
     document.addEventListener(ev, liberarAudio, { capture: true, passive: true }));
 
   musicaBtn && musicaBtn.addEventListener('click', (e) => {
