@@ -204,8 +204,11 @@
               <use href="#braco-floco" transform="rotate(300 50 50)"/>
             </g>
           </svg>
-          <!-- Player no MEIO do floco. -->
-          <button id="musica-toggle" type="button" title="Tocar / pausar" aria-label="Tocar ou pausar">&#9197;&#65038;</button>
+          <!-- Player no MEIO do floco: icones DESENHADOS (SVG preto), sem emoji. -->
+          <button id="musica-toggle" type="button" title="Tocar / pausar" aria-label="Tocar ou pausar">
+            <svg class="icone icone-play" viewBox="0 0 24 24" aria-hidden="true"><polygon points="7,4.5 20,12 7,19.5" fill="#000"/></svg>
+            <svg class="icone icone-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1" fill="#000"/><rect x="13.8" y="5" width="4.2" height="14" rx="1" fill="#000"/></svg>
+          </button>
         </div>
       </div>
       <span class="creditos-marca">𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤</span>
@@ -1723,42 +1726,73 @@
     } catch (e) { listaMusicas = []; }
   }
 
+  function criarAudio() {
+    if (audio) return;
+    audio = new Audio();
+    audio.loop = true;
+    audio.volume = 0.7;
+    audio.preload = 'auto';
+    audio.addEventListener('play', atualizarBotaoMusica);
+    audio.addEventListener('pause', atualizarBotaoMusica);
+  }
+
+  // Notificacao de midia (tela de bloqueio / notificacoes do sistema) com a
+  // FOTO do preview como capa. O navegador mostra o titulo/artista/capa.
+  function montarMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+    const img = new URL('preview.jpg', location.href).href;
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: 'EmuGames Lizzy',
+        artist: 'MATRIXˢᵉᶦᵗᵃ',
+        album: 'EmuGames',
+        artwork: [
+          { src: img, sizes: '1536x804', type: 'image/jpeg' },
+          { src: img, sizes: '512x268', type: 'image/jpeg' },
+        ],
+      });
+      navigator.mediaSession.setActionHandler('play', () => { audio && audio.play().catch(() => {}); });
+      navigator.mediaSession.setActionHandler('pause', () => { audio && audio.pause(); });
+    } catch (e) { /* ok */ }
+  }
+
+  // Toca uma faixa ALEATORIA. Tenta com SOM; se o navegador bloquear, tenta
+  // MUDO (autoplay mudo e' permitido) -- assim ja' "toca" ao entrar, e a 1a
+  // interacao libera o som.
   function tocarAleatoria() {
     if (!listaMusicas.length) return;
     let i = Math.floor(Math.random() * listaMusicas.length);
     if (listaMusicas.length > 1 && i === musicaIdx) i = (i + 1) % listaMusicas.length;
     musicaIdx = i;
-    if (!audio) {
-      audio = new Audio();
-      audio.loop = true;
-      audio.volume = 0.7;
-      audio.addEventListener('play', atualizarBotaoMusica);
-      audio.addEventListener('pause', atualizarBotaoMusica);
-    }
+    criarAudio();
     audio.src = 'musicas/' + encodeURIComponent(listaMusicas[i]);
     tentandoTocar = true;
+    audio.muted = false;
     audio.play().then(() => { tentandoTocar = false; atualizarBotaoMusica(); })
-      .catch(() => { tentandoTocar = false; atualizarBotaoMusica(); });
+      .catch(() => {
+        audio.muted = true;
+        audio.play().then(() => { tentandoTocar = true; atualizarBotaoMusica(); })
+          .catch(() => { tentandoTocar = false; atualizarBotaoMusica(); });
+      });
+    montarMediaSession();
   }
 
   function atualizarBotaoMusica() {
     if (!musicaBtn) return;
-    const tocando = audio && !audio.paused;
-    musicaBtn.textContent = tocando ? '\u23F8\uFE0E' : '\u23EF\uFE0E'; // ⏸ / ⏯
+    musicaBtn.classList.toggle('tocando', !!(audio && !audio.paused));
   }
 
-  // Autoplay bloqueado: o navegador so' deixa tocar depois de uma interacao.
-  // Nesse caso a 1a interacao comeca a musica -- mas se o usuario PAUSOU de
-  // proposito, nao retomamos sozinhos.
+  // 1a interacao: libera o SOM (se estava tocando mudo por causa do autoplay).
   function tocarNaInteracao() {
-    if (!tentandoTocar) return;
-    if (audio && audio.paused) audio.play().catch(() => {});
+    if (!tentandoTocar || !audio) return;
+    if (audio.muted) audio.muted = false;
+    if (audio.paused) audio.play().catch(() => {});
   }
 
   musicaBtn && musicaBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (!audio) { tocarAleatoria(); return; }
-    if (audio.paused) { tentandoTocar = false; audio.play().catch(() => {}); }
+    if (audio.paused) { tentandoTocar = false; audio.muted = false; audio.play().catch(() => {}); }
     else { tentandoTocar = false; audio.pause(); }
     atualizarBotaoMusica();
   });
