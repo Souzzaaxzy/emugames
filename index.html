@@ -1714,6 +1714,7 @@
   let listaMusicas = [];
   let musicaIdx = -1;
   let usuarioPausou = false;   // true = o usuario pausou de proposito
+  let audioLiberado = false;   // true = o usuario ja interagiu (som liberado)
 
   async function carregarListaMusicas() {
     try {
@@ -1767,7 +1768,10 @@
     usuarioPausou = false;
     criarAudio();
     audio.src = 'musicas/' + encodeURIComponent(listaMusicas[i]);
-    audio.muted = false;
+    // Se o usuario JA interagiu alguma vez (som liberado), toca com som; senao
+    // comeca MUDO -- autoplay mudo e' sempre permitido, entao a musica ja'
+    // "roda" ao entrar e o som entra no primeiro toque.
+    audio.muted = !audioLiberado;
     audio.play().then(atualizarBotaoMusica).catch(() => {
       audio.muted = true;
       audio.play().then(atualizarBotaoMusica).catch(atualizarBotaoMusica);
@@ -1780,26 +1784,28 @@
     musicaBtn.classList.toggle('tocando', !!(audio && !audio.paused));
   }
 
-  // QUALQUER interacao do usuario: libera o som e da' o play (se o navegador
-  // tinha bloqueado o autoplay). Nao mexe se o usuario PAUSOU de proposito.
-  // So' age se ja' existe audio (criado na home); numa pagina de jogo nao
-  // inicia musica.
-  function tocarNaInteracao() {
+  // QUALQUER gesto do usuario libera o SOM (se o navegador tinha bloqueado).
+  // Fica em CAPTURE no documento, entao roda antes de qualquer outro handler
+  // (mesmo os que param a propagacao). Nao mexe se o usuario pausou de
+  // proposito nem com um jogo aberto.
+  function liberarAudio() {
     if (usuarioPausou || !audio) return;
-    if (!jogador.hidden) return;   // com um jogo aberto, nao liga a musica
+    if (!jogador.hidden) return;
+    audioLiberado = true;
     if (audio.muted) audio.muted = false;
     if (audio.paused) audio.play().catch(() => {});
   }
+  ['pointerdown', 'touchstart', 'keydown', 'click'].forEach((ev) =>
+    document.addEventListener(ev, liberarAudio, { capture: true, passive: true }));
 
   musicaBtn && musicaBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (!audio) { tocarAleatoria(); return; }
+    audioLiberado = true;
     if (audio.paused) { usuarioPausou = false; audio.muted = false; audio.play().catch(() => {}); }
     else { usuarioPausou = true; audio.pause(); }
     atualizarBotaoMusica();
   });
-  ['pointerdown', 'keydown', 'touchstart', 'click'].forEach((ev) =>
-    addEventListener(ev, tocarNaInteracao, { passive: true }));
 
   // Ao ENTRAR no jogo: para a musica (nao competir com o audio do jogo).
   // Ao SAIR do jogo: troca pra outra faixa.
