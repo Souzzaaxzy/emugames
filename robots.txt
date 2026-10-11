@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap (ajuda o Google a achar as paginas).
+Sitemap: https://emugames.kannonmtx.workers.dev/sitemap.xml
