@@ -757,6 +757,23 @@ h1 #marca { letter-spacing: 2px; }
   font-size: 14px;
 }
 
+/* Bloco de TEXTO (SEO): visual de "sobre", discreto, no fim da home. */
+#sobre {
+  margin-top: clamp(18px, 4vh, 34px);
+  padding: clamp(14px, 3.5vw, 22px);
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+}
+#sobre h2 { margin-top: 0; }
+#sobre p {
+  color: var(--texto2);
+  font-size: clamp(12.5px, 3.4vw, 14.5px);
+  line-height: 1.7;
+  margin-top: 10px;
+}
+#sobre strong { color: var(--texto); font-weight: 700; }
+
 /* ==========================================================================
    TV / CONTROLE REMOTO
    Na TV nao ha toque: quem navega e o direcional do controle remoto, que move

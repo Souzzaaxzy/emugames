@@ -7,19 +7,26 @@
 <!-- Verificacao de propriedade no Google Search Console. NAO remover, nem
      depois de verificado (o Google revalida de vez em quando). -->
 <meta name="google-site-verification" content="gPg4d9evw0ulTCeIyumvcP1X1qm4e_EGBk8tgXQ0lPM" />
-<title>EmuGames Lizzy</title>
+<!-- SEO: titulo com as palavras que as pessoas buscam (jogos retro online,
+     SNES, arcade, no navegador). -->
+<title>Jogos Retrô Online — Super Nintendo e Arcade no Navegador | EmuGames Lizzy</title>
 <link rel="stylesheet" href="./style.css">
+<!-- Antecipar a conexao com o CDN do emulador (melhora a velocidade real). -->
+<link rel="preconnect" href="https://cdn.emulatorjs.org" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.emulatorjs.org">
 
 <!-- Preview do link (WhatsApp, Telegram, Discord...). As URLs precisam ser
      ABSOLUTAS: quem le o preview (o robo do WhatsApp) nao tem contexto do site.
      O dominio e' o do Cloudflare Workers, que e' quem serve este repo. -->
-<meta name="description" content="Jogos retrô direto do seu navegador: SNES, arcade e mais.">
+<meta name="description" content="Jogue grátis centenas de jogos retrô online: Super Nintendo (SNES) e arcade (Neo Geo) — Metal Slug, The King of Fighters, Super Mario World, Top Gear e muito mais. Roda direto no navegador do celular ou do PC, sem instalar nada.">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://emugames.kannonmtx.workers.dev/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EmuGames Lizzy">
-<meta property="og:title" content="EmuGames Lizzy">
-<meta property="og:description" content="Jogos retrô direto do seu navegador: SNES, arcade e mais.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Jogos Retrô Online — SNES e Arcade no Navegador | EmuGames Lizzy">
+<meta property="og:description" content="Jogue grátis centenas de jogos retrô online: Super Nintendo (SNES) e arcade (Neo Geo). Roda direto no navegador, sem instalar nada.">
 <meta property="og:url" content="https://emugames.kannonmtx.workers.dev/">
 <meta property="og:image" content="https://emugames.kannonmtx.workers.dev/preview.jpg">
 <meta property="og:image:secure_url" content="https://emugames.kannonmtx.workers.dev/preview.jpg">
@@ -30,9 +37,22 @@
 <meta property="og:image:alt" content="EmuGames Lizzy">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EmuGames Lizzy">
-<meta name="twitter:description" content="Jogos retrô direto do seu navegador: SNES, arcade e mais.">
+<meta name="twitter:title" content="Jogos Retrô Online — SNES e Arcade no Navegador | EmuGames Lizzy">
+<meta name="twitter:description" content="Jogue grátis centenas de jogos retrô online: Super Nintendo (SNES) e arcade (Neo Geo). Roda direto no navegador, sem instalar nada.">
 <meta name="twitter:image" content="https://emugames.kannonmtx.workers.dev/preview.jpg">
+
+<!-- Dados estruturados (schema.org): ajudam o Google a entender que isto e'
+     um site de jogos. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "EmuGames Lizzy",
+  "url": "https://emugames.kannonmtx.workers.dev/",
+  "inLanguage": "pt-BR",
+  "description": "Jogue grátis centenas de jogos retrô online: Super Nintendo (SNES) e arcade (Neo Geo), direto no navegador."
+}
+</script>
 </head>
 <body>
 
@@ -287,6 +307,29 @@
   </section>
 
   <p id="vazio" hidden>&#128533; Nenhum jogo encontrado</p>
+
+  <!-- ===== BLOCO DE TEXTO (SEO) =====
+       O Google precisa de TEXTO para entender e ranquear o site. Fica visivel
+       e com as palavras que as pessoas digitam: "jogos retro online", "SNES",
+       "arcade", "Neo Geo", "jogar no navegador". Nao interfere na lista. -->
+  <section id="sobre" aria-label="Sobre o EmuGames Lizzy">
+    <h2 class="secao-titulo">Jogos retrô online, direto no navegador</h2>
+    <p>O <strong>EmuGames Lizzy</strong> é um site para <strong>jogar jogos retrô
+      online</strong>, de graça, sem baixar nem instalar nada. São
+      <strong>centenas de jogos clássicos</strong> de <strong>Super Nintendo
+      (SNES)</strong> e de <strong>fliperama (arcade / Neo Geo)</strong>, rodando
+      pelo emulador dentro do próprio navegador — no celular e no PC.</p>
+    <p>Entre os jogos mais procurados estão <strong>Super Mario World</strong>,
+      <strong>Top Gear</strong>, <strong>Mortal Kombat</strong>,
+      <strong>Street Fighter</strong>, <strong>Donkey Kong Country</strong>,
+      <strong>Metal Slug</strong>, <strong>The King of Fighters '97</strong>,
+      <strong>Fatal Fury</strong>, <strong>Samurai Shodown</strong> e
+      <strong>Pac-Man</strong>. Tem ainda clássicos como <em>Contra</em> e
+      <em>Bomberman</em>.</p>
+    <p>Tem também <strong>controles de toque</strong> na tela, suporte a
+      <strong>controle Bluetooth</strong> e a opção de <strong>salvar o jogo</strong>
+      para continuar de onde parou. Escolha um jogo abaixo e boa jogatina!</p>
+  </section>
 </section>
 
 <!-- ============================= JOGADOR ============================= -->
