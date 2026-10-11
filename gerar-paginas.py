@@ -42,7 +42,9 @@ def gerar():
         cons = CONSOLES.get(j['console'], j['console'])
         capa_rel = 'capas/' + (j.get('capa') or (gid + '.gif'))
         capa_abs = SITE + '/' + capa_rel
-        url = SITE + '/jogo/' + gid + '.html'
+        # URL limpa: o Cloudflare redireciona `/jogo/x.html` -> `/jogo/x`
+        # (307), entao canonical/sitemap/links apontam direto para a limpa.
+        url = SITE + '/jogo/' + gid
         # Abre o jogo no app: volta pra RAIZ com `?jogo=<id>` (a home boota
         # nesse parametro e entra no jogo). `../` = raiz do site.
         jogar = '../?jogo=' + gid + '#/jogo/' + gid
@@ -51,7 +53,7 @@ def gerar():
         # "outros jogos" do mesmo console (links internos, bom pra SEO e pro usuario)
         outros = [o for o in por_console[j['console']] if o['id'] != gid][:8]
         outros_html = ''.join(
-            '<a class="outro" href="./' + esc(o['id']) + '.html">'
+            '<a class="outro" href="./' + esc(o['id']) + '">'
             '<img src="../capas/' + esc(o.get('capa') or (o['id'] + '.gif')) + '" alt="' + esc(o['nome']) + '" loading="lazy">'
             '<span>' + esc(o['nome']) + '</span></a>'
             for o in outros
@@ -137,7 +139,7 @@ footer h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#D1D
     # sitemap: home + uma entrada por jogo
     linhas = [f'  <url><loc>{SITE}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>']
     for j in jogos:
-        linhas.append(f'  <url><loc>{SITE}/jogo/{j["id"]}.html</loc><priority>0.7</priority></url>')
+        linhas.append(f'  <url><loc>{SITE}/jogo/{j["id"]}</loc><priority>0.7</priority></url>')
     with open(os.path.join(RAIZ, 'sitemap.xml'), 'w', encoding='utf-8') as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

@@ -222,8 +222,9 @@ o total e mostra — assim todo mundo vê o número atualizado.
 ## Páginas por jogo (SEO)
 
 Além da home, existe **uma página estática por jogo** em `jogo/<id>.html`
-(~570 arquivos, ~2,4 MB — quase nada perto das ROMs). Cada uma tem **título,
-descrição e dados estruturados (`VideoGame`) próprios**, a **capa** e um botão
+(servida na URL limpa `jogo/<id>`, pois o Cloudflare redireciona `.html` → sem
+extensão). São **~580 arquivos, ~2,4 MB** — quase nada perto das ROMs. Cada uma tem
+**título, descrição e dados estruturados (`VideoGame`) próprios**, a **capa** e um botão
 **▶ Jogar agora** (que volta pra raiz com `?jogo=<id>` e abre o jogo no app).
 Também listam **8 outros jogos** do mesmo console (links internos).
 
