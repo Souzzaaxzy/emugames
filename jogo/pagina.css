@@ -1,0 +1,19 @@
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#08090B;color:#F1F1EE;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;padding:16px;max-width:640px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid #2B2D33}
+header a{color:#F1F1EE;font-weight:800;text-decoration:none}
+header span{color:#9699A2;font-size:12px}
+main{text-align:center;padding:22px 0}
+.capa img{width:100%;max-width:420px;border-radius:16px;border:1px solid #2B2D33;display:block;margin:0 auto}
+h1{font-size:clamp(22px,6vw,32px);margin-top:16px}
+.cons{color:#9699A2;font-size:13px;margin-top:4px}
+.jogar{display:inline-block;margin:18px 0;background:#E8E9E6;color:#0B0C0F;font-weight:800;text-decoration:none;padding:14px 28px;border-radius:999px;font-size:16px}
+.desc{color:#D1D2D5;line-height:1.7;margin-top:8px;text-align:left}
+.dica{color:#9699A2;font-size:12.5px;margin-top:12px}
+footer{margin-top:26px;border-top:1px solid #2B2D33;padding-top:18px}
+footer h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#D1D2D5;margin-bottom:12px}
+.outros{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.outro{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:#F1F1EE}
+.outro img{width:100%;border-radius:10px;border:1px solid #2B2D33;aspect-ratio:1/1;object-fit:cover}
+.outro span{font-size:11.5px;font-weight:700;line-height:1.2}
+.todos{display:inline-block;margin-top:18px;color:#E8E9E6;font-weight:700;text-decoration:none}

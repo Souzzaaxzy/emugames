@@ -219,6 +219,24 @@ então a contagem **reinicia sozinha** toda semana. Para não inflar, só
 **incrementa 1× por navegador por semana** (`localStorage`), mas **sempre lê**
 o total e mostra — assim todo mundo vê o número atualizado.
 
+## Páginas por jogo (SEO)
+
+Além da home, existe **uma página estática por jogo** em `jogo/<id>.html`
+(~570 arquivos, ~2,4 MB — quase nada perto das ROMs). Cada uma tem **título,
+descrição e dados estruturados (`VideoGame`) próprios**, a **capa** e um botão
+**▶ Jogar agora** (que volta pra raiz com `?jogo=<id>` e abre o jogo no app).
+Também listam **8 outros jogos** do mesmo console (links internos).
+
+São geradas pelo **`gerar-paginas.py`** — rode sempre que o `jogos.json` mudar:
+
+```bash
+python3 gerar-paginas.py   # recria jogo/ e o sitemap.xml
+```
+
+O script também reescreve o **`sitemap.xml`** com a home + todas as páginas de
+jogo (ajuda o Google a achar tudo). A home tem **links internos** para os jogos
+mais populares (no bloco `#sobre`).
+
 ## Salvar / carregar (estado do jogo)
 
 O botão **💾 SALVAR** fica logo **abaixo do CONTROLE** (só aparece com um jogo
