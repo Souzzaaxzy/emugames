@@ -215,6 +215,11 @@
              recusam audio de elemento escondido. -->
         <audio id="bgMusic" loop preload="auto" playsinline style="width:0;height:0;display:block"></audio>
       </div>
+      <!-- Contador de usuarios (semanal), no MEIO da linha. Numero + rotulo. -->
+      <div id="creditos-semana" title="Usuários nesta semana">
+        <span class="semana-num">—</span>
+        <span class="semana-rotulo">usuários esta semana</span>
+      </div>
       <span class="creditos-marca">𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤</span>
     </div>
     <div class="creditos-cards">
@@ -1834,6 +1839,48 @@
   }
 
   // ==========================================================================
+  // CONTADOR DE USUARIOS (SEMANAL)
+  //
+  // Contador no MEIO da linha. Usa a API publica Abacus (gratis, sem cadastro,
+  // com CORS) -- o padrao em sites estaticos. A CHAVE inclui o ano + a semana
+  // do ano (ISO), entao a contagem REINICIA sozinha toda semana.
+  //
+  // Para nao inflar com o mesmo usuario: so' incrementa UMA vez por navegador
+  // por semana (guarda a semana no localStorage). Sempre le' o total da semana
+  // e mostra -- assim todo mundo ve o numero atualizado.
+  // ==========================================================================
+  const ABACUS = 'https://abacus.jasoncameron.dev';
+  const semNumEl = document.querySelector('#creditos-semana .semana-num');
+
+  function semanaISO(d) {
+    const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const dia = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - dia);
+    const ano = t.getUTCFullYear();
+    const ini = new Date(Date.UTC(ano, 0, 1));
+    const semana = Math.ceil(((t - ini) / 86400000 + 1) / 7);
+    return { ano: ano, semana: semana };
+  }
+
+  async function contarUsuariosSemana() {
+    if (!semNumEl) return;
+    const { ano, semana } = semanaISO(new Date());
+    const chave = 'emugames-' + ano + '-s' + semana;
+    const marca = chave;   // valor guardado no navegador para "ja' contei"
+    let jaContei = false;
+    try { jaContei = localStorage.getItem('emugames.semana') === marca; } catch (e) { /* ok */ }
+    const url = ABACUS + (jaContei ? '/get/' : '/hit/') + 'emugames/' + chave;
+    try {
+      const r = await fetch(url, { cache: 'no-store' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const d = await r.json();
+      const n = Number(d.count != null ? d.count : d.value);
+      if (isFinite(n)) semNumEl.textContent = n.toLocaleString('pt-BR');
+      if (!jaContei) { try { localStorage.setItem('emugames.semana', marca); } catch (e) { /* ok */ } }
+    } catch (e) { /* rede fora: deixa o "—" */ }
+  }
+
+  // ==========================================================================
   // EVENTOS
   // ==========================================================================
   pararBtn.addEventListener('click', parar);
@@ -2181,6 +2228,9 @@
     await carregarListaMusicas();
     if (!location.hash.startsWith('#/jogo/')) escolherAleatoria();
     atualizarBotaoMusica();
+
+    // Contador de usuarios da semana (roda no boot; nao bloqueia o resto).
+    contarUsuariosSemana();
   })();
 })();
 </script>

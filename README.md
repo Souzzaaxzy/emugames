@@ -197,17 +197,27 @@ Com `prefers-reduced-motion: reduce` a animação é escondida (CSS) e o loop de
 
 ## Música de fundo
 
-O rodapé de créditos tem, em cima dos cards de perfil, um **player** (à
-esquerda) e a marca **𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤** (à direita) — sem caixinha, cada um
-centralizado em cima do seu card.
+O rodapé de créditos tem, em cima dos cards de perfil, três coisas **sem
+caixinha**, cada uma centralizada na sua coluna: o **player** (esquerda), o
+**contador de usuários semanais** (meio) e a marca **𝑴𝑨𝑻𝑹𝑰𝑿ˢᵉᶦᵗᵃ💤** (direita).
 
 As faixas ficam em **`musicas/`** e a lista em **`musicas.json`** (raiz). O
 player toca uma faixa **aleatória** ao entrar na home e **troca** ao sair de um
-jogo (não repete a mesma na sequência). O botão preto pausa/retoma.
+jogo (não repete a mesma na sequência). O botão branco pausa/retoma.
 
-> O navegador pode **bloquear autoplay** antes de qualquer interação. Nesse
-> caso, a música começa na **primeira interação** (toque/clique/tecla) — o
-> botão também liga/desliga.
+> O navegador **bloqueia autoplay** antes de qualquer interação. O player
+> escuta **todos** os eventos de gesto (toque, deslizar, rolar, tecla) e o som
+> entra no primeiro — o `play()` com som; se recusar, cai para **mudo** e
+> desmuta logo em seguida (destrava em iOS/Safari/webview).
+
+### Contador de usuários (semanal)
+
+No **meio** da linha de cima há um contador de **usuários desta semana**.
+Usa a API pública **Abacus** (`abacus.jasoncameron.dev` — grátis, sem cadastro,
+com CORS), o padrão em sites estáticos. A **chave** inclui ano + semana ISO,
+então a contagem **reinicia sozinha** toda semana. Para não inflar, só
+**incrementa 1× por navegador por semana** (`localStorage`), mas **sempre lê**
+o total e mostra — assim todo mundo vê o número atualizado.
 
 ## Salvar / carregar (estado do jogo)
 

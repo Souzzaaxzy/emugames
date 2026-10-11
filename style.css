@@ -371,6 +371,29 @@ h1 #marca { letter-spacing: 2px; }
   color: var(--texto);
   overflow-wrap: anywhere;
 }
+/* Contador de usuarios semanais (no meio): numero + rotulo pequeno. */
+#creditos-semana {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  text-align: center;
+  line-height: 1.1;
+}
+#creditos-semana .semana-num {
+  font-size: clamp(15px, 4.2vw, 20px);
+  font-weight: 800;
+  letter-spacing: .5px;
+  color: var(--texto);
+  font-variant-numeric: tabular-nums;
+}
+#creditos-semana .semana-rotulo {
+  font-size: clamp(8.5px, 2.4vw, 10px);
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: var(--fraco);
+}
 /* FLOC desenhado (SVG, sem emoji) com o PLAYER no MEIO. */
 .floco-wrap {
   position: relative;
